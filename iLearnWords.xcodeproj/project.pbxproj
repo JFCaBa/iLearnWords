@@ -3,25 +3,33 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 50;
+	objectVersion = 51;
 	objects = {
 
 /* Begin PBXBuildFile section */
 		6D36E17E231BC09A00C88F0A /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D36E17D231BC09A00C88F0A /* AppDelegate.swift */; };
-		6D36E180231BC09A00C88F0A /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D36E17F231BC09A00C88F0A /* ViewController.swift */; };
+		6D36E180231BC09A00C88F0A /* MainVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D36E17F231BC09A00C88F0A /* MainVC.swift */; };
 		6D36E183231BC09A00C88F0A /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 6D36E181231BC09A00C88F0A /* Main.storyboard */; };
 		6D36E185231BC09C00C88F0A /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 6D36E184231BC09C00C88F0A /* Assets.xcassets */; };
 		6D36E188231BC09C00C88F0A /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 6D36E186231BC09C00C88F0A /* LaunchScreen.storyboard */; };
+		6D36E192231BD49200C88F0A /* TalkController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D36E191231BD49200C88F0A /* TalkController.swift */; };
+		6DF52795231C5D1600595B26 /* NetworkController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6DF52794231C5D1600595B26 /* NetworkController.swift */; };
+		AF4F2C61B2FCA3E744F72685 /* Pods_iLearnWords.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BD187980F093E277E5A968F7 /* Pods_iLearnWords.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		48B8AA7E06504417BD100AD6 /* Pods-iLearnWords.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-iLearnWords.debug.xcconfig"; path = "Target Support Files/Pods-iLearnWords/Pods-iLearnWords.debug.xcconfig"; sourceTree = "<group>"; };
 		6D36E17A231BC09A00C88F0A /* iLearnWords.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = iLearnWords.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		6D36E17D231BC09A00C88F0A /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		6D36E17F231BC09A00C88F0A /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		6D36E17F231BC09A00C88F0A /* MainVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainVC.swift; sourceTree = "<group>"; };
 		6D36E182231BC09A00C88F0A /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		6D36E184231BC09C00C88F0A /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		6D36E187231BC09C00C88F0A /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		6D36E189231BC09C00C88F0A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		6D36E191231BD49200C88F0A /* TalkController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TalkController.swift; sourceTree = "<group>"; };
+		6DF52794231C5D1600595B26 /* NetworkController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NetworkController.swift; sourceTree = "<group>"; };
+		85F90F8EBD3A95F9DE8D3868 /* Pods-iLearnWords.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-iLearnWords.release.xcconfig"; path = "Target Support Files/Pods-iLearnWords/Pods-iLearnWords.release.xcconfig"; sourceTree = "<group>"; };
+		BD187980F093E277E5A968F7 /* Pods_iLearnWords.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_iLearnWords.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -29,6 +37,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				AF4F2C61B2FCA3E744F72685 /* Pods_iLearnWords.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -40,6 +49,8 @@
 			children = (
 				6D36E17C231BC09A00C88F0A /* iLearnWords */,
 				6D36E17B231BC09A00C88F0A /* Products */,
+				DCBFE666AA0C7F1DA629D497 /* Pods */,
+				9AD42107F2B70BA6CB278AC0 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -55,13 +66,56 @@
 			isa = PBXGroup;
 			children = (
 				6D36E17D231BC09A00C88F0A /* AppDelegate.swift */,
-				6D36E17F231BC09A00C88F0A /* ViewController.swift */,
-				6D36E181231BC09A00C88F0A /* Main.storyboard */,
+				6D36E195231BF7D200C88F0A /* Classes */,
+				6D36E193231BF79700C88F0A /* Services */,
+				6D36E194231BF7C300C88F0A /* Views */,
 				6D36E184231BC09C00C88F0A /* Assets.xcassets */,
-				6D36E186231BC09C00C88F0A /* LaunchScreen.storyboard */,
 				6D36E189231BC09C00C88F0A /* Info.plist */,
 			);
 			path = iLearnWords;
+			sourceTree = "<group>";
+		};
+		6D36E193231BF79700C88F0A /* Services */ = {
+			isa = PBXGroup;
+			children = (
+				6DF52794231C5D1600595B26 /* NetworkController.swift */,
+				6D36E191231BD49200C88F0A /* TalkController.swift */,
+			);
+			path = Services;
+			sourceTree = "<group>";
+		};
+		6D36E194231BF7C300C88F0A /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				6D36E181231BC09A00C88F0A /* Main.storyboard */,
+				6D36E186231BC09C00C88F0A /* LaunchScreen.storyboard */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+		6D36E195231BF7D200C88F0A /* Classes */ = {
+			isa = PBXGroup;
+			children = (
+				6D36E17F231BC09A00C88F0A /* MainVC.swift */,
+			);
+			path = Classes;
+			sourceTree = "<group>";
+		};
+		9AD42107F2B70BA6CB278AC0 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				BD187980F093E277E5A968F7 /* Pods_iLearnWords.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		DCBFE666AA0C7F1DA629D497 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				48B8AA7E06504417BD100AD6 /* Pods-iLearnWords.debug.xcconfig */,
+				85F90F8EBD3A95F9DE8D3868 /* Pods-iLearnWords.release.xcconfig */,
+			);
+			path = Pods;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -71,9 +125,11 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 6D36E18C231BC09C00C88F0A /* Build configuration list for PBXNativeTarget "iLearnWords" */;
 			buildPhases = (
+				48DC0AB6CD1876BD01BD0EAA /* [CP] Check Pods Manifest.lock */,
 				6D36E176231BC09A00C88F0A /* Sources */,
 				6D36E177231BC09A00C88F0A /* Frameworks */,
 				6D36E178231BC09A00C88F0A /* Resources */,
+				BED63928BA4000CFFA99784A /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -96,6 +152,11 @@
 				TargetAttributes = {
 					6D36E179231BC09A00C88F0A = {
 						CreatedOnToolsVersion = 10.3;
+						SystemCapabilities = {
+							com.apple.BackgroundModes = {
+								enabled = 1;
+							};
+						};
 					};
 				};
 			};
@@ -130,13 +191,57 @@
 		};
 /* End PBXResourcesBuildPhase section */
 
+/* Begin PBXShellScriptBuildPhase section */
+		48DC0AB6CD1876BD01BD0EAA /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-iLearnWords-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		BED63928BA4000CFFA99784A /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-iLearnWords/Pods-iLearnWords-frameworks-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-iLearnWords/Pods-iLearnWords-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-iLearnWords/Pods-iLearnWords-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
+
 /* Begin PBXSourcesBuildPhase section */
 		6D36E176231BC09A00C88F0A /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				6D36E180231BC09A00C88F0A /* ViewController.swift in Sources */,
+				6DF52795231C5D1600595B26 /* NetworkController.swift in Sources */,
+				6D36E180231BC09A00C88F0A /* MainVC.swift in Sources */,
 				6D36E17E231BC09A00C88F0A /* AppDelegate.swift in Sources */,
+				6D36E192231BD49200C88F0A /* TalkController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -280,6 +385,7 @@
 		};
 		6D36E18D231BC09C00C88F0A /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 48B8AA7E06504417BD100AD6 /* Pods-iLearnWords.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
@@ -298,6 +404,7 @@
 		};
 		6D36E18E231BC09C00C88F0A /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 85F90F8EBD3A95F9DE8D3868 /* Pods-iLearnWords.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;

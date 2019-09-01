@@ -19,9 +19,10 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="urs-vg-5YN">
-                                <rect key="frame" x="20" y="88" width="374" height="684.5"/>
+                                <rect key="frame" x="0.0" y="88" width="414" height="729.5"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                <mutableString key="text">дОма
+                                <inset key="scrollIndicatorInsets" minX="20" minY="0.0" maxX="0.0" maxY="0.0"/>
+                                <string key="text">дОма
 в дОме
 странА
 пОмнить
@@ -63,39 +64,65 @@
 обЫчный
 ещЁ
 растЕние
-пАльма</mutableString>
+пАльма</string>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                             </textView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="LVB-gA-c0R">
-                                <rect key="frame" x="20" y="772.5" width="374" height="89.5"/>
+                                <rect key="frame" x="0.0" y="818" width="414" height="44"/>
+                                <color key="backgroundColor" red="0.97636479139328003" green="0.97653168439865112" blue="0.97635418176651001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="44" id="0fS-Eo-YbR"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="15"/>
                                 <state key="normal" title="PLAY"/>
                                 <connections>
                                     <action selector="btnPlayDidTap:" destination="BYZ-38-t0r" eventType="touchUpInside" id="eJr-nZ-ur2"/>
                                 </connections>
                             </button>
                         </subviews>
-                        <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <color key="backgroundColor" red="0.69796198606491089" green="0.69808381795883179" blue="0.69795435667037964" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
-                            <constraint firstItem="LVB-gA-c0R" firstAttribute="height" secondItem="8bC-Xf-vdC" secondAttribute="height" multiplier="0.1" id="3er-s5-F8l"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" secondItem="LVB-gA-c0R" secondAttribute="bottom" id="6dK-Qn-a6N"/>
-                            <constraint firstItem="LVB-gA-c0R" firstAttribute="top" secondItem="urs-vg-5YN" secondAttribute="bottom" id="M0D-wL-ffV"/>
-                            <constraint firstItem="LVB-gA-c0R" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="20" id="PoY-ul-MXB"/>
-                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="LVB-gA-c0R" secondAttribute="trailing" constant="20" id="Se1-kM-Wwe"/>
+                            <constraint firstItem="LVB-gA-c0R" firstAttribute="top" secondItem="urs-vg-5YN" secondAttribute="bottom" constant="0.5" id="M0D-wL-ffV"/>
+                            <constraint firstItem="LVB-gA-c0R" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="PoY-ul-MXB"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="LVB-gA-c0R" secondAttribute="trailing" id="Se1-kM-Wwe"/>
                             <constraint firstItem="urs-vg-5YN" firstAttribute="leading" secondItem="LVB-gA-c0R" secondAttribute="leading" id="n0r-iN-Jtq"/>
                             <constraint firstItem="urs-vg-5YN" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" id="qYN-5C-Alk"/>
                             <constraint firstItem="urs-vg-5YN" firstAttribute="trailing" secondItem="LVB-gA-c0R" secondAttribute="trailing" id="vlv-xw-lkP"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                     </view>
-                    <navigationItem key="navigationItem" id="m3p-Yg-42a"/>
+                    <navigationItem key="navigationItem" id="m3p-Yg-42a">
+                        <barButtonItem key="rightBarButtonItem" title="Settings" id="Tqd-pk-gZM">
+                            <connections>
+                                <action selector="btnSettingsDidTap:" destination="BYZ-38-t0r" id="8QW-Oo-Uvs"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
                     <connections>
                         <outlet property="txtWords" destination="urs-vg-5YN" id="e7r-bd-CKr"/>
+                        <segue destination="i0j-J4-E7u" kind="show" identifier="gotoSettings" id="I31-7n-ppf"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="1047.8260869565217" y="116.51785714285714"/>
+        </scene>
+        <!--View Controller-->
+        <scene sceneID="U2S-IB-2cr">
+            <objects>
+                <viewController id="i0j-J4-E7u" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="2RV-Eq-39x">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <viewLayoutGuide key="safeArea" id="9Fg-99-1xI"/>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="vFb-uV-ze4" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1759" y="112"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="EOK-H9-rS6">

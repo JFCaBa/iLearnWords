@@ -12,6 +12,7 @@ class MainVC: UIViewController, TalkerDelegate, UITextViewDelegate {
 
     //Outlets
     @IBOutlet weak var txtWords: UITextView!
+    
     //Ivars
     var wordsList: Array<String> = Array()
     var translateWordsList: Array<String> = Array()
@@ -33,6 +34,10 @@ class MainVC: UIViewController, TalkerDelegate, UITextViewDelegate {
     }
 
     //MARK: Actions
+    @IBAction func btnSettingsDidTap(_ sender: Any) {
+        self.performSegue(withIdentifier: "gotoSettings", sender: self)
+    }
+    
     @IBAction func btnPlayDidTap(_ sender: Any) {
         
         //Dont continue if the list is empty of if we didnt chante the list

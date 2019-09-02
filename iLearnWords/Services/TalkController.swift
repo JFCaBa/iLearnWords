@@ -18,6 +18,7 @@ class TalkController: NSObject {
     public var isPaused = false
     let synthesizer = AVSpeechSynthesizer()
     public weak var delegate:TalkerDelegate?
+    
     var utteranceRate: Float = 0.3
     
     //MARK: Initializers
@@ -25,6 +26,8 @@ class TalkController: NSObject {
         super.init()
         synthesizer.delegate = self
         NotificationCenter.default.addObserver(self, selector: #selector(didChangeSettings), name: NSNotification.Name(rawValue: "DID_CHANGE_SETTINGS"), object: nil)
+        let rate = UserDefaults.standard.float(forKey: "VOICE_SPEED")
+        utteranceRate = rate
     }
 
     //MARK: Public functions

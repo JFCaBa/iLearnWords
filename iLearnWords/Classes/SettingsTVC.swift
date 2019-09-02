@@ -10,6 +10,10 @@ import UIKit
 
 class SettingsTVC: UITableViewController {
 
+    @IBOutlet weak var voiceSpeedOutlet: UISlider!
+    @IBOutlet weak var repeatOriginalOutlet: UISwitch!
+    @IBOutlet weak var playInLoopOutlet: UISwitch!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         self.tableView.tableFooterView = UIView.init(frame: CGRect.zero)
@@ -33,13 +37,13 @@ class SettingsTVC: UITableViewController {
     
     @IBAction func repeatOriginalDidChangeValue(_ sender: Any){
         let sw = sender as! UISwitch
-        UserDefaults.standard.set(sw.isEnabled, forKey: "REPEAT_ORIGINAL")
+        UserDefaults.standard.set(sw.isOn, forKey: "REPEAT_ORIGINAL")
         notifyChanges()
     }
     
     @IBAction func playInLoopDidChangeValue(_ sender: Any) {
         let sw = sender as! UISwitch
-        UserDefaults.standard.set(sw.isEnabled, forKey: "PLAY_IN_LOOP")
+        UserDefaults.standard.set(sw.isOn, forKey: "PLAY_IN_LOOP")
         notifyChanges()
     }
 }
@@ -48,5 +52,11 @@ extension SettingsTVC{
     private func notifyChanges(){
         UserDefaults.standard.synchronize()
         NotificationCenter.default.post(name: NSNotification.Name(rawValue: "DID_CHANGE_SETTINGS"), object: nil)
+    }
+    
+    private func tweakUI(){
+        voiceSpeedOutlet.value = UserDefaults.standard.float(forKey: "VOICE_SPEED");
+        repeatOriginalOutlet.isOn = UserDefaults.standard.bool(forKey: "REPEAT_ORIGINAL")
+        playInLoopOutlet.isOn = UserDefaults.standard.bool(forKey: "PLAY_IN_LOOP")
     }
 }

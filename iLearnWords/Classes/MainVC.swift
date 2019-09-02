@@ -59,6 +59,10 @@ class MainVC: UIViewController, TalkerDelegate, UITextViewDelegate {
             if talk.isPaused{
                 talk.resumeTalk()
             }
+            else{
+                talk.sayText(wordsList[talkIndex], language: original)
+            }
+
         }
         else{
             btn.setTitle("PLAY", for: .normal)
@@ -91,19 +95,22 @@ class MainVC: UIViewController, TalkerDelegate, UITextViewDelegate {
     //MARK: TalkController delegate
     func didFinishTalk() {
         if talkIndex < wordsList.count{
+            let repeatSettings = UserDefaults.standard.bool(forKey: "REPEAT_ORIGINAL")
             if !talk.isPaused{
                 if isOriginal{
                     startTalking(wordsList[talkIndex])
-                    isOriginal = false //The nextone to be read will be the translated one
+                    if !repeatSettings || repeatCounter == 3{
+                        isOriginal = false //The nextone to be read will be the translated one
+                    }
+                    else{
+                        repeatCounter += 1
+                    }
                 }
-                else if(repeatCounter >= 3 && UserDefaults.standard.bool(forKey: "REPEAT_ORIGINAL")){
+                else{
                     startTalking(translateWordsList[talkIndex])
                     talkIndex += 1 //Increment the index to change the row
                     isOriginal = true //The nextone to be read will be the original one
                     repeatCounter = 1;
-                }
-                else{
-                    repeatCounter += 1
                 }
             }
         }

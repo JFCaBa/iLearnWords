@@ -225,6 +225,11 @@
                             <outlet property="delegate" destination="4T4-D4-0wu" id="VhE-ne-xHE"/>
                         </connections>
                     </tableView>
+                    <connections>
+                        <outlet property="playInLoopOutlet" destination="s2G-Rc-ILR" id="v2v-Gk-aml"/>
+                        <outlet property="repeatOriginalOutlet" destination="uW3-WN-Kbn" id="VBX-M9-8bk"/>
+                        <outlet property="voiceSpeedOutlet" destination="Bzc-GF-mHe" id="zEu-IM-hvC"/>
+                    </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="hp6-XA-OC5" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>

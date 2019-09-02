@@ -15,6 +15,7 @@
 		6D36E188231BC09C00C88F0A /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 6D36E186231BC09C00C88F0A /* LaunchScreen.storyboard */; };
 		6D36E192231BD49200C88F0A /* TalkController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D36E191231BD49200C88F0A /* TalkController.swift */; };
 		6DF52795231C5D1600595B26 /* NetworkController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6DF52794231C5D1600595B26 /* NetworkController.swift */; };
+		6DF52798231DB91C00595B26 /* Model.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 6DF52796231DB91C00595B26 /* Model.xcdatamodeld */; };
 		AF4F2C61B2FCA3E744F72685 /* Pods_iLearnWords.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BD187980F093E277E5A968F7 /* Pods_iLearnWords.framework */; };
 /* End PBXBuildFile section */
 
@@ -30,6 +31,7 @@
 		6D36E189231BC09C00C88F0A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		6D36E191231BD49200C88F0A /* TalkController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TalkController.swift; sourceTree = "<group>"; };
 		6DF52794231C5D1600595B26 /* NetworkController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NetworkController.swift; sourceTree = "<group>"; };
+		6DF52797231DB91C00595B26 /* Model.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Model.xcdatamodel; sourceTree = "<group>"; };
 		85F90F8EBD3A95F9DE8D3868 /* Pods-iLearnWords.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-iLearnWords.release.xcconfig"; path = "Target Support Files/Pods-iLearnWords/Pods-iLearnWords.release.xcconfig"; sourceTree = "<group>"; };
 		BD187980F093E277E5A968F7 /* Pods_iLearnWords.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_iLearnWords.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
@@ -73,6 +75,7 @@
 				6D36E194231BF7C300C88F0A /* Views */,
 				6D36E184231BC09C00C88F0A /* Assets.xcassets */,
 				6D36E189231BC09C00C88F0A /* Info.plist */,
+				6DF52796231DB91C00595B26 /* Model.xcdatamodeld */,
 			);
 			path = iLearnWords;
 			sourceTree = "<group>";
@@ -246,6 +249,7 @@
 				6D36E17E231BC09A00C88F0A /* AppDelegate.swift in Sources */,
 				6D22C6EC231D4EF8009DC8F7 /* SettingsTVC.swift in Sources */,
 				6D36E192231BD49200C88F0A /* TalkController.swift in Sources */,
+				6DF52798231DB91C00595B26 /* Model.xcdatamodeld in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -447,6 +451,19 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCVersionGroup section */
+		6DF52796231DB91C00595B26 /* Model.xcdatamodeld */ = {
+			isa = XCVersionGroup;
+			children = (
+				6DF52797231DB91C00595B26 /* Model.xcdatamodel */,
+			);
+			currentVersion = 6DF52797231DB91C00595B26 /* Model.xcdatamodel */;
+			path = Model.xcdatamodeld;
+			sourceTree = "<group>";
+			versionGroupType = wrapper.xcdatamodel;
+		};
+/* End XCVersionGroup section */
 	};
 	rootObject = 6D36E172231BC09A00C88F0A /* Project object */;
 }

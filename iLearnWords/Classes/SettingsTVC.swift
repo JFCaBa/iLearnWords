@@ -18,6 +18,11 @@ class SettingsTVC: UITableViewController {
         super.viewDidLoad()
         self.tableView.tableFooterView = UIView.init(frame: CGRect.zero)
     }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(true)
+        tweakUI()
+    }
 
     // MARK: - Table view data source
     override func numberOfSections(in tableView: UITableView) -> Int {

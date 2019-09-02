@@ -27,12 +27,17 @@ class MainVC: UIViewController, TalkerDelegate, UITextViewDelegate {
     var talkIndex = 0
     var isOriginal = false
     var repeatCounter = 1
-    
+        
     //MARK: Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
         talk.delegate = self
         txtWords.delegate = self
+        
+        if(translateWordsList.count == 0){
+            wordsList = txtWords.text.components(separatedBy: "\n")
+            self.translate()
+        }
     }
 
     //MARK: Actions
@@ -42,14 +47,14 @@ class MainVC: UIViewController, TalkerDelegate, UITextViewDelegate {
     
     @IBAction func btnPlayDidTap(_ sender: Any) {
         
-        //Dont continue if the list is empty of if we didnt chante the list
+        //Dont continue if the textView is empty of if we didnt chante the list
         if txtWords.text.count == 0{
             return
         }
         
         let btn = sender as! UIButton
         
-        if(wordsList.count == 0){
+        if(translateWordsList.count == 0){
             wordsList = txtWords.text.components(separatedBy: "\n")
             self.translate()
         }
@@ -60,9 +65,8 @@ class MainVC: UIViewController, TalkerDelegate, UITextViewDelegate {
                 talk.resumeTalk()
             }
             else{
-                talk.sayText(wordsList[talkIndex], language: original)
+                self.startTalking(self.wordsList[0])
             }
-
         }
         else{
             btn.setTitle("PLAY", for: .normal)
@@ -72,12 +76,15 @@ class MainVC: UIViewController, TalkerDelegate, UITextViewDelegate {
     
     //MARK: Private functions
     private func translate(){
+        //TODO: check with the words list if we already have some of them in the db
+        
         network.translateBlock =  { (response) -> Void in
             //next step
             if nil != response{
                 self.txtWordsTranslated.text = response;
                 self.translateWordsList = (response?.components(separatedBy: "\n"))!
-                self.startTalking(self.wordsList[0])
+                
+                //TODO: add the translated words to the db
             }
         }
         network.translateArray(txtWords!.text)

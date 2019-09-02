@@ -12,6 +12,7 @@ class MainVC: UIViewController, TalkerDelegate, UITextViewDelegate {
 
     //Outlets
     @IBOutlet weak var txtWords: UITextView!
+    @IBOutlet weak var txtWordsTranslated: UITextView!
     
     //Ivars
     var wordsList: Array<String> = Array()
@@ -25,6 +26,7 @@ class MainVC: UIViewController, TalkerDelegate, UITextViewDelegate {
     
     var talkIndex = 0
     var isOriginal = false
+    var repeatCounter = 1
     
     //MARK: Lifecycle
     override func viewDidLoad() {
@@ -69,6 +71,7 @@ class MainVC: UIViewController, TalkerDelegate, UITextViewDelegate {
         network.translateBlock =  { (response) -> Void in
             //next step
             if nil != response{
+                self.txtWordsTranslated.text = response;
                 self.translateWordsList = (response?.components(separatedBy: "\n"))!
                 self.startTalking(self.wordsList[0])
             }
@@ -78,7 +81,6 @@ class MainVC: UIViewController, TalkerDelegate, UITextViewDelegate {
     
     private func startTalking(_ text: String){
             self.talk.sayText(text, language: self.original)
-            //self.talk.sayText(self.translateWordsList[talkIndex], language: self.translated)
     }
     
     private func delay(_ delay:Double, closure:@escaping ()->()) {
@@ -94,14 +96,18 @@ class MainVC: UIViewController, TalkerDelegate, UITextViewDelegate {
                     startTalking(wordsList[talkIndex])
                     isOriginal = false //The nextone to be read will be the translated one
                 }
-                else{
+                else if(repeatCounter >= 3 && UserDefaults.standard.bool(forKey: "REPEAT_ORIGINAL")){
                     startTalking(translateWordsList[talkIndex])
                     talkIndex += 1 //Increment the index to change the row
                     isOriginal = true //The nextone to be read will be the original one
+                    repeatCounter = 1;
+                }
+                else{
+                    repeatCounter += 1
                 }
             }
         }
-        else{
+        else if UserDefaults.standard.bool(forKey: "PLAY_IN_LOOP"){
             talkIndex = 0
             //Repeat the list
             didFinishTalk()
@@ -114,4 +120,6 @@ class MainVC: UIViewController, TalkerDelegate, UITextViewDelegate {
         translateWordsList.removeAll()
     }
 }
+
+
 

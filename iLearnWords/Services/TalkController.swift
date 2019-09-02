@@ -18,11 +18,13 @@ class TalkController: NSObject {
     public var isPaused = false
     let synthesizer = AVSpeechSynthesizer()
     public weak var delegate:TalkerDelegate?
+    var utteranceRate: Float = 0.3
     
     //MARK: Initializers
     override init() {
         super.init()
         synthesizer.delegate = self
+        NotificationCenter.default.addObserver(self, selector: #selector(didChangeSettings), name: NSNotification.Name(rawValue: "DID_CHANGE_SETTINGS"), object: nil)
     }
 
     //MARK: Public functions
@@ -37,7 +39,7 @@ class TalkController: NSObject {
         
         let utterance = AVSpeechUtterance(string: text)
         utterance.voice = AVSpeechSynthesisVoice(language: language)
-        utterance.rate = 0.3
+        utterance.rate = utteranceRate
         
         synthesizer.speak(utterance)
     }
@@ -56,5 +58,14 @@ class TalkController: NSObject {
 extension TalkController: AVSpeechSynthesizerDelegate {
     func speechSynthesizer(_ synthesizer: AVSpeechSynthesizer, didFinish utterance: AVSpeechUtterance) {
         delegate?.didFinishTalk()
+    }
+}
+
+extension TalkController{
+    @objc private func didChangeSettings(){
+        let value = UserDefaults.standard.float(forKey: "VOICE_SPEED")
+        if value != utteranceRate{
+            utteranceRate = value
+        }
     }
 }

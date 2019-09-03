@@ -19,7 +19,7 @@ class MainVC: UIViewController, TalkerDelegate, UITextViewDelegate, UIScrollView
     var translateWordsList: Array<String> = Array()
     var strToTranslate = "" as String
     let network = NetworkController()
-    var talk: TalkController = TalkController()
+    private var talk: TalkController = TalkController()
     private let dao: DAOController = DAOController()
     
     let original = "ru_RU"

@@ -8,4 +8,6 @@ target 'iLearnWords' do
   # Pods for iLearnWords
   pod 'Alamofire', '~> 5.0.0-beta.5'
   pod 'IQKeyboardManagerSwift'
+  pod 'Fabric'
+  pod 'Crashlytics'
 end

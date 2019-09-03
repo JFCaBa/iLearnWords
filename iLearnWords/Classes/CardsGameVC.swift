@@ -9,23 +9,25 @@
 import UIKit
 import CoreData
 
-class CardsGameVC: UIViewController {
+class CardsGameVC: UIViewController, TalkerDelegate {
 
     //Outlets
     @IBOutlet weak var lblOriginal: UILabel!
     @IBOutlet weak var lblTranslated: UILabel!
-    
+    @IBOutlet weak var btnPlayOutlet: UIButton!
     //Ivars
     private let dao: DAOController = DAOController()
+    private var talk: TalkController = TalkController()
     var dataArray: [NSManagedObject] = []
     var max = 0
+    let original = "ru_RU"
     
     override func viewDidLoad() {
         super.viewDidLoad()
 
         lblOriginal.text = ""
         lblTranslated.text = ""
-        
+        talk.delegate = self        
         loadData()
     }
     
@@ -44,6 +46,11 @@ class CardsGameVC: UIViewController {
         lblTranslated.isHidden = false
     }
     
+    @IBAction func btnPlayDidTap(_ sender: Any) {
+        let btn = sender as? UIButton
+        btn?.isEnabled = false
+        talk.sayText(lblOriginal.text!, language: original)
+    }
 }
 
 extension CardsGameVC {
@@ -51,5 +58,10 @@ extension CardsGameVC {
         dataArray = dao.fetchAllWords()!
         max = dataArray.count - 1
         btnNextDidTap(nil)
+    }
+    
+    //MARK: TalkController delegate
+    func didFinishTalk() {
+       btnPlayOutlet?.isEnabled = true
     }
 }

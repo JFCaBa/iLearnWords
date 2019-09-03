@@ -9,6 +9,8 @@
 import UIKit
 import IQKeyboardManagerSwift
 import CoreData
+import Fabric
+import Crashlytics
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
@@ -16,7 +18,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     var window: UIWindow?
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
-        // Override point for customization after application launch.
+        Fabric.with([Crashlytics.self])
         IQKeyboardManager.shared.enable = true
         
         if (UserDefaults.standard.value(forKey: "VOICE_SPEED") == nil){

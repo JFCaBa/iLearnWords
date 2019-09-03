@@ -48,6 +48,17 @@ class MainVC: UIViewController, TalkerDelegate, UITextViewDelegate, UIScrollView
         self.performSegue(withIdentifier: "gotoSettings", sender: self)
     }
     
+    @IBAction func btnPasteDidTap(_ sender: Any) {
+        let toPaste = UIPasteboard.general.string
+        if toPaste!.count > 0 {
+            txtWords.text = toPaste
+            wordsList = txtWords.text.components(separatedBy: "\n")
+            txtWordsTranslated.text = ""
+            translate()
+        }
+    }
+    
+    
     @IBAction func btnPlayDidTap(_ sender: Any) {
         
         //Dont continue if the textView is empty of if we didnt chante the list
@@ -119,9 +130,10 @@ class MainVC: UIViewController, TalkerDelegate, UITextViewDelegate, UIScrollView
                     self.translateWordsList = (response?.components(separatedBy: "\n"))!
                     
                     for (_, element) in knownWordsIndexes.enumerated(){
-                        self.translateWordsList.insert(wordsInDB[element], at: element)
+                        if element < wordsInDB.count {
+                            self.translateWordsList.insert(wordsInDB[element], at: element)
+                        }
                     }
-                    //TODO: add the translated words to the db
                     
                     for (index, element) in self.translateWordsList.enumerated(){
                         let orig = wordsToTranslate[index]

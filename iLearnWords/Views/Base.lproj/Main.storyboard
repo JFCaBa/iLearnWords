@@ -80,7 +80,7 @@
                                     <action selector="btnPlayDidTap:" destination="BYZ-38-t0r" eventType="touchUpInside" id="eJr-nZ-ur2"/>
                                 </connections>
                             </button>
-                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="9T4-V0-GOW">
+                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" editable="NO" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="9T4-V0-GOW">
                                 <rect key="frame" x="207" y="88" width="207" height="729.5"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <inset key="scrollIndicatorInsets" minX="20" minY="0.0" maxX="0.0" maxY="0.0"/>
@@ -216,6 +216,36 @@
                                                 <constraint firstItem="aag-sr-lNu" firstAttribute="centerY" secondItem="w24-I8-jhG" secondAttribute="centerY" id="DHV-KJ-zaf"/>
                                                 <constraint firstAttribute="trailing" secondItem="s2G-Rc-ILR" secondAttribute="trailing" constant="20" id="gfP-e9-b6o"/>
                                                 <constraint firstItem="s2G-Rc-ILR" firstAttribute="centerY" secondItem="aag-sr-lNu" secondAttribute="centerY" id="x7m-Fu-jwt"/>
+                                            </constraints>
+                                        </tableViewCellContentView>
+                                    </tableViewCell>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" rowHeight="68" id="NAg-nt-507">
+                                        <rect key="frame" x="0.0" y="204" width="414" height="68"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="NAg-nt-507" id="c8O-pt-C1w">
+                                            <rect key="frame" x="0.0" y="0.0" width="414" height="67.5"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Rest Words Database" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="RPq-sd-csI">
+                                                    <rect key="frame" x="20" y="23.5" width="165" height="21"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                    <nil key="textColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="right" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="oEt-C9-it7">
+                                                    <rect key="frame" x="185" y="19" width="206" height="30"/>
+                                                    <state key="normal" title="Reset"/>
+                                                    <connections>
+                                                        <action selector="btnResetDidTap:" destination="4T4-D4-0wu" eventType="touchUpInside" id="L44-7W-yS1"/>
+                                                    </connections>
+                                                </button>
+                                            </subviews>
+                                            <constraints>
+                                                <constraint firstAttribute="trailing" secondItem="oEt-C9-it7" secondAttribute="trailing" constant="23" id="6Ki-LA-lGX"/>
+                                                <constraint firstItem="RPq-sd-csI" firstAttribute="centerY" secondItem="c8O-pt-C1w" secondAttribute="centerY" id="8hD-qe-UND"/>
+                                                <constraint firstItem="RPq-sd-csI" firstAttribute="leading" secondItem="c8O-pt-C1w" secondAttribute="leading" constant="20" id="Mv5-c1-vSV"/>
+                                                <constraint firstItem="oEt-C9-it7" firstAttribute="centerY" secondItem="RPq-sd-csI" secondAttribute="centerY" id="cC9-st-m3Z"/>
+                                                <constraint firstItem="oEt-C9-it7" firstAttribute="leading" secondItem="RPq-sd-csI" secondAttribute="trailing" id="qk3-Av-fCi"/>
                                             </constraints>
                                         </tableViewCellContentView>
                                     </tableViewCell>

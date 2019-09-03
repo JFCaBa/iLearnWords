@@ -8,7 +8,7 @@
 
 import UIKit
 
-class MainVC: UIViewController, TalkerDelegate, UITextViewDelegate {
+class MainVC: UIViewController, TalkerDelegate, UITextViewDelegate, UIScrollViewDelegate {
 
     //Outlets
     @IBOutlet weak var txtWords: UITextView!
@@ -20,6 +20,7 @@ class MainVC: UIViewController, TalkerDelegate, UITextViewDelegate {
     var strToTranslate = "" as String
     let network = NetworkController()
     var talk: TalkController = TalkController()
+    private let dao: DAOController = DAOController()
     
     let original = "ru_RU"
     let translated = "en_GB"
@@ -27,12 +28,14 @@ class MainVC: UIViewController, TalkerDelegate, UITextViewDelegate {
     var talkIndex = 0
     var isOriginal = false
     var repeatCounter = 1
-        
+
     //MARK: Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
+
         talk.delegate = self
         txtWords.delegate = self
+        txtWordsTranslated.delegate = self
         
         if(translateWordsList.count == 0){
             wordsList = txtWords.text.components(separatedBy: "\n")
@@ -77,17 +80,63 @@ class MainVC: UIViewController, TalkerDelegate, UITextViewDelegate {
     //MARK: Private functions
     private func translate(){
         //TODO: check with the words list if we already have some of them in the db
-        
-        network.translateBlock =  { (response) -> Void in
-            //next step
-            if nil != response{
-                self.txtWordsTranslated.text = response;
-                self.translateWordsList = (response?.components(separatedBy: "\n"))!
-                
-                //TODO: add the translated words to the db
+        var knownWordsIndexes: Array<Int> = Array()
+        var wordsToTranslate : Array<String> = Array()
+        var wordsInDB : Array<String> = Array()
+        var txt = ""
+        var txtDb = ""
+        for(index, element) in wordsList.enumerated(){
+            let translated = dao.getTranslatedForWord(word: element)
+            if nil != translated{
+                knownWordsIndexes.append(index)
+                wordsInDB.append(element)
+                txtDb += translated!
+                if index < wordsList.count - 1{
+                    txtDb += "\n"
+                }
+            }
+            else {
+                txt += element
+                if index < wordsList.count - 1{
+                    txt += "\n"
+                }
+                wordsToTranslate.append(element)
             }
         }
-        network.translateArray(txtWords!.text)
+        
+//        let wordsRemainingToTranslate = wordsList
+//            .enumerated()
+//            .filter { !knownWordsIndexes.contains($0.offset) }
+//            .map { $0.element }
+        
+
+        
+        if txt.count > 0 {
+            network.translateBlock =  { (response) -> Void in
+                //next step
+                if nil != response{
+                    self.txtWordsTranslated.text = response;
+                    self.translateWordsList = (response?.components(separatedBy: "\n"))!
+                    
+                    for (_, element) in knownWordsIndexes.enumerated(){
+                        self.translateWordsList.insert(wordsInDB[element], at: element)
+                    }
+                    //TODO: add the translated words to the db
+                    
+                    for (index, element) in self.translateWordsList.enumerated(){
+                        let orig = wordsToTranslate[index]
+                        let success = self.dao.save(original: orig , translated: element)
+                        if success{
+                            print("Saved \(orig) as \(element)")
+                        }
+                    }
+                }
+            }
+            network.translateStringOfWords(txt)
+        }
+        else {
+            txtWordsTranslated.text = txtDb
+        }
     }
     
     private func startTalking(_ text: String){
@@ -135,5 +184,21 @@ class MainVC: UIViewController, TalkerDelegate, UITextViewDelegate {
     }
 }
 
-
+extension MainVC{
+    func scrollViewDidScroll(_ scrollView: UIScrollView) {
+        if scrollView == txtWords {
+            self.synchronizeScrollView(txtWordsTranslated, toScrollView: txtWords)
+        }
+        else if scrollView == txtWordsTranslated {
+            self.synchronizeScrollView(txtWords, toScrollView: txtWordsTranslated)
+        }
+    }
+    
+    func synchronizeScrollView(_ scrollViewToScroll: UIScrollView, toScrollView scrolledView: UIScrollView) {
+        var offset = scrollViewToScroll.contentOffset
+        offset.y = scrolledView.contentOffset.y
+        
+        scrollViewToScroll.setContentOffset(offset, animated: false)
+    }
+}
 

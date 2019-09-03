@@ -2,6 +2,12 @@
 <Workspace
    version = "1.0">
    <FileRef
+      location = "group:iLearnWords/Model/Translated+CoreDataClass.swift">
+   </FileRef>
+   <FileRef
+      location = "group:iLearnWords/Model/Translated+CoreDataProperties.swift">
+   </FileRef>
+   <FileRef
       location = "group:iLearnWords.xcodeproj">
    </FileRef>
    <FileRef

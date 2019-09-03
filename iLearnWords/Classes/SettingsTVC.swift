@@ -14,6 +14,8 @@ class SettingsTVC: UITableViewController {
     @IBOutlet weak var repeatOriginalOutlet: UISwitch!
     @IBOutlet weak var playInLoopOutlet: UISwitch!
     
+    private let dao: DAOController = DAOController()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         self.tableView.tableFooterView = UIView.init(frame: CGRect.zero)
@@ -30,7 +32,7 @@ class SettingsTVC: UITableViewController {
     }
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 3
+        return 4
     }
 
     //MARK: - Actions
@@ -51,6 +53,27 @@ class SettingsTVC: UITableViewController {
         UserDefaults.standard.set(sw.isOn, forKey: "PLAY_IN_LOOP")
         notifyChanges()
     }
+    
+    @IBAction func btnResetDidTap(_ sender: Any) {
+        let alert: UIAlertController = UIAlertController(title: "Warning", message: "This action will remove the words from your phone", preferredStyle: .alert)
+        
+        alert.addAction(UIAlertAction(title: "YES", style: .destructive) { (alert: UIAlertAction) in
+            let reset = self.dao.cleanDB()
+            if reset{
+                print("Data base flushed")
+            }
+            else {
+                print("Error flushing Data base")
+            }
+        })
+        
+        alert.addAction(UIAlertAction(title: "NO", style: .default) { (alert: UIAlertAction) in
+            
+        })
+        
+        self.present(alert, animated: false, completion: nil)
+    }
+    
 }
 
 extension SettingsTVC{

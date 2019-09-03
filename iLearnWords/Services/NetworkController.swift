@@ -25,7 +25,7 @@ class NetworkController: NSObject {
     }
 
     //MARK: Public
-    public func translateArray(_ wordsStr: String){
+    public func translateStringOfWords(_ wordsStr: String){
         
         self.completionBlock =  { (response, error) -> Void in
             //Do the stuff on completion
@@ -40,8 +40,11 @@ class NetworkController: NSObject {
         self.translateString(wordsStr)
     }
     
-    //MARK: Private functions
-    private func translateString(_ string: String){
+    public func translateString(_ string: String){
+        
+        if string.count == 0{
+            return
+        }
         
         let escapedString = string.addingPercentEncoding(withAllowedCharacters: .urlHostAllowed)
         

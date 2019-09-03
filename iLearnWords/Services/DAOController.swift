@@ -11,7 +11,7 @@ import CoreData
 
 class DAOController: NSObject {
     
-    func save(original: String, translated: String) -> Bool {
+    public func save(original: String, translated: String) -> Bool {
         guard let appDelegate = UIApplication.shared.delegate as? AppDelegate else {
                 return false
         }
@@ -35,7 +35,7 @@ class DAOController: NSObject {
         }
     }
     
-    func getTranslatedForWord(word: String) -> String? {
+    public func getTranslatedForWord(word: String) -> String? {
         
         guard let appDelegate = UIApplication.shared.delegate as? AppDelegate else {
             return nil
@@ -57,7 +57,42 @@ class DAOController: NSObject {
         }
     }
     
-    func cleanDB() -> Bool{
+    public func numberOfRecords() -> Int {
+        guard let appDelegate = UIApplication.shared.delegate as? AppDelegate else {
+            return 0
+        }
+        
+        let managedContext = appDelegate.persistentContainer.viewContext
+        let fetchRequest = NSFetchRequest<NSManagedObject>(entityName: "Translated")
+        do {
+             let count = try managedContext.count(for: fetchRequest)
+            return count
+        }
+        catch let error as NSError {
+            print("Could not retrive number of records. \(error), \(error.userInfo)")
+            return 0
+        }
+    }
+    
+    public func fetchAllWords() -> Array<NSManagedObject>? {
+        guard let appDelegate = UIApplication.shared.delegate as? AppDelegate else {
+            return nil
+        }
+        
+        let managedContext = appDelegate.persistentContainer.viewContext
+        let fetchRequest = NSFetchRequest<NSManagedObject>(entityName: "Translated")
+        
+        do {
+            let result = try managedContext.fetch(fetchRequest)
+            return result
+            
+        } catch let error as NSError {
+            print("Could not fetch. \(error), \(error.userInfo)")
+            return nil
+        }
+    }
+    
+    public func cleanDB() -> Bool{
         guard let appDelegate = UIApplication.shared.delegate as? AppDelegate else {
             return false
         }

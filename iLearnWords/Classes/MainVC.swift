@@ -13,7 +13,7 @@ class MainVC: UIViewController, TalkerDelegate, UITextViewDelegate, UIScrollView
     //Outlets
     @IBOutlet weak var txtWords: UITextView!
     @IBOutlet weak var txtWordsTranslated: UITextView!
-    
+    @IBOutlet weak var btnPlayOutlet: UIButton!
     //Ivars
     var wordsList: Array<String> = Array()
     var translateWordsList: Array<String> = Array()
@@ -42,10 +42,22 @@ class MainVC: UIViewController, TalkerDelegate, UITextViewDelegate, UIScrollView
             self.translate()
         }
     }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(true)
+        if btnPlayOutlet.titleLabel?.text == "PAUSE" {
+            //btnPlayOutlet.setTitle("PLAY", for: .normal)
+            btnPlayDidTap(btnPlayOutlet as Any)
+        }
+    }
 
     //MARK: Actions
     @IBAction func btnSettingsDidTap(_ sender: Any) {
         self.performSegue(withIdentifier: "gotoSettings", sender: self)
+    }
+    
+    @IBAction func btnCardsDidTap(_ sender: Any) {
+        self.performSegue(withIdentifier: "gotoCardsGame", sender: self)
     }
     
     @IBAction func btnPasteDidTap(_ sender: Any) {
@@ -170,11 +182,14 @@ class MainVC: UIViewController, TalkerDelegate, UITextViewDelegate, UIScrollView
                     if !repeatSettings || repeatCounter == 3{
                         isOriginal = false //The nextone to be read will be the translated one
                     }
-                    else{
+                    else {
                         repeatCounter += 1
                     }
                 }
-                else{
+                else {
+                    if translateWordsList.count == 0 {
+                        translateWordsList = txtWordsTranslated.text.components(separatedBy: "\n")
+                    }
                     startTalking(translateWordsList[talkIndex])
                     talkIndex += 1 //Increment the index to change the row
                     isOriginal = true //The nextone to be read will be the original one

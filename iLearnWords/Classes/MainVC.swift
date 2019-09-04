@@ -35,7 +35,9 @@ class MainVC: UIViewController, TalkerDelegate, UITextViewDelegate, UIScrollView
         txtWords.delegate = self
         txtWordsTranslated.delegate = self
         
-        if(translateWordsList.count == 0){
+        txtWords.text = dao.fetchLastHistory()
+        
+        if(translateWordsList.count == 0 && txtWords.text.count > 0){
             wordsList = txtWords.text.components(separatedBy: "\n")
             self.translate()
         }
@@ -70,6 +72,12 @@ class MainVC: UIViewController, TalkerDelegate, UITextViewDelegate, UIScrollView
         if toPaste!.count > 0 {
             txtWords.text = toPaste
             wordsList = txtWords.text.components(separatedBy: "\n")
+            if dao.saveHistory(txtWords.text) {
+                print("History saved")
+            }
+            else {
+                print("Error saving History")
+            }
             txtWordsTranslated.text = ""
             translate()
         }
@@ -87,7 +95,6 @@ class MainVC: UIViewController, TalkerDelegate, UITextViewDelegate, UIScrollView
     }
     
     @IBAction func btnPlayDidTap(_ sender: Any) {
-        
         //Dont continue if the textView is empty of if we didnt chante the list
         if txtWords.text.count == 0{
             return
@@ -184,7 +191,6 @@ class MainVC: UIViewController, TalkerDelegate, UITextViewDelegate, UIScrollView
     }
     
     private func generateAttributedString(with searchTerm: String, targetString: String) -> NSAttributedString? {
-        
         let attributedString = NSMutableAttributedString(string: targetString)
         attributedString.addAttribute(NSAttributedString.Key.font, value: UIFont.systemFont(ofSize: 15), range: NSRange(location: 0, length: targetString.count))
         do {
@@ -209,7 +215,16 @@ class MainVC: UIViewController, TalkerDelegate, UITextViewDelegate, UIScrollView
     
     func textViewDidEndEditing(_ textView: UITextView) {
         if textView.text.last == "\n" {
-            textView.text.remove(at: textView.text.index(before: textView.text  .endIndex)) 
+            textView.text.remove(at: textView.text.index(before: textView.text  .endIndex))
+        }
+        
+        if textView.text.count > 0 {
+            if dao.saveHistory(textView.text) {
+                print("History saved")
+            }
+            else {
+                print("Error saving History")
+            }
         }
     }
 }

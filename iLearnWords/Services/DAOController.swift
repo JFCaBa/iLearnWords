@@ -30,7 +30,7 @@ class DAOController: NSObject {
             try managedContext.save()
             return true
         } catch let error as NSError {
-            print("Could not save. \(error), \(error.userInfo)")
+            print("Could not save Word. \(error), \(error.userInfo)")
             return false
         }
     }
@@ -52,7 +52,28 @@ class DAOController: NSObject {
             try managedContext.save()
             return true
         } catch let error as NSError {
-            print("Could not save. \(error), \(error.userInfo)")
+            print("Could not save Language. \(error), \(error.userInfo)")
+            return false
+        }
+    }
+    
+    public func saveHistory(_ history: String) -> Bool {
+        guard let appDelegate = UIApplication.shared.delegate as? AppDelegate else {
+            return false
+        }
+        
+        let managedContext = appDelegate.persistentContainer.viewContext
+        let entity = NSEntityDescription.entity(forEntityName: "History", in: managedContext)!
+        let hist = NSManagedObject(entity: entity, insertInto: managedContext)
+        
+        hist.setValue(history, forKey: "text")
+        hist.setValue(Date(), forKey: "date")
+        
+        do {
+            try managedContext.save()
+            return true
+        } catch let error as NSError {
+            print("Could not save history. \(error), \(error.userInfo)")
             return false
         }
     }
@@ -74,7 +95,27 @@ class DAOController: NSObject {
             return wordDb
             
         } catch let error as NSError {
-            print("Could not fetch. \(error), \(error.userInfo)")
+            print("Could not fetch Translated Word. \(error), \(error.userInfo)")
+            return nil
+        }
+    }
+    
+    public func fetchLastHistory() -> String? {
+        
+        guard let appDelegate = UIApplication.shared.delegate as? AppDelegate else {
+            return nil
+        }
+        
+        let managedContext = appDelegate.persistentContainer.viewContext
+        let fetchRequest = NSFetchRequest<NSManagedObject>(entityName: "History")
+        
+        do {
+            let result = try managedContext.fetch(fetchRequest)
+            let history = result.first?.value(forKey: "text") as? String
+            return history
+            
+        } catch let error as NSError {
+            print("Could not fetch History. \(error), \(error.userInfo)")
             return nil
         }
     }

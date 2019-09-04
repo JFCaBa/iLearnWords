@@ -32,7 +32,6 @@ class MainVC: UIViewController, TalkerDelegate, UITextViewDelegate, UIScrollView
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        talk.delegate = self
         txtWords.delegate = self
         txtWordsTranslated.delegate = self
         
@@ -45,6 +44,7 @@ class MainVC: UIViewController, TalkerDelegate, UITextViewDelegate, UIScrollView
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(true)
         title = (UserDefaults.standard.value(forKey: "TRANSLATE_WAY") as! String)
+        talk.delegate = self
     }
     
     override func viewWillDisappear(_ animated: Bool) {
@@ -53,6 +53,7 @@ class MainVC: UIViewController, TalkerDelegate, UITextViewDelegate, UIScrollView
             //btnPlayOutlet.setTitle("PLAY", for: .normal)
             btnPlayDidTap(btnPlayOutlet as Any)
         }
+        talk.stopTalk()
     }
 
     //MARK: - Actions
@@ -82,6 +83,7 @@ class MainVC: UIViewController, TalkerDelegate, UITextViewDelegate, UIScrollView
     }
     
     @IBAction func btnEditDidTap(_ sender: Any) {
+        txtWords.focusItems(in: CGRect.zero)
     }
     
     @IBAction func btnPlayDidTap(_ sender: Any) {
@@ -100,12 +102,7 @@ class MainVC: UIViewController, TalkerDelegate, UITextViewDelegate, UIScrollView
 
         if btn.titleLabel?.text == "PLAY"{
             btn.setTitle("PAUSE", for: .normal)
-            if talk.isPaused{
-                talk.resumeTalk()
-            }
-            else{
-                self.startTalking(self.wordsList[0], talkLanguage: original as! String)
-            }
+            self.startTalking(self.wordsList[talkIndex], talkLanguage: original as! String)
         }
         else{
             btn.setTitle("PLAY", for: .normal)
@@ -131,7 +128,7 @@ class MainVC: UIViewController, TalkerDelegate, UITextViewDelegate, UIScrollView
                     txtDb += "\n"
                 }
             }
-            else {
+            else if element.count > 0{
                 txt += element
                 if index < wordsList.count - 1{
                     txt += "\n"
@@ -154,7 +151,7 @@ class MainVC: UIViewController, TalkerDelegate, UITextViewDelegate, UIScrollView
                     }
                     
                     for (index, element) in self.translateWordsList.enumerated(){
-                        let orig = wordsToTranslate[index]
+                        let orig = wordsToTranslate[index - 1]
                         let success = self.dao.save(original: orig , translated: element)
                         if success{
                             print("Saved \(orig) as \(element)")
@@ -169,13 +166,39 @@ class MainVC: UIViewController, TalkerDelegate, UITextViewDelegate, UIScrollView
         }
     }
     
-    private func startTalking(_ text: String, talkLanguage: String = "ru_RU"){
+    private func startTalking(_ text: String, talkLanguage: String = "ru_RU") {
             self.talk.sayText(text, language: talkLanguage)
     }
     
     private func delay(_ delay:Double, closure:@escaping ()->()) {
         DispatchQueue.main.asyncAfter(
             deadline: DispatchTime.now() + Double(Int64(delay * Double(NSEC_PER_SEC))) / Double(NSEC_PER_SEC), execute: closure)
+    }
+    
+    private func highlihgtText() {
+        txtWords.attributedText = generateAttributedString(with: wordsList[talkIndex], targetString: txtWords.text)
+        if translateWordsList.count == 0 {
+            translateWordsList = txtWordsTranslated.text.components(separatedBy: "\n")
+        }
+        txtWordsTranslated.attributedText = generateAttributedString(with: translateWordsList[talkIndex], targetString: txtWordsTranslated.text)
+    }
+    
+    private func generateAttributedString(with searchTerm: String, targetString: String) -> NSAttributedString? {
+        
+        let attributedString = NSMutableAttributedString(string: targetString)
+        attributedString.addAttribute(NSAttributedString.Key.font, value: UIFont.systemFont(ofSize: 15), range: NSRange(location: 0, length: targetString.count))
+        do {
+            let regex = try NSRegularExpression(pattern: searchTerm.trimmingCharacters(in: .whitespacesAndNewlines).folding(options: .diacriticInsensitive, locale: .current), options: .caseInsensitive)
+            let range = NSRange(location: 0, length: targetString.utf16.count)
+            for match in regex.matches(in: targetString.folding(options: .diacriticInsensitive, locale: .current), options: .withTransparentBounds, range: range) {
+                attributedString.addAttribute(NSAttributedString.Key.font, value: UIFont.systemFont(ofSize: 16, weight: UIFont.Weight.bold), range: match.range)
+            }
+
+            return attributedString
+        } catch {
+            NSLog("Error creating regular expresion: \(error)")
+            return nil
+        }
     }
     
     //MARK: - UITextView delegate
@@ -207,6 +230,7 @@ extension MainVC {
     //MARK: TalkController delegate
     func didFinishTalk() {
         if talkIndex < wordsList.count{
+            highlihgtText()
             let repeatSettings = UserDefaults.standard.bool(forKey: "REPEAT_ORIGINAL")
             if !talk.isPaused{
                 if isOriginal{

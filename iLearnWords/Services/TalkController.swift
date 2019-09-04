@@ -32,7 +32,7 @@ class TalkController: NSObject {
 
     //MARK: Public functions
     public func sayText(_ text: String, language: String){
-        
+        isPaused = false
         do {
             try AVAudioSession.sharedInstance().setCategory(.playback, mode: .default, options: AVAudioSession.CategoryOptions.mixWithOthers)
             try AVAudioSession.sharedInstance().setActive(true)
@@ -47,14 +47,19 @@ class TalkController: NSObject {
         synthesizer.speak(utterance)
     }
     
-    public func pauseTalk(){
+    public func pauseTalk() {
+        
         synthesizer.pauseSpeaking(at: .immediate)
         isPaused = true
     }
     
-    public func resumeTalk(){
+    public func resumeTalk() {
         synthesizer.continueSpeaking()
         isPaused = false
+    }
+    
+    public func stopTalk() {
+        synthesizer.stopSpeaking(at: .immediate)
     }
 }
 

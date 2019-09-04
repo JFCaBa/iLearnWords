@@ -20,15 +20,19 @@ class CardsGameVC: UIViewController, TalkerDelegate {
     private var talk: TalkController = TalkController()
     var dataArray: [NSManagedObject] = []
     var max = 0
-    let original = "ru_RU"
+    let original = UserDefaults.standard.value(forKey: "TALK_LANGUAGE") ?? "ru_RU"
     
     override func viewDidLoad() {
         super.viewDidLoad()
 
         lblOriginal.text = ""
         lblTranslated.text = ""
-        talk.delegate = self        
         loadData()
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(true)
+        talk.delegate = self 
     }
     
     //MARK: - Actions
@@ -49,7 +53,7 @@ class CardsGameVC: UIViewController, TalkerDelegate {
     @IBAction func btnPlayDidTap(_ sender: Any) {
         let btn = sender as? UIButton
         btn?.isEnabled = false
-        talk.sayText(lblOriginal.text!, language: original)
+        talk.sayText(lblOriginal.text!, language: original as! String)
     }
 }
 

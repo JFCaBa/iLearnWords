@@ -10,26 +10,25 @@ import UIKit
 
 class MainVC: UIViewController, TalkerDelegate, UITextViewDelegate, UIScrollViewDelegate {
 
-    //Outlets
+    //MARK: - Outlets
     @IBOutlet weak var txtWords: UITextView!
     @IBOutlet weak var txtWordsTranslated: UITextView!
     @IBOutlet weak var btnPlayOutlet: UIButton!
-    //Ivars
+    //MARK: - Ivars
     var wordsList: Array<String> = Array()
     var translateWordsList: Array<String> = Array()
     var strToTranslate = "" as String
+    let original = UserDefaults.standard.value(forKey: "TALK_LANGUAGE") ?? "ru_RU"
+    let translated = NSLocale.current.languageCode ?? "en_GB"
+    var talkIndex = 0
+    var isOriginal = false
+    var repeatCounter = 1
+    //MARK: - Object instances
     let network = NetworkController()
     private var talk: TalkController = TalkController()
     private let dao: DAOController = DAOController()
     
-    let original = "ru_RU"
-    let translated = "en_GB"
-    
-    var talkIndex = 0
-    var isOriginal = false
-    var repeatCounter = 1
-
-    //MARK: Lifecycle
+    //MARK: - Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -43,6 +42,11 @@ class MainVC: UIViewController, TalkerDelegate, UITextViewDelegate, UIScrollView
         }
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(true)
+        title = (UserDefaults.standard.value(forKey: "TRANSLATE_WAY") as! String)
+    }
+    
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(true)
         if btnPlayOutlet.titleLabel?.text == "PAUSE" {
@@ -51,7 +55,7 @@ class MainVC: UIViewController, TalkerDelegate, UITextViewDelegate, UIScrollView
         }
     }
 
-    //MARK: Actions
+    //MARK: - Actions
     @IBAction func btnSettingsDidTap(_ sender: Any) {
         self.performSegue(withIdentifier: "gotoSettings", sender: self)
     }
@@ -70,6 +74,15 @@ class MainVC: UIViewController, TalkerDelegate, UITextViewDelegate, UIScrollView
         }
     }
     
+    @IBAction func btnDeleteDidTap(_ sender: Any) {
+        txtWords.text = ""
+        txtWordsTranslated.text = ""
+        wordsList.removeAll()
+        translateWordsList.removeAll()
+    }
+    
+    @IBAction func btnEditDidTap(_ sender: Any) {
+    }
     
     @IBAction func btnPlayDidTap(_ sender: Any) {
         
@@ -91,7 +104,7 @@ class MainVC: UIViewController, TalkerDelegate, UITextViewDelegate, UIScrollView
                 talk.resumeTalk()
             }
             else{
-                self.startTalking(self.wordsList[0])
+                self.startTalking(self.wordsList[0], talkLanguage: original as! String)
             }
         }
         else{
@@ -100,9 +113,9 @@ class MainVC: UIViewController, TalkerDelegate, UITextViewDelegate, UIScrollView
         }
     }
     
-    //MARK: Private functions
+    //MARK: - Private functions
     private func translate(){
-        //TODO: check with the words list if we already have some of them in the db
+        ///check with the words list if we already have some of them in the db
         var knownWordsIndexes: Array<Int> = Array()
         var wordsToTranslate : Array<String> = Array()
         var wordsInDB : Array<String> = Array()
@@ -127,16 +140,9 @@ class MainVC: UIViewController, TalkerDelegate, UITextViewDelegate, UIScrollView
             }
         }
         
-//        let wordsRemainingToTranslate = wordsList
-//            .enumerated()
-//            .filter { !knownWordsIndexes.contains($0.offset) }
-//            .map { $0.element }
-        
-
-        
+        ///perfor a translate of the unknown words
         if txt.count > 0 {
             network.translateBlock =  { (response) -> Void in
-                //next step
                 if nil != response{
                     self.txtWordsTranslated.text = response;
                     self.translateWordsList = (response?.components(separatedBy: "\n"))!
@@ -163,8 +169,8 @@ class MainVC: UIViewController, TalkerDelegate, UITextViewDelegate, UIScrollView
         }
     }
     
-    private func startTalking(_ text: String){
-            self.talk.sayText(text, language: self.original)
+    private func startTalking(_ text: String, talkLanguage: String = "ru_RU"){
+            self.talk.sayText(text, language: talkLanguage)
     }
     
     private func delay(_ delay:Double, closure:@escaping ()->()) {
@@ -172,46 +178,16 @@ class MainVC: UIViewController, TalkerDelegate, UITextViewDelegate, UIScrollView
             deadline: DispatchTime.now() + Double(Int64(delay * Double(NSEC_PER_SEC))) / Double(NSEC_PER_SEC), execute: closure)
     }
     
-    //MARK: TalkController delegate
-    func didFinishTalk() {
-        if talkIndex < wordsList.count{
-            let repeatSettings = UserDefaults.standard.bool(forKey: "REPEAT_ORIGINAL")
-            if !talk.isPaused{
-                if isOriginal{
-                    startTalking(wordsList[talkIndex])
-                    if !repeatSettings || repeatCounter == 3{
-                        isOriginal = false //The nextone to be read will be the translated one
-                    }
-                    else {
-                        repeatCounter += 1
-                    }
-                }
-                else {
-                    if translateWordsList.count == 0 {
-                        translateWordsList = txtWordsTranslated.text.components(separatedBy: "\n")
-                    }
-                    startTalking(translateWordsList[talkIndex])
-                    talkIndex += 1 //Increment the index to change the row
-                    isOriginal = true //The nextone to be read will be the original one
-                    repeatCounter = 1;
-                }
-            }
-        }
-        else if UserDefaults.standard.bool(forKey: "PLAY_IN_LOOP"){
-            talkIndex = 0
-            //Repeat the list
-            didFinishTalk()
-        }
-    }
-    
-    //MARK: UITextView delegate
+    //MARK: - UITextView delegate
     func textViewDidChange(_ textView: UITextView) {
         wordsList.removeAll()
         translateWordsList.removeAll()
     }
 }
 
-extension MainVC{
+extension MainVC {
+    
+    //MARK: - UIScroll delegates
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
         if scrollView == txtWords {
             self.synchronizeScrollView(txtWordsTranslated, toScrollView: txtWords)
@@ -226,6 +202,40 @@ extension MainVC{
         offset.y = scrolledView.contentOffset.y
         
         scrollViewToScroll.setContentOffset(offset, animated: false)
+    }
+    
+    //MARK: TalkController delegate
+    func didFinishTalk() {
+        if talkIndex < wordsList.count{
+            let repeatSettings = UserDefaults.standard.bool(forKey: "REPEAT_ORIGINAL")
+            if !talk.isPaused{
+                if isOriginal{
+                    startTalking(wordsList[talkIndex], talkLanguage: self.original as! String)
+                    if !repeatSettings || repeatCounter == 3{
+                        isOriginal = false //The nextone to be read will be the translated one
+                    }
+                    else {
+                        repeatCounter += 1
+                    }
+                }
+                else {
+                    if translateWordsList.count == 0 {
+                        translateWordsList = txtWordsTranslated.text.components(separatedBy: "\n")
+                    }
+                    startTalking(translateWordsList[talkIndex], talkLanguage: translated)
+                    talkIndex += 1 //Increment the index to change the row
+                    isOriginal = true //The nextone to be read will be the original one
+                    repeatCounter = 1;
+                }
+            }
+        }
+        else{
+            talkIndex = 0
+            if UserDefaults.standard.bool(forKey: "PLAY_IN_LOOP"){
+                //Repeat the list
+                didFinishTalk()
+            }
+        }
     }
 }
 

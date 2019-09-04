@@ -85,6 +85,8 @@ extension AppDelegate{
         UserDefaults.standard.set(0.3, forKey: "VOICE_SPEED")
         UserDefaults.standard.set(true, forKey: "REPEAT_ORIGINAL")
         UserDefaults.standard.set(true, forKey: "PLAY_IN_LOOP")
+        UserDefaults.standard.set("ru-en", forKey: "TRANSLATE_WAY")
+        UserDefaults.standard.set("ru_RU", forKey: "TALK_LANGUAGE")
         UserDefaults.standard.synchronize()
     }
 }

@@ -26,13 +26,20 @@ class SettingsTVC: UITableViewController {
         tweakUI()
     }
 
-    // MARK: - Table view data source
+    //MARK: - Table view data source
     override func numberOfSections(in tableView: UITableView) -> Int {
         return 1
     }
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 4
+        return 5
+    }
+    
+    //MARK: - Table view delegate
+    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        if indexPath.row == 3 {
+            self.performSegue(withIdentifier: "gotoLanguages", sender: self)
+        }
     }
 
     //MARK: - Actions
@@ -58,7 +65,7 @@ class SettingsTVC: UITableViewController {
         let alert: UIAlertController = UIAlertController(title: "Warning", message: "This action will remove the words from your phone", preferredStyle: .alert)
         
         alert.addAction(UIAlertAction(title: "YES", style: .destructive) { (alert: UIAlertAction) in
-            let reset = self.dao.cleanDB()
+            let reset = self.dao.cleanData("Translated")
             if reset{
                 print("Data base flushed")
             }

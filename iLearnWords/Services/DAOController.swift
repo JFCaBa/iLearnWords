@@ -17,14 +17,36 @@ class DAOController: NSObject {
         }
         
         let managedContext = appDelegate.persistentContainer.viewContext
-        
         let entity = NSEntityDescription.entity(forEntityName: "Translated", in: managedContext)!
-        
+        let translateWay = UserDefaults.standard.value(forKey: "TRANSLATE_WAY") as! String
         let word = NSManagedObject(entity: entity, insertInto: managedContext)
         
         word.setValue(original, forKey: "original")
         word.setValue(translated, forKey: "trans")
         word.setValue(Date(), forKey: "date")
+        word.setValue(translateWay, forKey: "translateWay")
+        
+        do {
+            try managedContext.save()
+            return true
+        } catch let error as NSError {
+            print("Could not save. \(error), \(error.userInfo)")
+            return false
+        }
+    }
+    
+    public func saveLanguage(title: String, short: String, say: String) -> Bool {
+        guard let appDelegate = UIApplication.shared.delegate as? AppDelegate else {
+            return false
+        }
+        
+        let managedContext = appDelegate.persistentContainer.viewContext
+        let entity = NSEntityDescription.entity(forEntityName: "Languages", in: managedContext)!
+        let lang = NSManagedObject(entity: entity, insertInto: managedContext)
+        
+        lang.setValue(title, forKey: "title")
+        lang.setValue(short, forKey: "short")
+        lang.setValue(say, forKey: "say")
         
         do {
             try managedContext.save()
@@ -42,9 +64,9 @@ class DAOController: NSObject {
         }
         
         let managedContext = appDelegate.persistentContainer.viewContext
-        
+        let translateWay = UserDefaults.standard.value(forKey: "TRANSLATE_WAY") as! String
         let fetchRequest = NSFetchRequest<NSManagedObject>(entityName: "Translated")
-        fetchRequest.predicate = NSPredicate(format: "original = %@", word)
+        fetchRequest.predicate = NSPredicate(format: "original = %@ and translateWay = %@", word, translateWay)
 
         do {
             let result = try managedContext.fetch(fetchRequest)
@@ -57,13 +79,13 @@ class DAOController: NSObject {
         }
     }
     
-    public func numberOfRecords() -> Int {
+    public func numberOfRecords(_ entity: String) -> Int {
         guard let appDelegate = UIApplication.shared.delegate as? AppDelegate else {
             return 0
         }
         
         let managedContext = appDelegate.persistentContainer.viewContext
-        let fetchRequest = NSFetchRequest<NSManagedObject>(entityName: "Translated")
+        let fetchRequest = NSFetchRequest<NSManagedObject>(entityName: entity)
         do {
              let count = try managedContext.count(for: fetchRequest)
             return count
@@ -74,13 +96,13 @@ class DAOController: NSObject {
         }
     }
     
-    public func fetchAllWords() -> Array<NSManagedObject>? {
+    public func fetchAll(_ entity: String) -> Array<NSManagedObject>? {
         guard let appDelegate = UIApplication.shared.delegate as? AppDelegate else {
             return nil
         }
         
         let managedContext = appDelegate.persistentContainer.viewContext
-        let fetchRequest = NSFetchRequest<NSManagedObject>(entityName: "Translated")
+        let fetchRequest = NSFetchRequest<NSManagedObject>(entityName: entity)
         
         do {
             let result = try managedContext.fetch(fetchRequest)
@@ -92,14 +114,14 @@ class DAOController: NSObject {
         }
     }
     
-    public func cleanDB() -> Bool{
+    public func cleanData(_ entity: String) -> Bool{
         guard let appDelegate = UIApplication.shared.delegate as? AppDelegate else {
             return false
         }
         
         let managedContext = appDelegate.persistentContainer.viewContext
         
-        let fetchRequest = NSFetchRequest<NSManagedObject>(entityName: "Translated")
+        let fetchRequest = NSFetchRequest<NSManagedObject>(entityName: entity)
         let deleteRequest = NSBatchDeleteRequest(fetchRequest: fetchRequest as! NSFetchRequest<NSFetchRequestResult>)
         
         do {

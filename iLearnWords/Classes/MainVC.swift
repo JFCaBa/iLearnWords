@@ -151,7 +151,7 @@ class MainVC: UIViewController, TalkerDelegate, UITextViewDelegate, UIScrollView
                     }
                     
                     for (index, element) in self.translateWordsList.enumerated(){
-                        let orig = wordsToTranslate[index - 1]
+                        let orig = wordsToTranslate[index]
                         let success = self.dao.save(original: orig , translated: element)
                         if success{
                             print("Saved \(orig) as \(element)")
@@ -205,6 +205,12 @@ class MainVC: UIViewController, TalkerDelegate, UITextViewDelegate, UIScrollView
     func textViewDidChange(_ textView: UITextView) {
         wordsList.removeAll()
         translateWordsList.removeAll()
+    }
+    
+    func textViewDidEndEditing(_ textView: UITextView) {
+        if textView.text.last == "\n" {
+            textView.text.remove(at: textView.text.index(before: textView.text  .endIndex)) 
+        }
     }
 }
 

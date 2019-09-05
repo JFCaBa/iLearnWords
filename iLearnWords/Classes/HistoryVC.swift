@@ -43,7 +43,12 @@ class HistoryVC: UIViewController, UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "Cell", for: indexPath)
         let obj = dataArray[indexPath.row]
-        cell.textLabel?.text = (obj.value(forKey: "title") as! String)
+        if let title = obj.value(forKey: "title") {
+            cell.textLabel?.text = (title as! String)
+        }
+        else {
+            cell.textLabel?.text = "Untitled"
+        }
         return cell
     }
     

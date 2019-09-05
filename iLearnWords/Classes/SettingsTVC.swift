@@ -32,13 +32,16 @@ class SettingsTVC: UITableViewController {
     }
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 5
+        return 6
     }
     
     //MARK: - Table view delegate
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         if indexPath.row == 3 {
             self.performSegue(withIdentifier: "gotoLanguages", sender: self)
+        }
+        else if indexPath.row == 4 {
+            self.performSegue(withIdentifier: "gotoHistory", sender: self)
         }
     }
 

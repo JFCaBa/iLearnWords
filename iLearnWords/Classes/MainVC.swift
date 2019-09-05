@@ -122,7 +122,7 @@ class MainVC: UIViewController, TalkerDelegate, UITextViewDelegate, UIScrollView
         var txt = ""
         var txtDb = ""
         for(index, element) in wordsList.enumerated(){
-            let translated = dao.getTranslatedForWord(word: element)
+            let translated = dao.fetchTranslatedForWord(word: element)
             if nil != translated{
                 knownWordsIndexes.append(index)
                 wordsInDB.append(element)

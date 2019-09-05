@@ -544,12 +544,16 @@
                     </view>
                     <navigationItem key="navigationItem" title="Languages" id="cR5-B9-xxT">
                         <rightBarButtonItems>
-                            <barButtonItem title="Select" style="plain" id="HHD-ki-xlB">
+                            <barButtonItem title="Select" id="HHD-ki-xlB">
                                 <connections>
                                     <action selector="switchDidTap:" destination="eIS-Hl-dZN" id="h7a-Fl-gFP"/>
                                 </connections>
                             </barButtonItem>
-                            <barButtonItem title="Delete" id="Bcd-jZ-Z76"/>
+                            <barButtonItem title="Delete" id="Bcd-jZ-Z76">
+                                <connections>
+                                    <action selector="deleteDidTap:" destination="eIS-Hl-dZN" id="USc-Ko-1ui"/>
+                                </connections>
+                            </barButtonItem>
                         </rightBarButtonItems>
                     </navigationItem>
                     <connections>

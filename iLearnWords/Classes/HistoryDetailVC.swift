@@ -13,14 +13,13 @@ class HistoryDetailVC: UIViewController {
 
     @IBOutlet weak var txtText: UITextView!
     
-    public var text: String?
     public var obj: NSManagedObject?
     private let dao: DAOController = DAOController()
     
     //MARK: - Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
-        txtText?.text = text
+        txtText?.text = obj?.value(forKey: "text") as? String
     }
     
     //MARK: - Actions
@@ -29,7 +28,7 @@ class HistoryDetailVC: UIViewController {
         let alertController = UIAlertController(title: "Switch to History", message: "", preferredStyle: .alert)
         
         let saveAction = UIAlertAction(title: "Yes", style: .default, handler: { alert -> Void in
-            UIPasteboard.general.string = self.text
+            UIPasteboard.general.string = self.txtText?.text
         })
         
         let cancelAction = UIAlertAction(title: "Cancel", style: .default, handler: {
@@ -48,7 +47,13 @@ class HistoryDetailVC: UIViewController {
         let alertController = UIAlertController(title: "Delete From History", message: "", preferredStyle: .alert)
         
         let saveAction = UIAlertAction(title: "Yes", style: .default, handler: { alert -> Void in
-            dao.
+            if self.dao.deleteObject(self.obj!) {
+                print("History deleted")
+                self.navigationController?.popViewController(animated: true)
+            }
+            else {
+                print("Error deleting History")
+            }
         })
         
         let cancelAction = UIAlertAction(title: "Cancel", style: .default, handler: {

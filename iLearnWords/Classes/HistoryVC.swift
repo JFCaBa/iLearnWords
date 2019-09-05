@@ -17,7 +17,7 @@ class HistoryVC: UIViewController, UITableViewDelegate, UITableViewDataSource {
     private let dao: DAOController = DAOController()
     //MARK: - Ivars
     var dataArray: [NSManagedObject] = []
-    var text: String?
+    var objToPass: NSManagedObject?
     
     //MARK: - Lifecycle
     override func viewDidLoad() {
@@ -26,13 +26,16 @@ class HistoryVC: UIViewController, UITableViewDelegate, UITableViewDataSource {
         tableView.delegate = self
         tableView.dataSource = self
         tableView.tableFooterView = UIView.init(frame: CGRect.zero)
-        loadData()
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(true)
+        loadData()
+    }
      //MARK: - Navigation
      override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         let details = segue.destination as! HistoryDetailVC
-        details.text = text
+        details.obj = objToPass
      }
     
     //MARK: - Table view datasource
@@ -49,13 +52,15 @@ class HistoryVC: UIViewController, UITableViewDelegate, UITableViewDataSource {
         else {
             cell.textLabel?.text = "Untitled"
         }
+        
+        cell.detailTextLabel?.text = (obj.value(forKey: "date") as! String)
+
         return cell
     }
     
     //MARK: - Table view delegate
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        let obj = dataArray[indexPath.row]
-        text = (obj.value(forKey: "text") as! String)
+        objToPass = dataArray[indexPath.row]
         self.performSegue(withIdentifier: "gotoHistoryDetails", sender: self)
     }
 }

@@ -142,7 +142,7 @@ class DAOController: NSObject {
     }
     
     //MARK: - Delete methods
-    public func deleteObject(_ entity: String, object: NSManagedObject) -> Bool {
+    public func deleteObject(_ object: NSManagedObject) -> Bool {
         guard let appDelegate = UIApplication.shared.delegate as? AppDelegate else {
             return false
         }

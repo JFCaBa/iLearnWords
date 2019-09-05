@@ -72,6 +72,7 @@ class MainVC: UIViewController, TalkerDelegate, UITextViewDelegate, UIScrollView
         if toPaste!.count > 0 {
             txtWords.text = toPaste
             wordsList = txtWords.text.components(separatedBy: "\n")
+            talkIndex = 0
             if dao.saveHistory(txtWords.text) {
                 print("History saved")
             }

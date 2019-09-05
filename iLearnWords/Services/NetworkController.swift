@@ -67,15 +67,15 @@ class NetworkController: NSObject {
                         if let textArray = result.object(forKey: "text")
                         {
                             let textA = textArray as! NSArray
-                            let result = textA.firstObject as! String
-                            print(result as Any)
+                            let result2 = textA.firstObject as! String
+                            //print(result as Any)
                             if let completionBlock = self.completionBlock {
-                                completionBlock(result, err);
+                                completionBlock(result2 == "" ? nil : result2, err);
                                 return
                             }
                         }
                     }
-                    self.completionBlock?("",err)
+                    self.completionBlock?(nil,err)
                     break
                 case .failure(let error):
                     err = error as NSError

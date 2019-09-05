@@ -11,6 +11,7 @@ import CoreData
 
 class DAOController: NSObject {
     
+    //MARK: - Save methods
     public func save(original: String, translated: String) -> Bool {
         guard let appDelegate = UIApplication.shared.delegate as? AppDelegate else {
                 return false
@@ -79,7 +80,8 @@ class DAOController: NSObject {
         }
     }
     
-    public func getTranslatedForWord(word: String) -> String? {
+    //MARK: - Fetch methods
+    public func fetchTranslatedForWord(word: String) -> String? {
         
         guard let appDelegate = UIApplication.shared.delegate as? AppDelegate else {
             return nil
@@ -121,23 +123,6 @@ class DAOController: NSObject {
         }
     }
     
-    public func numberOfRecords(_ entity: String) -> Int {
-        guard let appDelegate = UIApplication.shared.delegate as? AppDelegate else {
-            return 0
-        }
-        
-        let managedContext = appDelegate.persistentContainer.viewContext
-        let fetchRequest = NSFetchRequest<NSManagedObject>(entityName: entity)
-        do {
-             let count = try managedContext.count(for: fetchRequest)
-            return count
-        }
-        catch let error as NSError {
-            print("Could not retrive number of records. \(error), \(error.userInfo)")
-            return 0
-        }
-    }
-    
     public func fetchAll(_ entity: String) -> Array<NSManagedObject>? {
         guard let appDelegate = UIApplication.shared.delegate as? AppDelegate else {
             return nil
@@ -156,6 +141,44 @@ class DAOController: NSObject {
         }
     }
     
+    //MARK: - Delete methods
+    public func deleteObject(_ entity: String, object: NSManagedObject) -> Bool {
+        guard let appDelegate = UIApplication.shared.delegate as? AppDelegate else {
+            return false
+        }
+        
+        let managedContext = appDelegate.persistentContainer.viewContext
+        managedContext.delete(object)
+        
+        do {
+            try managedContext.save()
+            return true
+            
+        } catch let error as NSError {
+            print("Could not delete Object.\n \(error), \(error.userInfo)")
+            return false
+        }
+    }
+    
+    //MARK: - Update methods
+    
+    //MARK: - Aux methods
+    public func numberOfRecords(_ entity: String) -> Int {
+        guard let appDelegate = UIApplication.shared.delegate as? AppDelegate else {
+            return 0
+        }
+        
+        let managedContext = appDelegate.persistentContainer.viewContext
+        let fetchRequest = NSFetchRequest<NSManagedObject>(entityName: entity)
+        do {
+            let count = try managedContext.count(for: fetchRequest)
+            return count
+        }
+        catch let error as NSError {
+            print("Could not retrive number of records. \(error), \(error.userInfo)")
+            return 0
+        }
+    }
     public func cleanData(_ entity: String) -> Bool{
         guard let appDelegate = UIApplication.shared.delegate as? AppDelegate else {
             return false

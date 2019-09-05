@@ -57,7 +57,7 @@ class DAOController: NSObject {
         }
     }
     
-    public func saveHistory(_ history: String) -> Bool {
+    public func saveHistory(_ history: String, title: String = "Untitled") -> Bool {
         guard let appDelegate = UIApplication.shared.delegate as? AppDelegate else {
             return false
         }
@@ -67,6 +67,7 @@ class DAOController: NSObject {
         let hist = NSManagedObject(entity: entity, insertInto: managedContext)
         
         hist.setValue(history, forKey: "text")
+        hist.setValue(title, forKey: "title")
         hist.setValue(Date(), forKey: "date")
         
         do {

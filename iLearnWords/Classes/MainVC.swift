@@ -73,12 +73,7 @@ class MainVC: UIViewController, TalkerDelegate, UITextViewDelegate, UIScrollView
             txtWords.text = toPaste
             wordsList = txtWords.text.components(separatedBy: "\n")
             talkIndex = 0
-            if dao.saveHistory(txtWords.text) {
-                print("History saved")
-            }
-            else {
-                print("Error saving History")
-            }
+            self.saveHistory(txtWords.text)
             txtWordsTranslated.text = ""
             translate()
         }
@@ -220,12 +215,7 @@ class MainVC: UIViewController, TalkerDelegate, UITextViewDelegate, UIScrollView
         }
         
         if textView.text.count > 0 {
-            if dao.saveHistory(textView.text) {
-                print("History saved")
-            }
-            else {
-                print("Error saving History")
-            }
+            self.saveHistory(textView.text)
         }
     }
 }
@@ -282,6 +272,38 @@ extension MainVC {
                 didFinishTalk()
             }
         }
+    }
+    
+    //MARK: Save history
+    private func saveHistory(_ text: String) {
+        let alertController = UIAlertController(title: "Save List", message: "", preferredStyle: .alert)
+        alertController.addTextField { (textField : UITextField!) -> Void in
+            textField.placeholder = "Enter a List Name"
+        }
+        
+        let saveAction = UIAlertAction(title: "Save", style: .default, handler: { alert -> Void in
+            if let textField = alertController.textFields?[0] {
+                if textField.text!.count > 0 {
+                    let title = textField.text ?? "Utitlled"
+                    if self.dao.saveHistory(text, title: title) {
+                        print("History saved")
+                    }
+                    else {
+                        print("Error saving History")
+                    }
+                }
+            }
+        })
+        
+        let cancelAction = UIAlertAction(title: "Cancel", style: .default, handler: {
+            (action : UIAlertAction!) -> Void in })
+        
+        alertController.addAction(cancelAction)
+        alertController.addAction(saveAction)
+        
+        alertController.preferredAction = saveAction
+        
+        self.present(alertController, animated: true, completion: nil)
     }
 }
 

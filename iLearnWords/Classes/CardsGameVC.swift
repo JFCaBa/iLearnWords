@@ -59,7 +59,8 @@ class CardsGameVC: UIViewController, TalkerDelegate {
 
 extension CardsGameVC {
     private func loadData() {
-        dataArray = dao.fetchAll("Translated")!
+        let way = UserDefaults.standard.value(forKey: "TRANSLATE_WAY") ?? "ru-en"
+        dataArray = dao.fetchCards(way as! String) ?? []
         max = dataArray.count - 1
         btnNextDidTap(nil)
     }

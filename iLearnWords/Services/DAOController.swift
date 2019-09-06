@@ -141,6 +141,25 @@ class DAOController: NSObject {
         }
     }
     
+    public func fetchCards(_ language: String) -> Array<NSManagedObject>? {
+        guard let appDelegate = UIApplication.shared.delegate as? AppDelegate else {
+            return nil
+        }
+        
+        let managedContext = appDelegate.persistentContainer.viewContext
+        let fetchRequest = NSFetchRequest<NSManagedObject>(entityName: "Translated")
+        fetchRequest.predicate = NSPredicate(format: "translateWay = %@", language)
+        
+        do {
+            let result = try managedContext.fetch(fetchRequest)
+            return result
+            
+        } catch let error as NSError {
+            print("Could not fetch. \(error), \(error.userInfo)")
+            return nil
+        }
+    }
+    
     //MARK: - Delete methods
     public func deleteObject(_ object: NSManagedObject) -> Bool {
         guard let appDelegate = UIApplication.shared.delegate as? AppDelegate else {

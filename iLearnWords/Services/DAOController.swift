@@ -11,6 +11,7 @@ import CoreData
 
 class DAOController: NSObject {
     
+    //MARK: - Private functions
     //MARK: - Save methods
     public func save(original: String, translated: String) -> Bool {
         guard let appDelegate = UIApplication.shared.delegate as? AppDelegate else {

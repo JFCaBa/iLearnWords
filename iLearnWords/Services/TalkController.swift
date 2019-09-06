@@ -31,6 +31,7 @@ class TalkController: NSObject {
     }
 
     //MARK: Public functions
+    /** On charge of create the AudioSession object, Synthesiser stuff and start the Utterance with the passed word. The language settings for the voice is passed as a parameter*/
     public func sayText(_ text: String, language: String){
         isPaused = false
         do {

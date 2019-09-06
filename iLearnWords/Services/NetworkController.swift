@@ -24,6 +24,7 @@ class NetworkController: NSObject {
     }
 
     //MARK: Public
+    /** Returns in the var block the translation for the passed word*/
     public func translateStringOfWords(_ wordsStr: String){
         
         self.completionBlock =  { (response, error) -> Void in
@@ -39,6 +40,7 @@ class NetworkController: NSObject {
         self.translateString(wordsStr)
     }
     
+    /** Makes the call to Yandex translation API. The url is compossed using the language settins stored in the UserDefaults preferences*/
     public func translateString(_ string: String) {
         
         if string.count == 0{

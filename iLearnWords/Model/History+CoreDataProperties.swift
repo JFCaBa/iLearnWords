@@ -19,8 +19,9 @@ extension History {
     @NSManaged public var title: String?
     @NSManaged public var date: NSDate?
     @NSManaged public var isSelected: Bool
-    @NSManaged public var sayLanguage: NSObject?
-    @NSManaged public var translatedWay: NSObject?
+    @NSManaged public var talkOriginal: String?
+    @NSManaged public var translatedWay: String?
+    @NSManaged public var talkTranslated: String?
     @NSManaged public var hasWord: NSSet?
 
 }

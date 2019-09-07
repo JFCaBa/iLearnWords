@@ -17,7 +17,8 @@ class MainVC: UIViewController, TalkerDelegate, UITableViewDelegate, UITableView
     @IBOutlet weak var btnPlayOutlet: UIButton!
     //MARK: - Ivars
     var dataObj: Array<Words> = []
-    let original = UserDefaults.standard.value(forKey: "TALK_LANGUAGE") ?? "ru_RU"
+    var history: History?
+    let original = UserDefaults.standard.value(forKey: "TALK_ORIGINAL") ?? "ru_RU"
     let translated = NSLocale.current.languageCode ?? "en_GB"
     var talkIndex = 0
     var isOriginal = false
@@ -33,19 +34,22 @@ class MainVC: UIViewController, TalkerDelegate, UITableViewDelegate, UITableView
         tableView.delegate = self
         tableView.dataSource = self
         tableView.tableFooterView = UIView.init(frame: CGRect.zero)
-        
-        if let proxyArray = dao.fetchLastHistory() {
-            dataObj = proxyArray
-        }
-        else{
-            print("No history available")
-        }
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(true)
+        //Need to load the title in viewWillAppear because it can change
+        //depending on the language selection in settings
         title = (UserDefaults.standard.value(forKey: "TRANSLATE_WAY") as! String)
+        //Assign the delegate in viewWillAppear because the talk class is
+        //also used in the Cards game
         talk.delegate = self
+        //Need to load the data in viewWillAppear because the history shown can be
+        //changed in settings
+        history = dao.fetchSelectedHistory()
+        if ((history?.hasWord) != nil) {
+            dataObj = history?.hasWord!.allObjects as! Array<Words>
+        }
     }
     
     override func viewWillDisappear(_ animated: Bool) {
@@ -79,6 +83,7 @@ class MainVC: UIViewController, TalkerDelegate, UITableViewDelegate, UITableView
     //MARK: - Table view delegate
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let word = dataObj[indexPath.row] as Words
+        isOriginal = true
         startTalking(word.original!)
     }
 
@@ -114,12 +119,13 @@ class MainVC: UIViewController, TalkerDelegate, UITableViewDelegate, UITableView
     }
     
     @IBAction func btnPlayDidTap(_ sender: Any) {
-        
         let btn = sender as! UIButton
 
-        if btn.titleLabel?.text == "PLAY"{
+        if btn.titleLabel?.text == "PLAY" {
             btn.setTitle("PAUSE", for: .normal)
-            
+            let word = dataObj[talkIndex]
+            isOriginal = true
+            startTalking(word.original!, talkLanguage: history!.talkOriginal!)
         }
         else{
             btn.setTitle("PLAY", for: .normal)
@@ -181,23 +187,36 @@ extension MainVC {
     
     //MARK: TalkController delegate
     func didFinishTalk() {
+        let playInLoop = UserDefaults.standard.bool(forKey: "PLAY_IN_LOOP")
+        if talkIndex == (dataObj.count - 1) {
+            talkIndex = 0
+            if playInLoop == false {
+                return
+            }
+        }
+        let word = dataObj[talkIndex]
         
-            let repeatSettings = UserDefaults.standard.bool(forKey: "REPEAT_ORIGINAL")
-            if !talk.isPaused{
-                if isOriginal{
-                    if !repeatSettings || repeatCounter == 3{
-                        isOriginal = false //The nextone to be read will be the translated one
-                    }
-                    else {
-                        repeatCounter += 1
-                    }
+        if !talk.isPaused {
+            if isOriginal {
+                if let str = word.original {
+                    startTalking(str, talkLanguage: history!.talkOriginal!)
+                }
+                let repeatSettings = UserDefaults.standard.bool(forKey: "REPEAT_ORIGINAL")
+                if !repeatSettings || repeatCounter == 3{
+                    isOriginal = false //The nextone to be played will be the translated one
                 }
                 else {
-                    
-                    talkIndex += 1 //Increment the index to change the row
-                    isOriginal = true //The nextone to be read will be the original one
-                    repeatCounter = 1;
+                    repeatCounter += 1
                 }
+            }
+            else {
+                if let str = word.translated {
+                    startTalking(str, talkLanguage: history!.talkTranslated!)
+                }
+                talkIndex += 1 //Increment the index to change the row
+                isOriginal = true //The nextone to be read will be the original one
+                repeatCounter = 1;
+            }
         }
         else{
             talkIndex = 0

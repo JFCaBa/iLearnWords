@@ -70,7 +70,9 @@ class DAOController: NSObject {
         history.title = title
         history.isSelected = true
         history.translatedWay = (UserDefaults.standard.value(forKey: "TRANSLATE_WAY") as! String)
-        history.sayLanguage = (UserDefaults.standard.value(forKey: "TALK_LANGUAGE") as! String)
+        history.talkOriginal = (UserDefaults.standard.value(forKey: "TALK_ORIGINAL") as! String)
+        history.talkTranslated = (UserDefaults.standard.value(forKey: "TALK_TRANSLATED") as! String)
+        history.date = Date()
         
         do {
             try managedContext.save()
@@ -122,7 +124,7 @@ class DAOController: NSObject {
         }
     }
     
-    public func fetchLastHistory() -> Array<Words>? {
+    public func fetchSelectedHistory() -> History? {
         guard let appDelegate = UIApplication.shared.delegate as? AppDelegate else {
             return nil
         }
@@ -133,10 +135,9 @@ class DAOController: NSObject {
         
         do {
             let result = try managedContext.fetch(fetchRequest)
-            if let get = result.first {
+            if let get = result.last {
                 let history = get as! History
-                let toReturn = history.hasWord!.allObjects as! Array<Words>
-                return toReturn
+                return history
             }
             else {
                 return nil

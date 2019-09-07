@@ -3,7 +3,8 @@
     <entity name="History" representedClassName="History" syncable="YES" codeGenerationType="class">
         <attribute name="date" optional="YES" attributeType="Date" usesScalarValueType="NO" syncable="YES"/>
         <attribute name="isSelected" optional="YES" attributeType="Boolean" usesScalarValueType="YES" syncable="YES"/>
-        <attribute name="sayLanguage" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="talkOriginal" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="talkTranslated" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="title" optional="YES" attributeType="String" maxValueString="40" defaultValueString="Untitled" syncable="YES"/>
         <attribute name="translatedWay" optional="YES" attributeType="String" syncable="YES"/>
         <relationship name="hasWord" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Words" inverseName="isInHistory" inverseEntity="Words" syncable="YES"/>
@@ -21,6 +22,6 @@
     <elements>
         <element name="Languages" positionX="-63" positionY="9" width="128" height="90"/>
         <element name="Words" positionX="216.02734375" positionY="86.7421875" width="128" height="88"/>
-        <element name="History" positionX="-63" positionY="27" width="128" height="133"/>
+        <element name="History" positionX="-63" positionY="27" width="128" height="148"/>
     </elements>
 </model>

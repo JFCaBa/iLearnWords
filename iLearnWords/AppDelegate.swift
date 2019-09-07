@@ -83,10 +83,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 extension AppDelegate{
     private func createDefaultValues(){
         UserDefaults.standard.set(0.33, forKey: "VOICE_SPEED")
-        UserDefaults.standard.set(true, forKey: "REPEAT_ORIGINAL")
+        UserDefaults.standard.set(false, forKey: "REPEAT_ORIGINAL")
         UserDefaults.standard.set(true, forKey: "PLAY_IN_LOOP")
         UserDefaults.standard.set("ru-en", forKey: "TRANSLATE_WAY")
-        UserDefaults.standard.set("ru_RU", forKey: "TALK_LANGUAGE")
+        UserDefaults.standard.set("ru_RU", forKey: "TALK_ORIGINAL")
+        UserDefaults.standard.set("en_GB", forKey: "TALK_TRANSLATED")
         UserDefaults.standard.synchronize()
     }
 }

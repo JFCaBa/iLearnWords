@@ -20,7 +20,7 @@ class CardsGameVC: UIViewController, TalkerDelegate {
     private var talk: TalkController = TalkController()
     var dataArray: [Words] = []
     var max = 0
-    let original = UserDefaults.standard.value(forKey: "TALK_LANGUAGE") ?? "ru_RU"
+    let original = UserDefaults.standard.value(forKey: "TALK_ORIGINAL") ?? "ru_RU"
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -39,7 +39,7 @@ class CardsGameVC: UIViewController, TalkerDelegate {
     @IBAction func btnNextDidTap(_ sender: Any?) {
         lblTranslated.isHidden = true
         let number = Int.random(in: 0 ..< max)
-        let word = dataArray[number] as! Words
+        let word = dataArray[number] 
         lblOriginal.text = word.original
         lblTranslated.text = word.translated
     }

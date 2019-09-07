@@ -55,7 +55,7 @@ class LanguagesVC: UIViewController, UITableViewDelegate, UITableViewDataSource 
         let short = obj.value(forKey: "short") as! String
         let say = obj.value(forKey: "say") as! String
         UserDefaults.standard.set(short, forKey: "TRANSLATE_WAY")
-        UserDefaults.standard.set(say, forKey: "TALK_LANGUAGE")
+        UserDefaults.standard.set(say, forKey: "TALK_ORIGINAL")
         UserDefaults.standard.synchronize()
         tableView.reloadData()
     }

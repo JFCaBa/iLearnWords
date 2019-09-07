@@ -2,7 +2,7 @@
 //  Languages+CoreDataProperties.swift
 //  
 //
-//  Created by Jose Catala on 04/09/2019.
+//  Created by Jose Francisco Catalá Barba on 07/09/2019.
 //
 //
 
@@ -16,8 +16,8 @@ extension Languages {
         return NSFetchRequest<Languages>(entityName: "Languages")
     }
 
+    @NSManaged public var say: String?
+    @NSManaged public var way: String?
     @NSManaged public var title: String?
-    @NSManaged public var short: String?
-    @NSManaged public var read: String?
 
 }

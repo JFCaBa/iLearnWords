@@ -10,4 +10,5 @@ target 'iLearnWords' do
   pod 'IQKeyboardManagerSwift'
   pod 'Fabric'
   pod 'Crashlytics'
+  pod 'MKProgress', '~> 1.1.0'
 end

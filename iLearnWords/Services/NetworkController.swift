@@ -42,7 +42,6 @@ class NetworkController: NSObject {
     
     /** Makes the call to Yandex translation API. The url is compossed using the language settins stored in the UserDefaults preferences*/
     public func translateString(_ string: String) {
-        
         if string.count == 0{
             return
         }

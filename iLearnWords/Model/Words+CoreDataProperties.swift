@@ -17,10 +17,7 @@ extension Words {
     }
 
     @NSManaged public var original: String?
-    @NSManaged public var sayLang: String?
     @NSManaged public var translated: String?
-    @NSManaged public var translateWay: String?
-    @NSManaged public var isSelected: Bool
     @NSManaged public var isInHistory: History?
 
 }

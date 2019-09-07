@@ -18,7 +18,7 @@ class CardsGameVC: UIViewController, TalkerDelegate {
     //Ivars
     private let dao: DAOController = DAOController()
     private var talk: TalkController = TalkController()
-    var dataArray: [NSManagedObject] = []
+    var dataArray: [Words] = []
     var max = 0
     let original = UserDefaults.standard.value(forKey: "TALK_LANGUAGE") ?? "ru_RU"
     
@@ -38,12 +38,10 @@ class CardsGameVC: UIViewController, TalkerDelegate {
     //MARK: - Actions
     @IBAction func btnNextDidTap(_ sender: Any?) {
         lblTranslated.isHidden = true
-        
         let number = Int.random(in: 0 ..< max)
-        let obj = dataArray[number]
-        
-        lblOriginal.text = obj.value(forKey: "original") as? String
-        lblTranslated.text = obj.value(forKey: "trans") as? String
+        let word = dataArray[number] as! Words
+        lblOriginal.text = word.original
+        lblTranslated.text = word.translated
     }
     
     @IBAction func btnDiscoverDidTap(_ sender: Any) {
@@ -59,8 +57,7 @@ class CardsGameVC: UIViewController, TalkerDelegate {
 
 extension CardsGameVC {
     private func loadData() {
-        let way = UserDefaults.standard.value(forKey: "TRANSLATE_WAY") ?? "ru-en"
-        dataArray = dao.fetchCards(way as! String) ?? []
+        dataArray = dao.fetchCards() ?? []
         max = dataArray.count - 1
         btnNextDidTap(nil)
     }

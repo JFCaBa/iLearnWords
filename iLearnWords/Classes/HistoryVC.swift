@@ -16,13 +16,12 @@ class HistoryVC: UIViewController, UITableViewDelegate, UITableViewDataSource {
     //MARK: - Object instances
     private let dao: DAOController = DAOController()
     //MARK: - Ivars
-    var dataArray: [NSManagedObject] = []
-    var objToPass: NSManagedObject?
+    var dataArray: [History] = []
+    var objToPass: Array<Words>?
     
     //MARK: - Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
-        tableView.register(UITableViewCell.self, forCellReuseIdentifier: "Cell")
         tableView.delegate = self
         tableView.dataSource = self
         tableView.tableFooterView = UIView.init(frame: CGRect.zero)
@@ -32,10 +31,11 @@ class HistoryVC: UIViewController, UITableViewDelegate, UITableViewDataSource {
         super.viewWillAppear(true)
         loadData()
     }
+    
      //MARK: - Navigation
      override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         let details = segue.destination as! HistoryDetailVC
-        details.obj = objToPass
+        details.dataObj = objToPass
      }
     
     //MARK: - Table view datasource
@@ -44,30 +44,37 @@ class HistoryVC: UIViewController, UITableViewDelegate, UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "Cell", for: indexPath)
+        let cell: UITableViewCell = {
+            guard let cell = tableView.dequeueReusableCell(withIdentifier: "Cell") else {
+                // Never fails:
+                return UITableViewCell(style: UITableViewCell.CellStyle.subtitle, reuseIdentifier: "Cell")
+            }
+            return cell
+        }()
         let obj = dataArray[indexPath.row]
-        if let title = obj.value(forKey: "title") {
-            cell.textLabel?.text = (title as! String)
+        if let title = obj.title {
+            cell.textLabel?.text = title
         }
         else {
             cell.textLabel?.text = "Untitled"
         }
         
-        cell.detailTextLabel?.text = (obj.value(forKey: "date") as! String)
+        cell.detailTextLabel?.text = obj.translatedWay
 
         return cell
     }
     
     //MARK: - Table view delegate
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        objToPass = dataArray[indexPath.row]
+        let hist = dataArray[indexPath.row]
+        objToPass = (hist.hasWord?.allObjects as! Array<Words>)
         self.performSegue(withIdentifier: "gotoHistoryDetails", sender: self)
     }
 }
 
 extension HistoryVC {
     private func loadData() {
-        dataArray = dao.fetchAll("History")!
+        dataArray = dao.fetchAll("History")! as! [History]
         tableView.reloadData()
     }
 }

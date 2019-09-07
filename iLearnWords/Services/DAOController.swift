@@ -59,18 +59,18 @@ class DAOController: NSObject {
         }
     }
     
-    public func saveHistory(_ history: String, title: String = "Untitled") -> Bool {
+    public func saveHistory(_ words: Array<Words>, title: String = "Untitled") -> Bool {
         guard let appDelegate = UIApplication.shared.delegate as? AppDelegate else {
             return false
         }
         
         let managedContext = appDelegate.persistentContainer.viewContext
-        let entity = NSEntityDescription.entity(forEntityName: "History", in: managedContext)!
-        let hist = NSManagedObject(entity: entity, insertInto: managedContext)
-        
-        hist.setValue(history, forKey: "text")
-        hist.setValue(title, forKey: "title")
-        hist.setValue(Date(), forKey: "date")
+        let history = History(context: managedContext)
+        history.addToHasWord(NSSet(array: words))
+        history.title = title
+        history.isSelected = true
+        history.translatedWay = (UserDefaults.standard.value(forKey: "TRANSLATE_WAY") as! String)
+        history.sayLanguage = (UserDefaults.standard.value(forKey: "TALK_LANGUAGE") as! String)
         
         do {
             try managedContext.save()
@@ -78,6 +78,25 @@ class DAOController: NSObject {
         } catch let error as NSError {
             print("Could not save history. \(error), \(error.userInfo)")
             return false
+        }
+    }
+    
+    public func saveWordObjectFrom(original: String, translated: String) -> Words? {
+        guard let appDelegate = UIApplication.shared.delegate as? AppDelegate else {
+            return nil
+        }
+        
+        let managedContext = appDelegate.persistentContainer.viewContext
+        let word = Words(context: managedContext)
+        word.original = original
+        word.translated = translated
+        
+        do {
+            try managedContext.save()
+            return word
+        } catch let error as NSError {
+            print("Could not save Word. \(error), \(error.userInfo)")
+            return nil
         }
     }
     
@@ -89,13 +108,12 @@ class DAOController: NSObject {
         }
         
         let managedContext = appDelegate.persistentContainer.viewContext
-        let translateWay = UserDefaults.standard.value(forKey: "TRANSLATE_WAY") as! String
-        let fetchRequest = NSFetchRequest<NSManagedObject>(entityName: "Translated")
-        fetchRequest.predicate = NSPredicate(format: "original = %@ and translateWay = %@", word, translateWay)
+        let fetchRequest = NSFetchRequest<NSManagedObject>(entityName: "Words")
+        fetchRequest.predicate = NSPredicate(format: "original = %@", word)
 
         do {
             let result = try managedContext.fetch(fetchRequest)
-            let wordDb = result.first?.value(forKey: "trans") as? String
+            let wordDb = result.first?.value(forKey: "translated") as? String
             return wordDb
             
         } catch let error as NSError {
@@ -104,20 +122,26 @@ class DAOController: NSObject {
         }
     }
     
-    public func fetchLastHistory() -> String? {
-        
+    public func fetchLastHistory() -> Array<Words>? {
         guard let appDelegate = UIApplication.shared.delegate as? AppDelegate else {
             return nil
         }
         
         let managedContext = appDelegate.persistentContainer.viewContext
         let fetchRequest = NSFetchRequest<NSManagedObject>(entityName: "History")
+        fetchRequest.predicate = NSPredicate(format: "isSelected == %@",NSNumber(value: true))
         
         do {
             let result = try managedContext.fetch(fetchRequest)
-            let history = result.first?.value(forKey: "text") as? String
-            return history
-            
+            if let get = result.first {
+                let history = get as! History
+                let toReturn = history.hasWord!.allObjects as! Array<Words>
+                return toReturn
+            }
+            else {
+                return nil
+            }
+
         } catch let error as NSError {
             print("Could not fetch History. \(error), \(error.userInfo)")
             return nil
@@ -142,19 +166,21 @@ class DAOController: NSObject {
         }
     }
     
-    public func fetchCards(_ language: String) -> Array<NSManagedObject>? {
+    public func fetchCards() -> Array<Words>? {
         guard let appDelegate = UIApplication.shared.delegate as? AppDelegate else {
             return nil
         }
         
         let managedContext = appDelegate.persistentContainer.viewContext
-        let fetchRequest = NSFetchRequest<NSManagedObject>(entityName: "Translated")
-        fetchRequest.predicate = NSPredicate(format: "translateWay = %@", language)
+        let fetchRequest = NSFetchRequest<NSManagedObject>(entityName: "History")
+        let translateWay = UserDefaults.standard.value(forKey: "TRANSLATE_WAY") as! String
+        fetchRequest.predicate = NSPredicate(format: "translatedWay == %@", translateWay)
         
         do {
             let result = try managedContext.fetch(fetchRequest)
-            return result
-            
+            let history = result.first as! History
+            let toReturn = history.hasWord!.allObjects as! Array<Words>
+            return toReturn
         } catch let error as NSError {
             print("Could not fetch. \(error), \(error.userInfo)")
             return nil

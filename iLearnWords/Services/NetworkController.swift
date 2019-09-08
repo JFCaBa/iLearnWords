@@ -9,11 +9,14 @@
 import UIKit
 import Alamofire
 
-class NetworkController: NSObject {
-    
+struct API {
     //Free key from Yandex.com
     //https://translate.yandex.com/developers/keys
-    let key  = "trnsl.1.1.20190621T071428Z.f5242913863515ce.ad3d081c06e886ba5c5a34a836a10c817dd16b45" as String
+    static let key =  "trnsl.1.1.20190621T071428Z.f5242913863515ce.ad3d081c06e886ba5c5a34a836a10c817dd16b45"
+    static let baseURL = "https://translate.yandex.net/api/v1.5/tr.json/translate?key=%@&text=%@&lang=%@&format=plain"
+}
+
+class NetworkController: NSObject {
     
     var completionBlock: ((String?, NSError?) -> Void)? = nil
     var translateBlock: ((String?) -> Void)? = nil
@@ -49,7 +52,7 @@ class NetworkController: NSObject {
         let translateWay = UserDefaults.standard.object(forKey: "TRANSLATE_WAY") as? String ?? "ru-en"
         let escapedString = string.addingPercentEncoding(withAllowedCharacters: .urlHostAllowed)
         
-        let str = String(format: "https://translate.yandex.net/api/v1.5/tr.json/translate?key=%@&text=%@&lang=%@&format=plain", key, escapedString ?? "",translateWay)
+        let str = String(format: API.baseURL, API.key, escapedString ?? "",translateWay)
         
         guard let url = URL(string: str) else {
             return

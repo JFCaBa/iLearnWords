@@ -80,14 +80,26 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     }
 }
 
+extension UserDefaults {
+    enum keys {
+        static let VoiceSpeed = "VOICE_SPEED" //The speed for the utterance object
+        static let RepeatOriginal = "REPEAT_ORIGINAL" //If the user wants to repeat 3 times the original word before to hear the translation
+        static let PlayInLoop = "PLAY_IN_LOOP" //Start to play again when the last word is played
+        static let TranslateWay = "TRANSLATE_WAY" //From what language to what languate
+        static let TalkOriginal = "TALK_ORIGINAL" //Language defenition of the original word for the Synthethiser
+        static let TalkTranslate = "TALK_TRANSLATED" //Language definition of the translated word for the Synthethiser
+    }
+}
+
 extension AppDelegate{
     private func createDefaultValues(){
-        UserDefaults.standard.set(0.33, forKey: "VOICE_SPEED")
-        UserDefaults.standard.set(false, forKey: "REPEAT_ORIGINAL")
-        UserDefaults.standard.set(true, forKey: "PLAY_IN_LOOP")
-        UserDefaults.standard.set("ru-en", forKey: "TRANSLATE_WAY")
-        UserDefaults.standard.set("ru_RU", forKey: "TALK_ORIGINAL")
-        UserDefaults.standard.set("en_GB", forKey: "TALK_TRANSLATED")
+        let userDefaults = UserDefaults.standard
+        userDefaults.set(0.33, forKey: UserDefaults.keys.VoiceSpeed)
+        userDefaults.set(0.33, forKey: UserDefaults.keys.RepeatOriginal)
+        userDefaults.set(0.33, forKey: UserDefaults.keys.PlayInLoop)
+        userDefaults.set(0.33, forKey: UserDefaults.keys.TranslateWay)
+        userDefaults.set(0.33, forKey: UserDefaults.keys.TalkOriginal)
+        userDefaults.set(0.33, forKey: UserDefaults.keys.TalkTranslate)
         UserDefaults.standard.synchronize()
     }
 }

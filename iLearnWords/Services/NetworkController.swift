@@ -49,7 +49,7 @@ class NetworkController: NSObject {
             return
         }
         
-        let translateWay = UserDefaults.standard.object(forKey: "TRANSLATE_WAY") as? String ?? "ru-en"
+        let translateWay = UserDefaults.standard.object(forKey: UserDefaults.keys.TranslateWay) as? String ?? "ru-en"
         let escapedString = string.addingPercentEncoding(withAllowedCharacters: .urlHostAllowed)
         
         let str = String(format: API.baseURL, API.key, escapedString ?? "",translateWay)

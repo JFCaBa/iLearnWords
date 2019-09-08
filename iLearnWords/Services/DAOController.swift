@@ -20,7 +20,7 @@ class DAOController: NSObject {
         
         let managedContext = appDelegate.persistentContainer.viewContext
         let entity = NSEntityDescription.entity(forEntityName: "Translated", in: managedContext)!
-        let translateWay = UserDefaults.standard.value(forKey: "TRANSLATE_WAY") as! String
+        let translateWay = UserDefaults.standard.value(forKey: UserDefaults.keys.TranslateWay) as! String
         let word = NSManagedObject(entity: entity, insertInto: managedContext)
         
         word.setValue(original, forKey: "original")
@@ -69,9 +69,9 @@ class DAOController: NSObject {
         history.addToHasWord(NSSet(array: words))
         history.title = title
         history.isSelected = true
-        history.translatedWay = (UserDefaults.standard.value(forKey: "TRANSLATE_WAY") as! String)
-        history.talkOriginal = (UserDefaults.standard.value(forKey: "TALK_ORIGINAL") as! String)
-        history.talkTranslated = (UserDefaults.standard.value(forKey: "TALK_TRANSLATED") as! String)
+        history.translatedWay = (UserDefaults.standard.value(forKey: UserDefaults.keys.TranslateWay) as! String)
+        history.talkOriginal = (UserDefaults.standard.value(forKey: UserDefaults.keys.TalkOriginal) as! String)
+        history.talkTranslated = (UserDefaults.standard.value(forKey: UserDefaults.keys.TalkTranslate) as! String)
         history.date = Date()
         
         do {
@@ -174,7 +174,7 @@ class DAOController: NSObject {
         
         let managedContext = appDelegate.persistentContainer.viewContext
         let fetchRequest = NSFetchRequest<NSManagedObject>(entityName: "History")
-        let translateWay = UserDefaults.standard.value(forKey: "TRANSLATE_WAY") as! String
+        let translateWay = UserDefaults.standard.value(forKey: UserDefaults.keys.TranslateWay) as! String
         fetchRequest.predicate = NSPredicate(format: "translatedWay == %@", translateWay)
         
         do {

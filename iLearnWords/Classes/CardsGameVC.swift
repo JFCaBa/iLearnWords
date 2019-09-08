@@ -20,7 +20,7 @@ class CardsGameVC: UIViewController, TalkerDelegate {
     private var talk: TalkController = TalkController()
     var dataArray: [Words] = []
     var max = 0
-    let original = UserDefaults.standard.value(forKey: "TALK_ORIGINAL") ?? "ru_RU"
+    let original = UserDefaults.standard.value(forKey: UserDefaults.keys.TalkOriginal) ?? "ru_RU"
     
     override func viewDidLoad() {
         super.viewDidLoad()

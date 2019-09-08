@@ -48,19 +48,19 @@ class SettingsTVC: UITableViewController {
     //MARK: - Actions
     @IBAction func voiceSpeedDidChangeValue(_ sender: Any){
         let slider = sender as! UISlider
-        UserDefaults.standard.set(slider.value, forKey: "VOICE_SPEED")
+        UserDefaults.standard.set(slider.value, forKey: UserDefaults.keys.VoiceSpeed)
         notifyChanges()
     }
     
     @IBAction func repeatOriginalDidChangeValue(_ sender: Any){
         let sw = sender as! UISwitch
-        UserDefaults.standard.set(sw.isOn, forKey: "REPEAT_ORIGINAL")
+        UserDefaults.standard.set(sw.isOn, forKey: UserDefaults.keys.RepeatOriginal)
         notifyChanges()
     }
     
     @IBAction func playInLoopDidChangeValue(_ sender: Any) {
         let sw = sender as! UISwitch
-        UserDefaults.standard.set(sw.isOn, forKey: "PLAY_IN_LOOP")
+        UserDefaults.standard.set(sw.isOn, forKey: UserDefaults.keys.PlayInLoop)
         notifyChanges()
     }
     
@@ -93,8 +93,8 @@ extension SettingsTVC{
     }
     
     private func tweakUI(){
-        voiceSpeedOutlet.value = UserDefaults.standard.float(forKey: "VOICE_SPEED");
-        repeatOriginalOutlet.isOn = UserDefaults.standard.bool(forKey: "REPEAT_ORIGINAL")
-        playInLoopOutlet.isOn = UserDefaults.standard.bool(forKey: "PLAY_IN_LOOP")
+        voiceSpeedOutlet.value = UserDefaults.standard.float(forKey: UserDefaults.keys.VoiceSpeed);
+        repeatOriginalOutlet.isOn = UserDefaults.standard.bool(forKey: UserDefaults.keys.RepeatOriginal)
+        playInLoopOutlet.isOn = UserDefaults.standard.bool(forKey: UserDefaults.keys.PlayInLoop)
     }
 }

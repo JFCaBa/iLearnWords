@@ -18,7 +18,7 @@ class MainVC: UIViewController, TalkerDelegate, UITableViewDelegate, UITableView
     //MARK: - Ivars
     var dataObj: Array<Words> = []
     var history: History?
-    let original = UserDefaults.standard.value(forKey: "TALK_ORIGINAL") ?? "ru_RU"
+    let original = UserDefaults.standard.value(forKey: UserDefaults.keys.TalkOriginal) ?? "ru_RU"
     let translated = NSLocale.current.languageCode ?? "en_GB"
     var talkIndex = 0
     var isOriginal = false
@@ -40,7 +40,7 @@ class MainVC: UIViewController, TalkerDelegate, UITableViewDelegate, UITableView
         super.viewWillAppear(true)
         //Need to load the title in viewWillAppear because it can change
         //depending on the language selection in settings
-        title = (UserDefaults.standard.value(forKey: "TRANSLATE_WAY") as! String)
+        title = (UserDefaults.standard.value(forKey: UserDefaults.keys.TranslateWay) as! String)
         //Assign the delegate in viewWillAppear because the talk class is
         //also used in the Cards game
         talk.delegate = self
@@ -187,7 +187,7 @@ extension MainVC {
     
     //MARK: TalkController delegate
     func didFinishTalk() {
-        let playInLoop = UserDefaults.standard.bool(forKey: "PLAY_IN_LOOP")
+        let playInLoop = UserDefaults.standard.bool(forKey: UserDefaults.keys.PlayInLoop)
         if talkIndex == (dataObj.count - 1) {
             talkIndex = 0
             if playInLoop == false {
@@ -201,7 +201,7 @@ extension MainVC {
                 if let str = word.original {
                     startTalking(str, talkLanguage: history!.talkOriginal!)
                 }
-                let repeatSettings = UserDefaults.standard.bool(forKey: "REPEAT_ORIGINAL")
+                let repeatSettings = UserDefaults.standard.bool(forKey: UserDefaults.keys.RepeatOriginal)
                 if !repeatSettings || repeatCounter == 3{
                     isOriginal = false //The nextone to be played will be the translated one
                 }
@@ -220,7 +220,7 @@ extension MainVC {
         }
         else{
             talkIndex = 0
-            if UserDefaults.standard.bool(forKey: "PLAY_IN_LOOP"){
+            if UserDefaults.standard.bool(forKey: UserDefaults.keys.PlayInLoop){
                 //Repeat the list
                 didFinishTalk()
             }

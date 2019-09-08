@@ -37,9 +37,9 @@ class LanguagesVC: UIViewController, UITableViewDelegate, UITableViewDataSource 
         let cell = tableView.dequeueReusableCell(withIdentifier: "Cell", for: indexPath)
         let obj = dataArray[indexPath.row]
         cell.textLabel?.text = (obj.value(forKey: "title") as! String)
-        let way = UserDefaults.standard.value(forKey: "TRANSLATE_WAY") ?? "ru-en"
+        let way = UserDefaults.keys.TranslateWay
         let storedWay = obj.value(forKey: "short") ?? "ru-en"
-        if (way as! String == storedWay as! String) {
+        if (way == storedWay as! String) {
             cell.textLabel?.textColor = UIColor.blue
         }
         else {
@@ -54,8 +54,8 @@ class LanguagesVC: UIViewController, UITableViewDelegate, UITableViewDataSource 
         let obj = dataArray[indexPath.row]
         let short = obj.value(forKey: "short") as! String
         let say = obj.value(forKey: "say") as! String
-        UserDefaults.standard.set(short, forKey: "TRANSLATE_WAY")
-        UserDefaults.standard.set(say, forKey: "TALK_ORIGINAL")
+        UserDefaults.standard.set(short, forKey: UserDefaults.keys.TranslateWay)
+        UserDefaults.standard.set(say, forKey: UserDefaults.keys.TalkOriginal)
         UserDefaults.standard.synchronize()
         tableView.reloadData()
     }

@@ -135,7 +135,7 @@ class MainVC: UIViewController, TalkerDelegate, UITableViewDelegate, UITableView
         }
         else{
             btn.setTitle("PLAY", for: .normal)
-            talk.pauseTalk()
+            talk.stopTalk()
         }
     }
     

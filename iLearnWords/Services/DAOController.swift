@@ -167,6 +167,23 @@ class DAOController: NSObject {
         }
     }
     
+    public func fetchLanguages() -> Array<Languages>? {
+        guard let appDelegate = UIApplication.shared.delegate as? AppDelegate else {
+            return nil
+        }
+        
+        let managedContext = appDelegate.persistentContainer.viewContext
+        let fetchRequest = NSFetchRequest<NSManagedObject>(entityName: "Languages")
+        
+        do {
+            let result = try managedContext.fetch(fetchRequest)
+            return (result as! Array<Languages>)
+        } catch let error as NSError {
+            print("Could not fetch. \(error), \(error.userInfo)")
+            return nil
+        }
+    }
+    
     public func fetchCards() -> Array<Words>? {
         guard let appDelegate = UIApplication.shared.delegate as? AppDelegate else {
             return nil

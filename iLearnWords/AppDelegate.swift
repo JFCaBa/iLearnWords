@@ -21,15 +21,13 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         Fabric.with([Crashlytics.self])
         IQKeyboardManager.shared.enable = true
         
-        if (UserDefaults.standard.value(forKey: "VOICE_SPEED") == nil){
+        if (UserDefaults.standard.value(forKey: UserDefaults.keys.VoiceSpeed) == nil){
             createDefaultValues()
         }
-        createDefaultValues()
         return true
     }
     
     // MARK: - Core Data stack
-    
     func applicationWillTerminate(_ application: UIApplication) {
         // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
         // Saves changes in the application's managed object context before the application terminates.
@@ -64,7 +62,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     }()
     
     // MARK: - Core Data Saving support
-    
     func saveContext () {
         let context = persistentContainer.viewContext
         if context.hasChanges {
@@ -81,20 +78,49 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 }
 
 extension AppDelegate{
-    private func createDefaultValues(){
+    private func createDefaultValues() {
+        
+        /** Create the default settings values */
         let user = UserDefaults.standard
-        /** Syntheziser*/
+        //Syntheziser
         user.set(0.33, forKey: UserDefaults.keys.VoiceSpeed)
         user.set(false, forKey: UserDefaults.keys.RepeatOriginal)
         user.set(true, forKey: UserDefaults.keys.PlayInLoop)
         user.set("ru-en", forKey: UserDefaults.keys.TranslateWay)
         user.set("ru_RU", forKey: UserDefaults.keys.TalkOriginal)
         user.set("en_GB", forKey: UserDefaults.keys.TalkTranslate)
-        /** Colors */
+        //Colors
         user.setColor(color: UIColor.groupTableViewBackground, forKey: UserDefaults.keys.CellSelectedBackgroundColor)
         user.setColor(color: UIColor.white, forKey: UserDefaults.keys.CellBackgroundColor)
-        /** Synchronize changes */
+        //Synchronize changes
         UserDefaults.standard.synchronize()
+        
+        /** Create the Languages entity content */
+        let langDic = [["title":"Russian to English","sayOriginal":"ru_RU","sayTranslate":"en_GB","way":"ru-en"],
+                         ["title":"English to Russian","sayOriginal":"en_GB","sayTranslate":"ru_RU","way":"en-ru"]]
+        saveInCoreDataWith(array: langDic)
+    }
+    
+    //MARK: - Helper functions to Store the defaults values into the Languages Entity
+    private func createLanguageEntityFrom(dictionary: [String: String]) -> NSManagedObject? {
+        let context = persistentContainer.viewContext
+        if let languageEntity = NSEntityDescription.insertNewObject(forEntityName: "Languages", into: context) as? Languages {
+            languageEntity.title = dictionary["title"]
+            languageEntity.sayOriginal = dictionary["sayOriginal"]
+            languageEntity.sayTranslate = dictionary["sayTranslate"]
+            languageEntity.way = dictionary["way"]
+            return languageEntity
+        }
+        return nil
+    }
+    
+    private func saveInCoreDataWith(array: [[String: String]]) {
+        _ = array.map{self.createLanguageEntityFrom(dictionary: $0)}
+        do {
+            try persistentContainer.viewContext.save()
+        } catch let error {
+            print(error)
+        }
     }
 }
 

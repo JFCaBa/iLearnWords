@@ -454,13 +454,7 @@
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="gSa-rV-b7d"/>
                     </view>
-                    <navigationItem key="navigationItem" title="Languages" id="q9s-ou-Hhm">
-                        <barButtonItem key="rightBarButtonItem" systemItem="add" id="ndf-Lv-Fo7">
-                            <connections>
-                                <action selector="addDidTap:" destination="aSb-AZ-nO2" id="JmV-vC-UhC"/>
-                            </connections>
-                        </barButtonItem>
-                    </navigationItem>
+                    <navigationItem key="navigationItem" title="Languages" id="q9s-ou-Hhm"/>
                     <connections>
                         <outlet property="tableView" destination="rQi-fH-xAT" id="fpO-DM-tQv"/>
                     </connections>

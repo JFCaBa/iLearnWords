@@ -17,7 +17,7 @@ class LanguagesVC: UIViewController, UITableViewDelegate, UITableViewDataSource 
     //MARK: - Object instances
     private let dao: DAOController = DAOController()
     //MARK: - Ivars
-    var dataArray: [NSManagedObject] = []
+    var dataArray: [Languages] = []
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -33,73 +33,41 @@ class LanguagesVC: UIViewController, UITableViewDelegate, UITableViewDataSource 
         return dataArray.count
     }
     
+    let bgCellSelectedColor =  UserDefaults.standard.colorForKey(key: UserDefaults.keys.CellSelectedBackgroundColor)
+    let bgCellColor = UserDefaults.standard.colorForKey(key: UserDefaults.keys.CellBackgroundColor)
+    let way = UserDefaults.keys.TranslateWay
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "Cell", for: indexPath)
+        let cell: UITableViewCell = {
+            guard let cell = tableView.dequeueReusableCell(withIdentifier: "Cell") else {
+                // Never fails:
+                return UITableViewCell(style: UITableViewCell.CellStyle.subtitle, reuseIdentifier: "Cell")
+            }
+            return cell
+        }()
         let obj = dataArray[indexPath.row]
-        cell.textLabel?.text = (obj.value(forKey: "title") as! String)
-        let way = UserDefaults.keys.TranslateWay
-        let storedWay = obj.value(forKey: "short") ?? "ru-en"
-        if (way == storedWay as! String) {
-            cell.textLabel?.textColor = UIColor.blue
+        cell.textLabel?.text = obj.title
+        if way == obj.way {
+            cell.backgroundColor = bgCellSelectedColor
         }
         else {
-            cell.textLabel?.textColor = UIColor.black
+            cell.backgroundColor = bgCellColor
         }
-        
         return cell
     }
     
     //MARK: - Table view delegate
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let obj = dataArray[indexPath.row]
-        let short = obj.value(forKey: "short") as! String
-        let say = obj.value(forKey: "say") as! String
-        UserDefaults.standard.set(short, forKey: UserDefaults.keys.TranslateWay)
-        UserDefaults.standard.set(say, forKey: UserDefaults.keys.TalkOriginal)
+        UserDefaults.standard.set(obj.way, forKey: UserDefaults.keys.TranslateWay)
+        UserDefaults.standard.set(obj.sayOriginal, forKey: UserDefaults.keys.TalkOriginal)
         UserDefaults.standard.synchronize()
         tableView.reloadData()
-    }
-    
-    //MARK: - Actions
-    @IBAction func addDidTap(_ sender: Any) {
-        
-        let alertController = UIAlertController(title: "Add Language", message: "", preferredStyle: .alert)
-        alertController.addTextField { (textField : UITextField!) -> Void in
-            textField.placeholder = "Russian to English/ru-en/ru_RU"
-        }
-        
-        let saveAction = UIAlertAction(title: "Add", style: .default, handler: { alert -> Void in
-            if let textField = alertController.textFields?[0] {
-                if textField.text!.count > 0 {
-                    let content = textField.text?.components(separatedBy: "/") ?? ["Russian to English","ru-en", "ru_RU"]
-                    let title = content[0]
-                    let short = content[1]
-                    let say = content[2]
-                    if self.dao.saveLanguage(title: title, short: short, say: say) {
-                        print("Language \(title) \(short) \(say) saved")
-                    }
-                    else {
-                        print("Error saving language")
-                    }
-                }
-            }
-        })
-        
-        let cancelAction = UIAlertAction(title: "Cancel", style: .default, handler: {
-            (action : UIAlertAction!) -> Void in })
-        
-        alertController.addAction(cancelAction)
-        alertController.addAction(saveAction)
-        
-        alertController.preferredAction = saveAction
-        
-        self.present(alertController, animated: true, completion: nil)
     }
 }
 
 extension LanguagesVC {
     private func loadData() {
-        dataArray = dao.fetchAll("Languages")!
+        dataArray = dao.fetchLanguages()!
         tableView.reloadData()
     }
 }

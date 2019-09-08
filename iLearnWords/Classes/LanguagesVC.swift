@@ -63,6 +63,20 @@ class LanguagesVC: UIViewController, UITableViewDelegate, UITableViewDataSource 
         UserDefaults.standard.synchronize()
         tableView.reloadData()
     }
+    
+    func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
+        return true
+    }
+    
+    func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
+        if (editingStyle == .delete) {
+            // handle delete (by removing the data from your array and updating the tableview)
+            let obj = dataArray[indexPath.row]
+            if dao.deleteObject(obj) {
+                tableView.reloadData()
+            }
+        }
+    }
 }
 
 extension LanguagesVC {

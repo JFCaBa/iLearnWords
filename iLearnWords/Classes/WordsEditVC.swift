@@ -10,21 +10,47 @@ import UIKit
 
 class WordsEditVC: UIViewController {
 
+    @IBOutlet weak var txtOriginal: UITextView!
+    @IBOutlet weak var txtTranslated: UITextView!
+    
+    public var dataObj: Words?
+    private let dao: DAOController = DAOController()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
+        txtOriginal.text = dataObj?.original
+        txtTranslated.text = dataObj?.translated
+    }
 
-        // Do any additional setup after loading the view.
+    @IBAction func btnSaveDidTap(_ sender: Any) {
+        if dao.updateWord(original: dataObj!.original!, translated: dataObj!.translated!) {
+            dataObj?.original = txtOriginal.text
+            dataObj?.translated = txtTranslated.text
+            self.navigationController?.popViewController(animated: true)
+        }
     }
     
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
+    @IBAction func btnDeleteDidTap(_ sender: Any) {
+        let alertController = UIAlertController(title: "Delete Word?", message: "", preferredStyle: .alert)
+        
+        let saveAction = UIAlertAction(title: "Yes", style: .default, handler: { alert -> Void in
+            if self.dao.deleteObject(self.dataObj!) {
+                print("Word deleted")
+                self.navigationController?.popViewController(animated: true)
+            }
+            else {
+                print("Error deleting Word")
+            }
+        })
+        
+        let cancelAction = UIAlertAction(title: "Cancel", style: .default, handler: {
+            (action : UIAlertAction!) -> Void in })
+        
+        alertController.addAction(cancelAction)
+        alertController.addAction(saveAction)
+        
+        alertController.preferredAction = saveAction
+        
+        self.present(alertController, animated: true, completion: nil)
     }
-    */
-
 }

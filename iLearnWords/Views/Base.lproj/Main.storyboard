@@ -24,13 +24,13 @@
                                 <constraints>
                                     <constraint firstAttribute="height" constant="44" id="0fS-Eo-YbR"/>
                                 </constraints>
-                                <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="15"/>
+                                <fontDescription key="fontDescription" type="system" weight="medium" pointSize="15"/>
                                 <state key="normal" title="PLAY"/>
                                 <connections>
                                     <action selector="btnPlayDidTap:" destination="BYZ-38-t0r" eventType="touchUpInside" id="eJr-nZ-ur2"/>
                                 </connections>
                             </button>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="x3x-pQ-Bww">
+                            <button opaque="NO" contentMode="scaleToFill" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="x3x-pQ-Bww">
                                 <rect key="frame" x="0.0" y="818" width="68.5" height="44"/>
                                 <color key="backgroundColor" red="0.97636479139999999" green="0.97653168440000004" blue="0.9763541818" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
@@ -45,8 +45,8 @@
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="DHR-FO-96l">
                                 <rect key="frame" x="69" y="818" width="68.5" height="44"/>
                                 <color key="backgroundColor" red="0.97636479139999999" green="0.97653168440000004" blue="0.9763541818" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="15"/>
-                                <state key="normal" title="Delete"/>
+                                <fontDescription key="fontDescription" type="system" weight="medium" pointSize="15"/>
+                                <state key="normal" title="Clean"/>
                                 <connections>
                                     <action selector="btnDeleteDidTap:" destination="BYZ-38-t0r" eventType="touchUpInside" id="szF-x3-K5t"/>
                                 </connections>
@@ -54,7 +54,7 @@
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="D4V-mX-uMb">
                                 <rect key="frame" x="138" y="818" width="68.5" height="44"/>
                                 <color key="backgroundColor" red="0.97636479139999999" green="0.97653168440000004" blue="0.9763541818" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="15"/>
+                                <fontDescription key="fontDescription" type="system" weight="medium" pointSize="15"/>
                                 <state key="normal" title="Paste"/>
                                 <connections>
                                     <action selector="btnPasteDidTap:" destination="BYZ-38-t0r" eventType="touchUpInside" id="ycP-bl-4w7"/>
@@ -115,18 +115,16 @@
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                     </view>
                     <navigationItem key="navigationItem" id="m3p-Yg-42a">
-                        <rightBarButtonItems>
-                            <barButtonItem title="Settings" id="Tqd-pk-gZM">
-                                <connections>
-                                    <action selector="btnSettingsDidTap:" destination="BYZ-38-t0r" id="8QW-Oo-Uvs"/>
-                                </connections>
-                            </barButtonItem>
-                            <barButtonItem title="Cards" id="YsF-Hq-LbL">
-                                <connections>
-                                    <action selector="btnCardsDidTap:" destination="BYZ-38-t0r" id="2vR-vm-9h3"/>
-                                </connections>
-                            </barButtonItem>
-                        </rightBarButtonItems>
+                        <barButtonItem key="leftBarButtonItem" title="Cards Game" id="YsF-Hq-LbL">
+                            <connections>
+                                <action selector="btnCardsDidTap:" destination="BYZ-38-t0r" id="2vR-vm-9h3"/>
+                            </connections>
+                        </barButtonItem>
+                        <barButtonItem key="rightBarButtonItem" title="Settings" id="Tqd-pk-gZM">
+                            <connections>
+                                <action selector="btnSettingsDidTap:" destination="BYZ-38-t0r" id="8QW-Oo-Uvs"/>
+                            </connections>
+                        </barButtonItem>
                     </navigationItem>
                     <connections>
                         <outlet property="btnPlayOutlet" destination="LVB-gA-c0R" id="2j9-NW-enP"/>
@@ -614,20 +612,70 @@
         <!--Edit Word-->
         <scene sceneID="kwo-3z-zQ4">
             <objects>
-                <viewController id="bZY-kE-UEs" sceneMemberID="viewController">
+                <viewController id="bZY-kE-UEs" customClass="WordsEditVC" customModule="iLearnWords" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="TZ8-Yx-1I5">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="ixz-C5-uMY">
+                                <rect key="frame" x="20" y="160" width="374" height="134.5"/>
+                                <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="16"/>
+                                <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                            </textView>
+                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="Td0-Vd-qE4">
+                                <rect key="frame" x="20" y="350" width="374" height="134.5"/>
+                                <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="16"/>
+                                <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                            </textView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Original" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="jup-wi-NNn">
+                                <rect key="frame" x="20" y="131" width="374" height="21"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Translated" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="BPv-CB-hLI">
+                                <rect key="frame" x="20" y="321" width="374" height="21"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                        </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstItem="lG9-6A-ypt" firstAttribute="trailing" secondItem="ixz-C5-uMY" secondAttribute="trailing" constant="20" id="28M-EF-6pJ"/>
+                            <constraint firstItem="BPv-CB-hLI" firstAttribute="top" secondItem="ixz-C5-uMY" secondAttribute="bottom" constant="26.5" id="31d-1n-0xd"/>
+                            <constraint firstItem="Td0-Vd-qE4" firstAttribute="top" secondItem="BPv-CB-hLI" secondAttribute="bottom" constant="8" id="Gce-Nk-DAm"/>
+                            <constraint firstItem="ixz-C5-uMY" firstAttribute="height" secondItem="TZ8-Yx-1I5" secondAttribute="height" multiplier="0.15" id="IlY-Vz-Cwa"/>
+                            <constraint firstItem="Td0-Vd-qE4" firstAttribute="leading" secondItem="BPv-CB-hLI" secondAttribute="leading" id="KCX-SO-dpR"/>
+                            <constraint firstItem="Td0-Vd-qE4" firstAttribute="trailing" secondItem="ixz-C5-uMY" secondAttribute="trailing" id="Ovr-19-473"/>
+                            <constraint firstItem="jup-wi-NNn" firstAttribute="leading" secondItem="lG9-6A-ypt" secondAttribute="leading" constant="20" id="QTq-JA-WlP"/>
+                            <constraint firstItem="Td0-Vd-qE4" firstAttribute="height" secondItem="ixz-C5-uMY" secondAttribute="height" id="QXF-XR-9jt"/>
+                            <constraint firstItem="BPv-CB-hLI" firstAttribute="leading" secondItem="ixz-C5-uMY" secondAttribute="leading" id="SpE-Qw-TWg"/>
+                            <constraint firstItem="ixz-C5-uMY" firstAttribute="top" secondItem="jup-wi-NNn" secondAttribute="bottom" constant="8" id="YWG-ak-Y3F"/>
+                            <constraint firstItem="ixz-C5-uMY" firstAttribute="leading" secondItem="jup-wi-NNn" secondAttribute="leading" id="alk-8D-6tO"/>
+                            <constraint firstItem="jup-wi-NNn" firstAttribute="trailing" secondItem="ixz-C5-uMY" secondAttribute="trailing" id="bqc-WC-rRe"/>
+                            <constraint firstItem="jup-wi-NNn" firstAttribute="top" secondItem="lG9-6A-ypt" secondAttribute="top" constant="43" id="mET-UW-nAd"/>
+                            <constraint firstItem="BPv-CB-hLI" firstAttribute="trailing" secondItem="Td0-Vd-qE4" secondAttribute="trailing" id="sfj-8l-aah"/>
+                        </constraints>
                         <viewLayoutGuide key="safeArea" id="lG9-6A-ypt"/>
                     </view>
                     <navigationItem key="navigationItem" title="Edit Word" id="IvK-AN-6da">
-                        <barButtonItem key="rightBarButtonItem" title="Save" id="mnT-0d-YyR"/>
+                        <barButtonItem key="rightBarButtonItem" title="Save" id="mnT-0d-YyR">
+                            <connections>
+                                <action selector="btnSaveDidTap:" destination="bZY-kE-UEs" id="yU2-Ts-FCR"/>
+                            </connections>
+                        </barButtonItem>
                     </navigationItem>
+                    <connections>
+                        <outlet property="txtOriginal" destination="ixz-C5-uMY" id="Ce1-5g-WD5"/>
+                        <outlet property="txtTranslated" destination="Td0-Vd-qE4" id="7GR-Yp-tAr"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="aBs-DX-S1V" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="3293" y="778"/>
+            <point key="canvasLocation" x="3292.753623188406" y="777.45535714285711"/>
         </scene>
     </scenes>
 </document>

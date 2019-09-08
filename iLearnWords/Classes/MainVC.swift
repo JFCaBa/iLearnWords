@@ -19,7 +19,6 @@ class MainVC: UIViewController, TalkerDelegate, UITableViewDelegate, UITableView
     var dataObj: Array<Words> = []
     var history: History?
     let original = UserDefaults.standard.value(forKey: UserDefaults.keys.TalkOriginal) ?? "ru_RU"
-    let translated = NSLocale.current.languageCode ?? "en_GB"
     var talkIndex = 0
     var isOriginal = false
     var repeatCounter = 1
@@ -50,6 +49,7 @@ class MainVC: UIViewController, TalkerDelegate, UITableViewDelegate, UITableView
         if ((history?.hasWord) != nil) {
             dataObj = history?.hasWord!.allObjects as! Array<Words>
         }
+        tableView.reloadData()
     }
     
     override func viewWillDisappear(_ animated: Bool) {

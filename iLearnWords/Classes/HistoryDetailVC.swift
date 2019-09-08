@@ -13,7 +13,9 @@ class HistoryDetailVC: UIViewController, UITableViewDelegate, UITableViewDataSou
 
     @IBOutlet weak var tableView: UITableView!
     
-    public var dataObj: Array<Words>?
+    var dataObj: Array<Words> = []
+    public var history: History?
+    var index: Int = 0
     private let dao: DAOController = DAOController()
     
     //MARK: - Lifecycle
@@ -22,11 +24,23 @@ class HistoryDetailVC: UIViewController, UITableViewDelegate, UITableViewDataSou
         tableView.delegate = self
         tableView.dataSource = self
         tableView.tableFooterView = UIView.init(frame: CGRect.zero)
+        dataObj = (history!.hasWord?.allObjects as! Array<Words>)
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(true)
+        tableView.reloadData()
+    }
+    
+    //MARK: - Navigation
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        let edit = segue.destination as! WordsEditVC
+        edit.dataObj = dataObj[index]
     }
     
     //MARK: - Table view datasource
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return dataObj!.count
+        return dataObj.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -37,7 +51,7 @@ class HistoryDetailVC: UIViewController, UITableViewDelegate, UITableViewDataSou
             }
             return cell
         }()
-        let word: Words = (dataObj?[indexPath.row])!
+        let word: Words = dataObj[indexPath.row]
         cell.textLabel?.text = word.original
         cell.detailTextLabel?.text = word.translated
         return cell
@@ -45,25 +59,30 @@ class HistoryDetailVC: UIViewController, UITableViewDelegate, UITableViewDataSou
     
     //MARK: - Table view delegate
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        let word = dataObj![indexPath.row] as Words
+        index = indexPath.row
+        self.performSegue(withIdentifier: "gotoEditWord", sender: self)
     }
     
     //MARK: - Actions
     @IBAction func switchDidTap(_ sender: Any) {
+        let alertController = UIAlertController(title: "Switch to this History", message: "", preferredStyle: .alert)
         
-        let alertController = UIAlertController(title: "Switch to History", message: "", preferredStyle: .alert)
-        
-        let saveAction = UIAlertAction(title: "Yes", style: .default, handler: { alert -> Void in
+        let yesAction = UIAlertAction(title: "Yes", style: .default, handler: { alert -> Void in
+            //Unselect the previous history
+            
             //Set the isSelected property to yes
+            self.history?.isSelected = true
+            //Back to the main screen
+            self.navigationController?.popToRootViewController(animated: true)
         })
         
         let cancelAction = UIAlertAction(title: "Cancel", style: .default, handler: {
             (action : UIAlertAction!) -> Void in })
         
         alertController.addAction(cancelAction)
-        alertController.addAction(saveAction)
+        alertController.addAction(yesAction)
         
-        alertController.preferredAction = saveAction
+        alertController.preferredAction = yesAction
         
         self.present(alertController, animated: true, completion: nil)
     }

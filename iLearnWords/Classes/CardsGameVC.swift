@@ -22,17 +22,17 @@ class CardsGameVC: UIViewController, TalkerDelegate {
     var max = 0
     let original = UserDefaults.standard.value(forKey: UserDefaults.keys.TalkOriginal) ?? "ru_RU"
     
+    //MARK: Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
-
         lblOriginal.text = ""
         lblTranslated.text = ""
-        loadData()
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(true)
-        talk.delegate = self 
+        talk.delegate = self
+        loadData()
     }
     
     //MARK: - Actions

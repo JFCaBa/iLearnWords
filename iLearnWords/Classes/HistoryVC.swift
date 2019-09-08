@@ -17,6 +17,7 @@ class HistoryVC: UIViewController, UITableViewDelegate, UITableViewDataSource {
     private let dao: DAOController = DAOController()
     //MARK: - Ivars
     var dataArray: [History] = []
+    var index: Int = 0
     var objToPass: Array<Words>?
     
     //MARK: - Lifecycle
@@ -35,7 +36,7 @@ class HistoryVC: UIViewController, UITableViewDelegate, UITableViewDataSource {
      //MARK: - Navigation
      override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         let details = segue.destination as! HistoryDetailVC
-        details.dataObj = objToPass
+        details.history = dataArray[index]
      }
     
     //MARK: - Table view datasource
@@ -66,9 +67,22 @@ class HistoryVC: UIViewController, UITableViewDelegate, UITableViewDataSource {
     
     //MARK: - Table view delegate
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        let hist = dataArray[indexPath.row]
-        objToPass = (hist.hasWord?.allObjects as! Array<Words>)
+        index = indexPath.row
         self.performSegue(withIdentifier: "gotoHistoryDetails", sender: self)
+    }
+    
+    func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
+        return true
+    }
+    
+    func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
+        if (editingStyle == .delete) {
+            // handle delete (by removing the data from your array and updating the tableview)
+            let obj = dataArray[indexPath.row]
+            if dao.deleteObject(obj) {
+                tableView.reloadData()
+            }
+        }
     }
 }
 

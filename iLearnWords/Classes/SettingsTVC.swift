@@ -16,6 +16,7 @@ class SettingsTVC: UITableViewController {
     
     private let dao: DAOController = DAOController()
     
+    //MARK: Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
         self.tableView.tableFooterView = UIView.init(frame: CGRect.zero)

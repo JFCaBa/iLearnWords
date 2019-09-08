@@ -24,7 +24,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         if (UserDefaults.standard.value(forKey: "VOICE_SPEED") == nil){
             createDefaultValues()
         }
-        
+        createDefaultValues()
         return true
     }
     
@@ -82,13 +82,18 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
 extension AppDelegate{
     private func createDefaultValues(){
-        let userDefaults = UserDefaults.standard
-        userDefaults.set(0.33, forKey: UserDefaults.keys.VoiceSpeed)
-        userDefaults.set(0.33, forKey: UserDefaults.keys.RepeatOriginal)
-        userDefaults.set(0.33, forKey: UserDefaults.keys.PlayInLoop)
-        userDefaults.set(0.33, forKey: UserDefaults.keys.TranslateWay)
-        userDefaults.set(0.33, forKey: UserDefaults.keys.TalkOriginal)
-        userDefaults.set(0.33, forKey: UserDefaults.keys.TalkTranslate)
+        let user = UserDefaults.standard
+        /** Syntheziser*/
+        user.set(0.33, forKey: UserDefaults.keys.VoiceSpeed)
+        user.set(false, forKey: UserDefaults.keys.RepeatOriginal)
+        user.set(true, forKey: UserDefaults.keys.PlayInLoop)
+        user.set("ru-en", forKey: UserDefaults.keys.TranslateWay)
+        user.set("ru_RU", forKey: UserDefaults.keys.TalkOriginal)
+        user.set("en_GB", forKey: UserDefaults.keys.TalkTranslate)
+        /** Colors */
+        user.setColor(color: UIColor.groupTableViewBackground, forKey: UserDefaults.keys.CellSelectedBackgroundColor)
+        user.setColor(color: UIColor.white, forKey: UserDefaults.keys.CellBackgroundColor)
+        /** Synchronize changes */
         UserDefaults.standard.synchronize()
     }
 }

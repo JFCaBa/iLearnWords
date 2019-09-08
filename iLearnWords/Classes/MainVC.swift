@@ -66,6 +66,8 @@ class MainVC: UIViewController, TalkerDelegate, UITableViewDelegate, UITableView
         return dataObj.count
     }
     
+    let bgCellSelectedColor =  UserDefaults.standard.colorForKey(key: UserDefaults.keys.CellSelectedBackgroundColor)
+    let bgCellColor = UserDefaults.standard.colorForKey(key: UserDefaults.keys.CellBackgroundColor)
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell: UITableViewCell = {
             guard let cell = tableView.dequeueReusableCell(withIdentifier: "CellMain") else {
@@ -82,6 +84,10 @@ class MainVC: UIViewController, TalkerDelegate, UITableViewDelegate, UITableView
     
     //MARK: - Table view delegate
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        //Dont play the word if we are already playing the list
+        if btnPlayOutlet.titleLabel?.text == "PLAY" {
+            return
+        }
         let word = dataObj[indexPath.row] as Words
         isOriginal = true
         startTalking(word.original!)
@@ -195,7 +201,20 @@ extension MainVC {
             }
         }
         let word = dataObj[talkIndex]
-        
+        //Update the tableView to remark the cell which is being talked now
+        if repeatCounter == 1 && isOriginal {
+            DispatchQueue.main.async {
+                let indexPath = IndexPath(item: self.talkIndex, section: 0)
+                self.tableView.scrollToRow(at: indexPath, at: .top, animated: true)
+                if let cell = self.tableView.cellForRow(at: indexPath) {
+                    cell.backgroundColor = self.bgCellSelectedColor
+                }
+                let prevIndexPath = IndexPath(item: self.talkIndex - 1, section: 0)
+                if let cell = self.tableView.cellForRow(at: prevIndexPath) {
+                    cell.backgroundColor = self.bgCellColor
+                }
+            }
+        }
         if !talk.isPaused {
             if isOriginal {
                 if let str = word.original {

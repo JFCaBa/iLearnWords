@@ -8,7 +8,6 @@
 
 import UIKit
 import Foundation
-import CoreData
 
 class LanguagesVC: UIViewController, UITableViewDelegate, UITableViewDataSource {
     

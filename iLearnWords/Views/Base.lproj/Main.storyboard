@@ -61,7 +61,7 @@
                                 </connections>
                             </button>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="vcf-cD-5Zy">
-                                <rect key="frame" x="0.0" y="88" width="414" height="733"/>
+                                <rect key="frame" x="0.0" y="88" width="414" height="729.5"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="CellMain" textLabel="dK5-Cv-aWI" detailTextLabel="nTC-E7-gYi" rowHeight="76" style="IBUITableViewCellStyleSubtitle" id="tug-VQ-TPm">
@@ -100,10 +100,10 @@
                             <constraint firstItem="DHR-FO-96l" firstAttribute="width" secondItem="x3x-pQ-Bww" secondAttribute="width" id="HK6-Uv-wZc"/>
                             <constraint firstItem="DHR-FO-96l" firstAttribute="bottom" secondItem="x3x-pQ-Bww" secondAttribute="bottom" id="Jdi-k5-HG0"/>
                             <constraint firstItem="DHR-FO-96l" firstAttribute="top" secondItem="x3x-pQ-Bww" secondAttribute="top" id="KM6-AH-FMd"/>
+                            <constraint firstItem="LVB-gA-c0R" firstAttribute="top" secondItem="vcf-cD-5Zy" secondAttribute="bottom" constant="0.5" id="SX9-hb-ePM"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="LVB-gA-c0R" secondAttribute="trailing" id="Se1-kM-Wwe"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="vcf-cD-5Zy" secondAttribute="trailing" id="TwL-Pm-V2b"/>
                             <constraint firstItem="x3x-pQ-Bww" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="c8E-ob-gkS"/>
-                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" secondItem="vcf-cD-5Zy" secondAttribute="bottom" constant="41" id="gPV-hp-Ef0"/>
                             <constraint firstItem="DHR-FO-96l" firstAttribute="leading" secondItem="x3x-pQ-Bww" secondAttribute="trailing" constant="0.5" id="gQt-Y2-QHk"/>
                             <constraint firstItem="vcf-cD-5Zy" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" id="idg-Aa-iFR"/>
                             <constraint firstItem="LVB-gA-c0R" firstAttribute="leading" secondItem="D4V-mX-uMb" secondAttribute="trailing" constant="0.5" id="joq-8Z-5Rq"/>
@@ -215,7 +215,13 @@
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="fhy-PG-xgF"/>
                     </view>
-                    <navigationItem key="navigationItem" title="Cards Game" id="zI7-yt-5Pa"/>
+                    <navigationItem key="navigationItem" title="Cards Game" id="zI7-yt-5Pa">
+                        <barButtonItem key="rightBarButtonItem" title="Reverse" id="03O-Zt-1E4">
+                            <connections>
+                                <action selector="btnReverseDidTap:" destination="cWF-hc-php" id="oCZ-LQ-Bbq"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
                     <connections>
                         <outlet property="btnPlayOutlet" destination="uHi-9l-LSv" id="ncO-aa-KO5"/>
                         <outlet property="lblOriginal" destination="k5v-rf-Ub4" id="C3d-y9-5i6"/>

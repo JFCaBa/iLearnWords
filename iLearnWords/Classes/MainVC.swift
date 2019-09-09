@@ -8,7 +8,6 @@
 
 import UIKit
 import MKProgress
-import CoreData
 
 class MainVC: UIViewController, TalkerDelegate, UITableViewDelegate, UITableViewDataSource {
 
@@ -61,6 +60,14 @@ class MainVC: UIViewController, TalkerDelegate, UITableViewDelegate, UITableView
             btnPlayDidTap(btnPlayOutlet as Any)
         }
         talk.stopTalk()
+    }
+    
+    //MARK: - Navigation
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == "gotoCardsGame" {
+            let cards = segue.destination as! CardsGameVC
+            cards.history = history
+        }
     }
     
     //MARK: - Table view datasource

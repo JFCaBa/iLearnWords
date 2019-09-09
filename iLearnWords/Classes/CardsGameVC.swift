@@ -7,7 +7,6 @@
 //
 
 import UIKit
-import CoreData
 
 class CardsGameVC: UIViewController, TalkerDelegate {
 
@@ -18,9 +17,10 @@ class CardsGameVC: UIViewController, TalkerDelegate {
     //Ivars
     private let dao: DAOController = DAOController()
     private var talk: TalkController = TalkController()
-    var dataArray: [Words] = []
+    public var history: History?
+    var dataObj: [Words] = []
     var max = 0
-    let original = UserDefaults.standard.value(forKey: UserDefaults.keys.TalkOriginal) ?? "ru_RU"
+    var reverse: Bool = false
     
     //MARK: Lifecycle
     override func viewDidLoad() {
@@ -38,10 +38,24 @@ class CardsGameVC: UIViewController, TalkerDelegate {
     //MARK: - Actions
     @IBAction func btnNextDidTap(_ sender: Any?) {
         lblTranslated.isHidden = true
-        let number = Int.random(in: 0 ..< max)
-        let word = dataArray[number] 
-        lblOriginal.text = word.original
-        lblTranslated.text = word.translated
+        guard let original = lblOriginal.text else { return }
+        guard let translated = lblTranslated.text else { return }
+        
+        if nil != sender {
+            let number = Int.random(in: 0 ..< max)
+            let word = dataObj[number]
+            
+            lblOriginal.text = reverse ? word.translated : word.original
+            lblTranslated.text = reverse ? word.original :  word.translated
+        }
+        else if reverse {
+            lblOriginal.text = translated
+            lblTranslated.text = original
+        }
+        else {
+            lblTranslated.text = original
+            lblOriginal.text = translated
+        }
     }
     
     @IBAction func btnDiscoverDidTap(_ sender: Any) {
@@ -51,19 +65,33 @@ class CardsGameVC: UIViewController, TalkerDelegate {
     @IBAction func btnPlayDidTap(_ sender: Any) {
         let btn = sender as? UIButton
         btn?.isEnabled = false
-        talk.sayText(lblOriginal.text!, language: original as! String)
+        guard  let txt = lblOriginal.text else {
+            return
+        }
+        
+        guard  let lang = reverse ? history?.talkTranslated : history?.talkOriginal else {
+            return
+        }
+        
+        talk.sayText(txt, language: lang )
+    }
+    
+    @IBAction func btnReverseDidTap(_ sender: Any) {
+        reverse = !reverse
+        btnNextDidTap(nil)
     }
 }
 
 extension CardsGameVC {
     private func loadData() {
-        dataArray = dao.fetchCards() ?? []
-        max = dataArray.count - 1
-        btnNextDidTap(nil)
+        dataObj = (history!.hasWord?.allObjects as! Array<Words>)
+        max = dataObj.count - 1
+        btnNextDidTap(UIButton())
     }
     
     //MARK: TalkController delegate
     func didFinishTalk() {
        btnPlayOutlet?.isEnabled = true
+        
     }
 }

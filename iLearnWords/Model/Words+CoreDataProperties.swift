@@ -2,7 +2,7 @@
 //  Words+CoreDataProperties.swift
 //  
 //
-//  Created by Jose Francisco Catalá Barba on 07/09/2019.
+//  Created by Jose Catala on 09/09/2019.
 //
 //
 
@@ -18,6 +18,7 @@ extension Words {
 
     @NSManaged public var original: String?
     @NSManaged public var translated: String?
+    @NSManaged public var date: NSDate?
     @NSManaged public var isInHistory: History?
 
 }

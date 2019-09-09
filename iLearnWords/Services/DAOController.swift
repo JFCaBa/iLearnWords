@@ -92,6 +92,7 @@ class DAOController: NSObject {
         let word = Words(context: managedContext)
         word.original = original
         word.translated = translated
+        word.date = Date()
         
         do {
             try managedContext.save()
@@ -131,6 +132,8 @@ class DAOController: NSObject {
         
         let managedContext = appDelegate.persistentContainer.viewContext
         let fetchRequest = NSFetchRequest<NSManagedObject>(entityName: "History")
+        let sort = NSSortDescriptor(key: #keyPath(History.date), ascending: true)
+        fetchRequest.sortDescriptors = [sort]
         fetchRequest.predicate = NSPredicate(format: "isSelected == %@",NSNumber(value: true))
         
         do {

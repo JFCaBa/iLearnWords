@@ -25,6 +25,7 @@ class HistoryDetailVC: UIViewController, UITableViewDelegate, UITableViewDataSou
         tableView.dataSource = self
         tableView.tableFooterView = UIView.init(frame: CGRect.zero)
         dataObj = (history!.hasWord?.allObjects as! Array<Words>)
+        dataObj = dataObj.sorted(by:{ $0.date!.timeIntervalSince1970 < $1.date!.timeIntervalSince1970 })
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -69,11 +70,15 @@ class HistoryDetailVC: UIViewController, UITableViewDelegate, UITableViewDataSou
         
         let yesAction = UIAlertAction(title: "Yes", style: .default, handler: { alert -> Void in
             //Unselect the previous history
-            
-            //Set the isSelected property to yes
-            self.history?.isSelected = true
-            //Back to the main screen
-            self.navigationController?.popToRootViewController(animated: true)
+            if self.dao.unSelectHistory() {
+                //Set the isSelected property to yes
+                self.history?.isSelected = true
+                //Back to the main screen
+                self.navigationController?.popToRootViewController(animated: true)
+            }
+            else {
+                print("Error: The History couldn't be changed")
+            }
         })
         
         let cancelAction = UIAlertAction(title: "Cancel", style: .default, handler: {

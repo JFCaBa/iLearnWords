@@ -16,6 +16,7 @@
         <attribute name="way" optional="YES" attributeType="String" defaultValueString="ru-en" syncable="YES"/>
     </entity>
     <entity name="Words" representedClassName="Words" syncable="YES" codeGenerationType="class">
+        <attribute name="date" optional="YES" attributeType="Date" usesScalarValueType="NO" syncable="YES"/>
         <attribute name="original" optional="YES" attributeType="String" customClassName="NSString" syncable="YES"/>
         <attribute name="translated" optional="YES" attributeType="String" customClassName="NSString" syncable="YES"/>
         <relationship name="isInHistory" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="History" inverseName="hasWord" inverseEntity="History" syncable="YES"/>
@@ -23,6 +24,6 @@
     <elements>
         <element name="History" positionX="-63" positionY="27" width="128" height="148"/>
         <element name="Languages" positionX="-63" positionY="9" width="128" height="105"/>
-        <element name="Words" positionX="216.02734375" positionY="86.7421875" width="128" height="88"/>
+        <element name="Words" positionX="216.02734375" positionY="86.7421875" width="128" height="105"/>
     </elements>
 </model>

@@ -48,6 +48,7 @@ class MainVC: UIViewController, TalkerDelegate, UITableViewDelegate, UITableView
         history = dao.fetchSelectedHistory()
         if ((history?.hasWord) != nil) {
             dataObj = history?.hasWord!.allObjects as! Array<Words>
+            dataObj = dataObj.sorted(by:{ $0.date!.timeIntervalSince1970 < $1.date!.timeIntervalSince1970 })
         }
         tableView.reloadData()
     }
@@ -147,6 +148,7 @@ class MainVC: UIViewController, TalkerDelegate, UITableViewDelegate, UITableView
                 if let wordModel = self.dao.saveWordObjectFrom(original: wordObj, translated: translatedWord){
                     //Add the word to the array
                     self.dataObj.append(wordModel)
+                    self.tableView.reloadData()
                 }
                 let i = index + 1
                 //Call the method recursivily to translate all the words
@@ -158,6 +160,7 @@ class MainVC: UIViewController, TalkerDelegate, UITableViewDelegate, UITableView
                         if let wordModel = self.dao.saveWordObjectFrom(original: wordObj, translated: response!){
                             //Add the word to the array
                             self.dataObj.append(wordModel)
+                            self.tableView.reloadData()
                         }
                         let i = index + 1
                         //Call the method recursivily to translate all the words

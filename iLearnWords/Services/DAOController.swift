@@ -262,6 +262,31 @@ class DAOController: NSObject {
                     history.isSelected = false
                     try managedContext.save()
                 }
+            }
+
+            return true
+            
+        } catch let error as NSError {
+            print("Could not fetch. \(error), \(error.userInfo)")
+            return false
+        }
+    }
+    
+    public func updateHistory(_ history: History) -> Bool {
+        guard let appDelegate = UIApplication.shared.delegate as? AppDelegate else {
+            return false
+        }
+        
+        let managedContext = appDelegate.persistentContainer.viewContext
+        let fetchRequest = NSFetchRequest<NSManagedObject>(entityName: "History")
+        fetchRequest.predicate = NSPredicate(format: "date == %@", history.date! as NSDate)
+        
+        do {
+            let result = try managedContext.fetch(fetchRequest)
+            if result.count > 0 {
+                let hist = result.first as! History
+                hist.isSelected = true
+                try managedContext.save()
                 return true
             }
             else {
@@ -273,6 +298,7 @@ class DAOController: NSObject {
             return false
         }
     }
+    
     public func updateWord(original: String, translated: String) -> Bool {
         guard let appDelegate = UIApplication.shared.delegate as? AppDelegate else {
             return false

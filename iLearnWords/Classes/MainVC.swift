@@ -48,6 +48,7 @@ class MainVC: UIViewController, TalkerDelegate, UITableViewDelegate, UITableView
         history = dao.fetchSelectedHistory()
         if ((history?.hasWord) != nil) {
             dataObj = history?.hasWord!.allObjects as! Array<Words>
+            //Sort the array by the date the words were added to the database
             dataObj = dataObj.sorted(by:{ $0.date!.timeIntervalSince1970 < $1.date!.timeIntervalSince1970 })
         }
         tableView.reloadData()
@@ -259,7 +260,7 @@ extension MainVC {
         let saveAction = UIAlertAction(title: "Save", style: .default, handler: { alert -> Void in
             if let textField = alertController.textFields?[0] {
                 if textField.text!.count > 0 {
-                    let title = textField.text ?? "Utitlled"
+                    let title = textField.text ?? "Utitled"
                     if self.dao.saveHistory(data, title: title) {
                        print("\(title)")
                     }

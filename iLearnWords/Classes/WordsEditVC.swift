@@ -24,8 +24,10 @@ class WordsEditVC: UIViewController {
 
     @IBAction func btnSaveDidTap(_ sender: Any) {
         if dao.updateWord(original: dataObj!.original!, translated: dataObj!.translated!) {
-            dataObj?.original = txtOriginal.text
-            dataObj?.translated = txtTranslated.text
+            guard let original = txtOriginal.text else { return }
+            guard let translated = txtTranslated.text else { return }
+            dataObj?.original = original
+            dataObj?.translated = translated
             self.navigationController?.popViewController(animated: true)
         }
     }

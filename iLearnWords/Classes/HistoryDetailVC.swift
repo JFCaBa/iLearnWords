@@ -25,6 +25,7 @@ class HistoryDetailVC: UIViewController, UITableViewDelegate, UITableViewDataSou
         tableView.dataSource = self
         tableView.tableFooterView = UIView.init(frame: CGRect.zero)
         dataObj = (history!.hasWord?.allObjects as! Array<Words>)
+        //Sort the array by the date the words were added to the database
         dataObj = dataObj.sorted(by:{ $0.date!.timeIntervalSince1970 < $1.date!.timeIntervalSince1970 })
     }
     
@@ -73,11 +74,16 @@ class HistoryDetailVC: UIViewController, UITableViewDelegate, UITableViewDataSou
             if self.dao.unSelectHistory() {
                 //Set the isSelected property to yes
                 self.history?.isSelected = true
-                //Back to the main screen
-                self.navigationController?.popToRootViewController(animated: true)
+                if self.dao.updateHistory(self.history!) {
+                    //Back to the main screen
+                    self.navigationController?.popToRootViewController(animated: true)
+                }
+                else {
+                    print("Error: The History couldn't be selected")
+                }
             }
             else {
-                print("Error: The History couldn't be changed")
+                print("Error: The History couldn't be unselected")
             }
         })
         

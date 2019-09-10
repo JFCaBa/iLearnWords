@@ -121,16 +121,20 @@ class MainVC: UIViewController, TalkerDelegate, UITableViewDelegate, UITableView
         }
     }
     
-    private func translateWordRecursive(_ word: String) {
-        
-    }
-    
     @IBAction func btnDeleteDidTap(_ sender: Any) {
         dataObj.removeAll()
         tableView.reloadData()
     }
     
-    @IBAction func btnEditDidTap(_ sender: Any) {
+    @IBAction func btnCopyDidTap(_ sender: Any) {
+        var copyStr = ""
+        for (index, element) in dataObj.enumerated() {
+            copyStr += element.original! + " => " + element.translated!
+            if index < dataObj.count - 1 {
+                copyStr += "\n"
+            }
+        }
+        UIPasteboard.general.string = copyStr
     }
     
     @IBAction func btnPlayDidTap(_ sender: Any) {

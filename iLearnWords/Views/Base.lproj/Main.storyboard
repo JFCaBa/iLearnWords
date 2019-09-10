@@ -30,16 +30,16 @@
                                     <action selector="btnPlayDidTap:" destination="BYZ-38-t0r" eventType="touchUpInside" id="eJr-nZ-ur2"/>
                                 </connections>
                             </button>
-                            <button opaque="NO" contentMode="scaleToFill" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="x3x-pQ-Bww">
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="x3x-pQ-Bww">
                                 <rect key="frame" x="0.0" y="818" width="68.5" height="44"/>
                                 <color key="backgroundColor" red="0.97636479139999999" green="0.97653168440000004" blue="0.9763541818" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="44" id="cBJ-C4-v9N"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="15"/>
-                                <state key="normal" title="Edit"/>
+                                <state key="normal" title="Copy"/>
                                 <connections>
-                                    <action selector="btnEditDidTap:" destination="BYZ-38-t0r" eventType="touchUpInside" id="8LG-2W-dW6"/>
+                                    <action selector="btnCopyDidTap:" destination="BYZ-38-t0r" eventType="touchUpInside" id="lyU-hv-TRf"/>
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="DHR-FO-96l">

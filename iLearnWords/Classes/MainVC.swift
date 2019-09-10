@@ -23,7 +23,7 @@ class MainVC: UIViewController, TalkerDelegate, UITableViewDelegate, UITableView
     var repeatCounter = 1
     //MARK: - Object instances
     let network = NetworkController()
-    private var talk: TalkController = TalkController()
+    private var talk = TalkController.shared
     private let dao: DAOController = DAOController()
     
     //MARK: - Lifecycle
@@ -55,11 +55,9 @@ class MainVC: UIViewController, TalkerDelegate, UITableViewDelegate, UITableView
     
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(true)
-        if btnPlayOutlet.titleLabel?.text == "PAUSE" {
-            //btnPlayOutlet.setTitle("PLAY", for: .normal)
-            btnPlayDidTap(btnPlayOutlet as Any)
+        if talk.stopTalk() {
+            btnPlayOutlet.setTitle("PLAY", for: .normal)
         }
-        talk.stopTalk()
     }
     
     //MARK: - Navigation
@@ -94,9 +92,11 @@ class MainVC: UIViewController, TalkerDelegate, UITableViewDelegate, UITableView
     //MARK: - Table view delegate
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         //Dont play the word if we are already playing the list
-        if btnPlayOutlet.titleLabel?.text == "PLAY" {
+        tableView.deselectRow(at: indexPath, animated: false)
+        if talk.isSpeaking() {
             return
         }
+        btnPlayOutlet.isEnabled = false
         let word = dataObj[indexPath.row] as Words
         isOriginal = true
         startTalking(word.original!)
@@ -114,8 +114,12 @@ class MainVC: UIViewController, TalkerDelegate, UITableViewDelegate, UITableView
     @IBAction func btnPasteDidTap(_ sender: Any) {
         let toPaste = UIPasteboard.general.string
         if nil != toPaste {
-            if let tmpArray = toPaste?.components(separatedBy: "\n") {
+            if var tmpArray = toPaste?.components(separatedBy: "\n") {
                 MKProgress.show()
+                // If when pasting the last char is \n this generate an empty string in the array, we'll remove it here
+                if tmpArray.last == "" {
+                    tmpArray.removeLast()
+                }
                 translateRecursive(tmpArray, index: 0)
             }
         }
@@ -139,16 +143,16 @@ class MainVC: UIViewController, TalkerDelegate, UITableViewDelegate, UITableView
     
     @IBAction func btnPlayDidTap(_ sender: Any) {
         let btn = sender as! UIButton
-
         if btn.titleLabel?.text == "PLAY" {
-            btn.setTitle("PAUSE", for: .normal)
+            btn.setTitle("STOP", for: .normal)
             let word = dataObj[talkIndex]
-            isOriginal = true
+            isOriginal = false
             startTalking(word.original!, talkLanguage: history!.talkOriginal!)
         }
         else{
-            btn.setTitle("PLAY", for: .normal)
-            talk.stopTalk()
+            if talk.stopTalk() || !talk.isSpeaking(){
+                btn.setTitle("PLAY", for: .normal)
+            }
         }
     }
     
@@ -195,7 +199,7 @@ class MainVC: UIViewController, TalkerDelegate, UITableViewDelegate, UITableView
     }
     
     private func startTalking(_ text: String, talkLanguage: String = "ru_RU") {
-            self.talk.sayText(text, language: talkLanguage)
+        self.talk.sayText(text, language: talkLanguage)
     }
     
     private func delay(_ delay:Double, closure:@escaping ()->()) {
@@ -205,9 +209,14 @@ class MainVC: UIViewController, TalkerDelegate, UITableViewDelegate, UITableView
 }
 
 extension MainVC {
-    
     //MARK: TalkController delegate
     func didFinishTalk() {
+        // If tap on the table cell the btn is disable to avoid tap again on it until the play finish is notified here
+        btnPlayOutlet.isEnabled = true
+        if btnPlayOutlet.titleLabel?.text == "PLAY" {
+            return
+        }
+        
         let playInLoop = UserDefaults.standard.bool(forKey: UserDefaults.keys.PlayInLoop)
         if talkIndex == (dataObj.count - 1) {
             talkIndex = 0
@@ -217,7 +226,7 @@ extension MainVC {
         }
         let word = dataObj[talkIndex]
         //Update the tableView to remark the cell which is being talked now
-        if repeatCounter == 1 && isOriginal {
+        if isOriginal {
             DispatchQueue.main.async {
                 let indexPath = IndexPath(item: self.talkIndex, section: 0)
                 self.tableView.scrollToRow(at: indexPath, at: .top, animated: true)
@@ -229,35 +238,25 @@ extension MainVC {
                     cell.backgroundColor = self.bgCellColor
                 }
             }
-        }
-        if !talk.isPaused {
-            if isOriginal {
-                if let str = word.original {
-                    startTalking(str, talkLanguage: history!.talkOriginal!)
-                }
-                let repeatSettings = UserDefaults.standard.bool(forKey: UserDefaults.keys.RepeatOriginal)
-                if !repeatSettings || repeatCounter == 3{
-                    isOriginal = false //The nextone to be played will be the translated one
-                }
-                else {
-                    repeatCounter += 1
-                }
+            
+            if let str = word.original {
+                startTalking(str, talkLanguage: history!.talkOriginal!)
+            }
+            let repeatSettings = UserDefaults.standard.bool(forKey: UserDefaults.keys.RepeatOriginal)
+            if !repeatSettings || repeatCounter == 3{
+                isOriginal = false //The nextone to be played will be the translated one
             }
             else {
-                if let str = word.translated {
-                    startTalking(str, talkLanguage: history!.talkTranslated!)
-                }
-                talkIndex += 1 //Increment the index to change the row
-                isOriginal = true //The nextone to be read will be the original one
-                repeatCounter = 1;
+                repeatCounter += 1
             }
         }
-        else{
-            talkIndex = 0
-            if UserDefaults.standard.bool(forKey: UserDefaults.keys.PlayInLoop){
-                //Repeat the list
-                didFinishTalk()
+        else {
+            if let str = word.translated {
+                startTalking(str, talkLanguage: history!.talkTranslated!)
             }
+            talkIndex += 1 //Increment the index to change the row
+            isOriginal = true //The nextone to be read will be the original one
+            repeatCounter = 1;
         }
     }
     

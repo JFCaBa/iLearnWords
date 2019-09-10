@@ -16,7 +16,7 @@ class CardsGameVC: UIViewController, TalkerDelegate {
     @IBOutlet weak var btnPlayOutlet: UIButton!
     //Ivars
     private let dao: DAOController = DAOController()
-    private var talk: TalkController = TalkController()
+    private var talk = TalkController.shared
     public var history: History?
     var dataObj: [Words] = []
     var max = 0

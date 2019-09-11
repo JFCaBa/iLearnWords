@@ -16,6 +16,8 @@
 		6D36E192231BD49200C88F0A /* TalkController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D36E191231BD49200C88F0A /* TalkController.swift */; };
 		6DA5E4D7231E53F0004732CF /* DAOController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6DA5E4D6231E53F0004732CF /* DAOController.swift */; };
 		6DA5E4FF231EAE8B004732CF /* CardsGameVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6DA5E4FE231EAE8B004732CF /* CardsGameVC.swift */; };
+		6DCD6ED72329037900CF6806 /* CloudKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6DCD6ED62329037900CF6806 /* CloudKit.framework */; };
+		6DCD6ED92329220800CF6806 /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 6DCD6ED82329220800CF6806 /* Default-568h@2x.png */; };
 		6DCDEFF5231F9DCD00744E65 /* LanguagesVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6DCDEFF4231F9DCD00744E65 /* LanguagesVC.swift */; };
 		6DDEF2B623240D29007C9C77 /* WordsEditVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6DDEF2B523240D29007C9C77 /* WordsEditVC.swift */; };
 		6DDEF2B823251697007C9C77 /* UserDefaults+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6DDEF2B723251697007C9C77 /* UserDefaults+Extension.swift */; };
@@ -41,6 +43,9 @@
 		6DA5E4FE231EAE8B004732CF /* CardsGameVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardsGameVC.swift; sourceTree = "<group>"; };
 		6DCD6ED32328FFB500CF6806 /* ru */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ru; path = ru.lproj/Main.strings; sourceTree = "<group>"; };
 		6DCD6ED42328FFB500CF6806 /* ru */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ru; path = ru.lproj/LaunchScreen.strings; sourceTree = "<group>"; };
+		6DCD6ED52329036000CF6806 /* iLearnWords.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = iLearnWords.entitlements; sourceTree = "<group>"; };
+		6DCD6ED62329037900CF6806 /* CloudKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CloudKit.framework; path = System/Library/Frameworks/CloudKit.framework; sourceTree = SDKROOT; };
+		6DCD6ED82329220800CF6806 /* Default-568h@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-568h@2x.png"; sourceTree = "<group>"; };
 		6DCDEFF4231F9DCD00744E65 /* LanguagesVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LanguagesVC.swift; sourceTree = "<group>"; };
 		6DDEF2B523240D29007C9C77 /* WordsEditVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WordsEditVC.swift; sourceTree = "<group>"; };
 		6DDEF2B723251697007C9C77 /* UserDefaults+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UserDefaults+Extension.swift"; sourceTree = "<group>"; };
@@ -58,6 +63,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				AF4F2C61B2FCA3E744F72685 /* Pods_iLearnWords.framework in Frameworks */,
+				6DCD6ED72329037900CF6806 /* CloudKit.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -67,6 +73,7 @@
 		6D36E171231BC09A00C88F0A = {
 			isa = PBXGroup;
 			children = (
+				6DCD6ED82329220800CF6806 /* Default-568h@2x.png */,
 				6D36E17C231BC09A00C88F0A /* iLearnWords */,
 				6D36E17B231BC09A00C88F0A /* Products */,
 				DCBFE666AA0C7F1DA629D497 /* Pods */,
@@ -85,6 +92,7 @@
 		6D36E17C231BC09A00C88F0A /* iLearnWords */ = {
 			isa = PBXGroup;
 			children = (
+				6DCD6ED52329036000CF6806 /* iLearnWords.entitlements */,
 				6D36E17D231BC09A00C88F0A /* AppDelegate.swift */,
 				6DDEF2B723251697007C9C77 /* UserDefaults+Extension.swift */,
 				6D36E195231BF7D200C88F0A /* Classes */,
@@ -141,6 +149,7 @@
 		9AD42107F2B70BA6CB278AC0 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				6DCD6ED62329037900CF6806 /* CloudKit.framework */,
 				BD187980F093E277E5A968F7 /* Pods_iLearnWords.framework */,
 			);
 			name = Frameworks;
@@ -194,6 +203,12 @@
 							com.apple.BackgroundModes = {
 								enabled = 1;
 							};
+							com.apple.Push = {
+								enabled = 1;
+							};
+							com.apple.iCloud = {
+								enabled = 1;
+							};
 						};
 					};
 				};
@@ -223,6 +238,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				6D36E188231BC09C00C88F0A /* LaunchScreen.storyboard in Resources */,
+				6DCD6ED92329220800CF6806 /* Default-568h@2x.png in Resources */,
 				6D36E185231BC09C00C88F0A /* Assets.xcassets in Resources */,
 				6D36E183231BC09A00C88F0A /* Main.storyboard in Resources */,
 			);
@@ -457,6 +473,7 @@
 			baseConfigurationReference = 48B8AA7E06504417BD100AD6 /* Pods-iLearnWords.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = iLearnWords/iLearnWords.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 75SEZC5TGW;
@@ -478,6 +495,7 @@
 			baseConfigurationReference = 85F90F8EBD3A95F9DE8D3868 /* Pods-iLearnWords.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = iLearnWords/iLearnWords.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 75SEZC5TGW;

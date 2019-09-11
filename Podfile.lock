@@ -1,9 +1,9 @@
 PODS:
-  - Alamofire (5.0.0-beta.7)
-  - Crashlytics (3.13.4):
+  - Alamofire (5.0.0-rc.2)
+  - Crashlytics (3.14.0):
     - Fabric (~> 1.10.2)
   - Fabric (1.10.2)
-  - IQKeyboardManagerSwift (6.4.1)
+  - IQKeyboardManagerSwift (6.4.2)
   - MKProgress (1.1.0)
 
 DEPENDENCIES:
@@ -22,10 +22,10 @@ SPEC REPOS:
     - MKProgress
 
 SPEC CHECKSUMS:
-  Alamofire: bd07938ceecad59d2492aeecb1f785a8f2721160
-  Crashlytics: 2dfd686bcb918dc10ee0e76f7f853fe42c7bd552
+  Alamofire: f9450d3c7f6bea2ad62e7a541c3e9b186c7991d6
+  Crashlytics: 540b7e5f5da5a042647227a5e3ac51d85eed06df
   Fabric: 706c8b8098fff96c33c0db69cbf81f9c551d0d74
-  IQKeyboardManagerSwift: d2df660d0b8d64a15cb2537c9ff303213fa515b2
+  IQKeyboardManagerSwift: 79a3ec200dfb41cb66a89b8575417b5378107c5d
   MKProgress: 260d166200323f3d991190a73ab2dc3a04b0f52f
 
 PODFILE CHECKSUM: 05340c5bcedaa9e52111214fb0607ff769f6248f

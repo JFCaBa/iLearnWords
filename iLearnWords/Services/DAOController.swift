@@ -8,8 +8,15 @@
 
 import UIKit
 import CoreData
+import CloudKit
 
 class DAOController: NSObject {
+    
+    override init() {
+        let container = CKContainer.default()
+        let containerIdentifier = "iCloud.com.armentechnology.iLearnWords"
+        
+    }
     
     //MARK: - Private functions
     //MARK: - Save methods

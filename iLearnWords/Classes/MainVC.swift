@@ -56,7 +56,7 @@ class MainVC: UIViewController, TalkerDelegate, UITableViewDelegate, UITableView
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(true)
         if talk.stopTalk() {
-            btnPlayOutlet.setTitle("PLAY", for: .normal)
+            btnPlayOutlet.setTitle(NSLocalizedString("PLAY", comment: ""), for: .normal)
         }
     }
     
@@ -143,8 +143,8 @@ class MainVC: UIViewController, TalkerDelegate, UITableViewDelegate, UITableView
     
     @IBAction func btnPlayDidTap(_ sender: Any) {
         let btn = sender as! UIButton
-        if btn.titleLabel?.text == "PLAY" {
-            btn.setTitle("STOP", for: .normal)
+        if btn.titleLabel?.text == NSLocalizedString("PLAY", comment: "") {
+            btn.setTitle(NSLocalizedString("STOP", comment:""), for: .normal)
             let word = dataObj[talkIndex]
             isOriginal = false
             startTalking(word.original!, talkLanguage: history!.talkOriginal!)
@@ -196,6 +196,8 @@ class MainVC: UIViewController, TalkerDelegate, UITableViewDelegate, UITableView
                 saveHistory(dataObj)
             }
         }
+        //When we past new words need to reset the talk index
+        self.talkIndex = 0
     }
     
     private func startTalking(_ text: String, talkLanguage: String = "ru_RU") {
@@ -213,7 +215,7 @@ extension MainVC {
     func didFinishTalk() {
         // If tap on the table cell the btn is disable to avoid tap again on it until the play finish is notified here
         btnPlayOutlet.isEnabled = true
-        if btnPlayOutlet.titleLabel?.text == "PLAY" {
+        if btnPlayOutlet.titleLabel?.text == NSLocalizedString("PLAY", comment:"") {
             return
         }
         
@@ -262,12 +264,12 @@ extension MainVC {
     
     //MARK: Save history
     private func saveHistory(_ data: Array<Words>) {
-        let alertController = UIAlertController(title: "Save List", message: "", preferredStyle: .alert)
+        let alertController = UIAlertController(title: NSLocalizedString("Save List", comment: ""), message: "", preferredStyle: .alert)
         alertController.addTextField { (textField : UITextField!) -> Void in
-            textField.placeholder = "Enter a List Name"
+            textField.placeholder = NSLocalizedString("Enter a List Name", comment:"")
         }
         
-        let saveAction = UIAlertAction(title: "Save", style: .default, handler: { alert -> Void in
+        let saveAction = UIAlertAction(title: NSLocalizedString("Save", comment:""), style: .default, handler: { alert -> Void in
             if let textField = alertController.textFields?[0] {
                 if textField.text!.count > 0 {
                     let title = textField.text ?? "Utitled"
@@ -281,7 +283,7 @@ extension MainVC {
             }
         })
         
-        let cancelAction = UIAlertAction(title: "Cancel", style: .default, handler: {
+        let cancelAction = UIAlertAction(title: NSLocalizedString("Cancel", comment:""), style: .default, handler: {
             (action : UIAlertAction!) -> Void in })
         
         alertController.addAction(cancelAction)

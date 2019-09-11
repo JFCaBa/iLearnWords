@@ -33,9 +33,9 @@ class WordsEditVC: UIViewController {
     }
     
     @IBAction func btnDeleteDidTap(_ sender: Any) {
-        let alertController = UIAlertController(title: "Delete Word?", message: "", preferredStyle: .alert)
+        let alertController = UIAlertController(title: NSLocalizedString("Delete Word?", comment: ""), message: "", preferredStyle: .alert)
         
-        let saveAction = UIAlertAction(title: "Yes", style: .default, handler: { alert -> Void in
+        let saveAction = UIAlertAction(title: NSLocalizedString("Yes", comment:""), style: .default, handler: { alert -> Void in
             if self.dao.deleteObject(self.dataObj!) {
                 print("Word deleted")
                 self.navigationController?.popViewController(animated: true)
@@ -45,7 +45,7 @@ class WordsEditVC: UIViewController {
             }
         })
         
-        let cancelAction = UIAlertAction(title: "Cancel", style: .default, handler: {
+        let cancelAction = UIAlertAction(title: NSLocalizedString("Cancel", comment:""), style: .default, handler: {
             (action : UIAlertAction!) -> Void in })
         
         alertController.addAction(cancelAction)

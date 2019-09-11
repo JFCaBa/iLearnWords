@@ -86,9 +86,19 @@ extension AppDelegate{
         user.set(0.33, forKey: UserDefaults.keys.VoiceSpeed)
         user.set(false, forKey: UserDefaults.keys.RepeatOriginal)
         user.set(true, forKey: UserDefaults.keys.PlayInLoop)
-        user.set("ru-en", forKey: UserDefaults.keys.TranslateWay)
-        user.set("ru_RU", forKey: UserDefaults.keys.TalkOriginal)
-        user.set("en_GB", forKey: UserDefaults.keys.TalkTranslate)
+        if let language = Locale.current.languageCode {
+            if language.contains("ru") {
+                user.set("en-ru", forKey: UserDefaults.keys.TranslateWay)
+                user.set("en_GB", forKey: UserDefaults.keys.TalkOriginal)
+                user.set("ru_RU", forKey: UserDefaults.keys.TalkTranslate)
+            }
+            else {
+                user.set("ru-en", forKey: UserDefaults.keys.TranslateWay)
+                user.set("ru_RU", forKey: UserDefaults.keys.TalkOriginal)
+                user.set("en_GB", forKey: UserDefaults.keys.TalkTranslate)
+            }
+        }
+        
         //Colors
         user.setColor(color: UIColor.groupTableViewBackground, forKey: UserDefaults.keys.CellSelectedBackgroundColor)
         user.setColor(color: UIColor.white, forKey: UserDefaults.keys.CellBackgroundColor)

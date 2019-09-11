@@ -66,9 +66,9 @@ class SettingsTVC: UITableViewController {
     }
     
     @IBAction func btnResetDidTap(_ sender: Any) {
-        let alert: UIAlertController = UIAlertController(title: "Warning", message: "This action will remove the words from your phone", preferredStyle: .alert)
+        let alert: UIAlertController = UIAlertController(title: NSLocalizedString("Warning", comment: ""), message: NSLocalizedString("This action will remove the words from your phone", comment:""), preferredStyle: .alert)
         
-        alert.addAction(UIAlertAction(title: "YES", style: .destructive) { (alert: UIAlertAction) in
+        alert.addAction(UIAlertAction(title: NSLocalizedString("YES", comment:""), style: .destructive) { (alert: UIAlertAction) in
             let reset = self.dao.cleanData("Translated")
             if reset{
                 print("Data base flushed")
@@ -78,7 +78,7 @@ class SettingsTVC: UITableViewController {
             }
         })
         
-        alert.addAction(UIAlertAction(title: "NO", style: .default) { (alert: UIAlertAction) in
+        alert.addAction(UIAlertAction(title: NSLocalizedString("NO", comment:""), style: .default) { (alert: UIAlertAction) in
             
         })
         

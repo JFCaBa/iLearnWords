@@ -1,0 +1,126 @@
+
+/* Class = "UIBarButtonItem"; title = "Reverse"; ObjectID = "03O-Zt-1E4"; */
+"03O-Zt-1E4.title" = "Reverse";
+
+/* Class = "UINavigationItem"; title = "History"; ObjectID = "3lF-qX-HhF"; */
+"3lF-qX-HhF.title" = "History";
+
+/* Class = "UILabel"; text = "Title"; ObjectID = "46v-Md-b4H"; */
+"46v-Md-b4H.text" = "Title";
+
+/* Class = "UITableViewController"; title = "Settings"; ObjectID = "4T4-D4-0wu"; */
+"4T4-D4-0wu.title" = "Settings";
+
+/* Class = "UILabel"; text = "History"; ObjectID = "6cR-v0-AWD"; */
+"6cR-v0-AWD.text" = "History";
+
+/* Class = "UILabel"; text = "Translated"; ObjectID = "BPv-CB-hLI"; */
+"BPv-CB-hLI.text" = "Translated";
+
+/* Class = "UIViewController"; title = "Words List"; ObjectID = "BYZ-38-t0r"; */
+"BYZ-38-t0r.title" = "Words List";
+
+/* Class = "UIBarButtonItem"; title = "Delete"; ObjectID = "Bcd-jZ-Z76"; */
+"Bcd-jZ-Z76.title" = "Delete";
+
+/* Class = "UIButton"; normalTitle = "Paste"; ObjectID = "D4V-mX-uMb"; */
+"D4V-mX-uMb.normalTitle" = "Paste";
+
+/* Class = "UIButton"; normalTitle = "Clean"; ObjectID = "DHR-FO-96l"; */
+"DHR-FO-96l.normalTitle" = "Clean";
+
+/* Class = "UILabel"; text = "Subtitle"; ObjectID = "FAt-vM-VhD"; */
+"FAt-vM-VhD.text" = "Subtitle";
+
+/* Class = "UIBarButtonItem"; title = "Select"; ObjectID = "HHD-ki-xlB"; */
+"HHD-ki-xlB.title" = "Select";
+
+/* Class = "UINavigationItem"; title = "Edit Word"; ObjectID = "IvK-AN-6da"; */
+"IvK-AN-6da.title" = "Edit Word";
+
+/* Class = "UILabel"; text = "Title"; ObjectID = "Kex-PV-Pu7"; */
+"Kex-PV-Pu7.text" = "Title";
+
+/* Class = "UIButton"; normalTitle = "PLAY"; ObjectID = "LVB-gA-c0R"; */
+"LVB-gA-c0R.normalTitle" = "PLAY";
+
+/* Class = "UILabel"; text = "Translate Languages"; ObjectID = "RPq-sd-csI"; */
+"RPq-sd-csI.text" = "Translate Languages";
+
+/* Class = "UILabel"; text = "Subtitle"; ObjectID = "Tjz-BS-vXj"; */
+"Tjz-BS-vXj.text" = "Subtitle";
+
+/* Class = "UIBarButtonItem"; title = "Settings"; ObjectID = "Tqd-pk-gZM"; */
+"Tqd-pk-gZM.title" = "Settings";
+
+/* Class = "UIButton"; normalTitle = "Discover"; ObjectID = "UjS-de-rPZ"; */
+"UjS-de-rPZ.normalTitle" = "Discover";
+
+/* Class = "UILabel"; text = "Label"; ObjectID = "VIU-sC-ypp"; */
+"VIU-sC-ypp.text" = "Label";
+
+/* Class = "UIBarButtonItem"; title = "Item"; ObjectID = "VqN-rt-0a0"; */
+"VqN-rt-0a0.title" = "Item";
+
+/* Class = "UIButton"; normalTitle = "NEXT"; ObjectID = "YCJ-YK-uoq"; */
+"YCJ-YK-uoq.normalTitle" = "NEXT";
+
+/* Class = "UIBarButtonItem"; title = "Cards Game"; ObjectID = "YsF-Hq-LbL"; */
+"YsF-Hq-LbL.title" = "Cards Game";
+
+/* Class = "UIViewController"; title = "History"; ObjectID = "Zxb-Ie-Gpm"; */
+"Zxb-Ie-Gpm.title" = "History";
+
+/* Class = "UIViewController"; title = "Languages"; ObjectID = "aSb-AZ-nO2"; */
+"aSb-AZ-nO2.title" = "Languages";
+
+/* Class = "UILabel"; text = "Play in loop"; ObjectID = "aag-sr-lNu"; */
+"aag-sr-lNu.text" = "Play in loop";
+
+/* Class = "UINavigationItem"; title = "Words"; ObjectID = "cR5-B9-xxT"; */
+"cR5-B9-xxT.title" = "Words";
+
+/* Class = "UIViewController"; title = "Cards Game "; ObjectID = "cWF-hc-php"; */
+"cWF-hc-php.title" = "Cards Game ";
+
+/* Class = "UILabel"; text = "Title"; ObjectID = "dK5-Cv-aWI"; */
+"dK5-Cv-aWI.text" = "Title";
+
+/* Class = "UIViewController"; title = "History"; ObjectID = "eIS-Hl-dZN"; */
+"eIS-Hl-dZN.title" = "History";
+
+/* Class = "UILabel"; text = "Original"; ObjectID = "jup-wi-NNn"; */
+"jup-wi-NNn.text" = "Original";
+
+/* Class = "UILabel"; text = "Label"; ObjectID = "k5v-rf-Ub4"; */
+"k5v-rf-Ub4.text" = "Label";
+
+/* Class = "UILabel"; text = "Voice speed"; ObjectID = "kg7-ba-eDq"; */
+"kg7-ba-eDq.text" = "Voice speed";
+
+/* Class = "UIBarButtonItem"; title = "Save"; ObjectID = "mnT-0d-YyR"; */
+"mnT-0d-YyR.title" = "Save";
+
+/* Class = "UILabel"; text = "Subtitle"; ObjectID = "nTC-E7-gYi"; */
+"nTC-E7-gYi.text" = "Subtitle";
+
+/* Class = "UINavigationItem"; title = "Languages"; ObjectID = "q9s-ou-Hhm"; */
+"q9s-ou-Hhm.title" = "Languages";
+
+/* Class = "UILabel"; text = "Repeat Original"; ObjectID = "raI-sN-VjI"; */
+"raI-sN-VjI.text" = "Repeat Original";
+
+/* Class = "UIButton"; normalTitle = "Reset"; ObjectID = "tEV-h2-0kC"; */
+"tEV-h2-0kC.normalTitle" = "Reset";
+
+/* Class = "UIButton"; normalTitle = "Play"; ObjectID = "uHi-9l-LSv"; */
+"uHi-9l-LSv.normalTitle" = "Play";
+
+/* Class = "UILabel"; text = "Rest Words Database"; ObjectID = "vGU-eC-rxh"; */
+"vGU-eC-rxh.text" = "Rest Words Database";
+
+/* Class = "UIButton"; normalTitle = "Copy"; ObjectID = "x3x-pQ-Bww"; */
+"x3x-pQ-Bww.normalTitle" = "Copy";
+
+/* Class = "UINavigationItem"; title = "Cards Game"; ObjectID = "zI7-yt-5Pa"; */
+"zI7-yt-5Pa.title" = "Cards Game";

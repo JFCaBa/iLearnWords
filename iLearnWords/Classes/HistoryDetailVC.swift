@@ -66,9 +66,9 @@ class HistoryDetailVC: UIViewController, UITableViewDelegate, UITableViewDataSou
     
     //MARK: - Actions
     @IBAction func switchDidTap(_ sender: Any) {
-        let alertController = UIAlertController(title: "Switch to this History", message: "", preferredStyle: .alert)
+        let alertController = UIAlertController(title: NSLocalizedString("Switch to this History", comment:""), message: "", preferredStyle: .alert)
         
-        let yesAction = UIAlertAction(title: "Yes", style: .default, handler: { alert -> Void in
+        let yesAction = UIAlertAction(title: NSLocalizedString("Yes", comment:""), style: .default, handler: { alert -> Void in
             //Unselect the previous history
             if self.dao.unSelectHistory() {
                 //Set the isSelected property to yes
@@ -86,7 +86,7 @@ class HistoryDetailVC: UIViewController, UITableViewDelegate, UITableViewDataSou
             }
         })
         
-        let cancelAction = UIAlertAction(title: "Cancel", style: .default, handler: {
+        let cancelAction = UIAlertAction(title: NSLocalizedString("Cancel", comment:""), style: .default, handler: {
             (action : UIAlertAction!) -> Void in })
         
         alertController.addAction(cancelAction)
@@ -99,9 +99,9 @@ class HistoryDetailVC: UIViewController, UITableViewDelegate, UITableViewDataSou
     
     @IBAction func deleteDidTap(_ sender: Any) {
         
-        let alertController = UIAlertController(title: "Delete From History", message: "", preferredStyle: .alert)
+        let alertController = UIAlertController(title: NSLocalizedString("Delete From History", comment:""), message: "", preferredStyle: .alert)
         
-        let saveAction = UIAlertAction(title: "Yes", style: .default, handler: { alert -> Void in
+        let saveAction = UIAlertAction(title: NSLocalizedString("Yes", comment:""), style: .default, handler: { alert -> Void in
 //            if self.dao.deleteObject(self.dataObj!) {
 //                print("History deleted")
 //                self.navigationController?.popViewController(animated: true)
@@ -111,7 +111,7 @@ class HistoryDetailVC: UIViewController, UITableViewDelegate, UITableViewDataSou
 //            }
         })
         
-        let cancelAction = UIAlertAction(title: "Cancel", style: .default, handler: {
+        let cancelAction = UIAlertAction(title: NSLocalizedString("Cancel", comment:""), style: .default, handler: {
             (action : UIAlertAction!) -> Void in })
         
         alertController.addAction(cancelAction)

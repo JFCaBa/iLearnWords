@@ -5,6 +5,9 @@ PODS:
   - Fabric (1.10.2)
   - IQKeyboardManagerSwift (6.4.2)
   - MKProgress (1.1.0)
+  - SyncKit/Core (0.7.5)
+  - SyncKit/CoreData (0.7.5):
+    - SyncKit/Core
 
 DEPENDENCIES:
   - Alamofire (~> 5.0.0-beta.5)
@@ -12,6 +15,7 @@ DEPENDENCIES:
   - Fabric
   - IQKeyboardManagerSwift
   - MKProgress (~> 1.1.0)
+  - SyncKit/CoreData
 
 SPEC REPOS:
   https://github.com/cocoapods/specs.git:
@@ -20,6 +24,7 @@ SPEC REPOS:
     - Fabric
     - IQKeyboardManagerSwift
     - MKProgress
+    - SyncKit
 
 SPEC CHECKSUMS:
   Alamofire: f9450d3c7f6bea2ad62e7a541c3e9b186c7991d6
@@ -27,7 +32,8 @@ SPEC CHECKSUMS:
   Fabric: 706c8b8098fff96c33c0db69cbf81f9c551d0d74
   IQKeyboardManagerSwift: 79a3ec200dfb41cb66a89b8575417b5378107c5d
   MKProgress: 260d166200323f3d991190a73ab2dc3a04b0f52f
+  SyncKit: 7fc5a00c7cd708c2b8473940f4624def8bdc11ac
 
-PODFILE CHECKSUM: 05340c5bcedaa9e52111214fb0607ff769f6248f
+PODFILE CHECKSUM: 29e786c1c3f10c599f152690393feb8bb98f30c7
 
 COCOAPODS: 1.7.5

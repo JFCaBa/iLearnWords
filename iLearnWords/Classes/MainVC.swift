@@ -45,8 +45,8 @@ class MainVC: UIViewController, TalkerDelegate, UITableViewDelegate, UITableView
         //Need to load the data in viewWillAppear because the history shown can be
         //changed in settings
         history = dao.fetchSelectedHistory()
-        if ((history?.hasWord) != nil) {
-            dataObj = history?.hasWord!.allObjects as! Array<Words>
+        if ((history?.words) != nil) {
+            dataObj = history?.words!.allObjects as! Array<Words>
             //Sort the array by the date the words were added to the database
             dataObj = dataObj.sorted(by:{ $0.date!.timeIntervalSince1970 < $1.date!.timeIntervalSince1970 })
         }

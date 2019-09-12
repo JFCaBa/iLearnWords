@@ -2,14 +2,17 @@
 //  Languages+CoreDataClass.swift
 //  
 //
-//  Created by Jose Francisco Catalá Barba on 08/09/2019.
+//  Created by Jose Catala on 12/09/2019.
 //
 //
 
 import Foundation
 import CoreData
+import SyncKit
 
 @objc(Languages)
-public class Languages: NSManagedObject {
-
+public class Languages: NSManagedObject, PrimaryKey {
+    static func primaryKey() -> String {
+        return "identifier"
+    }   
 }

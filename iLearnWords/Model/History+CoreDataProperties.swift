@@ -2,7 +2,7 @@
 //  History+CoreDataProperties.swift
 //  
 //
-//  Created by Jose Francisco Catalá Barba on 07/09/2019.
+//  Created by Jose Catala on 12/09/2019.
 //
 //
 
@@ -16,29 +16,30 @@ extension History {
         return NSFetchRequest<History>(entityName: "History")
     }
 
-    @NSManaged public var title: String?
     @NSManaged public var date: NSDate?
     @NSManaged public var isSelected: Bool
     @NSManaged public var talkOriginal: String?
-    @NSManaged public var translatedWay: String?
     @NSManaged public var talkTranslated: String?
-    @NSManaged public var hasWord: NSSet?
+    @NSManaged public var title: String?
+    @NSManaged public var translatedWay: String?
+    @NSManaged public var identifier: String?
+    @NSManaged public var words: NSSet?
 
 }
 
-// MARK: Generated accessors for hasWord
+// MARK: Generated accessors for words
 extension History {
 
-    @objc(addHasWordObject:)
-    @NSManaged public func addToHasWord(_ value: Words)
+    @objc(addWordsObject:)
+    @NSManaged public func addToWords(_ value: Words)
 
-    @objc(removeHasWordObject:)
-    @NSManaged public func removeFromHasWord(_ value: Words)
+    @objc(removeWordsObject:)
+    @NSManaged public func removeFromWords(_ value: Words)
 
-    @objc(addHasWord:)
-    @NSManaged public func addToHasWord(_ values: NSSet)
+    @objc(addWords:)
+    @NSManaged public func addToWords(_ values: NSSet)
 
-    @objc(removeHasWord:)
-    @NSManaged public func removeFromHasWord(_ values: NSSet)
+    @objc(removeWords:)
+    @NSManaged public func removeFromWords(_ values: NSSet)
 
 }

@@ -84,7 +84,7 @@ class CardsGameVC: UIViewController, TalkerDelegate {
 
 extension CardsGameVC {
     private func loadData() {
-        dataObj = (history!.hasWord?.allObjects as! Array<Words>)
+        dataObj = (history!.words?.allObjects as! Array<Words>)
         max = dataObj.count - 1
         btnNextDidTap(UIButton())
     }

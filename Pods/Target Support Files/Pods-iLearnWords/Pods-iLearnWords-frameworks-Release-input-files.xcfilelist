@@ -2,3 +2,4 @@ ${PODS_ROOT}/Target Support Files/Pods-iLearnWords/Pods-iLearnWords-frameworks.s
 ${BUILT_PRODUCTS_DIR}/Alamofire/Alamofire.framework
 ${BUILT_PRODUCTS_DIR}/IQKeyboardManagerSwift/IQKeyboardManagerSwift.framework
 ${BUILT_PRODUCTS_DIR}/MKProgress/MKProgress.framework
+${BUILT_PRODUCTS_DIR}/SyncKit/SyncKit.framework

@@ -2,7 +2,7 @@
 //  Languages+CoreDataProperties.swift
 //  
 //
-//  Created by Jose Francisco Catalá Barba on 08/09/2019.
+//  Created by Jose Catala on 12/09/2019.
 //
 //
 
@@ -17,8 +17,9 @@ extension Languages {
     }
 
     @NSManaged public var sayOriginal: String?
+    @NSManaged public var sayTranslate: String?
     @NSManaged public var title: String?
     @NSManaged public var way: String?
-    @NSManaged public var sayTranslate: String?
+    @NSManaged public var identifier: String?
 
 }

@@ -86,6 +86,7 @@ class MainVC: UIViewController, TalkerDelegate, UITableViewDelegate, UITableView
         let word: Words = dataObj[indexPath.row]
         cell.textLabel?.text = word.original
         cell.detailTextLabel?.text = word.translated
+        cell.backgroundColor = bgCellColor
         return cell
     }
     

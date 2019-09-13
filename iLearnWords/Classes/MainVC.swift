@@ -32,25 +32,23 @@ class MainVC: UIViewController, TalkerDelegate, UITableViewDelegate, UITableView
         tableView.delegate = self
         tableView.dataSource = self
         tableView.tableFooterView = UIView.init(frame: CGRect.zero)
+        
+        loadData()
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(true)
+        
         //Need to load the title in viewWillAppear because it can change
         //depending on the language selection in settings
-        title = (UserDefaults.standard.value(forKey: UserDefaults.keys.TranslateWay) as! String)
-        //Assign the delegate in viewWillAppear because the talk class is
-        //also used in the Cards game
-        talk.delegate = self
-        //Need to load the data in viewWillAppear because the history shown can be
-        //changed in settings
-        history = dao.fetchSelectedHistory()
-        if ((history?.hasWord) != nil) {
-            dataObj = history?.hasWord!.allObjects as! Array<Words>
-            //Sort the array by the date the words were added to the database
-            dataObj = dataObj.sorted(by:{ $0.date!.timeIntervalSince1970 < $1.date!.timeIntervalSince1970 })
+        if let language = dao.fetchSelectedLanguage() {
+            title = language.way
         }
-        tableView.reloadData()
+        else {
+            title = ""
+        }
+        
+        loadData()
     }
     
     override func viewWillDisappear(_ animated: Bool) {
@@ -102,7 +100,19 @@ class MainVC: UIViewController, TalkerDelegate, UITableViewDelegate, UITableView
         isOriginal = true
         startTalking(word.original!)
     }
-
+    
+    //Set the history title as Title in the header section
+    func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
+        if let txt = history?.title {
+            return txt
+        }
+        return ""
+    }
+    
+    func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+        return 30
+    }
+    
     //MARK: - Actions
     @IBAction func btnSettingsDidTap(_ sender: Any) {
         self.performSegue(withIdentifier: "gotoSettings", sender: self)
@@ -128,6 +138,7 @@ class MainVC: UIViewController, TalkerDelegate, UITableViewDelegate, UITableView
     
     @IBAction func btnDeleteDidTap(_ sender: Any) {
         dataObj.removeAll()
+        history = nil
         tableView.reloadData()
     }
     
@@ -148,7 +159,7 @@ class MainVC: UIViewController, TalkerDelegate, UITableViewDelegate, UITableView
             btn.setTitle(NSLocalizedString("STOP", comment:""), for: .normal)
             let word = dataObj[talkIndex]
             isOriginal = false
-            startTalking(word.original!, talkLanguage: history!.talkOriginal!)
+            startTalking(word.original!, talkLanguage: (history?.language!.sayOriginal)!)
         }
         else{
             if talk.stopTalk() || !talk.isSpeaking(){
@@ -162,7 +173,7 @@ class MainVC: UIViewController, TalkerDelegate, UITableViewDelegate, UITableView
         if sender.count > index {
             let wordObj = sender[index]
             if let translatedWord = dao.fetchTranslatedForWord(word: wordObj) {
-                if let wordModel = self.dao.saveWordObjectFrom(original: wordObj, translated: translatedWord){
+                if let wordModel = self.dao.wordObjectFrom(original: wordObj, translated: translatedWord){
                     //Add the word to the array
                     self.dataObj.append(wordModel)
                     self.tableView.reloadData()
@@ -174,7 +185,7 @@ class MainVC: UIViewController, TalkerDelegate, UITableViewDelegate, UITableView
             else {
                 network.completionBlock =  { (response, error) -> Void in
                     if nil == error {
-                        if let wordModel = self.dao.saveWordObjectFrom(original: wordObj, translated: response!){
+                        if let wordModel = self.dao.wordObjectFrom(original: wordObj, translated: response!){
                             //Add the word to the array
                             self.dataObj.append(wordModel)
                             self.tableView.reloadData()
@@ -212,6 +223,26 @@ class MainVC: UIViewController, TalkerDelegate, UITableViewDelegate, UITableView
 }
 
 extension MainVC {
+    func loadData() {
+        //Assign the delegate in viewWillAppear because the talk class is
+        //also used in the Cards game
+        talk.delegate = self
+        
+        //Need to load the data in viewWillAppear because the history to be shown can
+        //change in settings
+        if let result =  dao.fetchSelectedHistory() {
+            history = result
+            dataObj = result.words?.allObjects as! Array<Words>
+            //Sort the array by the date the words were added to the database
+            dataObj = dataObj.sorted(by:{ $0.date!.timeIntervalSince1970 < $1.date!.timeIntervalSince1970 })
+        }
+        else {
+            dataObj = []
+        }
+        
+        tableView.reloadData()
+    }
+    
     //MARK: TalkController delegate
     func didFinishTalk() {
         // If tap on the table cell the btn is disable to avoid tap again on it until the play finish is notified here
@@ -243,7 +274,7 @@ extension MainVC {
             }
             
             if let str = word.original {
-                startTalking(str, talkLanguage: history!.talkOriginal!)
+                startTalking(str, talkLanguage: (history?.language!.sayOriginal)!)
             }
             let repeatSettings = UserDefaults.standard.bool(forKey: UserDefaults.keys.RepeatOriginal)
             if !repeatSettings || repeatCounter == 3{
@@ -255,7 +286,7 @@ extension MainVC {
         }
         else {
             if let str = word.translated {
-                startTalking(str, talkLanguage: history!.talkTranslated!)
+                startTalking(str, talkLanguage: (history?.language!.sayTranslate)!)
             }
             talkIndex += 1 //Increment the index to change the row
             isOriginal = true //The nextone to be read will be the original one
@@ -264,7 +295,7 @@ extension MainVC {
     }
     
     //MARK: Save history
-    private func saveHistory(_ data: Array<Words>) {
+    private func saveHistory(_ words: Array<Words>) {
         let alertController = UIAlertController(title: NSLocalizedString("Save List", comment: ""), message: "", preferredStyle: .alert)
         alertController.addTextField { (textField : UITextField!) -> Void in
             textField.placeholder = NSLocalizedString("Enter a List Name", comment:"")
@@ -273,12 +304,21 @@ extension MainVC {
         let saveAction = UIAlertAction(title: NSLocalizedString("Save", comment:""), style: .default, handler: { alert -> Void in
             if let textField = alertController.textFields?[0] {
                 if textField.text!.count > 0 {
-                    let title = textField.text ?? "Utitled"
-                    if self.dao.saveHistory(data, title: title) {
-                       print("\(title)")
+                    guard let title = textField.text else {
+                        return
+                    }
+                    if let ret = self.dao.saveArrayOfWords(words) {
+                        if let hist = self.dao.saveHistory(ret, title: title) {
+                            print("\(title)")
+                            self.history = hist
+                            self.tableView.reloadData()
+                        }
+                        else {
+                            print("Error Saving History.")
+                        }
                     }
                     else {
-                        print("Error Saving History.")
+                        print("Error Saving Words.")
                     }
                 }
             }

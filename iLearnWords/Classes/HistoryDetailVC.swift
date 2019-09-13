@@ -23,7 +23,7 @@ class HistoryDetailVC: UIViewController, UITableViewDelegate, UITableViewDataSou
         tableView.delegate = self
         tableView.dataSource = self
         tableView.tableFooterView = UIView.init(frame: CGRect.zero)
-        dataObj = (history!.hasWord?.allObjects as! Array<Words>)
+        dataObj = (history!.words?.allObjects as! Array<Words>)
         //Sort the array by the date the words were added to the database
         dataObj = dataObj.sorted(by:{ $0.date!.timeIntervalSince1970 < $1.date!.timeIntervalSince1970 })
     }

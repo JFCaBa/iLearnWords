@@ -88,18 +88,6 @@ extension AppDelegate{
         user.set(0.33, forKey: UserDefaults.keys.VoiceSpeed)
         user.set(false, forKey: UserDefaults.keys.RepeatOriginal)
         user.set(true, forKey: UserDefaults.keys.PlayInLoop)
-        if let language = Locale.current.languageCode {
-            if language.contains("ru") {
-                user.set("en-ru", forKey: UserDefaults.keys.TranslateWay)
-                user.set("en_GB", forKey: UserDefaults.keys.TalkOriginal)
-                user.set("ru_RU", forKey: UserDefaults.keys.TalkTranslate)
-            }
-            else {
-                user.set("ru-en", forKey: UserDefaults.keys.TranslateWay)
-                user.set("ru_RU", forKey: UserDefaults.keys.TalkOriginal)
-                user.set("en_GB", forKey: UserDefaults.keys.TalkTranslate)
-            }
-        }
         
         //Colors
         user.setColor(color: UIColor.groupTableViewBackground, forKey: UserDefaults.keys.CellSelectedBackgroundColor)
@@ -108,9 +96,21 @@ extension AppDelegate{
         UserDefaults.standard.synchronize()
         
         /** Create the Languages entity content */
-        let langDic = [["title":"Russian to English","sayOriginal":"ru_RU","sayTranslate":"en_GB","way":"ru-en"],
-                         ["title":"English to Russian","sayOriginal":"en_GB","sayTranslate":"ru_RU","way":"en-ru"]]
-        saveInCoreDataWith(array: langDic)
+        let langDic = [["title":"Russian to English",
+                        "sayOriginal":"ru_RU",
+                        "sayTranslate":"en_GB",
+                        "way":"ru-en",
+                        "recordID":UUID().uuidString,
+                        "isSelected":"1"],
+                       ["title":"English to Russian",
+                        "sayOriginal":"en_GB",
+                        "sayTranslate":"ru_RU",
+                        "way":"en-ru",
+                        "recordID":UUID().uuidString,
+                        "isSelected":"0"]
+            ]
+            
+        saveInCoreDataWith(array: langDic )
     }
     
     //MARK: - Helper functions to Store the defaults values into the Languages Entity
@@ -121,6 +121,8 @@ extension AppDelegate{
             languageEntity.sayOriginal = dictionary["sayOriginal"]
             languageEntity.sayTranslate = dictionary["sayTranslate"]
             languageEntity.way = dictionary["way"]
+            languageEntity.recordID = dictionary["recordID"]
+            languageEntity.isSelected = dictionary["isSelected"] == "1" ? true : false
             return languageEntity
         }
         return nil

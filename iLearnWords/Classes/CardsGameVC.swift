@@ -19,7 +19,6 @@ class CardsGameVC: UIViewController, TalkerDelegate {
     private var talk = TalkController.shared
     public var history: History?
     var dataObj: [Words] = []
-    var max = 0
     var reverse: Bool = false
     
     //MARK: Lifecycle
@@ -32,7 +31,8 @@ class CardsGameVC: UIViewController, TalkerDelegate {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(true)
         talk.delegate = self
-        loadData()
+        dataObj = (history!.words?.allObjects as! Array<Words>)
+        btnNextDidTap(UIButton())
     }
     
     //MARK: - Actions
@@ -41,12 +41,10 @@ class CardsGameVC: UIViewController, TalkerDelegate {
         guard let original = lblOriginal.text else { return }
         guard let translated = lblTranslated.text else { return }
         
-        if nil != sender {
-            let number = Int.random(in: 0 ..< max)
-            let word = dataObj[number]
-            
-            lblOriginal.text = reverse ? word.translated : word.original
-            lblTranslated.text = reverse ? word.original :  word.translated
+        if dataObj.count > 0 {
+            let randomWord = dataObj.randomElement()
+            lblOriginal.text = reverse ? randomWord!.translated : randomWord!.original
+            lblTranslated.text = reverse ? randomWord!.original :  randomWord!.translated
         }
         else if reverse {
             lblOriginal.text = translated
@@ -69,7 +67,7 @@ class CardsGameVC: UIViewController, TalkerDelegate {
             return
         }
         
-        guard  let lang = reverse ? history?.talkTranslated : history?.talkOriginal else {
+        guard  let lang = reverse ? history?.language!.sayTranslate : history?.language!.sayOriginal else {
             return
         }
         
@@ -83,12 +81,7 @@ class CardsGameVC: UIViewController, TalkerDelegate {
 }
 
 extension CardsGameVC {
-    private func loadData() {
-        dataObj = (history!.hasWord?.allObjects as! Array<Words>)
-        max = dataObj.count - 1
-        btnNextDidTap(UIButton())
-    }
-    
+
     //MARK: TalkController delegate
     func didFinishTalk() {
        btnPlayOutlet?.isEnabled = true

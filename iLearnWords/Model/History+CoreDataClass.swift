@@ -2,7 +2,7 @@
 //  History+CoreDataClass.swift
 //  
 //
-//  Created by Jose Francisco Catalá Barba on 07/09/2019.
+//  Created by Jose Catala on 13/09/2019.
 //
 //
 

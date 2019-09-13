@@ -15,7 +15,7 @@ class HistoryVC: UIViewController, UITableViewDelegate, UITableViewDataSource {
     //MARK: - Object instances
     private let dao: DAOController = DAOController()
     //MARK: - Ivars
-    var dataArray: [History] = []
+    var dataArray: Array<History> = []
     var index: Int = 0
     var objToPass: Array<Words>?
     
@@ -43,6 +43,8 @@ class HistoryVC: UIViewController, UITableViewDelegate, UITableViewDataSource {
         return dataArray.count
     }
     
+    let bgCellSelectedColor =  UserDefaults.standard.colorForKey(key: UserDefaults.keys.CellSelectedBackgroundColor)
+    let bgCellColor = UserDefaults.standard.colorForKey(key: UserDefaults.keys.CellBackgroundColor)
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell: UITableViewCell = {
             guard let cell = tableView.dequeueReusableCell(withIdentifier: "Cell") else {
@@ -51,6 +53,7 @@ class HistoryVC: UIViewController, UITableViewDelegate, UITableViewDataSource {
             }
             return cell
         }()
+        
         let obj = dataArray[indexPath.row]
         if let title = obj.title {
             cell.textLabel?.text = title
@@ -59,7 +62,14 @@ class HistoryVC: UIViewController, UITableViewDelegate, UITableViewDataSource {
             cell.textLabel?.text = "Untitled"
         }
         
-        cell.detailTextLabel?.text = obj.translatedWay
+        if obj.isSelected {
+            cell.backgroundColor = bgCellSelectedColor
+        }
+        else {
+            cell.backgroundColor = bgCellColor
+        }
+        
+        cell.detailTextLabel?.text = obj.language?.title
 
         return cell
     }
@@ -79,6 +89,9 @@ class HistoryVC: UIViewController, UITableViewDelegate, UITableViewDataSource {
             // handle delete (by removing the data from your array and updating the tableview)
             let obj = dataArray[indexPath.row]
             if dao.deleteObject(obj) {
+                if let index = dataArray.firstIndex(of: obj) {
+                    dataArray.remove(at: index)
+                }
                 tableView.reloadData()
             }
         }
@@ -87,7 +100,7 @@ class HistoryVC: UIViewController, UITableViewDelegate, UITableViewDataSource {
 
 extension HistoryVC {
     private func loadData() {
-        dataArray = dao.fetchAll("History")! as! [History]
+        dataArray = dao.fetchAll()
         tableView.reloadData()
     }
 }

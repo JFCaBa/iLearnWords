@@ -2,7 +2,7 @@
 //  Words+CoreDataClass.swift
 //  
 //
-//  Created by Jose Catala on 09/09/2019.
+//  Created by Jose Catala on 13/09/2019.
 //
 //
 

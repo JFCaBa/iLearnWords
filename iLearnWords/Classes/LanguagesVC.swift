@@ -34,7 +34,6 @@ class LanguagesVC: UIViewController, UITableViewDelegate, UITableViewDataSource 
     
     let bgCellSelectedColor =  UserDefaults.standard.colorForKey(key: UserDefaults.keys.CellSelectedBackgroundColor)
     let bgCellColor = UserDefaults.standard.colorForKey(key: UserDefaults.keys.CellBackgroundColor)
-    let way = UserDefaults.keys.TranslateWay
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell: UITableViewCell = {
             guard let cell = tableView.dequeueReusableCell(withIdentifier: "Cell") else {
@@ -45,7 +44,7 @@ class LanguagesVC: UIViewController, UITableViewDelegate, UITableViewDataSource 
         }()
         let obj = dataArray[indexPath.row]
         cell.textLabel?.text = obj.title
-        if way == obj.way {
+        if obj.isSelected {
             cell.backgroundColor = bgCellSelectedColor
         }
         else {
@@ -57,9 +56,8 @@ class LanguagesVC: UIViewController, UITableViewDelegate, UITableViewDataSource 
     //MARK: - Table view delegate
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let obj = dataArray[indexPath.row]
-        UserDefaults.standard.set(obj.way, forKey: UserDefaults.keys.TranslateWay)
-        UserDefaults.standard.set(obj.sayOriginal, forKey: UserDefaults.keys.TalkOriginal)
-        UserDefaults.standard.synchronize()
+        _ = dao.updateSelectedLanguage(obj)
+        loadData()
         tableView.reloadData()
     }
     
@@ -80,7 +78,7 @@ class LanguagesVC: UIViewController, UITableViewDelegate, UITableViewDataSource 
 
 extension LanguagesVC {
     private func loadData() {
-        dataArray = dao.fetchLanguages()!
+        dataArray = dao.fetchAll()
         tableView.reloadData()
     }
 }

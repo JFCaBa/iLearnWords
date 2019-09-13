@@ -21,6 +21,7 @@
 		6DCDEFF5231F9DCD00744E65 /* LanguagesVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6DCDEFF4231F9DCD00744E65 /* LanguagesVC.swift */; };
 		6DDEF2B623240D29007C9C77 /* WordsEditVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6DDEF2B523240D29007C9C77 /* WordsEditVC.swift */; };
 		6DDEF2B823251697007C9C77 /* UserDefaults+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6DDEF2B723251697007C9C77 /* UserDefaults+Extension.swift */; };
+		6DDEF2BA232C0897007C9C77 /* CloudKitController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6DDEF2B9232C0897007C9C77 /* CloudKitController.swift */; };
 		6DE21ECC232151A400CA24D9 /* HistoryVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6DE21ECB232151A400CA24D9 /* HistoryVC.swift */; };
 		6DE21ECE232153F800CA24D9 /* HistoryDetailVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6DE21ECD232153F800CA24D9 /* HistoryDetailVC.swift */; };
 		6DF52795231C5D1600595B26 /* NetworkController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6DF52794231C5D1600595B26 /* NetworkController.swift */; };
@@ -49,6 +50,7 @@
 		6DCDEFF4231F9DCD00744E65 /* LanguagesVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LanguagesVC.swift; sourceTree = "<group>"; };
 		6DDEF2B523240D29007C9C77 /* WordsEditVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WordsEditVC.swift; sourceTree = "<group>"; };
 		6DDEF2B723251697007C9C77 /* UserDefaults+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UserDefaults+Extension.swift"; sourceTree = "<group>"; };
+		6DDEF2B9232C0897007C9C77 /* CloudKitController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CloudKitController.swift; sourceTree = "<group>"; };
 		6DE21ECB232151A400CA24D9 /* HistoryVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HistoryVC.swift; sourceTree = "<group>"; };
 		6DE21ECD232153F800CA24D9 /* HistoryDetailVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HistoryDetailVC.swift; sourceTree = "<group>"; };
 		6DF52794231C5D1600595B26 /* NetworkController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NetworkController.swift; sourceTree = "<group>"; };
@@ -111,6 +113,7 @@
 				6DF52794231C5D1600595B26 /* NetworkController.swift */,
 				6D36E191231BD49200C88F0A /* TalkController.swift */,
 				6DA5E4D6231E53F0004732CF /* DAOController.swift */,
+				6DDEF2B9232C0897007C9C77 /* CloudKitController.swift */,
 			);
 			path = Services;
 			sourceTree = "<group>";
@@ -314,6 +317,7 @@
 				6DE21ECC232151A400CA24D9 /* HistoryVC.swift in Sources */,
 				6D36E180231BC09A00C88F0A /* MainVC.swift in Sources */,
 				6DDEF2B623240D29007C9C77 /* WordsEditVC.swift in Sources */,
+				6DDEF2BA232C0897007C9C77 /* CloudKitController.swift in Sources */,
 				6D36E17E231BC09A00C88F0A /* AppDelegate.swift in Sources */,
 				6DE21ECE232153F800CA24D9 /* HistoryDetailVC.swift in Sources */,
 				6D22C6EC231D4EF8009DC8F7 /* SettingsTVC.swift in Sources */,

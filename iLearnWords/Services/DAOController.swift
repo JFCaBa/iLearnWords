@@ -9,19 +9,12 @@
 import UIKit
 import CoreData
 
-protocol LangProtocol {
-     func fetchAll() -> Array<Languages>
-}
-
-protocol HistProtocol {
-     func fetchAll() -> Array<History>
-}
-
-protocol WordProtocol {
-     func fetchAll() -> Array<Words>
-}
-
 public class DAOController: NSObject {
+    
+    public override init() {
+        super.init()
+        testCloudKit()
+    }
     
     //MARK: - Private functions
     /// To get the managedContext to be used in the access to the database
@@ -393,3 +386,10 @@ public class DAOController: NSObject {
     }
 }
 
+extension DAOController {
+    func testCloudKit() {
+        let cloud: CloudKitController = CloudKitController()
+        
+        _ = cloud.fetchLanguages()
+    }
+}

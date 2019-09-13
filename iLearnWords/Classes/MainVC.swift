@@ -159,7 +159,8 @@ class MainVC: UIViewController, TalkerDelegate, UITableViewDelegate, UITableView
             btn.setTitle(NSLocalizedString("STOP", comment:""), for: .normal)
             let word = dataObj[talkIndex]
             isOriginal = false
-            startTalking(word.original!, talkLanguage: (history?.language!.sayOriginal)!)
+            let language = dao.fetchSelectedLanguage()
+            startTalking(word.original!, talkLanguage: language!.sayOriginal!)
         }
         else{
             if talk.stopTalk() || !talk.isSpeaking(){
@@ -286,7 +287,8 @@ extension MainVC {
         }
         else {
             if let str = word.translated {
-                startTalking(str, talkLanguage: (history?.language!.sayTranslate)!)
+                let language = dao.fetchSelectedLanguage()
+                startTalking(str, talkLanguage: language!.sayTranslate!)
             }
             talkIndex += 1 //Increment the index to change the row
             isOriginal = true //The nextone to be read will be the original one

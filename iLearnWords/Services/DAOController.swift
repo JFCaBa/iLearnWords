@@ -237,7 +237,6 @@ public class DAOController: NSObject {
         return retArray
     }
     
-
     /// To save a new word in the table
     ///
     /// - Parameters:
@@ -267,43 +266,22 @@ public class DAOController: NSObject {
     
     
     public func wordObjectFrom(original: String, translated: String) -> Words? {
-        guard let appDelegate = UIApplication.shared.delegate as? AppDelegate else {
-            return nil
-        }
-        
-        let managedContext = appDelegate.persistentContainer.viewContext
-        let word = Words(context: managedContext)
+        let managedContext = context()
+        let word = Words(context: managedContext!)
         word.original = original
         word.translated = translated
         word.date = Date()
         word.recordID = UUID().uuidString
         return word
-//        do {
-//            try managedContext.save()
-//            return word
-//        } catch let error as NSError {
-//            print("Could not save Word. \(error), \(error.userInfo)")
-//            return nil
-//        }
     }
     
-    //MARK: - Save methods
-    
-
-    
-    //MARK: - Fetch methods
     public func fetchTranslatedForWord(word: String) -> String? {
-        
-        guard let appDelegate = UIApplication.shared.delegate as? AppDelegate else {
-            return nil
-        }
-        
-        let managedContext = appDelegate.persistentContainer.viewContext
+        let managedContext = context()
         let fetchRequest = NSFetchRequest<NSManagedObject>(entityName: "Words")
         fetchRequest.predicate = NSPredicate(format: "original = %@", word)
-
+        
         do {
-            let result = try managedContext.fetch(fetchRequest)
+            let result = try managedContext!.fetch(fetchRequest)
             let wordDb = result.first?.value(forKey: "translated") as? String
             return wordDb
             
@@ -312,57 +290,14 @@ public class DAOController: NSObject {
             return nil
         }
     }
-
     
-    public func fetchLanguages() -> Array<Languages>? {
-        guard let appDelegate = UIApplication.shared.delegate as? AppDelegate else {
-            return nil
-        }
-        
-        let managedContext = appDelegate.persistentContainer.viewContext
-        let fetchRequest = NSFetchRequest<NSManagedObject>(entityName: "Languages")
-        
-        do {
-            let result = try managedContext.fetch(fetchRequest)
-            return (result as! Array<Languages>)
-        } catch let error as NSError {
-            print("Could not fetch. \(error), \(error.userInfo)")
-            return nil
-        }
-    }
-    
-    public func fetchCards() -> Array<Words>? {
-        guard let appDelegate = UIApplication.shared.delegate as? AppDelegate else {
-            return nil
-        }
-        
-        let managedContext = appDelegate.persistentContainer.viewContext
-        let fetchRequest = NSFetchRequest<NSManagedObject>(entityName: "History")
-        let translateWay = UserDefaults.standard.value(forKey: UserDefaults.keys.TranslateWay) as! String
-        fetchRequest.predicate = NSPredicate(format: "translatedWay == %@ && isSelected == %@", translateWay, NSNumber(value: true))
-        
-        do {
-            let result = try managedContext.fetch(fetchRequest)
-            let history = result.first as! History
-            let toReturn = history.words!.allObjects as! Array<Words>
-            return toReturn
-        } catch let error as NSError {
-            print("Could not fetch. \(error), \(error.userInfo)")
-            return nil
-        }
-    }
     
     //MARK: - Delete methods
     public func deleteObject(_ object: NSManagedObject) -> Bool {
-        guard let appDelegate = UIApplication.shared.delegate as? AppDelegate else {
-            return false
-        }
-        
-        let managedContext = appDelegate.persistentContainer.viewContext
-        managedContext.delete(object)
-        
+        let managedContext = context()
+        managedContext!.delete(object)
         do {
-            try managedContext.save()
+            try managedContext!.save()
             return true
             
         } catch let error as NSError {
@@ -373,15 +308,10 @@ public class DAOController: NSObject {
     
     //MARK: - Update methods
     public func updateObject(_ object: NSManagedObject) -> Bool {
-        guard let appDelegate = UIApplication.shared.delegate as? AppDelegate else {
-            return false
-        }
-        
-        let managedContext = appDelegate.persistentContainer.viewContext
-        managedContext.insert(object)
-        
+        let managedContext = context()
+        managedContext!.insert(object)
         do {
-            try managedContext.save()
+            try managedContext!.save()
             return true
             
         } catch let error as NSError {
@@ -391,20 +321,15 @@ public class DAOController: NSObject {
     }
     
     public func unSelectHistory() -> Bool {
-        guard let appDelegate = UIApplication.shared.delegate as? AppDelegate else {
-            return false
-        }
-        
-        let managedContext = appDelegate.persistentContainer.viewContext
+        let managedContext = context()
         let fetchRequest = NSFetchRequest<NSManagedObject>(entityName: "History")
         fetchRequest.predicate = NSPredicate(format: "isSelected == %@",NSNumber(value: true))
-        
         do {
-            let result = try managedContext.fetch(fetchRequest)
+            let result = try managedContext!.fetch(fetchRequest)
             if result.count > 0 {
                 for history in result.compactMap({ $0 as? History }) {
                     history.isSelected = false
-                    try managedContext.save()
+                    try managedContext!.save()
                 }
             }
 
@@ -416,49 +341,18 @@ public class DAOController: NSObject {
         }
     }
     
-    public func updateHistory(_ history: History) -> Bool {
-        guard let appDelegate = UIApplication.shared.delegate as? AppDelegate else {
-            return false
-        }
-        
-        let managedContext = appDelegate.persistentContainer.viewContext
-        let fetchRequest = NSFetchRequest<NSManagedObject>(entityName: "History")
-        fetchRequest.predicate = NSPredicate(format: "date == %@", history.date! as NSDate)
-        
-        do {
-            let result = try managedContext.fetch(fetchRequest)
-            if result.count > 0 {
-                let hist = result.first as! History
-                hist.isSelected = true
-                try managedContext.save()
-                return true
-            }
-            else {
-                return false
-            }
-            
-        } catch let error as NSError {
-            print("Could not fetch. \(error), \(error.userInfo)")
-            return false
-        }
-    }
-    
     public func updateWord(original: String, translated: String) -> Bool {
-        guard let appDelegate = UIApplication.shared.delegate as? AppDelegate else {
-            return false
-        }
-        
-        let managedContext = appDelegate.persistentContainer.viewContext
+        let managedContext = context()
         let fetchRequest = NSFetchRequest<NSManagedObject>(entityName: "Words")
         fetchRequest.predicate = NSPredicate(format: "original == %@ && translated == %@", original,translated)
         
         do {
-            let result = try managedContext.fetch(fetchRequest)
+            let result = try managedContext!.fetch(fetchRequest)
             if result.count > 0 {
                 let word = result.first as! Words
                 word.original = original
                 word.translated = translated
-                try managedContext.save()
+                try managedContext!.save()
                 return true
             }
             else {
@@ -473,14 +367,10 @@ public class DAOController: NSObject {
     
     //MARK: - Aux methods
     public func numberOfRecords(_ entity: String) -> Int {
-        guard let appDelegate = UIApplication.shared.delegate as? AppDelegate else {
-            return 0
-        }
-        
-        let managedContext = appDelegate.persistentContainer.viewContext
+        let managedContext = context()
         let fetchRequest = NSFetchRequest<NSManagedObject>(entityName: entity)
         do {
-            let count = try managedContext.count(for: fetchRequest)
+            let count = try managedContext!.count(for: fetchRequest)
             return count
         }
         catch let error as NSError {
@@ -489,18 +379,12 @@ public class DAOController: NSObject {
         }
     }
     public func cleanData(_ entity: String) -> Bool{
-        guard let appDelegate = UIApplication.shared.delegate as? AppDelegate else {
-            return false
-        }
-        
-        let managedContext = appDelegate.persistentContainer.viewContext
-        
+        let managedContext = context()
         let fetchRequest = NSFetchRequest<NSManagedObject>(entityName: entity)
         let deleteRequest = NSBatchDeleteRequest(fetchRequest: fetchRequest as! NSFetchRequest<NSFetchRequestResult>)
-        
         do {
-            try managedContext.execute(deleteRequest)
-            try managedContext.save()
+            try managedContext!.execute(deleteRequest)
+            try managedContext!.save()
             return true
         } catch let error as NSError {
             print("Could not delete. \(error), \(error.userInfo)")

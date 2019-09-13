@@ -67,22 +67,15 @@ class HistoryDetailVC: UIViewController, UITableViewDelegate, UITableViewDataSou
     //MARK: - Actions
     @IBAction func switchDidTap(_ sender: Any) {
         let alertController = UIAlertController(title: NSLocalizedString("Switch to this History", comment:""), message: "", preferredStyle: .alert)
-        
         let yesAction = UIAlertAction(title: NSLocalizedString("Yes", comment:""), style: .default, handler: { alert -> Void in
-            //Unselect the previous history
-            if self.dao.unSelectHistory() {
-                //Set the isSelected property to yes
-                self.history?.isSelected = true
-                if self.dao.updateHistory(self.history!) {
-                    //Back to the main screen
-                    self.navigationController?.popToRootViewController(animated: true)
-                }
-                else {
-                    print("Error: The History couldn't be selected")
-                }
+            //Set the isSelected property to yes
+            self.history?.isSelected = true
+            if self.dao.updateSelectedHistory(self.history!) {
+                //Back to the main screen
+                self.navigationController?.popToRootViewController(animated: true)
             }
             else {
-                print("Error: The History couldn't be unselected")
+                print("Error: The History couldn't be selected")
             }
         })
         

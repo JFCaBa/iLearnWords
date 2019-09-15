@@ -23,8 +23,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         IQKeyboardManager.shared.enable = true
         
         if (UserDefaults.standard.value(forKey: UserDefaults.keys.VoiceSpeed) == nil){
-            createDefaultValues()
+            //createDefaultValues()
         }
+        createDefaultValues()
         
         return true
     }
@@ -97,7 +98,7 @@ extension AppDelegate{
         
         /** Create the Languages entity content */
         let dao: DAOController = DAOController()
-        dao.fetchLanguagesFromCloudKit()
+        dao.synchronizeData()
     }
 }
 

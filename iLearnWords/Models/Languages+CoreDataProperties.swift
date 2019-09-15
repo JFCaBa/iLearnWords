@@ -9,7 +9,6 @@
 import Foundation
 import CoreData
 
-
 extension Languages {
 
     @nonobjc public class func fetchRequest() -> NSFetchRequest<Languages> {
@@ -17,13 +16,13 @@ extension Languages {
     }
 
     @NSManaged public var isSelected: Bool
-    @NSManaged public var recordID: NSData?
+    @NSManaged public var recordID: Data?
     @NSManaged public var sayOriginal: String?
     @NSManaged public var sayTranslated: String?
     @NSManaged public var title: String?
     @NSManaged public var way: String?
     @NSManaged public var recordName: String?
-    @NSManaged public var lastUpdate: NSDate?
+    @NSManaged public var lastUpdate: Date?
     @NSManaged public var history: NSSet?
 
 }

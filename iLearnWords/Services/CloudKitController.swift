@@ -38,23 +38,12 @@ class CloudKitController {
         var retArray: Array<Languages> = []
         privateDB.perform(query, inZoneWith: nil) { records, error in
             guard let languages = records else { return }
-            //Use the records..
-            
+            //Iterate the records..
             for (_ ,element) in (languages.enumerated()) {
-                let lang = Languages(context: contextManager)
-                do {
-                    lang.recordID = try NSKeyedArchiver.archivedData(withRootObject: element.recordID, requiringSecureCoding: false)
-                    lang.recordName = element.recordID.recordName
-                    lang.sayOriginal = element["sayOriginal"] as? String
-                    lang.sayTranslated = element["sayTranslated"] as? String
-                    lang.title = element["title"] as? String
-                    lang.way = element["way"] as? String
-                    lang.lastUpdate = element["modificationDate"] as? Date
-                    lang.isSelected = element["isSelected"] as! Bool
-                    retArray.append(lang)
-                }
-                catch {
-                    print("Error fetching languages from CloudKit")
+                DispatchQueue.main.async {
+                    let lang = Languages(context: contextManager)
+                    let managed = lang.recordToManagedObject(element) as! Languages
+                    retArray.append(managed)
                 }
             }
             self.fetchCompletion?(retArray)
@@ -63,25 +52,16 @@ class CloudKitController {
     
     func fetchHistory(_ contextManager: NSManagedObjectContext) {
         let predicate = NSPredicate(value: true)
-        let query = CKQuery(recordType: "Languages", predicate: predicate)
+        let query = CKQuery(recordType: "History", predicate: predicate)
         var retArray: Array<History> = []
         privateDB.perform(query, inZoneWith: nil) { records, error in
             guard let history = records else { return }
-            //Use the records..
+            //Iterate the records..
             for (_ ,element) in (history.enumerated()) {
-                let hist = History(context: contextManager)
-                do {
-                    hist.recordID = try NSKeyedArchiver.archivedData(withRootObject: element.recordID, requiringSecureCoding: false)
-                    hist.recordName = element.recordID.recordName
-                    hist.language = element["language"] as? Languages
-                    hist.words = element["words"] as? NSSet
-                    hist.title = element["title"] as? String
-                    hist.lastUpdate = element["modificationDate"] as? Date
-                    hist.isSelected = element["isSelected"] as! Bool
-                    retArray.append(hist)
-                }
-                catch {
-                    print("Error fetching languages from CloudKit")
+                DispatchQueue.main.async {
+                    let hist = History(context: contextManager)
+                    let managed = hist.recordToManagedObject(element) as! History
+                    retArray.append(managed)
                 }
             }
             self.fetchCompletion?(retArray)
@@ -90,24 +70,16 @@ class CloudKitController {
     
     func fetchWords(_ contextManager: NSManagedObjectContext) {
         let predicate = NSPredicate(value: true)
-        let query = CKQuery(recordType: "Languages", predicate: predicate)
+        let query = CKQuery(recordType: "Words", predicate: predicate)
         var retArray: Array<Words> = []
         privateDB.perform(query, inZoneWith: nil) { records, error in
             guard let words = records else { return }
-            //Use the records..
+            //Iterate the records..
             for (_ ,element) in (words.enumerated()) {
-                let word = Words(context: contextManager)
-                do {
-                    word.recordID = try NSKeyedArchiver.archivedData(withRootObject: element.recordID, requiringSecureCoding: false)
-                    word.recordName = element.recordID.recordName
-                    word.original = element["original"] as? String
-                    word.translated = element["translated"] as? String
-                    word.history = element["history"] as? History
-                    word.lastUpdate = element["modificationDate"] as? Date
-                    retArray.append(word)
-                }
-                catch {
-                    print("Error fetching languages from CloudKit")
+                DispatchQueue.main.async {
+                    let word = Words(context: contextManager)
+                    let managed = word.recordToManagedObject(element) as! Words
+                    retArray.append(managed)
                 }
             }
             self.fetchCompletion?(retArray)
@@ -115,24 +87,24 @@ class CloudKitController {
     }
     
     // MARK: - Save
-    
     func saveHistory(_ hist: History, managedContext: NSManagedObjectContext) {
         do {
             let cKhistory = CKRecord(recordType: "History")
             let langID = try NSKeyedUnarchiver.unarchivedObject(ofClass: CKRecord.ID.self, from: hist.language!.recordID!)
-            let refHist = CKRecord.Reference(recordID: langID!, action: .deleteSelf)
-            cKhistory.setValue(refHist, forKey: "language")
-            
+            let refLang = CKRecord.Reference(recordID: langID!, action: .deleteSelf)
+            cKhistory.setValue(refLang, forKey: "language")
+           // let histID = try NSKeyedUnarchiver.unarchivedObject(ofClass: CKRecord.ID.self, from: hist.recordID!)
+            let histRef = CKRecord.Reference(record: cKhistory, action: .deleteSelf)
             var wordsRecords: Array<CKRecord> = []
             for (_, element) in (hist.words?.enumerated())! {
                 let word = element as! Words
                 let ckRecord = toRecord(word)
+                ckRecord.setValue(histRef, forKey: "history")
                 self.privateDB.save(ckRecord) { (record, error) in
                     do {
                         word.recordID = try NSKeyedArchiver.archivedData(withRootObject: record!.recordID, requiringSecureCoding: false)
                         word.recordName = record!.recordID.recordName
                         word.lastUpdate = record?.modificationDate
-//                        try managedContext.save()
                     }
                     catch {
                         print("Error Saving History to CloudKit")
@@ -141,11 +113,7 @@ class CloudKitController {
                 wordsRecords.append(ckRecord)
             }
             
-            var wordsReferences: Array<CKRecord.Reference> = []
-            for (_, element) in wordsRecords.enumerated() {
-                let reference = CKRecord.Reference(record: element, action: .deleteSelf)
-                wordsReferences.append(reference)
-            }
+            let wordsReferences = toArrayOfReferences(wordsRecords)
             
             cKhistory.setValue(wordsReferences, forKey: "words")
             cKhistory.setValue(hist.title, forKey: "title")
@@ -168,15 +136,12 @@ class CloudKitController {
         }
     }
     
-    func saveWords(_ word: Words, managedContext: NSManagedObjectContext) {
+    func saveCkWord(_ word: Words, managedContext: NSManagedObjectContext) {
         let ckWord = CKRecord(recordType: "Words")
         ckWord.setValue(word.original, forKey: "original")
         ckWord.setValue(word.translated, forKey: "translated")
-        //ckWord.setValue(word.history, forKey: "history")
         publicDB.save(ckWord) { (record, error) in
             do {
-                word.recordID = try NSKeyedArchiver.archivedData(withRootObject: record!.recordID, requiringSecureCoding: false)
-                word.recordName = record!.recordID.recordName
                 word.lastUpdate = record?.modificationDate
                 try managedContext.save()
             }
@@ -194,5 +159,23 @@ extension CloudKitController {
         ckRecord.setValue(sender.original, forKey: "original")
         ckRecord.setValue(sender.translated, forKey: "translated")
         return ckRecord
+    }
+    
+    func toArrayOfRecords(_ sender: Array<Words>) -> Array<CKRecord> {
+        var records: Array<CKRecord> = []
+        for (_, element) in sender.enumerated() {
+            let record = toRecord(element)
+            records.append(record)
+        }
+        return records
+    }
+    
+    func toArrayOfReferences(_ sender: Array<CKRecord>) -> Array<CKRecord.Reference> {
+        var references: Array<CKRecord.Reference> = []
+        for (_, element) in sender.enumerated() {
+            let reference = CKRecord.Reference(record: element, action: .deleteSelf)
+            references.append(reference)
+        }
+        return references
     }
 }

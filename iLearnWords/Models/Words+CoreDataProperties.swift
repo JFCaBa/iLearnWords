@@ -16,9 +16,9 @@ extension Words {
         return NSFetchRequest<Words>(entityName: "Words")
     }
 
-    @NSManaged public var lastUpdate: NSDate?
+    @NSManaged public var lastUpdate: Date?
     @NSManaged public var original: String?
-    @NSManaged public var recordID: NSData?
+    @NSManaged public var recordID: Data?
     @NSManaged public var translated: String?
     @NSManaged public var recordName: String?
     @NSManaged public var history: History?

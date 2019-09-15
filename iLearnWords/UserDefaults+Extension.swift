@@ -28,6 +28,44 @@ extension UserDefaults {
         static let CellBackgroundColor = "CELL_BACKGROUND_COLOR" //The speed for the utterance object
     }
     
+    enum Languages {
+        static let Title = "title"
+        static let IsSelected = "isSelected"
+        static let RecordID = "recordID"
+        static let SayOriginal = "sayOriginal"
+        static let SayTranslated = "sayTranslated"
+        static let Way = "way"
+        static let RecordName = "recordName"
+        static let LastUpdate = "modificationDate"
+        static let History = "history"
+    }
+    
+    enum History {
+        static let Title = "title"
+        static let IsSelected = "isSelected"
+        static let RecordID = "recordID"
+        static let RecordName = "recordName"
+        static let LastUpdate = "modificationDate"
+        static let Words = "words"
+        static let Language = "language"
+    }
+    
+    enum Words {
+        static let Original = "original"
+        static let Translated = "translated"
+        static let RecordID = "recordID"
+        static let RecordName = "recordName"
+        static let LastUpdate = "modificationDate"
+        static let History = "history"
+    }
+    
+    enum Entity {
+        static let Languages = "Languages"
+        static let History = "History"
+        static let Words = "Words"
+    }
+
+    
     func colorForKey(key: String) -> UIColor? {
         if let colorData = data(forKey: key) {
             do {

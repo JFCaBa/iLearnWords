@@ -219,6 +219,10 @@ public class DAOController: NSObject {
             if let wordEntity = NSEntityDescription.insertNewObject(forEntityName: "Words", into: managedContext!) as? Words {
                 wordEntity.original = element.original
                 wordEntity.translated = element.translated
+                let uuid = UUID().uuidString
+                wordEntity.recordID = Data(base64Encoded: uuid)
+                wordEntity.recordName = "Words." + uuid
+                wordEntity.lastUpdate = Date()
                 retArray.append(wordEntity)
             }
             do {
@@ -246,7 +250,7 @@ public class DAOController: NSObject {
         let word = Words(context: managedContext!)
         word.original = original
         word.translated = translated
-        word.recordID = Data(base64Encoded: UUID().uuidString) 
+        word.recordID = Data(base64Encoded: UUID().uuidString)
         word.lastUpdate = Date()
         word.history = history
         
@@ -260,7 +264,7 @@ public class DAOController: NSObject {
     }
     
     
-    public func wordObjectFrom(original: String, translated: String) -> Words? {
+    func wordObjectFrom(original: String, translated: String) -> Words? {
         let managedContext = context()
         let word = Words(context: managedContext!)
         word.original = original
@@ -375,7 +379,7 @@ public class DAOController: NSObject {
             return 0
         }
     }
-    public func cleanData(_ entity: String) -> Bool{
+    public func cleanData(_ entity: String) -> Bool {
         let managedContext = context()
         let fetchRequest = NSFetchRequest<NSManagedObject>(entityName: entity)
         let deleteRequest = NSBatchDeleteRequest(fetchRequest: fetchRequest as! NSFetchRequest<NSFetchRequestResult>)
@@ -391,44 +395,100 @@ public class DAOController: NSObject {
 }
 
 extension DAOController {
-    func fetchLanguagesFromCloudKit() {
+    func fetchLanguagesFromCloudKit(completionHandler: @escaping (Error?) -> Void) {
         let contextManager = context()
         let cloud: CloudKitController = CloudKitController()
         cloud.fetchCompletion = { (response) -> Void in
             do {
                 try contextManager?.save()
+                completionHandler(nil)
             }
-            catch {
+            catch let err as NSError {
                 print("Error saving context Languages from CloudKit")
+                completionHandler(err)
             }
         }
         cloud.fetchLanguages(contextManager!)
     }
     
-    func fetchHistoryFromCloudKit() {
+    func fetchHistoryFromCloudKit(completionHandler: @escaping (Error?) -> Void) {
         let contextManager = context()
         let cloud: CloudKitController = CloudKitController()
         cloud.fetchCompletion = { (response) -> Void in
             do {
                 try contextManager?.save()
+                completionHandler(nil)
             }
-            catch {
+            catch let err as NSError {
                 print("Error saving context History from CloudKit")
+                completionHandler(err)
             }
         }
         cloud.fetchHistory(contextManager!)
     }
     
-    func fetchWordsFromCloudKit() {
+    func fetchWordsFromCloudKit(completionHandler: @escaping (Error?) -> Void) {
         let contextManager = context()
         cloud.fetchCompletion = { (response) -> Void in
+            for (_, element) in response!.enumerated() {
+                //Assign to each word its history
+            }
             do {
                 try contextManager?.save()
+                completionHandler(nil)
             }
-            catch {
+            catch let err as NSError {
                 print("Error saving context Words from CloudKit")
+                completionHandler(err)
             }
         }
         cloud.fetchWords(contextManager!)
+    }
+    
+    func synchronizeData() {
+        let serialQueue = DispatchQueue.main
+        let group = DispatchGroup()
+        group.enter()
+        serialQueue.async {
+            self.fetchLanguagesFromCloudKit(completionHandler: { (_) in
+                group.leave()
+            })
+        }
+        serialQueue.async {
+            group.wait()
+            group.enter()
+            self.fetchHistoryFromCloudKit(completionHandler: { (_) in
+                group.leave()
+            })
+        }
+        serialQueue.async {
+            group.wait()
+            group.enter()
+            self.fetchWordsFromCloudKit(completionHandler: { (_) in
+                group.leave()
+            })
+        }
+        group.notify(queue: serialQueue) {
+            
+        }
+    }
+    
+    func saveContext () {
+        let viewContext = context()
+        let insertedObjects = viewContext!.insertedObjects
+        let modifiedObjects = viewContext!.updatedObjects
+//        let deletedRecordIDs = viewContext.deletedObjects.map { ($0 as! CloudKitManagedObject).cloudKitRecordID() }
+        
+        if viewContext!.hasChanges {
+            do {
+                try viewContext!.save()
+            } catch {
+                NSLog("Core Data SaveContext Error: \(error.localizedDescription)")
+            }
+            
+            let insertedObjectIDs = insertedObjects.map { $0.objectID }
+            let modifiedObjectIDs = modifiedObjects.map { $0.objectID }
+//            CloudKitManager.shared.uploadChangedObjects(savedIDs: insertedObjectIDs + modifiedObjectIDs, deletedIDs: deletedRecordIDs)
+        }
     }
 }

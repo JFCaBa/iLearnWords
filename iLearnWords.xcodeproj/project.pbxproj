@@ -22,10 +22,18 @@
 		6DDEF2B623240D29007C9C77 /* WordsEditVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6DDEF2B523240D29007C9C77 /* WordsEditVC.swift */; };
 		6DDEF2B823251697007C9C77 /* UserDefaults+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6DDEF2B723251697007C9C77 /* UserDefaults+Extension.swift */; };
 		6DDEF2BA232C0897007C9C77 /* CloudKitController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6DDEF2B9232C0897007C9C77 /* CloudKitController.swift */; };
+		6DDEF2BE232E8E38007C9C77 /* CloudKitProtocols.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6DDEF2BD232E8E38007C9C77 /* CloudKitProtocols.swift */; };
+		6DDEF2C1232E95EB007C9C77 /* CoreDataProtocols.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6DDEF2C0232E95EB007C9C77 /* CoreDataProtocols.swift */; };
+		6DDEF2C9232EB808007C9C77 /* Languages.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6DDEF2C3232EB808007C9C77 /* Languages.swift */; };
+		6DDEF2CD232EB808007C9C77 /* History.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6DDEF2C7232EB808007C9C77 /* History.swift */; };
+		6DDEF2CE232EBA58007C9C77 /* Words.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6DDEF2C2232EB808007C9C77 /* Words.swift */; };
+		6DDEF2D3232EBFF3007C9C77 /* iLearnWords.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 6DDEF2D1232EBFF3007C9C77 /* iLearnWords.xcdatamodeld */; };
+		6DDEF2D7232EC2CC007C9C77 /* Languages+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6DDEF2C4232EB808007C9C77 /* Languages+CoreDataProperties.swift */; };
+		6DDEF2D8232EC2CF007C9C77 /* History+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6DDEF2C6232EB808007C9C77 /* History+CoreDataProperties.swift */; };
+		6DDEF2D9232EC2D2007C9C77 /* Words+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6DDEF2C5232EB808007C9C77 /* Words+CoreDataProperties.swift */; };
 		6DE21ECC232151A400CA24D9 /* HistoryVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6DE21ECB232151A400CA24D9 /* HistoryVC.swift */; };
 		6DE21ECE232153F800CA24D9 /* HistoryDetailVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6DE21ECD232153F800CA24D9 /* HistoryDetailVC.swift */; };
 		6DF52795231C5D1600595B26 /* NetworkController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6DF52794231C5D1600595B26 /* NetworkController.swift */; };
-		6DF52798231DB91C00595B26 /* iLearnWords.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 6DF52796231DB91C00595B26 /* iLearnWords.xcdatamodeld */; };
 		AF4F2C61B2FCA3E744F72685 /* Pods_iLearnWords.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BD187980F093E277E5A968F7 /* Pods_iLearnWords.framework */; };
 /* End PBXBuildFile section */
 
@@ -51,10 +59,18 @@
 		6DDEF2B523240D29007C9C77 /* WordsEditVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WordsEditVC.swift; sourceTree = "<group>"; };
 		6DDEF2B723251697007C9C77 /* UserDefaults+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UserDefaults+Extension.swift"; sourceTree = "<group>"; };
 		6DDEF2B9232C0897007C9C77 /* CloudKitController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CloudKitController.swift; sourceTree = "<group>"; };
+		6DDEF2BD232E8E38007C9C77 /* CloudKitProtocols.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CloudKitProtocols.swift; sourceTree = "<group>"; };
+		6DDEF2C0232E95EB007C9C77 /* CoreDataProtocols.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataProtocols.swift; sourceTree = "<group>"; };
+		6DDEF2C2232EB808007C9C77 /* Words.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Words.swift; sourceTree = "<group>"; };
+		6DDEF2C3232EB808007C9C77 /* Languages.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Languages.swift; sourceTree = "<group>"; };
+		6DDEF2C4232EB808007C9C77 /* Languages+CoreDataProperties.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Languages+CoreDataProperties.swift"; sourceTree = "<group>"; };
+		6DDEF2C5232EB808007C9C77 /* Words+CoreDataProperties.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Words+CoreDataProperties.swift"; sourceTree = "<group>"; };
+		6DDEF2C6232EB808007C9C77 /* History+CoreDataProperties.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "History+CoreDataProperties.swift"; sourceTree = "<group>"; };
+		6DDEF2C7232EB808007C9C77 /* History.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = History.swift; sourceTree = "<group>"; };
+		6DDEF2D2232EBFF3007C9C77 /* Model.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Model.xcdatamodel; sourceTree = "<group>"; };
 		6DE21ECB232151A400CA24D9 /* HistoryVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HistoryVC.swift; sourceTree = "<group>"; };
 		6DE21ECD232153F800CA24D9 /* HistoryDetailVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HistoryDetailVC.swift; sourceTree = "<group>"; };
 		6DF52794231C5D1600595B26 /* NetworkController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NetworkController.swift; sourceTree = "<group>"; };
-		6DF52797231DB91C00595B26 /* Model.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Model.xcdatamodel; sourceTree = "<group>"; };
 		85F90F8EBD3A95F9DE8D3868 /* Pods-iLearnWords.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-iLearnWords.release.xcconfig"; path = "Target Support Files/Pods-iLearnWords/Pods-iLearnWords.release.xcconfig"; sourceTree = "<group>"; };
 		BD187980F093E277E5A968F7 /* Pods_iLearnWords.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_iLearnWords.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
@@ -97,12 +113,13 @@
 				6DCD6ED52329036000CF6806 /* iLearnWords.entitlements */,
 				6D36E17D231BC09A00C88F0A /* AppDelegate.swift */,
 				6DDEF2B723251697007C9C77 /* UserDefaults+Extension.swift */,
+				6DDEF2CF232EBAA7007C9C77 /* Models */,
+				6DDEF2BF232E9083007C9C77 /* Protocols */,
 				6D36E195231BF7D200C88F0A /* Classes */,
 				6D36E193231BF79700C88F0A /* Services */,
 				6D36E194231BF7C300C88F0A /* Views */,
 				6D36E184231BC09C00C88F0A /* Assets.xcassets */,
 				6D36E189231BC09C00C88F0A /* Info.plist */,
-				6DA5E4F9231E57EA004732CF /* Model */,
 			);
 			path = iLearnWords;
 			sourceTree = "<group>";
@@ -141,12 +158,27 @@
 			path = Classes;
 			sourceTree = "<group>";
 		};
-		6DA5E4F9231E57EA004732CF /* Model */ = {
+		6DDEF2BF232E9083007C9C77 /* Protocols */ = {
 			isa = PBXGroup;
 			children = (
-				6DF52796231DB91C00595B26 /* iLearnWords.xcdatamodeld */,
+				6DDEF2BD232E8E38007C9C77 /* CloudKitProtocols.swift */,
+				6DDEF2C0232E95EB007C9C77 /* CoreDataProtocols.swift */,
 			);
-			path = Model;
+			path = Protocols;
+			sourceTree = "<group>";
+		};
+		6DDEF2CF232EBAA7007C9C77 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				6DDEF2C3232EB808007C9C77 /* Languages.swift */,
+				6DDEF2C4232EB808007C9C77 /* Languages+CoreDataProperties.swift */,
+				6DDEF2C7232EB808007C9C77 /* History.swift */,
+				6DDEF2C6232EB808007C9C77 /* History+CoreDataProperties.swift */,
+				6DDEF2C2232EB808007C9C77 /* Words.swift */,
+				6DDEF2C5232EB808007C9C77 /* Words+CoreDataProperties.swift */,
+				6DDEF2D1232EBFF3007C9C77 /* iLearnWords.xcdatamodeld */,
+			);
+			path = Models;
 			sourceTree = "<group>";
 		};
 		9AD42107F2B70BA6CB278AC0 /* Frameworks */ = {
@@ -314,19 +346,27 @@
 			buildActionMask = 2147483647;
 			files = (
 				6DF52795231C5D1600595B26 /* NetworkController.swift in Sources */,
+				6DDEF2C9232EB808007C9C77 /* Languages.swift in Sources */,
 				6DE21ECC232151A400CA24D9 /* HistoryVC.swift in Sources */,
+				6DDEF2CD232EB808007C9C77 /* History.swift in Sources */,
 				6D36E180231BC09A00C88F0A /* MainVC.swift in Sources */,
 				6DDEF2B623240D29007C9C77 /* WordsEditVC.swift in Sources */,
 				6DDEF2BA232C0897007C9C77 /* CloudKitController.swift in Sources */,
+				6DDEF2CE232EBA58007C9C77 /* Words.swift in Sources */,
 				6D36E17E231BC09A00C88F0A /* AppDelegate.swift in Sources */,
 				6DE21ECE232153F800CA24D9 /* HistoryDetailVC.swift in Sources */,
 				6D22C6EC231D4EF8009DC8F7 /* SettingsTVC.swift in Sources */,
 				6DA5E4FF231EAE8B004732CF /* CardsGameVC.swift in Sources */,
 				6D36E192231BD49200C88F0A /* TalkController.swift in Sources */,
+				6DDEF2C1232E95EB007C9C77 /* CoreDataProtocols.swift in Sources */,
+				6DDEF2D8232EC2CF007C9C77 /* History+CoreDataProperties.swift in Sources */,
 				6DDEF2B823251697007C9C77 /* UserDefaults+Extension.swift in Sources */,
+				6DDEF2D7232EC2CC007C9C77 /* Languages+CoreDataProperties.swift in Sources */,
 				6DCDEFF5231F9DCD00744E65 /* LanguagesVC.swift in Sources */,
 				6DA5E4D7231E53F0004732CF /* DAOController.swift in Sources */,
-				6DF52798231DB91C00595B26 /* iLearnWords.xcdatamodeld in Sources */,
+				6DDEF2BE232E8E38007C9C77 /* CloudKitProtocols.swift in Sources */,
+				6DDEF2D3232EBFF3007C9C77 /* iLearnWords.xcdatamodeld in Sources */,
+				6DDEF2D9232EC2D2007C9C77 /* Words+CoreDataProperties.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -540,12 +580,12 @@
 /* End XCConfigurationList section */
 
 /* Begin XCVersionGroup section */
-		6DF52796231DB91C00595B26 /* iLearnWords.xcdatamodeld */ = {
+		6DDEF2D1232EBFF3007C9C77 /* iLearnWords.xcdatamodeld */ = {
 			isa = XCVersionGroup;
 			children = (
-				6DF52797231DB91C00595B26 /* Model.xcdatamodel */,
+				6DDEF2D2232EBFF3007C9C77 /* Model.xcdatamodel */,
 			);
-			currentVersion = 6DF52797231DB91C00595B26 /* Model.xcdatamodel */;
+			currentVersion = 6DDEF2D2232EBFF3007C9C77 /* Model.xcdatamodel */;
 			path = iLearnWords.xcdatamodeld;
 			sourceTree = "<group>";
 			versionGroupType = wrapper.xcdatamodel;

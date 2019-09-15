@@ -9,7 +9,6 @@
 import Foundation
 import CoreData
 
-
 extension History {
 
     @nonobjc public class func fetchRequest() -> NSFetchRequest<History> {
@@ -17,10 +16,10 @@ extension History {
     }
 
     @NSManaged public var isSelected: Bool
-    @NSManaged public var recordID: NSData?
+    @NSManaged public var recordID: Data?
     @NSManaged public var title: String?
     @NSManaged public var recordName: String?
-    @NSManaged public var lastUpdate: NSDate?
+    @NSManaged public var lastUpdate: Date?
     @NSManaged public var language: Languages?
     @NSManaged public var words: NSSet?
 

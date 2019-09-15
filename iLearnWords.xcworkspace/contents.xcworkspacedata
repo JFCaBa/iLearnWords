@@ -2,24 +2,6 @@
 <Workspace
    version = "1.0">
    <FileRef
-      location = "group:iLearnWords/Model/Words+CoreDataClass.swift">
-   </FileRef>
-   <FileRef
-      location = "group:iLearnWords/Model/Words+CoreDataProperties.swift">
-   </FileRef>
-   <FileRef
-      location = "group:iLearnWords/Model/Languages+CoreDataClass.swift">
-   </FileRef>
-   <FileRef
-      location = "group:iLearnWords/Model/Languages+CoreDataProperties.swift">
-   </FileRef>
-   <FileRef
-      location = "group:iLearnWords/Model/History+CoreDataClass.swift">
-   </FileRef>
-   <FileRef
-      location = "group:iLearnWords/Model/History+CoreDataProperties.swift">
-   </FileRef>
-   <FileRef
       location = "group:iLearnWords.xcodeproj">
    </FileRef>
    <FileRef

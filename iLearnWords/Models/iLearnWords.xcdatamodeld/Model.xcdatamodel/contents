@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="14492.1" systemVersion="18G95" minimumToolsVersion="Automatic" sourceLanguage="Swift" userDefinedModelVersionIdentifier="Cloud">
-    <entity name="History" representedClassName="History" syncable="YES" codeGenerationType="class">
+<model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="14492.1" systemVersion="18G95" minimumToolsVersion="Automatic" sourceLanguage="Swift" userDefinedModelVersionIdentifier="">
+    <entity name="History" representedClassName=".History" syncable="YES">
         <attribute name="isSelected" optional="YES" attributeType="Boolean" usesScalarValueType="YES" syncable="YES"/>
         <attribute name="lastUpdate" optional="YES" attributeType="Date" usesScalarValueType="NO" syncable="YES"/>
         <attribute name="recordID" optional="YES" attributeType="Binary" syncable="YES"/>
@@ -9,7 +9,7 @@
         <relationship name="language" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Languages" inverseName="history" inverseEntity="Languages" syncable="YES"/>
         <relationship name="words" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Words" inverseName="history" inverseEntity="Words" syncable="YES"/>
     </entity>
-    <entity name="Languages" representedClassName="Languages" syncable="YES" codeGenerationType="class">
+    <entity name="Languages" representedClassName=".Languages" syncable="YES">
         <attribute name="isSelected" optional="YES" attributeType="Boolean" usesScalarValueType="YES" syncable="YES"/>
         <attribute name="lastUpdate" optional="YES" attributeType="Date" usesScalarValueType="NO" syncable="YES"/>
         <attribute name="recordID" optional="YES" attributeType="Binary" syncable="YES"/>
@@ -20,7 +20,7 @@
         <attribute name="way" optional="YES" attributeType="String" defaultValueString="ru-en" syncable="YES"/>
         <relationship name="history" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="History" inverseName="language" inverseEntity="History" syncable="YES"/>
     </entity>
-    <entity name="Words" representedClassName="Words" syncable="YES" codeGenerationType="class">
+    <entity name="Words" representedClassName=".Words" syncable="YES">
         <attribute name="lastUpdate" optional="YES" attributeType="Date" usesScalarValueType="NO" syncable="YES"/>
         <attribute name="original" optional="YES" attributeType="String" customClassName="NSString" syncable="YES"/>
         <attribute name="recordID" optional="YES" attributeType="Binary" syncable="YES"/>
@@ -31,11 +31,6 @@
     <fetchRequest name="FetchHistory" entity="Languages"/>
     <fetchRequest name="FetchLanguages" entity="Languages"/>
     <fetchRequest name="FetchWords" entity="Languages" predicateString="TRUEPREDICATE"/>
-    <configuration name="Cloud">
-        <memberEntity name="History"/>
-        <memberEntity name="Languages"/>
-        <memberEntity name="Words"/>
-    </configuration>
     <elements>
         <element name="History" positionX="-63" positionY="27" width="128" height="150"/>
         <element name="Languages" positionX="-27.96484375" positionY="-269.95703125" width="128" height="180"/>

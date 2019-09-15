@@ -31,9 +31,7 @@ class MainVC: UIViewController, TalkerDelegate, UITableViewDelegate, UITableView
         super.viewDidLoad()
         tableView.delegate = self
         tableView.dataSource = self
-        tableView.tableFooterView = UIView.init(frame: CGRect.zero)
-        
-        loadData()
+        tableView.tableFooterView = UIView.init(frame: CGRect.zero)        
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -47,6 +45,9 @@ class MainVC: UIViewController, TalkerDelegate, UITableViewDelegate, UITableView
         else {
             title = ""
         }
+        //Assign the delegate in viewWillAppear because the talk class is
+        //also used in the Cards game
+        talk.delegate = self
         
         loadData()
     }
@@ -224,17 +225,13 @@ class MainVC: UIViewController, TalkerDelegate, UITableViewDelegate, UITableView
 
 extension MainVC {
     func loadData() {
-        //Assign the delegate in viewWillAppear because the talk class is
-        //also used in the Cards game
-        talk.delegate = self
-        
         //Need to load the data in viewWillAppear because the history to be shown can
         //change in settings
         if let result =  dao.fetchSelectedHistory() {
             history = result
             dataObj = result.words?.allObjects as! Array<Words>
             //Sort the array by the date the words were added to the database
-            dataObj = dataObj.sorted(by:{ $0.date!.timeIntervalSince1970 < $1.date!.timeIntervalSince1970 })
+            dataObj = dataObj.sorted(by:{ $0.lastUpdate!.timeIntervalSince1970 < $1.lastUpdate!.timeIntervalSince1970 })
         }
         else {
             dataObj = []
@@ -286,7 +283,7 @@ extension MainVC {
         }
         else {
             if let str = word.translated {
-                startTalking(str, talkLanguage: (history?.language!.sayTranslate)!)
+                startTalking(str, talkLanguage: (history?.language!.sayTranslated)!)
             }
             talkIndex += 1 //Increment the index to change the row
             isOriginal = true //The nextone to be read will be the original one
@@ -307,8 +304,7 @@ extension MainVC {
                     guard let title = textField.text else {
                         return
                     }
-                    if let ret = self.dao.saveArrayOfWords(words) {
-                        if let hist = self.dao.saveHistory(ret, title: title) {
+                        if let hist = self.dao.saveHistory(words, title: title) {
                             print("\(title)")
                             self.history = hist
                             self.tableView.reloadData()
@@ -316,10 +312,6 @@ extension MainVC {
                         else {
                             print("Error Saving History.")
                         }
-                    }
-                    else {
-                        print("Error Saving Words.")
-                    }
                 }
             }
         })

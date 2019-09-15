@@ -96,45 +96,8 @@ extension AppDelegate{
         UserDefaults.standard.synchronize()
         
         /** Create the Languages entity content */
-        let langDic = [["title":"Russian to English",
-                        "sayOriginal":"ru_RU",
-                        "sayTranslate":"en_GB",
-                        "way":"ru-en",
-                        "recordID":UUID().uuidString,
-                        "isSelected":"1"],
-                       ["title":"English to Russian",
-                        "sayOriginal":"en_GB",
-                        "sayTranslate":"ru_RU",
-                        "way":"en-ru",
-                        "recordID":UUID().uuidString,
-                        "isSelected":"0"]
-            ]
-            
-        saveInCoreDataWith(array: langDic )
-    }
-    
-    //MARK: - Helper functions to Store the defaults values into the Languages Entity
-    private func createLanguageEntityFrom(dictionary: [String: String]) -> NSManagedObject? {
-        let context = persistentContainer.viewContext
-        if let languageEntity = NSEntityDescription.insertNewObject(forEntityName: "Languages", into: context) as? Languages {
-            languageEntity.title = dictionary["title"]
-            languageEntity.sayOriginal = dictionary["sayOriginal"]
-            languageEntity.sayTranslate = dictionary["sayTranslate"]
-            languageEntity.way = dictionary["way"]
-            languageEntity.recordID = dictionary["recordID"]
-            languageEntity.isSelected = dictionary["isSelected"] == "1" ? true : false
-            return languageEntity
-        }
-        return nil
-    }
-    
-    private func saveInCoreDataWith(array: [[String: String]]) {
-        _ = array.map{self.createLanguageEntityFrom(dictionary: $0)}
-        do {
-            try persistentContainer.viewContext.save()
-        } catch let error {
-            print(error)
-        }
+        let dao: DAOController = DAOController()
+        dao.fetchLanguagesFromCloudKit()
     }
 }
 

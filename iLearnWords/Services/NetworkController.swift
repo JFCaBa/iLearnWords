@@ -28,14 +28,13 @@ class NetworkController: NSObject {
 
     //MARK: Public
     /** Returns in the var block the translation for the passed word*/
-    public func translateStringOfWords(_ wordsStr: String){
-        
+    public func translateStringOfWords(_ wordsStr: String) {
         self.completionBlock =  { (response, error) -> Void in
             //Do the stuff on completion
-            if nil == error{
+            if nil == error {
                 self.translateBlock?(response)
             }
-            else{
+            else {
                 self.translateBlock?(nil)
                 print(error as Any)
             }

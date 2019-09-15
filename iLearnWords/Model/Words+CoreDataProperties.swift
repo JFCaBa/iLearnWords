@@ -2,13 +2,13 @@
 //  Words+CoreDataProperties.swift
 //  
 //
-//  Created by Jose Catala on 13/09/2019.
+//  Created by Jose Francisco Catalá Barba on 14/09/2019.
 //
 //
 
 import Foundation
 import CoreData
-
+import CloudKit
 
 extension Words {
 
@@ -16,10 +16,10 @@ extension Words {
         return NSFetchRequest<Words>(entityName: "Words")
     }
 
-    @NSManaged public var date: NSDate?
+    @NSManaged public var lastUpdate: NSDate?
     @NSManaged public var original: String?
-    @NSManaged public var recordID: String?
+    @NSManaged public var recordID: NSData?
     @NSManaged public var translated: String?
+    @NSManaged public var recordName: String?
     @NSManaged public var history: History?
-
 }

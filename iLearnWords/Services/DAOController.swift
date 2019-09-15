@@ -11,9 +11,10 @@ import CoreData
 
 public class DAOController: NSObject {
     
+    let cloud: CloudKitController = CloudKitController()
+    
     public override init() {
         super.init()
-        testCloudKit()
     }
     
     //MARK: - Private functions
@@ -71,6 +72,7 @@ public class DAOController: NSObject {
     }
     
     //MARK: - Languages
+    
     /// To get all the objects in the table Languages
     ///
     /// - Returns:
@@ -152,15 +154,18 @@ public class DAOController: NSObject {
     func saveHistory(_ words: Array<NSManagedObject>, title: String = "Untitled") -> History? {
         let managedContext = context()
         let history = History(context: managedContext!)
+        _ = updateSelectedHistory(history)
         history.addToWords(NSSet(array: words))
         history.isSelected = true
         history.title = title
-        history.recordID = UUID().uuidString
-        history.date = Date()
+        let uuid = UUID().uuidString
+        history.recordID = Data(base64Encoded: uuid)
+        history.recordName = "History." + uuid
+        history.lastUpdate = Date()
         history.language = fetchSelectedLanguage()
         do {
             try managedContext!.save()
-            _ = updateSelectedHistory(history)
+            cloud.saveHistory(history, managedContext: managedContext!)
             return history
         } catch let error as NSError {
             print("Could not save history. \(error), \(error.userInfo)")
@@ -180,10 +185,10 @@ public class DAOController: NSObject {
         do {
             let result = try managedContext!.fetch(fetchRequest)
             if result.count > 0 {
-                for history in result.compactMap({ $0 as? Languages }) {
-                    history.isSelected = history.recordID == hist.recordID ? true : false
-                    try managedContext!.save()
+                for history in result.compactMap({ $0 as? History}) {
+                    history.isSelected =  false
                 }
+                try managedContext!.save()
             }
             return true
             
@@ -213,14 +218,11 @@ public class DAOController: NSObject {
         for (_, element) in words.enumerated() {
             if let wordEntity = NSEntityDescription.insertNewObject(forEntityName: "Words", into: managedContext!) as? Words {
                 wordEntity.original = element.original
-                wordEntity.date = Date()
                 wordEntity.translated = element.translated
-                wordEntity.recordID = UUID().uuidString
                 retArray.append(wordEntity)
             }
             do {
                 try managedContext?.save()
-                
             }
             catch let error {
                 print(error)
@@ -244,8 +246,8 @@ public class DAOController: NSObject {
         let word = Words(context: managedContext!)
         word.original = original
         word.translated = translated
-        word.recordID = UUID().uuidString
-        word.date = Date()
+        word.recordID = Data(base64Encoded: UUID().uuidString) 
+        word.lastUpdate = Date()
         word.history = history
         
         do {
@@ -263,8 +265,10 @@ public class DAOController: NSObject {
         let word = Words(context: managedContext!)
         word.original = original
         word.translated = translated
-        word.date = Date()
-        word.recordID = UUID().uuidString
+        word.lastUpdate = Date()
+        let uuid = UUID().uuidString
+        word.recordID = Data(base64Encoded: uuid)
+        word.recordName = "Words." + uuid
         return word
     }
     
@@ -387,9 +391,44 @@ public class DAOController: NSObject {
 }
 
 extension DAOController {
-    func testCloudKit() {
+    func fetchLanguagesFromCloudKit() {
+        let contextManager = context()
         let cloud: CloudKitController = CloudKitController()
-        
-        _ = cloud.fetchLanguages()
+        cloud.fetchCompletion = { (response) -> Void in
+            do {
+                try contextManager?.save()
+            }
+            catch {
+                print("Error saving context Languages from CloudKit")
+            }
+        }
+        cloud.fetchLanguages(contextManager!)
+    }
+    
+    func fetchHistoryFromCloudKit() {
+        let contextManager = context()
+        let cloud: CloudKitController = CloudKitController()
+        cloud.fetchCompletion = { (response) -> Void in
+            do {
+                try contextManager?.save()
+            }
+            catch {
+                print("Error saving context History from CloudKit")
+            }
+        }
+        cloud.fetchHistory(contextManager!)
+    }
+    
+    func fetchWordsFromCloudKit() {
+        let contextManager = context()
+        cloud.fetchCompletion = { (response) -> Void in
+            do {
+                try contextManager?.save()
+            }
+            catch {
+                print("Error saving context Words from CloudKit")
+            }
+        }
+        cloud.fetchWords(contextManager!)
     }
 }

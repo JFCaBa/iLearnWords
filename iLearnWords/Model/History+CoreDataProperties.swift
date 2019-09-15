@@ -2,7 +2,7 @@
 //  History+CoreDataProperties.swift
 //  
 //
-//  Created by Jose Catala on 13/09/2019.
+//  Created by Jose Francisco Catalá Barba on 14/09/2019.
 //
 //
 
@@ -16,10 +16,11 @@ extension History {
         return NSFetchRequest<History>(entityName: "History")
     }
 
-    @NSManaged public var date: NSDate?
     @NSManaged public var isSelected: Bool
-    @NSManaged public var recordID: String?
+    @NSManaged public var recordID: NSData?
     @NSManaged public var title: String?
+    @NSManaged public var recordName: String?
+    @NSManaged public var lastUpdate: NSDate?
     @NSManaged public var language: Languages?
     @NSManaged public var words: NSSet?
 

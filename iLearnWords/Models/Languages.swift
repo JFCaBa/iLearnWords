@@ -11,14 +11,9 @@ import UIKit
 import CoreData
 import CloudKit
 
-class Languages: NSManagedObject, CloudKitManagedObject, CoreDataManagedObject {
+class Languages: NSManagedObject, CloudKitManagedObject {
     
-    func context() -> NSManagedObjectContext? {
-        guard let appDelegate = UIApplication.shared.delegate as? AppDelegate else {
-            return nil
-        }
-        return appDelegate.persistentContainer.viewContext
-    }
+    var coreData = CoreDataController.shared
     
     var recordType: String { return UserDefaults.Entity.Languages }
     func managedObjectToRecord() -> CKRecord {
@@ -42,11 +37,12 @@ class Languages: NSManagedObject, CloudKitManagedObject, CoreDataManagedObject {
     }
     
     func recordToManagedObject(_ record: CKRecord) -> NSManagedObject? {
-        let managedContext = context()
+        let managedContext = coreData.context()
         let lang = Languages(context: managedContext!)
         do {
             lang.recordID = try NSKeyedArchiver.archivedData(withRootObject: record.recordID, requiringSecureCoding: false)
             lang.recordName = record.recordID.recordName
+            //TODO: Use dateformater here
             lang.lastUpdate = record[UserDefaults.Languages.LastUpdate]
             lang.sayOriginal = record[UserDefaults.Languages.SayOriginal] as? String
             lang.sayTranslated = record[UserDefaults.Languages.SayTranslated] as? String

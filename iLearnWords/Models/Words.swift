@@ -11,14 +11,8 @@ import UIKit
 import CoreData
 import CloudKit
 
-class Words: NSManagedObject, CloudKitManagedObject, CoreDataManagedObject
-{
-    func context() -> NSManagedObjectContext? {
-        guard let appDelegate = UIApplication.shared.delegate as? AppDelegate else {
-            return nil
-        }
-        return appDelegate.persistentContainer.viewContext
-    }
+class Words: NSManagedObject, CloudKitManagedObject {
+    var coreData = CoreDataController.shared
     
     var recordType: String { return UserDefaults.Entity.Words }
     func managedObjectToRecord() -> CKRecord {
@@ -35,7 +29,7 @@ class Words: NSManagedObject, CloudKitManagedObject, CoreDataManagedObject
     }
     
     func recordToManagedObject(_ record: CKRecord) -> NSManagedObject? {
-        let managedContext = context()
+        let managedContext = coreData.context()
         let word = Words(context: managedContext!)
         do {
             word.recordID = try NSKeyedArchiver.archivedData(withRootObject: record.recordID, requiringSecureCoding: false)

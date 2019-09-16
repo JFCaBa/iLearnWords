@@ -11,14 +11,9 @@ import UIKit
 import CoreData
 import CloudKit
 
-class History: NSManagedObject, CloudKitManagedObject, CoreDataManagedObject {
+class History: NSManagedObject, CloudKitManagedObject {
     
-    func context() -> NSManagedObjectContext? {
-        guard let appDelegate = UIApplication.shared.delegate as? AppDelegate else {
-            return nil
-        }
-        return appDelegate.persistentContainer.viewContext
-    }
+    var coreData = CoreDataController.shared
     
     var recordType: String { return UserDefaults.Entity.History }
     func managedObjectToRecord() -> CKRecord {
@@ -35,7 +30,7 @@ class History: NSManagedObject, CloudKitManagedObject, CoreDataManagedObject {
     }
     
     func recordToManagedObject(_ record: CKRecord) -> NSManagedObject? {
-        let managedContext = context()
+        let managedContext = coreData.context()
         let hist = History(context: managedContext!)
         do {
             hist.recordID = try NSKeyedArchiver.archivedData(withRootObject: record.recordID, requiringSecureCoding: false)

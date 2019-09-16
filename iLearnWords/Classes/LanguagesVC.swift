@@ -56,8 +56,9 @@ class LanguagesVC: UIViewController, UITableViewDelegate, UITableViewDataSource 
     //MARK: - Table view delegate
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let obj = dataArray[indexPath.row]
+        //TODO: alertcontroller to confirm
         _ = dao.updateSelectedLanguage(obj)
-        loadData()
+        //loadData()
         tableView.reloadData()
     }
     

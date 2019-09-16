@@ -15,23 +15,18 @@ public class DAOController: NSObject {
     let cloud: CloudKitController = CloudKitController()
     var managedContext: NSManagedObjectContext?
     
+    var coreData = CoreDataController.shared
+    
+    var languages: Array<CKRecord> = []
+    var history: Array<Any> = []
+    var words: Array<Any> = []
+
+
+    
     public override init() {
         super.init()
 
-        managedContext = context()!
-    }
-    
-    //MARK: - Private functions
-    /// To get the managedContext to be used in the access to the database
-    ///
-    /// - Returns:
-    ///  - NSManagedObjectContext: Instantiated in Appdelegate
-    private func context() -> NSManagedObjectContext? {
-        guard let appDelegate = UIApplication.shared.delegate as? AppDelegate else {
-            return nil
-        }
-        
-        return appDelegate.persistentContainer.viewContext
+        managedContext = coreData.context()
     }
     
     /// To get all the objects associated to the entity passed as parameter
@@ -42,7 +37,6 @@ public class DAOController: NSObject {
     ///  - Array containig all the objects in the table
     func fetchAllByEntity(_ entity: String) -> Array<NSManagedObject>? {
         let fetchRequest = NSFetchRequest<NSManagedObject>(entityName: entity)
-        
         do {
             let result = try managedContext?.fetch(fetchRequest)
             return result
@@ -95,7 +89,7 @@ public class DAOController: NSObject {
     /// - Returns:
     ///  - True if the operation was complete, false if not
     func updateSelectedLanguage(_ lang: Languages) -> Bool {
-        let fetchRequest = NSFetchRequest<NSManagedObject>(entityName: "Languages")
+        let fetchRequest = NSFetchRequest<NSManagedObject>(entityName: UserDefaults.Entity.Languages)
         do {
             let result = try managedContext?.fetch(fetchRequest)
             if result!.count > 0 {
@@ -113,7 +107,7 @@ public class DAOController: NSObject {
     }
     
     func fetchSelectedLanguage() -> Languages? {
-        if let object = fetchSelectedByEntity("Languages") {
+        if let object = fetchSelectedByEntity(UserDefaults.Entity.Languages) {
             return (object as! Languages)
         }
         else {
@@ -127,7 +121,7 @@ public class DAOController: NSObject {
     /// - Returns:
     ///  - Array of History objects
     func fetchAll() -> Array<History> {
-        if let result =  fetchAllByEntity("History"){
+        if let result =  fetchAllByEntity(UserDefaults.Entity.History){
             return (result as! Array<History>)
         }
         else {
@@ -136,7 +130,7 @@ public class DAOController: NSObject {
     }
     
     func fetchSelectedHistory() -> History? {
-        if let object = fetchSelectedByEntity("History") {
+        if let object = fetchSelectedByEntity(UserDefaults.Entity.History) {
             return (object as! History)
         }
         else {
@@ -160,7 +154,7 @@ public class DAOController: NSObject {
         history.title = title
         let uuid = UUID().uuidString
         history.recordID = Data(base64Encoded: uuid)
-        history.recordName = "History." + uuid
+        history.recordName = UserDefaults.Entity.History + "." + uuid
         history.lastUpdate = Date()
         history.language = fetchSelectedLanguage()
         do {
@@ -180,7 +174,7 @@ public class DAOController: NSObject {
     /// - Returns:
     ///  - True if the operation was complete, false if not
     func updateSelectedHistory(_ hist: History) -> Bool {
-        let fetchRequest = NSFetchRequest<NSManagedObject>(entityName: "History")
+        let fetchRequest = NSFetchRequest<NSManagedObject>(entityName: UserDefaults.Entity.History)
         do {
             let result = try managedContext?.fetch(fetchRequest)
             if result!.count > 0 {
@@ -197,29 +191,16 @@ public class DAOController: NSObject {
         }
     }
     
-    //MARK: - Words
-    /// To get all the objects in the table History
-    ///
-    /// - Returns:
-    ///  - Array of Words objects
-    func fetchAll() -> Array<Words> {
-        if let result =  fetchAllByEntity("Words"){
-            return (result as! Array<Words>)
-        }
-        else {
-            return []
-        }
-    }
     
     func saveArrayOfWords(_ words: Array<Words>) -> Array<NSManagedObject>? {
         var retArray: Array<NSManagedObject> = []
         for (_, element) in words.enumerated() {
-            if let wordEntity = NSEntityDescription.insertNewObject(forEntityName: "Words", into: managedContext!) as? Words {
+            if let wordEntity = NSEntityDescription.insertNewObject(forEntityName: UserDefaults.Entity.Words, into: managedContext!) as? Words {
                 wordEntity.original = element.original
                 wordEntity.translated = element.translated
                 let uuid = UUID().uuidString
                 wordEntity.recordID = Data(base64Encoded: uuid)
-                wordEntity.recordName = "Words." + uuid
+                wordEntity.recordName = UserDefaults.Entity.Words + "." + uuid
                 wordEntity.lastUpdate = Date()
                 retArray.append(wordEntity)
             }
@@ -268,12 +249,12 @@ public class DAOController: NSObject {
         word.lastUpdate = Date()
         let uuid = UUID().uuidString
         word.recordID = Data(base64Encoded: uuid)
-        word.recordName = "Words." + uuid
+        word.recordName = UserDefaults.Entity.Words + "." + uuid
         return word
     }
     
     public func fetchTranslatedForWord(word: String) -> String? {
-        let fetchRequest = NSFetchRequest<NSManagedObject>(entityName: "Words")
+        let fetchRequest = NSFetchRequest<NSManagedObject>(entityName: UserDefaults.Entity.Words)
         fetchRequest.predicate = NSPredicate(format: "original = %@", word)
         
         do {
@@ -315,7 +296,7 @@ public class DAOController: NSObject {
     }
     
     public func unSelectHistory() -> Bool {
-        let fetchRequest = NSFetchRequest<NSManagedObject>(entityName: "History")
+        let fetchRequest = NSFetchRequest<NSManagedObject>(entityName: UserDefaults.Entity.History)
         fetchRequest.predicate = NSPredicate(format: "isSelected == %@",NSNumber(value: true))
         do {
             let result = try managedContext?.fetch(fetchRequest)
@@ -335,7 +316,7 @@ public class DAOController: NSObject {
     }
     
     public func updateWord(original: String, translated: String) -> Bool {
-        let fetchRequest = NSFetchRequest<NSManagedObject>(entityName: "Words")
+        let fetchRequest = NSFetchRequest<NSManagedObject>(entityName: UserDefaults.Entity.Words)
         fetchRequest.predicate = NSPredicate(format: "original == %@ && translated == %@", original,translated)
         
         do {
@@ -384,59 +365,41 @@ public class DAOController: NSObject {
 }
 
 extension DAOController {
+    
     func synchronizeData() {
         let group = DispatchGroup()
         group.enter()
+
         self.cloud.fetchLanguages(completionHandler: { (records) -> Void? in
             if nil != records {
-                //Iterate the records..
-                DispatchQueue.main.async {
-                    for (_ ,element) in (records!.enumerated()) {
-                        let lang = Languages(context: self.managedContext!)
-                        _ = lang.recordToManagedObject(element as! CKRecord) as! Languages
-                    }
-                }
+                self.languages = records as! Array<CKRecord>
             }
             group.leave()
             return nil
         })
         
-//        group.enter()
-//        self.cloud.fetchWords(completionHandler: { (records) -> Void? in
-//            if nil != records {
-//                var retArray: Array<Words> = []
-//                //Iterate the records..
-//                DispatchQueue.main.async {
-//                    for (_ ,element) in (records!.enumerated()) {
-//                        let word = Words(context: self.managedContext!)
-//                        let managed = word.recordToManagedObject(element as! CKRecord) as! Words
-//                        retArray.append(managed)
-//                    }
-//                }
-//            }
-//            group.leave()
-//            return nil
-//        })
+        group.enter()
+        self.cloud.fetchWords(completionHandler: { (records) -> Void? in
+            if nil != records {
+                self.words = records as! Array<CKRecord>
+            }
+            group.leave()
+            return nil
+        })
         
-//        group.enter()
-//        self.cloud.fetchHistory(completionHandler: { (records) -> Void? in
-//            if nil != records {
-//                var retArray: Array<History> = []
-//                //Iterate the records..
-//                DispatchQueue.main.async {
-//                    for (_ ,element) in (records!.enumerated()) {
-//                        let hist = History(context: self.managedContext!)
-//                        let managed = hist.recordToManagedObject(element as! CKRecord) as! History
-//                        retArray.append(managed)
-//                    }
-//                }
-//            }
-//            group.leave()
-//            return nil
-//        })
+        group.enter()
+        self.cloud.fetchHistory(completionHandler: { (records) -> Void? in
+            if nil != records {
+                self.history = records as! Array<CKRecord>
+            }
+            group.leave()
+            return nil
+        })
         
         group.notify(queue: DispatchQueue.main) {
-
+            self.syncLanguages()
+            self.syncLanguagesWithHistory()
+            self.syncWordsWithHistory()
         }
     }
     
@@ -450,12 +413,26 @@ extension DAOController {
         }
     }
     
-    func syncLanguagesWithHistory(_ contextManager: NSManagedObjectContext, completionHandler: @escaping (Error?) -> Void) {
-        
+    func syncLanguages() {
+        for (_ ,element) in (languages.enumerated()) {
+            let lang = Languages(context: self.managedContext!)
+            _ = lang.recordToManagedObject(element) as! Languages
+        }
+    }
+    
+    func syncLanguagesWithHistory() {
+        //Iterate the records..
+        for (_ ,element) in (history.enumerated()) {
+            let hist = History(context: self.managedContext!)
+            _ = hist.recordToManagedObject(element as! CKRecord) as! History
+        }
     }
     
     
-    func syndWordsWithHistory(_ contextManager: NSManagedObjectContext, completionHandler: @escaping (Error?) -> Void) {
-        
+    func syncWordsWithHistory() {
+        for (_ ,element) in (words.enumerated()) {
+            let word = Words(context: self.managedContext!)
+            _ = word.recordToManagedObject(element as! CKRecord) as! Words
+        }
     }
 }

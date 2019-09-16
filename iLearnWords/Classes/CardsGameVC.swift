@@ -31,7 +31,8 @@ class CardsGameVC: UIViewController, TalkerDelegate {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(true)
         talk.delegate = self
-        dataObj = (history!.words?.allObjects as! Array<Words>)
+        //dataObj = (history!.words?.allObjects as! Array<Words>)
+        loadAllWords()
         btnNextDidTap(UIButton())
     }
     

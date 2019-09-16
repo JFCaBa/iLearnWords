@@ -42,7 +42,6 @@ class Languages: NSManagedObject, CloudKitManagedObject {
         do {
             lang.recordID = try NSKeyedArchiver.archivedData(withRootObject: record.recordID, requiringSecureCoding: false)
             lang.recordName = record.recordID.recordName
-            //TODO: Use dateformater here
             lang.lastUpdate = record[UserDefaults.Languages.LastUpdate]
             lang.sayOriginal = record[UserDefaults.Languages.SayOriginal] as? String
             lang.sayTranslated = record[UserDefaults.Languages.SayTranslated] as? String

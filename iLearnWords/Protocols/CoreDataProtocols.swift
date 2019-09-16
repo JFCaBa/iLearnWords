@@ -17,3 +17,11 @@ protocol CoreDataManagedObject {
     func context() -> NSManagedObjectContext?
 }
 
+
+extension CoreDataManagedObject {
+    
+    func addLanguageToHistory(_ history: History) {
+        //this is a empty implementation to allow this method to be optional
+        
+    }
+}

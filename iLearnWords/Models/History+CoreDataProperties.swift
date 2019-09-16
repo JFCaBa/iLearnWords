@@ -17,6 +17,7 @@ extension History {
 
     @NSManaged public var isSelected: Bool
     @NSManaged public var recordID: Data?
+    @NSManaged public var languageID: String?
     @NSManaged public var title: String?
     @NSManaged public var recordName: String?
     @NSManaged public var lastUpdate: Date?
@@ -39,5 +40,4 @@ extension History {
 
     @objc(removeWords:)
     @NSManaged public func removeFromWords(_ values: NSSet)
-
 }

@@ -17,13 +17,13 @@
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "iLearnWords/Services/DAOController.swift"
-            timestampString = "590339598.064555"
+            filePath = "iLearnWords/Classes/CardsGameVC.swift"
+            timestampString = "590344094.324206"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "93"
-            endingLineNumber = "93"
-            landmarkName = "updateSelectedLanguage(_:)"
+            startingLineNumber = "97"
+            endingLineNumber = "97"
+            landmarkName = "loadAllWords()"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
@@ -33,29 +33,13 @@
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "iLearnWords/Services/CoreDataController.swift"
-            timestampString = "590339598.064624"
+            filePath = "iLearnWords/Classes/LanguagesVC.swift"
+            timestampString = "590345778.435902"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "55"
-            endingLineNumber = "55"
-            landmarkName = "saveContext()"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "No"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "iLearnWords/Services/DAOController.swift"
-            timestampString = "590339598.0646681"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "228"
-            endingLineNumber = "228"
-            landmarkName = "save(original:translated:history:)"
+            startingLineNumber = "59"
+            endingLineNumber = "59"
+            landmarkName = "tableView(_:didSelectRowAt:)"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>

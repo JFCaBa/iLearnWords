@@ -18,8 +18,8 @@ public class DAOController: NSObject {
     var coreData = CoreDataController.shared
     
     var languages: Array<CKRecord> = []
-    var history: Array<Any> = []
-    var words: Array<Any> = []
+    var history: Array<CKRecord> = []
+    var words: Array<CKRecord> = []
 
 
     
@@ -403,10 +403,10 @@ extension DAOController {
         }
     }
     
-    func saveContext (_ contextManager: NSManagedObjectContext) {
-        if contextManager.hasChanges {
+    func saveContext () {
+        if managedContext!.hasChanges {
             do {
-                try contextManager.save()
+                try managedContext!.save()
             } catch {
                 NSLog("Core Data SaveContext Error: \(error.localizedDescription)")
             }
@@ -414,25 +414,17 @@ extension DAOController {
     }
     
     func syncLanguages() {
-        for (_ ,element) in (languages.enumerated()) {
-            let lang = Languages(context: self.managedContext!)
-            _ = lang.recordToManagedObject(element) as! Languages
-        }
+        let lang = Languages(context: self.managedContext!)
+        _ = lang.recordToManagedObject(languages.first!) as! Languages
     }
     
     func syncLanguagesWithHistory() {
-        //Iterate the records..
-        for (_ ,element) in (history.enumerated()) {
-            let hist = History(context: self.managedContext!)
-            _ = hist.recordToManagedObject(element as! CKRecord) as! History
-        }
+        let hist = History(context: self.managedContext!)
+        _ = hist.recordToManagedObject(history.first!) as! History
     }
     
-    
     func syncWordsWithHistory() {
-        for (_ ,element) in (words.enumerated()) {
-            let word = Words(context: self.managedContext!)
-            _ = word.recordToManagedObject(element as! CKRecord) as! Words
-        }
+        let word = Words(context: self.managedContext!)
+        _ = word.recordToManagedObject(words.first!) as! Words
     }
 }

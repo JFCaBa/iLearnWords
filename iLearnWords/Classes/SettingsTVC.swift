@@ -69,18 +69,25 @@ class SettingsTVC: UITableViewController {
         let alert: UIAlertController = UIAlertController(title: NSLocalizedString("Warning", comment: ""), message: NSLocalizedString("This action will remove the words from your phone", comment:""), preferredStyle: .alert)
         
         alert.addAction(UIAlertAction(title: NSLocalizedString("YES", comment:""), style: .destructive) { (alert: UIAlertAction) in
-            if self.dao.cleanData("Words") {
+            if self.dao.cleanData(UserDefaults.Entity.Words) {
                 print("Words flushed")
             }
             else {
                 print("Error flushing Words")
             }
             
-            if self.dao.cleanData("History") {
+            if self.dao.cleanData(UserDefaults.Entity.History) {
                 print("History flushed")
             }
             else {
                 print("Error flushing History")
+            }
+            
+            if self.dao.cleanData(UserDefaults.Entity.Languages) {
+                print("History flushed")
+            }
+            else {
+                print("Error flushing Languages")
             }
             
             self.navigationController?.popViewController(animated: true)

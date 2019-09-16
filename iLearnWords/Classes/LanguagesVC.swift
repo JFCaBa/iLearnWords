@@ -78,7 +78,9 @@ class LanguagesVC: UIViewController, UITableViewDelegate, UITableViewDataSource 
 
 extension LanguagesVC {
     private func loadData() {
-        dataArray = dao.fetchAll()
-        tableView.reloadData()
+        if let data = dao.fetchAllByEntity(UserDefaults.Entity.Languages){
+            dataArray = data  as! Array<Languages>
+            tableView.reloadData()
+        }
     }
 }

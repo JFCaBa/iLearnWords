@@ -78,6 +78,10 @@ class CardsGameVC: UIViewController, TalkerDelegate {
         reverse = !reverse
         btnNextDidTap(nil)
     }
+    
+    @IBAction func btnAllDidTap(_ sender: Any) {
+        loadAllWords()
+    }
 }
 
 extension CardsGameVC {
@@ -85,6 +89,11 @@ extension CardsGameVC {
     //MARK: TalkController delegate
     func didFinishTalk() {
        btnPlayOutlet?.isEnabled = true
-        
+    }
+    
+    func loadAllWords() {
+        if let data = dao.fetchAllByEntity(UserDefaults.Entity.Words) {
+            dataObj = data as! Array<Words>
+        }
     }
 }

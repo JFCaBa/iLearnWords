@@ -22,11 +22,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         Fabric.with([Crashlytics.self])
         IQKeyboardManager.shared.enable = true
         
-        if (UserDefaults.standard.value(forKey: UserDefaults.keys.VoiceSpeed) == nil){
-            //createDefaultValues()
+        if (UserDefaults.standard.value(forKey: UserDefaults.keys.RunOnce) == nil){
+            createDefaultValues()
         }
-        createDefaultValues()
-        
+
         return true
     }
     
@@ -85,6 +84,10 @@ extension AppDelegate{
         
         /** Create the default settings values */
         let user = UserDefaults.standard
+        
+        //App did run once
+        user.set(true, forKey: UserDefaults.keys.RunOnce)
+        
         //Syntheziser
         user.set(0.33, forKey: UserDefaults.keys.VoiceSpeed)
         user.set(false, forKey: UserDefaults.keys.RepeatOriginal)

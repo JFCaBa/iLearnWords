@@ -22,6 +22,7 @@ class CloudKitController {
     let privateDB: CKDatabase
     
     public var fetchCompletion: ((Array<Any>?) -> Void)? = nil
+    public var synchronizeCompletion: ((Error?) -> Void)? = nil
 //    public var saveCompletion: ((Any?) -> Void)? = nil
     
     // MARK: - Initializers
@@ -31,58 +32,46 @@ class CloudKitController {
         privateDB = container.privateCloudDatabase
     }
     
+    
+    /** NEW APPROACH */
+    func synchronizeWith(new:[Any], update:[Any], delete:[Any], completionHandler:(Error?) -> Void) {
+        
+    }
+    
     // MARK: - Fetch
-    func fetchLanguages(_ contextManager: NSManagedObjectContext) {
+    func fetchLanguages(completionHandler:@escaping (Array<Any>?) -> Void?) {
         let predicate = NSPredicate(value: true)
         let query = CKQuery(recordType: "Languages", predicate: predicate)
-        var retArray: Array<Languages> = []
         privateDB.perform(query, inZoneWith: nil) { records, error in
-            guard let languages = records else { return }
-            //Iterate the records..
-            for (_ ,element) in (languages.enumerated()) {
-                DispatchQueue.main.async {
-                    let lang = Languages(context: contextManager)
-                    let managed = lang.recordToManagedObject(element) as! Languages
-                    retArray.append(managed)
-                }
+            guard let recordsArray = records else {
+                completionHandler(nil)
+                return
             }
-            self.fetchCompletion?(retArray)
+            completionHandler(recordsArray)
         }
     }
     
-    func fetchHistory(_ contextManager: NSManagedObjectContext) {
+    func fetchHistory(completionHandler:@escaping (Array<Any>?) -> Void?) {
         let predicate = NSPredicate(value: true)
         let query = CKQuery(recordType: "History", predicate: predicate)
-        var retArray: Array<History> = []
         privateDB.perform(query, inZoneWith: nil) { records, error in
-            guard let history = records else { return }
-            //Iterate the records..
-            for (_ ,element) in (history.enumerated()) {
-                DispatchQueue.main.async {
-                    let hist = History(context: contextManager)
-                    let managed = hist.recordToManagedObject(element) as! History
-                    retArray.append(managed)
-                }
+            guard let recordsArray = records else {
+                completionHandler(nil)
+                return
             }
-            self.fetchCompletion?(retArray)
+            completionHandler(recordsArray)
         }
     }
     
-    func fetchWords(_ contextManager: NSManagedObjectContext) {
+    func fetchWords(completionHandler:@escaping (Array<Any>?) -> Void?) {
         let predicate = NSPredicate(value: true)
         let query = CKQuery(recordType: "Words", predicate: predicate)
-        var retArray: Array<Words> = []
         privateDB.perform(query, inZoneWith: nil) { records, error in
-            guard let words = records else { return }
-            //Iterate the records..
-            for (_ ,element) in (words.enumerated()) {
-                DispatchQueue.main.async {
-                    let word = Words(context: contextManager)
-                    let managed = word.recordToManagedObject(element) as! Words
-                    retArray.append(managed)
-                }
+            guard let recordsArray = records else {
+                completionHandler(nil)
+                return
             }
-            self.fetchCompletion?(retArray)
+            completionHandler(recordsArray)
         }
     }
     

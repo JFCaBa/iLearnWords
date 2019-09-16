@@ -15,6 +15,9 @@ import UIKit
  */
 extension UserDefaults {
     enum keys {
+        /** The app did run once */
+        static let RunOnce = "RUN_ONCE"
+        
         /** Related to the Synthezyser */
         static let VoiceSpeed = "VOICE_SPEED" //The speed for the utterance object
         static let RepeatOriginal = "REPEAT_ORIGINAL" //If the user wants to repeat 3 times the original word before to hear the translation
@@ -28,6 +31,7 @@ extension UserDefaults {
         static let CellBackgroundColor = "CELL_BACKGROUND_COLOR" //The speed for the utterance object
     }
     
+    /** CoreData stuff */
     enum Languages {
         static let Title = "title"
         static let IsSelected = "isSelected"
@@ -65,7 +69,7 @@ extension UserDefaults {
         static let Words = "Words"
     }
 
-    
+    /** Convenient functions to store color in UserDefaults */
     func colorForKey(key: String) -> UIColor? {
         if let colorData = data(forKey: key) {
             do {

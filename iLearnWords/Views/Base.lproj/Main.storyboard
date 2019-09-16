@@ -216,11 +216,18 @@
                         <viewLayoutGuide key="safeArea" id="fhy-PG-xgF"/>
                     </view>
                     <navigationItem key="navigationItem" title="Cards Game" id="zI7-yt-5Pa">
-                        <barButtonItem key="rightBarButtonItem" title="Reverse" id="03O-Zt-1E4">
-                            <connections>
-                                <action selector="btnReverseDidTap:" destination="cWF-hc-php" id="oCZ-LQ-Bbq"/>
-                            </connections>
-                        </barButtonItem>
+                        <rightBarButtonItems>
+                            <barButtonItem title="Reverse" id="03O-Zt-1E4">
+                                <connections>
+                                    <action selector="btnReverseDidTap:" destination="cWF-hc-php" id="oCZ-LQ-Bbq"/>
+                                </connections>
+                            </barButtonItem>
+                            <barButtonItem title="All" id="lyP-h2-yF9">
+                                <connections>
+                                    <action selector="btnAllDidTap:" destination="cWF-hc-php" id="M0T-8q-sL7"/>
+                                </connections>
+                            </barButtonItem>
+                        </rightBarButtonItems>
                     </navigationItem>
                     <connections>
                         <outlet property="btnPlayOutlet" destination="uHi-9l-LSv" id="ncO-aa-KO5"/>

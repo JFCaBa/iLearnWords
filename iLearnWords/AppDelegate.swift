@@ -8,6 +8,7 @@
 
 import UIKit
 import CoreData
+import SyncKit
 //PODs
 import Fabric
 import Crashlytics
@@ -22,7 +23,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         Fabric.with([Crashlytics.self])
         IQKeyboardManager.shared.enable = true
         
-        if (UserDefaults.standard.value(forKey: UserDefaults.keys.VoiceSpeed) == nil){
+        if (UserDefaults.standard.value(forKey: UserDefaults.keys.launchedOnce) == nil){
             createDefaultValues()
         }
         
@@ -96,6 +97,7 @@ extension AppDelegate{
         UserDefaults.standard.synchronize()
         
         /** Create the Languages entity content */
+<<<<<<< HEAD
         let langDic = [["title":"Russian to English",
                         "sayOriginal":"ru_RU",
                         "sayTranslate":"en_GB",
@@ -111,6 +113,12 @@ extension AppDelegate{
             ]
             
         saveInCoreDataWith(array: langDic )
+=======
+        let langDic = [["title":"Russian to English","sayOriginal":"ru_RU","sayTranslate":"en_GB","way":"ru-en"],
+                         ["title":"English to Russian","sayOriginal":"en_GB","sayTranslate":"ru_RU","way":"en-ru"]]
+        saveInCoreDataWith(array: langDic)
+        UserDefaults.standard.set("1", forKey: UserDefaults.keys.launchedOnce)
+>>>>>>> 6c8190a5346c9ed24f74a8093e6fb3f95a9fb685
     }
     
     //MARK: - Helper functions to Store the defaults values into the Languages Entity
@@ -121,8 +129,12 @@ extension AppDelegate{
             languageEntity.sayOriginal = dictionary["sayOriginal"]
             languageEntity.sayTranslate = dictionary["sayTranslate"]
             languageEntity.way = dictionary["way"]
+<<<<<<< HEAD
             languageEntity.recordID = dictionary["recordID"]
             languageEntity.isSelected = dictionary["isSelected"] == "1" ? true : false
+=======
+            languageEntity.identifier = UUID().uuidString
+>>>>>>> 6c8190a5346c9ed24f74a8093e6fb3f95a9fb685
             return languageEntity
         }
         return nil
@@ -132,6 +144,12 @@ extension AppDelegate{
         _ = array.map{self.createLanguageEntityFrom(dictionary: $0)}
         do {
             try persistentContainer.viewContext.save()
+            let synchronizer = CloudKitSynchronizer.privateSynchronizer(containerName: "iCloud.com.armentechnology.iLearnWords", managedObjectContext: persistentContainer.viewContext)
+            
+            // Synchronize
+            synchronizer.synchronize { error in
+                
+            }
         } catch let error {
             print(error)
         }

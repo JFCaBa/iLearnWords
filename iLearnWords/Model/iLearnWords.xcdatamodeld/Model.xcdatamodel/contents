@@ -2,7 +2,9 @@
 <model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="14492.1" systemVersion="18G95" minimumToolsVersion="Automatic" sourceLanguage="Swift" userDefinedModelVersionIdentifier="Cloud">
     <entity name="History" representedClassName="History" syncable="YES" codeGenerationType="class">
         <attribute name="date" optional="YES" attributeType="Date" usesScalarValueType="NO" syncable="YES"/>
+        <attribute name="identifier" attributeType="String" syncable="YES"/>
         <attribute name="isSelected" optional="YES" attributeType="Boolean" usesScalarValueType="YES" syncable="YES"/>
+<<<<<<< HEAD
         <attribute name="recordID" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="title" optional="YES" attributeType="String" maxValueString="40" defaultValueString="Untitled" syncable="YES"/>
         <relationship name="language" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Languages" inverseName="history" inverseEntity="Languages" syncable="YES"/>
@@ -11,6 +13,16 @@
     <entity name="Languages" representedClassName="Languages" syncable="YES" codeGenerationType="class">
         <attribute name="isSelected" optional="YES" attributeType="Boolean" usesScalarValueType="YES" syncable="YES"/>
         <attribute name="recordID" optional="YES" attributeType="String" syncable="YES"/>
+=======
+        <attribute name="talkOriginal" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="talkTranslated" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="title" optional="YES" attributeType="String" maxValueString="40" defaultValueString="Untitled" syncable="YES"/>
+        <attribute name="translatedWay" optional="YES" attributeType="String" syncable="YES"/>
+        <relationship name="words" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Words" inverseName="history" inverseEntity="Words" syncable="YES"/>
+    </entity>
+    <entity name="Languages" representedClassName="Languages" syncable="YES" codeGenerationType="class">
+        <attribute name="identifier" attributeType="String" syncable="YES"/>
+>>>>>>> 6c8190a5346c9ed24f74a8093e6fb3f95a9fb685
         <attribute name="sayOriginal" optional="YES" attributeType="String" defaultValueString="en_GB" syncable="YES"/>
         <attribute name="sayTranslate" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="title" optional="YES" attributeType="String" defaultValueString="Russian to English" syncable="YES"/>
@@ -19,8 +31,13 @@
     </entity>
     <entity name="Words" representedClassName="Words" syncable="YES" codeGenerationType="class">
         <attribute name="date" optional="YES" attributeType="Date" usesScalarValueType="NO" syncable="YES"/>
+<<<<<<< HEAD
         <attribute name="original" optional="YES" attributeType="String" customClassName="NSString" syncable="YES"/>
         <attribute name="recordID" optional="YES" attributeType="String" syncable="YES"/>
+=======
+        <attribute name="identifier" attributeType="String" syncable="YES"/>
+        <attribute name="original" optional="YES" attributeType="String" customClassName="NSString" syncable="YES"/>
+>>>>>>> 6c8190a5346c9ed24f74a8093e6fb3f95a9fb685
         <attribute name="translated" optional="YES" attributeType="String" customClassName="NSString" syncable="YES"/>
         <relationship name="history" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="History" inverseName="words" inverseEntity="History" syncable="YES"/>
     </entity>
@@ -33,8 +50,14 @@
         <memberEntity name="Words"/>
     </configuration>
     <elements>
+<<<<<<< HEAD
         <element name="History" positionX="-63" positionY="27" width="128" height="135"/>
         <element name="Languages" positionX="-27.96484375" positionY="-269.95703125" width="128" height="150"/>
         <element name="Words" positionX="216.02734375" positionY="86.7421875" width="128" height="120"/>
+=======
+        <element name="History" positionX="-63" positionY="27" width="128" height="163"/>
+        <element name="Languages" positionX="-27.96484375" positionY="-269.95703125" width="128" height="118"/>
+        <element name="Words" positionX="216.02734375" positionY="86.7421875" width="128" height="118"/>
+>>>>>>> 6c8190a5346c9ed24f74a8093e6fb3f95a9fb685
     </elements>
 </model>

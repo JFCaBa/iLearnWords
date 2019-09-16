@@ -41,8 +41,22 @@ class MainVC: UIViewController, TalkerDelegate, UITableViewDelegate, UITableView
         
         //Need to load the title in viewWillAppear because it can change
         //depending on the language selection in settings
+<<<<<<< HEAD
         if let language = dao.fetchSelectedLanguage() {
             title = language.way
+=======
+        title = (UserDefaults.standard.value(forKey: UserDefaults.keys.TranslateWay) as! String)
+        //Assign the delegate in viewWillAppear because the talk class is
+        //also used in the Cards game
+        talk.delegate = self
+        //Need to load the data in viewWillAppear because the history shown can be
+        //changed in settings
+        history = dao.fetchSelectedHistory()
+        if ((history?.words) != nil) {
+            dataObj = history?.words!.allObjects as! Array<Words>
+            //Sort the array by the date the words were added to the database
+            dataObj = dataObj.sorted(by:{ $0.date!.timeIntervalSince1970 < $1.date!.timeIntervalSince1970 })
+>>>>>>> 6c8190a5346c9ed24f74a8093e6fb3f95a9fb685
         }
         else {
             title = ""

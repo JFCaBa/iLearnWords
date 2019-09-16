@@ -2,7 +2,11 @@
 //  Languages+CoreDataProperties.swift
 //  
 //
+<<<<<<< HEAD
 //  Created by Jose Catala on 13/09/2019.
+=======
+//  Created by Jose Catala on 12/09/2019.
+>>>>>>> 6c8190a5346c9ed24f74a8093e6fb3f95a9fb685
 //
 //
 
@@ -21,6 +25,7 @@ extension Languages {
     @NSManaged public var sayTranslate: String?
     @NSManaged public var title: String?
     @NSManaged public var way: String?
+<<<<<<< HEAD
     @NSManaged public var isSelected: Bool
     @NSManaged public var history: NSSet?
 
@@ -40,5 +45,8 @@ extension Languages {
 
     @objc(removeHistory:)
     @NSManaged public func removeFromHistory(_ values: NSSet)
+=======
+    @NSManaged public var identifier: String?
+>>>>>>> 6c8190a5346c9ed24f74a8093e6fb3f95a9fb685
 
 }

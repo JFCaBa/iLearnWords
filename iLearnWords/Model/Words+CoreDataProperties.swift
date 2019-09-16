@@ -2,7 +2,11 @@
 //  Words+CoreDataProperties.swift
 //  
 //
+<<<<<<< HEAD
 //  Created by Jose Catala on 13/09/2019.
+=======
+//  Created by Jose Catala on 12/09/2019.
+>>>>>>> 6c8190a5346c9ed24f74a8093e6fb3f95a9fb685
 //
 //
 
@@ -20,6 +24,10 @@ extension Words {
     @NSManaged public var original: String?
     @NSManaged public var recordID: String?
     @NSManaged public var translated: String?
+<<<<<<< HEAD
+=======
+    @NSManaged public var identifier: String?
+>>>>>>> 6c8190a5346c9ed24f74a8093e6fb3f95a9fb685
     @NSManaged public var history: History?
 
 }

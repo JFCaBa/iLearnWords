@@ -81,7 +81,16 @@ class CardsGameVC: UIViewController, TalkerDelegate {
 }
 
 extension CardsGameVC {
+<<<<<<< HEAD
 
+=======
+    private func loadData() {
+        dataObj = (history!.words?.allObjects as! Array<Words>)
+        max = dataObj.count - 1
+        btnNextDidTap(UIButton())
+    }
+    
+>>>>>>> 6c8190a5346c9ed24f74a8093e6fb3f95a9fb685
     //MARK: TalkController delegate
     func didFinishTalk() {
        btnPlayOutlet?.isEnabled = true

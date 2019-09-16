@@ -8,6 +8,7 @@
 
 import UIKit
 import CoreData
+import SyncKit
 
 protocol LangProtocol {
      func fetchAll() -> Array<Languages>
@@ -23,6 +24,24 @@ protocol WordProtocol {
 
 public class DAOController: NSObject {
     
+    override init() {
+        super.init()
+        guard let appDelegate = UIApplication.shared.delegate as? AppDelegate else {
+            return
+        }
+
+        let managedContext = appDelegate.persistentContainer.viewContext
+
+//        let synchronizer = CloudKitSynchronizer.privateSynchronizer(containerName: "iCloud.com.armentechnology.iLearnWords", managedObjectContext: managedContext)
+
+//        synchronizer.eraseLocalMetadata()
+//        // Synchronize
+//
+//        synchronizer.synchronize { error in
+//
+//        }
+
+    }
     //MARK: - Private functions
     /// To get the managedContext to be used in the access to the database
     ///
@@ -33,6 +52,7 @@ public class DAOController: NSObject {
             return nil
         }
         
+<<<<<<< HEAD
         return appDelegate.persistentContainer.viewContext
     }
     
@@ -50,12 +70,35 @@ public class DAOController: NSObject {
             let result = try managedContext!.fetch(fetchRequest)
             return result
             
+=======
+        let managedContext = appDelegate.persistentContainer.viewContext
+        let entity = NSEntityDescription.entity(forEntityName: "Translated", in: managedContext)!
+        let translateWay = UserDefaults.standard.value(forKey: UserDefaults.keys.TranslateWay) as! String
+        let word = NSManagedObject(entity: entity, insertInto: managedContext)
+        
+        word.setValue(original, forKey: "original")
+        word.setValue(translated, forKey: "trans")
+        word.setValue(Date(), forKey: "date")
+        word.setValue(translateWay, forKey: "translateWay")
+        word.setValue(UUID().uuidString, forKey: "recordID")
+        
+        do {
+            try managedContext.save()
+            let synchronizer = CloudKitSynchronizer.privateSynchronizer(containerName: "iCloud.com.armentechnology.iLearnWords", managedObjectContext: managedContext)
+            
+            // Synchronize
+            synchronizer.synchronize { error in
+                
+            }
+            return true
+>>>>>>> 6c8190a5346c9ed24f74a8093e6fb3f95a9fb685
         } catch let error as NSError {
             print("Could not fetch. \(error), \(error.userInfo)")
             return nil
         }
     }
     
+<<<<<<< HEAD
     /// To get the selected object in the passed entity. For the tables Language and History
     /// there is a property call isSelected
     ///
@@ -107,6 +150,60 @@ public class DAOController: NSObject {
                     language.isSelected = language.recordID == lang.recordID ? true : false
                     try managedContext!.save()
                 }
+=======
+    public func saveLanguage(title: String, short: String, say: String) -> Bool {
+        guard let appDelegate = UIApplication.shared.delegate as? AppDelegate else {
+            return false
+        }
+        
+        let managedContext = appDelegate.persistentContainer.viewContext
+        let entity = NSEntityDescription.entity(forEntityName: "Languages", in: managedContext)!
+        let lang = NSManagedObject(entity: entity, insertInto: managedContext)
+        
+        lang.setValue(title, forKey: "title")
+        lang.setValue(short, forKey: "short")
+        lang.setValue(say, forKey: "say")
+        lang.setValue(UUID().uuidString, forKey: "recordID")
+        
+        do {
+            try managedContext.save()
+            let synchronizer = CloudKitSynchronizer.privateSynchronizer(containerName: "iCloud.com.armentechnology.iLearnWords", managedObjectContext: managedContext)
+            
+            // Synchronize
+            synchronizer.synchronize { error in
+                
+            }
+            return true
+        } catch let error as NSError {
+            print("Could not save Language. \(error), \(error.userInfo)")
+            return false
+        }
+    }
+    
+    public func saveHistory(_ word: Array<Words>, title: String = "Untitled") -> Bool {
+        guard let appDelegate = UIApplication.shared.delegate as? AppDelegate else {
+            return false
+        }
+        
+        let managedContext = appDelegate.persistentContainer.viewContext
+        let history = History(context: managedContext)
+        history.words = (NSSet(array: word))
+        history.title = title
+        history.isSelected = true
+        history.translatedWay = (UserDefaults.standard.value(forKey: UserDefaults.keys.TranslateWay) as! String)
+        history.talkOriginal = (UserDefaults.standard.value(forKey: UserDefaults.keys.TalkOriginal) as! String)
+        history.talkTranslated = (UserDefaults.standard.value(forKey: UserDefaults.keys.TalkTranslate) as! String)
+        history.date = Date()
+        history.identifier = UUID().uuidString
+        
+        do {
+            try managedContext.save()
+            let synchronizer = CloudKitSynchronizer.privateSynchronizer(containerName: "iCloud.com.armentechnology.iLearnWords", managedObjectContext: managedContext)
+            
+            // Synchronize
+            synchronizer.synchronize { error in
+                
+>>>>>>> 6c8190a5346c9ed24f74a8093e6fb3f95a9fb685
             }
             return true
             
@@ -120,7 +217,29 @@ public class DAOController: NSObject {
         if let object = fetchSelectedByEntity("Languages") {
             return (object as! Languages)
         }
+<<<<<<< HEAD
         else {
+=======
+        
+        let managedContext = appDelegate.persistentContainer.viewContext
+        let word = Words(context: managedContext)
+        word.original = original
+        word.translated = translated
+        word.date = Date()
+        word.identifier = UUID().uuidString
+        
+        do {
+            try managedContext.save()
+            let synchronizer = CloudKitSynchronizer.privateSynchronizer(containerName: "iCloud.com.armentechnology.iLearnWords", managedObjectContext: managedContext)
+            
+            // Synchronize
+            synchronizer.synchronize { error in
+                
+            }
+            return word
+        } catch let error as NSError {
+            print("Could not save Word. \(error), \(error.userInfo)")
+>>>>>>> 6c8190a5346c9ed24f74a8093e6fb3f95a9fb685
             return nil
         }
     }
@@ -281,10 +400,17 @@ public class DAOController: NSObject {
         fetchRequest.predicate = NSPredicate(format: "original = %@", word)
         
         do {
+<<<<<<< HEAD
             let result = try managedContext!.fetch(fetchRequest)
             let wordDb = result.first?.value(forKey: "translated") as? String
             return wordDb
             
+=======
+            let result = try managedContext.fetch(fetchRequest)
+            let history = result.first as! History
+            let toReturn = history.words!.allObjects as! Array<Words>
+            return toReturn
+>>>>>>> 6c8190a5346c9ed24f74a8093e6fb3f95a9fb685
         } catch let error as NSError {
             print("Could not fetch Translated Word. \(error), \(error.userInfo)")
             return nil
@@ -297,7 +423,17 @@ public class DAOController: NSObject {
         let managedContext = context()
         managedContext!.delete(object)
         do {
+<<<<<<< HEAD
             try managedContext!.save()
+=======
+            try managedContext.save()
+            let synchronizer = CloudKitSynchronizer.privateSynchronizer(containerName: "iCloud.com.armentechnology.iLearnWords", managedObjectContext: managedContext)
+            
+            // Synchronize
+            synchronizer.synchronize { error in
+                
+            }
+>>>>>>> 6c8190a5346c9ed24f74a8093e6fb3f95a9fb685
             return true
             
         } catch let error as NSError {
@@ -311,7 +447,17 @@ public class DAOController: NSObject {
         let managedContext = context()
         managedContext!.insert(object)
         do {
+<<<<<<< HEAD
             try managedContext!.save()
+=======
+            try managedContext.save()
+            let synchronizer = CloudKitSynchronizer.privateSynchronizer(containerName: "iCloud.com.armentechnology.iLearnWords", managedObjectContext: managedContext)
+            
+            // Synchronize
+            synchronizer.synchronize { error in
+                
+            }
+>>>>>>> 6c8190a5346c9ed24f74a8093e6fb3f95a9fb685
             return true
             
         } catch let error as NSError {
@@ -332,7 +478,12 @@ public class DAOController: NSObject {
                     try managedContext!.save()
                 }
             }
-
+            let synchronizer = CloudKitSynchronizer.privateSynchronizer(containerName: "iCloud.com.armentechnology.iLearnWords", managedObjectContext: managedContext)
+            
+            // Synchronize
+            synchronizer.synchronize { error in
+                
+            }
             return true
             
         } catch let error as NSError {
@@ -341,6 +492,42 @@ public class DAOController: NSObject {
         }
     }
     
+<<<<<<< HEAD
+=======
+    public func updateHistory(_ history: History) -> Bool {
+        guard let appDelegate = UIApplication.shared.delegate as? AppDelegate else {
+            return false
+        }
+        
+        let managedContext = appDelegate.persistentContainer.viewContext
+        let fetchRequest = NSFetchRequest<NSManagedObject>(entityName: "History")
+        fetchRequest.predicate = NSPredicate(format: "date == %@", history.date! as NSDate)
+        
+        do {
+            let result = try managedContext.fetch(fetchRequest)
+            if result.count > 0 {
+                let hist = result.first as! History
+                hist.isSelected = true
+                try managedContext.save()
+                let synchronizer = CloudKitSynchronizer.privateSynchronizer(containerName: "iCloud.com.armentechnology.iLearnWords", managedObjectContext: managedContext)
+                
+                // Synchronize
+                synchronizer.synchronize { error in
+                    
+                }
+                return true
+            }
+            else {
+                return false
+            }
+            
+        } catch let error as NSError {
+            print("Could not fetch. \(error), \(error.userInfo)")
+            return false
+        }
+    }
+    
+>>>>>>> 6c8190a5346c9ed24f74a8093e6fb3f95a9fb685
     public func updateWord(original: String, translated: String) -> Bool {
         let managedContext = context()
         let fetchRequest = NSFetchRequest<NSManagedObject>(entityName: "Words")
@@ -352,7 +539,17 @@ public class DAOController: NSObject {
                 let word = result.first as! Words
                 word.original = original
                 word.translated = translated
+<<<<<<< HEAD
                 try managedContext!.save()
+=======
+                try managedContext.save()
+                let synchronizer = CloudKitSynchronizer.privateSynchronizer(containerName: "iCloud.com.armentechnology.iLearnWords", managedObjectContext: managedContext)
+                
+                // Synchronize
+                synchronizer.synchronize { error in
+                    
+                }
+>>>>>>> 6c8190a5346c9ed24f74a8093e6fb3f95a9fb685
                 return true
             }
             else {
@@ -383,8 +580,19 @@ public class DAOController: NSObject {
         let fetchRequest = NSFetchRequest<NSManagedObject>(entityName: entity)
         let deleteRequest = NSBatchDeleteRequest(fetchRequest: fetchRequest as! NSFetchRequest<NSFetchRequestResult>)
         do {
+<<<<<<< HEAD
             try managedContext!.execute(deleteRequest)
             try managedContext!.save()
+=======
+            try managedContext.execute(deleteRequest)
+            try managedContext.save()
+            let synchronizer = CloudKitSynchronizer.privateSynchronizer(containerName: "iCloud.com.armentechnology.iLearnWords", managedObjectContext: managedContext)
+            
+            // Synchronize
+            synchronizer.synchronize { error in
+                
+            }
+>>>>>>> 6c8190a5346c9ed24f74a8093e6fb3f95a9fb685
             return true
         } catch let error as NSError {
             print("Could not delete. \(error), \(error.userInfo)")

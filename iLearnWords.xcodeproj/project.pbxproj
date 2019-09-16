@@ -16,16 +16,16 @@
 		6D36E192231BD49200C88F0A /* TalkController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D36E191231BD49200C88F0A /* TalkController.swift */; };
 		6DA5E4D7231E53F0004732CF /* DAOController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6DA5E4D6231E53F0004732CF /* DAOController.swift */; };
 		6DA5E4FF231EAE8B004732CF /* CardsGameVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6DA5E4FE231EAE8B004732CF /* CardsGameVC.swift */; };
-		6DCD6ED72329037900CF6806 /* CloudKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6DCD6ED62329037900CF6806 /* CloudKit.framework */; };
 		6DCD6ED92329220800CF6806 /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 6DCD6ED82329220800CF6806 /* Default-568h@2x.png */; };
 		6DCDEFF5231F9DCD00744E65 /* LanguagesVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6DCDEFF4231F9DCD00744E65 /* LanguagesVC.swift */; };
+		6DDDA23D232A92D700D8F1BD /* Pods_iLearnWords.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BD187980F093E277E5A968F7 /* Pods_iLearnWords.framework */; };
 		6DDEF2B623240D29007C9C77 /* WordsEditVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6DDEF2B523240D29007C9C77 /* WordsEditVC.swift */; };
 		6DDEF2B823251697007C9C77 /* UserDefaults+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6DDEF2B723251697007C9C77 /* UserDefaults+Extension.swift */; };
 		6DE21ECC232151A400CA24D9 /* HistoryVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6DE21ECB232151A400CA24D9 /* HistoryVC.swift */; };
 		6DE21ECE232153F800CA24D9 /* HistoryDetailVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6DE21ECD232153F800CA24D9 /* HistoryDetailVC.swift */; };
+		6DF10466232A82BF003008C5 /* CloudKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6DCD6ED62329037900CF6806 /* CloudKit.framework */; };
 		6DF52795231C5D1600595B26 /* NetworkController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6DF52794231C5D1600595B26 /* NetworkController.swift */; };
 		6DF52798231DB91C00595B26 /* iLearnWords.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 6DF52796231DB91C00595B26 /* iLearnWords.xcdatamodeld */; };
-		AF4F2C61B2FCA3E744F72685 /* Pods_iLearnWords.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BD187980F093E277E5A968F7 /* Pods_iLearnWords.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -47,6 +47,10 @@
 		6DCD6ED62329037900CF6806 /* CloudKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CloudKit.framework; path = System/Library/Frameworks/CloudKit.framework; sourceTree = SDKROOT; };
 		6DCD6ED82329220800CF6806 /* Default-568h@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-568h@2x.png"; sourceTree = "<group>"; };
 		6DCDEFF4231F9DCD00744E65 /* LanguagesVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LanguagesVC.swift; sourceTree = "<group>"; };
+		6DDDA236232A8C1F00D8F1BD /* iLearnWords-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "iLearnWords-Bridging-Header.h"; sourceTree = "<group>"; };
+		6DDDA237232A92AD00D8F1BD /* SyncKit.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = SyncKit.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		6DDDA239232A92BD00D8F1BD /* SyncKit.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = SyncKit.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		6DDDA23B232A92C700D8F1BD /* SyncKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SyncKit.framework; path = "../Library/Developer/Xcode/DerivedData/iLearnWords-gunrrjinpyoihwgjvgopwpmcxeqt/Build/Products/Debug-iphoneos/SyncKit/SyncKit.framework"; sourceTree = "<group>"; };
 		6DDEF2B523240D29007C9C77 /* WordsEditVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WordsEditVC.swift; sourceTree = "<group>"; };
 		6DDEF2B723251697007C9C77 /* UserDefaults+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UserDefaults+Extension.swift"; sourceTree = "<group>"; };
 		6DE21ECB232151A400CA24D9 /* HistoryVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HistoryVC.swift; sourceTree = "<group>"; };
@@ -62,8 +66,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				AF4F2C61B2FCA3E744F72685 /* Pods_iLearnWords.framework in Frameworks */,
-				6DCD6ED72329037900CF6806 /* CloudKit.framework in Frameworks */,
+				6DF10466232A82BF003008C5 /* CloudKit.framework in Frameworks */,
+				6DDDA23D232A92D700D8F1BD /* Pods_iLearnWords.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -95,6 +99,7 @@
 				6DCD6ED52329036000CF6806 /* iLearnWords.entitlements */,
 				6D36E17D231BC09A00C88F0A /* AppDelegate.swift */,
 				6DDEF2B723251697007C9C77 /* UserDefaults+Extension.swift */,
+				6DDDA236232A8C1F00D8F1BD /* iLearnWords-Bridging-Header.h */,
 				6D36E195231BF7D200C88F0A /* Classes */,
 				6D36E193231BF79700C88F0A /* Services */,
 				6D36E194231BF7C300C88F0A /* Views */,
@@ -149,7 +154,10 @@
 		9AD42107F2B70BA6CB278AC0 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				6DDDA237232A92AD00D8F1BD /* SyncKit.framework */,
+				6DDDA23B232A92C700D8F1BD /* SyncKit.framework */,
 				6DCD6ED62329037900CF6806 /* CloudKit.framework */,
+				6DDDA239232A92BD00D8F1BD /* SyncKit.framework */,
 				BD187980F093E277E5A968F7 /* Pods_iLearnWords.framework */,
 			);
 			name = Frameworks;
@@ -478,6 +486,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 75SEZC5TGW;
 				INFOPLIST_FILE = iLearnWords/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -485,6 +494,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.armentechnology.iLearnWords;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
+				SWIFT_OBJC_BRIDGING_HEADER = "iLearnWords/iLearnWords-Bridging-Header.h";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
@@ -500,6 +510,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 75SEZC5TGW;
 				INFOPLIST_FILE = iLearnWords/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -507,6 +518,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.armentechnology.iLearnWords;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
+				SWIFT_OBJC_BRIDGING_HEADER = "iLearnWords/iLearnWords-Bridging-Header.h";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};

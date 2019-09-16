@@ -15,6 +15,7 @@ import UIKit
  */
 extension UserDefaults {
     enum keys {
+        static let launchedOnce = "LAUNCH_ONCE" 
         /** Related to the Synthezyser */
         static let VoiceSpeed = "VOICE_SPEED" //The speed for the utterance object
         static let RepeatOriginal = "REPEAT_ORIGINAL" //If the user wants to repeat 3 times the original word before to hear the translation

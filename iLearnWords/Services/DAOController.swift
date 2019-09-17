@@ -63,6 +63,27 @@ public class DAOController: NSObject {
     }
     
     //MARK: - Languages
+    //Helper functions to Store the defaults values into the Languages Entity
+    func createLanguageEntityFrom(dictionary: [String: String]) -> NSManagedObject? {
+        if let languageEntity = NSEntityDescription.insertNewObject(forEntityName: "Languages", into: managedContext!) as? Languages {
+            languageEntity.title = dictionary[UserDefaults.Languages.Title]
+            languageEntity.sayOriginal = dictionary[UserDefaults.Languages.SayOriginal]
+            languageEntity.sayTranslated = dictionary[UserDefaults.Languages.SayTranslated]
+            languageEntity.way = dictionary[UserDefaults.Languages.Way]
+            languageEntity.isSelected = dictionary[UserDefaults.Languages.IsSelected] == "1" ? true : false
+            return languageEntity
+        }
+        return nil
+    }
+    
+    func saveInCoreDataWith(array: [[String: String]]) {
+        _ = array.map{self.createLanguageEntityFrom(dictionary: $0)}
+        do {
+            try managedContext?.save()
+        } catch let error {
+            print(error)
+        }
+    }
     /// To update the selected language
     ///
     /// - Parameters:

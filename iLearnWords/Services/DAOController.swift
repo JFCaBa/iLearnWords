@@ -150,6 +150,7 @@ public class DAOController: NSObject {
                 for history in result!.compactMap({ $0 as? History}) {
                     history.isSelected =  false
                 }
+                hist.isSelected = true
                 try managedContext?.save()
             }
             return true
@@ -177,7 +178,6 @@ public class DAOController: NSObject {
         word.recordID = Data(base64Encoded: UUID().uuidString)
         word.lastUpdate = Date()
         word.history = history
-        
         do {
             try managedContext!.save()
             return true
@@ -287,7 +287,7 @@ extension DAOController {
         group.enter()
         
         var languages: Array<CKRecord> = []
-//        var history: Array<CKRecord> = []
+        var history: Array<CKRecord> = []
         var words: Array<CKRecord> = []
         
         self.cloud.fetchLanguages(completionHandler: { (records) -> Void? in
@@ -313,28 +313,29 @@ extension DAOController {
             return nil
         })
         
-//        group.enter()
-//        self.cloud.fetchHistory(completionHandler: { (records) -> Void? in
-//            if nil != records {
-//                for (_, element) in records!.enumerated() {
-//                    let record = element as! CKRecord
-//                    history.append(record)
-//                }
-//            }
-//            group.leave()
-//            return nil
-//        })
+        group.enter()
+        self.cloud.fetchHistory(completionHandler: { (records) -> Void? in
+            if nil != records {
+                for (_, element) in records!.enumerated() {
+                    let record = element as! CKRecord
+                    history.append(record)
+                }
+            }
+            group.leave()
+            return nil
+        })
         
         group.notify(queue: DispatchQueue.main) {
             if languages.count > 0 {
                 self.syncLanguages(languages)
             }
-//            if history.count > 0 {
-//                self.syncLanguagesWithHistory(history)
-//            }
             
             if words.count > 0 {
                 self.syncWordsWithHistory(words)
+            }
+            
+            if history.count > 0 {
+                self.syncLanguagesWithHistory(history)
             }
         }
     }
@@ -355,11 +356,11 @@ extension DAOController {
         lang.recordsToManagedObjects(sender)
     }
     
-//    func syncLanguagesWithHistory(_ sender: Array<CKRecord>) {
-//        let hist = History(context: self.managedContext!)
-//        coreData.context()?.delete(hist)
-//        hist.recordsToManagedObjects(sender)
-//    }
+    func syncLanguagesWithHistory(_ sender: Array<CKRecord>) {
+        let hist = History(context: self.managedContext!)
+        coreData.context()?.delete(hist)
+        hist.recordsToManagedObjects(sender)
+    }
     
     func syncWordsWithHistory(_ sender: Array<CKRecord>) {
         let word = Words(context: self.managedContext!)

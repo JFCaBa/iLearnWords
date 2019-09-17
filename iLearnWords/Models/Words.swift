@@ -25,6 +25,7 @@ class Words: NSManagedObject, CloudKitManagedObject {
         let record = cloudKitRecord()
         record[UserDefaults.Words.Original]          = original as CKRecordValue
         record[UserDefaults.Words.Translated]        = translated as CKRecordValue
+        record[UserDefaults.Words.LastUpdate]        = Date() as CKRecordValue
         return record
     }
     

@@ -231,7 +231,7 @@ extension MainVC {
             history = result
             dataObj = result.words?.allObjects as! Array<Words>
             //Sort the array by the date the words were added to the database
-            //dataObj = dataObj.sorted(by:{ $0.lastUpdate!.timeIntervalSince1970 < $1.lastUpdate!.timeIntervalSince1970 })
+            dataObj = dataObj.sorted(by:{ $0.lastUpdate?.timeIntervalSince1970 ?? Date().timeIntervalSince1970 < $1.lastUpdate?.timeIntervalSince1970 ?? Date().timeIntervalSince1970 })
         }
         else {
             dataObj = []

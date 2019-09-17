@@ -54,21 +54,4 @@ extension CloudKitManagedObject {
             _ = recordToManagedObject(record)
         }
     }
-    
-    func addLanguagesToHistories() {
-
-    }
-    
-    func addWordsToHistories() {
-        let hist = History(context: CoreDataController.shared.context()!)
-        
-        let fetchRequest = NSFetchRequest<NSManagedObject>(entityName: UserDefaults.Entity.Words)
-        do {
-            let words = try CoreDataController.shared.context()?.fetch(fetchRequest)
-            hist.addToWords(NSSet(array: words!))
-        }
-        catch {
-            fatalError("Cannot assign words to history")
-        }
-    }
 }

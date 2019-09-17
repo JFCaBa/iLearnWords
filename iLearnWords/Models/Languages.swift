@@ -33,7 +33,7 @@ class Languages: NSManagedObject, CloudKitManagedObject {
         record[UserDefaults.Languages.SayOriginal]   = sayOriginal as CKRecordValue
         record[UserDefaults.Languages.SayTranslated] = sayTranslated as CKRecordValue
 //        record[UserDefaults.Languages.History]       = history as! CKRecordValue
-        record[UserDefaults.Languages.LastUpdate]    = lastUpdate
+        record[UserDefaults.Languages.LastUpdate]    = Date() as CKRecordValue
         return record
     }
     

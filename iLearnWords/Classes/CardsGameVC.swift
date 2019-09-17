@@ -68,7 +68,7 @@ class CardsGameVC: UIViewController, TalkerDelegate {
             return
         }
         
-        guard  let lang = reverse ? history?.language!.sayTranslated : history?.language!.sayOriginal else {
+        guard  let lang = history?.language!.sayOriginal else {
             return
         }
         

@@ -100,7 +100,7 @@ class HistoryVC: UIViewController, UITableViewDelegate, UITableViewDataSource {
 
 extension HistoryVC {
     private func loadData() {
-        dataArray = dao.fetchAll()
+        dataArray = dao.fetchAllByEntity(UserDefaults.Entity.History) as! Array<History>
         tableView.reloadData()
     }
 }

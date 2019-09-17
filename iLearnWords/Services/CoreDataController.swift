@@ -5,20 +5,21 @@
 //  Created by Jose Catala on 16/09/2019.
 //  Copyright © 2019 Jose Francisco Catalá Barba. All rights reserved.
 //
+// ***********************************************************
+// CoreData STACK
+// Singleton Class to ensure that the ManagedContextObject
+// is the same used in all the classes
+// ***********************************************************
 
 import UIKit
 import CoreData
 
 
 class CoreDataController: NSObject, CoreDataManagedObject {
-    
-
-    
     static let shared = CoreDataController()
     
     private override init() {
         super.init()
-
     }
     
     lazy var persistentContainer: NSPersistentContainer = {

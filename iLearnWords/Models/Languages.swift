@@ -16,6 +16,7 @@ class Languages: NSManagedObject, CloudKitManagedObject {
     var coreData = CoreDataController.shared
     
     var recordType: String { return UserDefaults.Entity.Languages }
+    
     func managedObjectToRecord() -> CKRecord {
         guard   let title = title,
                 let way = way,
@@ -54,4 +55,6 @@ class Languages: NSManagedObject, CloudKitManagedObject {
             return nil
         }
     }
+    
+
 }

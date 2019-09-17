@@ -24,9 +24,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         IQKeyboardManager.shared.enable = true
         
         if (UserDefaults.standard.value(forKey: UserDefaults.keys.RunOnce) == nil){
-            //createDefaultValues()
+            createDefaultValues()
         }
-         createDefaultValues()
+
         return true
     }
     

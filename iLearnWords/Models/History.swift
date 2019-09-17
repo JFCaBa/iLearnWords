@@ -44,8 +44,4 @@ class History: NSManagedObject, CloudKitManagedObject {
             return nil
         }
     }
-    
-    func addLanguageToHistory(_ History: NSManagedObject) {
-        
-    }
 }

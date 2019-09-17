@@ -16,22 +16,19 @@ protocol RecordHelper {
 
 class CloudKitController {
     
+    static let shared = CloudKitController()
+    
     // Represents the default container specified in the iCloud section of the Capabilities tab for the project.
-    let container: CKContainer
-    let publicDB: CKDatabase
+    let container: CKContainer = CKContainer.default()
     let privateDB: CKDatabase
     
     public var fetchCompletion: ((Array<Any>?) -> Void)? = nil
     public var synchronizeCompletion: ((Error?) -> Void)? = nil
-//    public var saveCompletion: ((Any?) -> Void)? = nil
     
     // MARK: - Initializers
     init() {
-        container = CKContainer.default()
-        publicDB = container.publicCloudDatabase
         privateDB = container.privateCloudDatabase
     }
-    
     
     /** NEW APPROACH */
     func synchronizeWith(new:[Any], update:[Any], delete:[Any], completionHandler:(Error?) -> Void) {
@@ -125,18 +122,29 @@ class CloudKitController {
         }
     }
     
-    func saveCkWord(_ word: Words, managedContext: NSManagedObjectContext) {
-        let ckWord = CKRecord(recordType: "Words")
-        ckWord.setValue(word.original, forKey: "original")
-        ckWord.setValue(word.translated, forKey: "translated")
-        publicDB.save(ckWord) { (record, error) in
-            do {
-                word.lastUpdate = record?.modificationDate
-                try managedContext.save()
+    func saveCkWord(_ word: Words) {
+        do {
+            let recordID = try NSKeyedUnarchiver.unarchivedObject(ofClass: CKRecord.ID.self, from: word.recordID!)
+            privateDB.fetch(withRecordID: recordID!) { (record, error) in
+                if let ckWord = record {
+                    ckWord.setObject(word.translated as __CKRecordObjCValue?, forKey: "translated")
+                    let modifyRecords = CKModifyRecordsOperation(recordsToSave:[ckWord], recordIDsToDelete: nil)
+                    modifyRecords.savePolicy = CKModifyRecordsOperation.RecordSavePolicy.allKeys
+                    modifyRecords.qualityOfService = QualityOfService.userInitiated
+                    modifyRecords.modifyRecordsCompletionBlock = { savedRecords, deletedRecordIDs, error in
+                        if error == nil {
+                            word.lastUpdate = Date()
+                            print("Modified")
+                        }else {
+                            print(error as Any)
+                        }
+                    }
+                    self.privateDB.add(modifyRecords)
+                }
             }
-            catch {
-                print("Error Saving History to CloudKit")
-            }
+        }
+        catch {
+            print("Error")
         }
     }
 }

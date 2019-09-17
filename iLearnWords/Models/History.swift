@@ -37,7 +37,7 @@ class History: NSManagedObject, CloudKitManagedObject {
             hist.recordName = record.recordID.recordName
             hist.lastUpdate = record[UserDefaults.Languages.LastUpdate]
             hist.title = record[UserDefaults.Languages.Title] as? String
-            hist.isSelected = record[UserDefaults.Languages.IsSelected] as! Bool
+            hist.isSelected = false
             let langRef = record[UserDefaults.History.Language] as! CKRecord.Reference
             let fetchRequestLang = NSFetchRequest<NSManagedObject>(entityName: UserDefaults.Entity.Languages)
             fetchRequestLang.predicate = NSPredicate(format: "recordName = %@", langRef.recordID.recordName)

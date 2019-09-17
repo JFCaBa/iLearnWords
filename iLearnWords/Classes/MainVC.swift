@@ -39,8 +39,8 @@ class MainVC: UIViewController, TalkerDelegate, UITableViewDelegate, UITableView
         
         //Need to load the title in viewWillAppear because it can change
         //depending on the language selection in settings
-        if let language = dao.fetchSelectedLanguage() {
-            title = language.way
+        if let language = dao.fetchSelectedByEntity(UserDefaults.Entity.Languages) {
+            title = (language as! Languages).way
         }
         else {
             title = ""
@@ -227,9 +227,9 @@ extension MainVC {
     func loadData() {
         //Need to load the data in viewWillAppear because the history to be shown can
         //change in settings
-        if let result =  dao.fetchSelectedHistory() {
-            history = result
-            dataObj = result.words?.allObjects as! Array<Words>
+        if let result =  dao.fetchSelectedByEntity(UserDefaults.Entity.History) {
+            history = (result as! History)
+            dataObj = history!.words?.allObjects as! Array<Words>
             //Sort the array by the date the words were added to the database
             dataObj = dataObj.sorted(by:{ $0.lastUpdate?.timeIntervalSince1970 ?? Date().timeIntervalSince1970 < $1.lastUpdate?.timeIntervalSince1970 ?? Date().timeIntervalSince1970 })
         }

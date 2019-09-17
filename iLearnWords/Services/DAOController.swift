@@ -49,7 +49,7 @@ public class DAOController: NSObject {
     ///  - entity: String with the name of the entity
     /// - Returns:
     ///  - The first NSManagedObject with the property isSelected to true (should be just one)
-    private func fetchSelectedByEntity(_ entity: String) -> NSManagedObject? {
+    func fetchSelectedByEntity(_ entity: String) -> NSManagedObject? {
         let fetchRequest = NSFetchRequest<NSManagedObject>(entityName: entity)
         fetchRequest.predicate = NSPredicate(format: "isSelected == %@", NSNumber(value: true))
         do {
@@ -87,24 +87,7 @@ public class DAOController: NSObject {
         }
     }
     
-    func fetchSelectedLanguage() -> Languages? {
-        if let object = fetchSelectedByEntity(UserDefaults.Entity.Languages) {
-            return (object as! Languages)
-        }
-        else {
-            return nil
-        }
-    }
-    
     //MARK: - History
-    func fetchSelectedHistory() -> History? {
-        if let object = fetchSelectedByEntity(UserDefaults.Entity.History) {
-            return (object as! History)
-        }
-        else {
-            return nil
-        }
-    }
     
     /// To save the paste history
     ///
@@ -124,7 +107,7 @@ public class DAOController: NSObject {
         history.recordID = Data(base64Encoded: uuid)
         history.recordName = UserDefaults.Entity.History + "." + uuid
         history.lastUpdate = Date()
-        history.language = fetchSelectedLanguage()
+        history.language = (fetchSelectedByEntity(UserDefaults.Entity.Languages) as! Languages)
         do {
             try managedContext!.save()
             //Upload Hitory to the Cloud

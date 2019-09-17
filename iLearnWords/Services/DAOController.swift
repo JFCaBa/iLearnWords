@@ -306,7 +306,7 @@ public class DAOController: NSObject {
         do {
             let result = try managedContext!.fetch(fetchRequest)
             if result.count > 0 {
-                for history in result.compactMap({ $0 as? Languages }) {
+                for history in result.compactMap({ $0 as? History }) {
                     history.isSelected = history.recordID == hist.recordID ? true : false
                     try managedContext!.save()
                 }

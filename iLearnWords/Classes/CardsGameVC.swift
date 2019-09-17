@@ -67,7 +67,8 @@ class CardsGameVC: UIViewController, TalkerDelegate {
             return
         }
         
-        guard  let lang = reverse ? history?.language!.sayTranslate : history?.language!.sayOriginal else {
+        let language = dao.fetchSelectedLanguage()
+        guard  let lang = reverse ? language?.sayTranslate : language?.sayOriginal else {
             return
         }
         

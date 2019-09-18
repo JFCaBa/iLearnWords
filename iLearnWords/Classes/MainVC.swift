@@ -225,6 +225,8 @@ class MainVC: UIViewController, TalkerDelegate, UITableViewDelegate, UITableView
 
 extension MainVC {
     func loadData() {
+        //Set the talkIndex to 0 in case of the data changed
+        talkIndex = 0
         //Need to load the data in viewWillAppear because the history to be shown can
         //change in settings
         if let result =  dao.fetchSelectedByEntity(UserDefaults.Entity.History) {
@@ -236,7 +238,6 @@ extension MainVC {
         else {
             dataObj = []
         }
-        
         tableView.reloadData()
     }
     

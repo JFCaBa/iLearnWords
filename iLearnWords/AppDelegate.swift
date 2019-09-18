@@ -59,21 +59,9 @@ extension AppDelegate{
         //Synchronize changes
         UserDefaults.standard.synchronize()
         
-        let langDic = [["title":"Russian to English",
-                        "sayOriginal":"ru_RU",
-                        "sayTranslate":"en_GB",
-                        "way":"ru-en",
-                        "isSelected":"1"],
-                       ["title":"English to Russian",
-                        "sayOriginal":"en_GB",
-                        "sayTranslate":"ru_RU",
-                        "way":"en-ru",
-                        "isSelected":"0"]
-        ]
-
         /** Create the Languages entity content */
         let dao: DAOController = DAOController()
-        dao.saveInCoreDataWith(array: langDic)
+        dao.saveLanguagesInCoreDataWith()
         dao.synchronizeData()
     }
 }

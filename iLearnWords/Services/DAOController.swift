@@ -76,10 +76,13 @@ public class DAOController: NSObject {
         return nil
     }
     
-    func saveInCoreDataWith(array: [[String: String]]) {
+    func saveLanguagesInCoreDataWith() {
+        let lang = Languages(context: managedContext!)
+        let array = lang.suportedLanguages()
         _ = array.map{self.createLanguageEntityFrom(dictionary: $0)}
         do {
             try managedContext?.save()
+            cloud.saveCkLanguage(lang)
         } catch let error {
             print(error)
         }
@@ -132,7 +135,7 @@ public class DAOController: NSObject {
         do {
             try managedContext!.save()
             //Upload Hitory to the Cloud
-            cloud.saveHistory(history, managedContext: managedContext!)
+            cloud.saveCkHistory(history, managedContext: managedContext!)
             return history
         } catch let error as NSError {
             print("Could not save history. \(error), \(error.userInfo)")

@@ -73,19 +73,19 @@ class CloudKitController {
     }
     
     // MARK: - Save
-    func saveHistory(_ hist: History, managedContext: NSManagedObjectContext) {
+    func saveCkHistory(_ hist: History, managedContext: NSManagedObjectContext) {
         do {
-            let cKhistory = CKRecord(recordType: "History")
+            let cKhistory = CKRecord(recordType: UserDefaults.Entity.History)
             let langID = try NSKeyedUnarchiver.unarchivedObject(ofClass: CKRecord.ID.self, from: hist.language!.recordID!)
             let refLang = CKRecord.Reference(recordID: langID!, action: .deleteSelf)
-            cKhistory.setValue(refLang, forKey: "language")
+            cKhistory.setValue(refLang, forKey: UserDefaults.History.Language)
            // let histID = try NSKeyedUnarchiver.unarchivedObject(ofClass: CKRecord.ID.self, from: hist.recordID!)
             let histRef = CKRecord.Reference(record: cKhistory, action: .deleteSelf)
             var wordsRecords: Array<CKRecord> = []
             for (_, element) in (hist.words?.enumerated())! {
                 let word = element as! Words
                 let ckRecord = toRecord(word)
-                ckRecord.setValue(histRef, forKey: "history")
+                ckRecord.setValue(histRef, forKey: UserDefaults.Languages.History)
                 self.privateDB.save(ckRecord) { (record, error) in
                     do {
                         word.recordID = try NSKeyedArchiver.archivedData(withRootObject: record!.recordID, requiringSecureCoding: false)
@@ -101,9 +101,9 @@ class CloudKitController {
             
             let wordsReferences = toArrayOfReferences(wordsRecords)
             
-            cKhistory.setValue(wordsReferences, forKey: "words")
-            cKhistory.setValue(hist.title, forKey: "title")
-            cKhistory.setValue(hist.isSelected, forKey: "isSelected")
+            cKhistory.setValue(wordsReferences, forKey: UserDefaults.History.Words)
+            cKhistory.setValue(hist.title, forKey: UserDefaults.History.Title)
+            cKhistory.setValue(hist.isSelected, forKey: UserDefaults.History.IsSelected)
             
             self.privateDB.save(cKhistory) { (record, error) in
                 do {
@@ -127,7 +127,7 @@ class CloudKitController {
             let recordID = try NSKeyedUnarchiver.unarchivedObject(ofClass: CKRecord.ID.self, from: word.recordID!)
             privateDB.fetch(withRecordID: recordID!) { (record, error) in
                 if let ckWord = record {
-                    ckWord.setObject(word.translated as __CKRecordObjCValue?, forKey: "translated")
+                    ckWord.setObject(word.translated as __CKRecordObjCValue?, forKey: UserDefaults.Words.Translated)
                     let modifyRecords = CKModifyRecordsOperation(recordsToSave:[ckWord], recordIDsToDelete: nil)
                     modifyRecords.savePolicy = CKModifyRecordsOperation.RecordSavePolicy.allKeys
                     modifyRecords.qualityOfService = QualityOfService.userInitiated
@@ -145,6 +145,26 @@ class CloudKitController {
         }
         catch {
             print("Error")
+        }
+    }
+    
+    func saveCkLanguage(_ language: Languages) {
+        let record = language.cloudKitRecord()
+        record.setValue(language.isSelected, forKey: UserDefaults.Languages.IsSelected)
+        record.setValue(Date(), forKey: UserDefaults.Languages.LastUpdate)
+        record.setValue(language.sayOriginal, forKey: UserDefaults.Languages.SayOriginal)
+        record.setValue(language.sayTranslated, forKey: UserDefaults.Languages.SayTranslated)
+        record.setValue(language.way, forKey: UserDefaults.Languages.Way)
+        
+        self.privateDB.save(record) { (record, error) in
+            do {
+                language.recordID = try NSKeyedArchiver.archivedData(withRootObject: record!.recordID, requiringSecureCoding: false)
+                language.recordName = record!.recordID.recordName
+                language.lastUpdate = Date()
+            }
+            catch {
+                print("Error Saving History to CloudKit")
+            }
         }
     }
 }

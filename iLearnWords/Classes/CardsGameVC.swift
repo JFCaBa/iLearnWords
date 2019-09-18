@@ -64,7 +64,7 @@ class CardsGameVC: UIViewController, TalkerDelegate {
     @IBAction func btnPlayDidTap(_ sender: Any) {
         let btn = sender as? UIButton
         btn?.isEnabled = false
-        guard  let txt = lblOriginal.text else {
+        guard  let txt = reverse ? lblTranslated.text : lblOriginal.text else {
             return
         }
         

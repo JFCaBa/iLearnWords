@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		6D164123233A80DA00FEC6AA /* TranslateController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D164122233A80DA00FEC6AA /* TranslateController.swift */; };
 		6D22C6EC231D4EF8009DC8F7 /* SettingsTVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D22C6EB231D4EF8009DC8F7 /* SettingsTVC.swift */; };
 		6D36E17E231BC09A00C88F0A /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D36E17D231BC09A00C88F0A /* AppDelegate.swift */; };
 		6D36E180231BC09A00C88F0A /* MainVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D36E17F231BC09A00C88F0A /* MainVC.swift */; };
@@ -40,6 +41,7 @@
 
 /* Begin PBXFileReference section */
 		48B8AA7E06504417BD100AD6 /* Pods-iLearnWords.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-iLearnWords.debug.xcconfig"; path = "Target Support Files/Pods-iLearnWords/Pods-iLearnWords.debug.xcconfig"; sourceTree = "<group>"; };
+		6D164122233A80DA00FEC6AA /* TranslateController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TranslateController.swift; sourceTree = "<group>"; };
 		6D22C6EB231D4EF8009DC8F7 /* SettingsTVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsTVC.swift; sourceTree = "<group>"; };
 		6D36E17A231BC09A00C88F0A /* iLearnWords.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = iLearnWords.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		6D36E17D231BC09A00C88F0A /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -131,6 +133,7 @@
 			children = (
 				6DF52794231C5D1600595B26 /* NetworkController.swift */,
 				6D36E191231BD49200C88F0A /* TalkController.swift */,
+				6D164122233A80DA00FEC6AA /* TranslateController.swift */,
 				6DA5E4D6231E53F0004732CF /* DAOController.swift */,
 				6DDEF2B9232C0897007C9C77 /* CloudKitController.swift */,
 				6DDBAB27232FCEA300862EA7 /* CoreDataController.swift */,
@@ -370,6 +373,7 @@
 				6DA5E4D7231E53F0004732CF /* DAOController.swift in Sources */,
 				6DDEF2BE232E8E38007C9C77 /* CloudKitProtocols.swift in Sources */,
 				6DDEF2D3232EBFF3007C9C77 /* iLearnWords.xcdatamodeld in Sources */,
+				6D164123233A80DA00FEC6AA /* TranslateController.swift in Sources */,
 				6DDEF2D9232EC2D2007C9C77 /* Words+CoreDataProperties.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

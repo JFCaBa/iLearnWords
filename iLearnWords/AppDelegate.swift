@@ -61,7 +61,7 @@ extension AppDelegate{
         
         /** Create the Languages entity content */
         let dao: DAOController = DAOController()
-        dao.saveLanguagesInCoreDataWith()
+        //dao.saveLanguagesInCoreDataWith()
         dao.synchronizeData()
     }
 }

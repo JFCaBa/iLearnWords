@@ -46,9 +46,7 @@ class TranslateController: NSObject {
             }
         }
         else {
-            if dataObj.count > 0 {
-//                saveHistory(dataObj)
-            }
+            completionHandler!(dataObj)
         }
     }
 }

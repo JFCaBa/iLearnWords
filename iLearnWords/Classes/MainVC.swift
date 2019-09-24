@@ -25,6 +25,7 @@ class MainVC: UIViewController, TalkerDelegate, UITableViewDelegate, UITableView
     let network = NetworkController()
     private var talk = TalkController.shared
     private let dao: DAOController = DAOController()
+    private let translate: TranslateController = TranslateController()
     
     //MARK: - Lifecycle
     override func viewDidLoad() {
@@ -120,7 +121,8 @@ class MainVC: UIViewController, TalkerDelegate, UITableViewDelegate, UITableView
                 if tmpArray.last == "" {
                     tmpArray.removeLast()
                 }
-                translateRecursive(tmpArray, index: 0)
+//                translateRecursive(tmpArray, index: 0)
+                translateWords(tmpArray)
             }
         }
     }
@@ -157,48 +159,59 @@ class MainVC: UIViewController, TalkerDelegate, UITableViewDelegate, UITableView
     }
     
     //MARK: - Private functions
-    private func translateRecursive(_ sender: Array<String>, index: Int = 0) {
-        if sender.count > index {
-            let wordObj = sender[index]
-            if let translatedWord = dao.fetchTranslatedForWord(word: wordObj) {
-                if let wordModel = self.dao.saveWordObjectFrom(original: wordObj, translated: translatedWord){
-                    //Add the word to the array
-                    self.dataObj.append(wordModel)
-                    self.tableView.reloadData()
-                }
-                let i = index + 1
-                //Call the method recursivily to translate all the words
-                self.translateRecursive(sender, index: i)
-            }
-            else {
-                network.completionBlock =  { (response, error) -> Void in
-                    if nil == error {
-                        if let wordModel = self.dao.saveWordObjectFrom(original: wordObj, translated: response!){
-                            //Add the word to the array
-                            self.dataObj.append(wordModel)
-                            self.tableView.reloadData()
-                        }
-                        let i = index + 1
-                        //Call the method recursivily to translate all the words
-                        self.translateRecursive(sender, index: i)
-                    }
-                    else{
-                        print(error as Any)
-                    }
-                }
-                network.translateString(wordObj)
-            }
-        }
-        else {
+    private func translateWords(_ sender: Array<String>) {
+        translate.completionHandler = { (response) -> Void in
+            self.dataObj = response
+            self.tableView.reloadData()
+            self.saveHistory(self.dataObj)
             MKProgress.hide()
-            tableView.reloadData()
-            if dataObj.count > 0 {
-                saveHistory(dataObj)
-            }
         }
-        //When we past new words need to reset the talk index
-        self.talkIndex = 0
+        
+        translate.translateRecursive(sender, index: 0)
     }
+    
+//    private func translateRecursive(_ sender: Array<String>, index: Int = 0) {
+//        if sender.count > index {
+//            let wordObj = sender[index]
+//            if let translatedWord = dao.fetchTranslatedForWord(word: wordObj) {
+//                if let wordModel = self.dao.saveWordObjectFrom(original: wordObj, translated: translatedWord){
+//                    //Add the word to the array
+//                    self.dataObj.append(wordModel)
+//                    self.tableView.reloadData()
+//                }
+//                let i = index + 1
+//                //Call the method recursivily to translate all the words
+//                self.translateRecursive(sender, index: i)
+//            }
+//            else {
+//                network.completionBlock =  { (response, error) -> Void in
+//                    if nil == error {
+//                        if let wordModel = self.dao.saveWordObjectFrom(original: wordObj, translated: response!){
+//                            //Add the word to the array
+//                            self.dataObj.append(wordModel)
+//                            self.tableView.reloadData()
+//                        }
+//                        let i = index + 1
+//                        //Call the method recursivily to translate all the words
+//                        self.translateRecursive(sender, index: i)
+//                    }
+//                    else{
+//                        print(error as Any)
+//                    }
+//                }
+//                network.translateString(wordObj)
+//            }
+//        }
+//        else {
+//            MKProgress.hide()
+//            tableView.reloadData()
+//            if dataObj.count > 0 {
+//                saveHistory(dataObj)
+//            }
+//        }
+//        //When we past new words need to reset the talk index
+//        self.talkIndex = 0
+//    }
     
     private func startTalking(_ text: String, talkLanguage: String = "ru_RU") {
         self.talk.sayText(text, language: talkLanguage)

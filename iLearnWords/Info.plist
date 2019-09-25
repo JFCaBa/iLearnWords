@@ -20,6 +20,8 @@
 	<string>1</string>
 	<key>CKSharingSupported</key>
 	<true/>
+    <key>UIUserInterfaceStyle</key>
+    <string>Light</string>
 	<key>Fabric</key>
 	<dict>
 		<key>APIKey</key>

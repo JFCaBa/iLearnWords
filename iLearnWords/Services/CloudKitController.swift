@@ -106,10 +106,11 @@ class CloudKitController {
             cKhistory.setValue(hist.isSelected, forKey: UserDefaults.History.IsSelected)
             
             self.privateDB.save(cKhistory) { (record, error) in
+                guard let ckRecord = record else {return}
                 do {
-                    hist.recordID = try NSKeyedArchiver.archivedData(withRootObject: record!.recordID, requiringSecureCoding: false)
-                    hist.recordName = record!.recordID.recordName
-                    hist.lastUpdate = record?.modificationDate
+                    hist.recordID = try NSKeyedArchiver.archivedData(withRootObject: ckRecord.recordID, requiringSecureCoding: false)
+                    hist.recordName = ckRecord.recordID.recordName
+                    hist.lastUpdate = ckRecord.modificationDate
                     try managedContext.save()
                 }
                 catch {

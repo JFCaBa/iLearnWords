@@ -65,7 +65,7 @@ public class DAOController: NSObject {
     //MARK: - Languages
     //Helper functions to Store the defaults values into the Languages Entity
     func createLanguageEntityFrom(dictionary: [String: String]) -> NSManagedObject? {
-        if let languageEntity = NSEntityDescription.insertNewObject(forEntityName: "Languages", into: managedContext!) as? Languages {
+        if let languageEntity = NSEntityDescription.insertNewObject(forEntityName: UserDefaults.Entity.Languages, into: managedContext!) as? Languages {
             languageEntity.title = dictionary[UserDefaults.Languages.Title]
             languageEntity.sayOriginal = dictionary[UserDefaults.Languages.SayOriginal]
             languageEntity.sayTranslated = dictionary[UserDefaults.Languages.SayTranslated]

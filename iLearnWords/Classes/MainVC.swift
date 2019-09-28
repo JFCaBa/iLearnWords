@@ -219,7 +219,7 @@ extension MainVC {
         }
         
         let playInLoop = UserDefaults.standard.bool(forKey: UserDefaults.keys.PlayInLoop)
-        if talkIndex == (dataObj.count - 1) {
+        if talkIndex == (dataObj.count) {
             talkIndex = 0
             if playInLoop == false {
                 return

@@ -12,5 +12,5 @@ import CoreData
 
 @objc(Words)
 public class Words: NSManagedObject {
-    var coreData: CoreDataStack = CoreDataStack()
+    var coreData = CoreDataStack.shared
 }

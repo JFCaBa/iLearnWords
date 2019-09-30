@@ -34,12 +34,9 @@ extension MainHistoryVM  {
         
         let originalArray = original.components(separatedBy: "\n")
         let translatedArray = translated.components(separatedBy: "\n")
-<<<<<<< Updated upstream
-        let response: Array<Words> = []
-=======
+
         var response: Array<Words> = []
         
->>>>>>> Stashed changes
         for (index, element) in originalArray.enumerated() {
             let word = Words(context: context)
             word.original = element
@@ -54,6 +51,7 @@ extension MainHistoryVM  {
             }
             word.recordName = UserDefaults.Entity.Words + UUID().uuidString
             word.lastUpdate = Date()
+            response.append(word)
         }
         
         let history = History(context: context)

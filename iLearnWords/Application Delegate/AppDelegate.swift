@@ -31,6 +31,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
 extension AppDelegate{
     private func createDefaultValues() {
+        /** Create the Languages entity content */
+        let coreData: CoreDataManager = CoreDataManager()
+        coreData.saveLanguagesInCoreDataWith()
         
         /** Create the default settings values */
         let user = UserDefaults.standard
@@ -46,13 +49,9 @@ extension AppDelegate{
         //Colors
         user.setColor(color: UIColor.lightGray, forKey: UserDefaults.keys.CellSelectedBackgroundColor)
         user.setColor(color: UIColor.white, forKey: UserDefaults.keys.CellBackgroundColor)
+        
         //Synchronize changes
         UserDefaults.standard.synchronize()
-        
-        /** Create the Languages entity content */
-//        let dao: DAOController = DAOController()
-//        dao.saveLanguagesInCoreDataWith()
-        //dao.synchronizeData()
     }
 }
 

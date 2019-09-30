@@ -12,12 +12,12 @@ struct MainLanguageVM {
     
     // MARK: - Properties
 
-    let language: Languages
+    let language: Languages?
     
     // MARK: -
     
     var title : String {
-        return language.way ?? "Untitled"
+        return language?.way ?? "Untitled"
     }
 
 }

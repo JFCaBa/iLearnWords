@@ -12,6 +12,12 @@ import CoreData
 
 class CoreDataStack: NSObject {
     
+    static let shared = CoreDataStack()
+    
+    private override init() {
+        super.init()
+    }
+    
     lazy var persistentContainer: NSPersistentContainer = {
         /*
          The persistent container for the application. This implementation

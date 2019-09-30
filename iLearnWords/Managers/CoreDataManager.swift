@@ -13,11 +13,11 @@ public class CoreDataManager: NSObject {
     
     var managedContext: NSManagedObjectContext?
     
-    var coreData: CoreDataStack?
+    var coreData = CoreDataStack.shared
     
     public override init() {
         super.init()
-        managedContext = coreData?.context()
+        managedContext = coreData.context()
     }
     
     /// To get the selected object in the passed entity. For the tables Language and History
@@ -37,5 +37,55 @@ public class CoreDataManager: NSObject {
             print("Could not fetch. \(error), \(error.userInfo)")
             return nil
         }
+    }
+}
+
+extension CoreDataManager {
+    
+    func suportedLanguages() -> [[String: String]] {
+        let langDic = [["title":"Russian to English",
+                        "sayOriginal":"ru_RU",
+                        "sayTranslated":"en_GB",
+                        "way":"ru-en",
+                        "isSelected":"1"],
+                       ["title":"English to Russian",
+                        "sayOriginal":"en_GB",
+                        "sayTranslated":"ru_RU",
+                        "way":"en-ru",
+                        "isSelected":"0"]
+        ]
+        return langDic
+    }
+    
+    func saveLanguagesInCoreDataWith() {
+        let array = suportedLanguages()
+        _ = array.map{self.createLanguageEntityFrom(dictionary: $0)}
+        do {
+            try managedContext?.save()
+        } catch let error {
+            print(error)
+        }
+    }
+    
+    func createLanguageEntityFrom(dictionary: [String: String]) -> NSManagedObject? {
+        if let languageEntity = NSEntityDescription.insertNewObject(forEntityName: UserDefaults.Entity.Languages, into: managedContext!) as? Languages {
+            languageEntity.title = dictionary[UserDefaults.Languages.Title]
+            languageEntity.sayOriginal = dictionary[UserDefaults.Languages.SayOriginal]
+            languageEntity.sayTranslated = dictionary[UserDefaults.Languages.SayTranslated]
+            languageEntity.way = dictionary[UserDefaults.Languages.Way]
+            languageEntity.isSelected = dictionary[UserDefaults.Languages.IsSelected] == "1" ? true : false
+            let uuid = UUID().uuidString
+            do {
+                languageEntity.recordID = try NSKeyedArchiver.archivedData(withRootObject: uuid, requiringSecureCoding: false)
+            }
+            catch {
+                print("Error")
+                return nil
+            }
+            languageEntity.recordName = UserDefaults.Entity.Languages + UUID().uuidString
+            languageEntity.lastUpdate = Date()
+            return languageEntity
+        }
+        return nil
     }
 }

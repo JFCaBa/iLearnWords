@@ -30,15 +30,15 @@ struct MainWordsVM {
             return ""
         }
         let word = wordsData[index]
-        return word.original ?? ""
+        return word.original ?? "Undefined"
     }
     
     func translatedWord(index: Int) -> String {
         if index >= wordsData.count {
-            return ""
+            return "Undefined"
         }
         let word = wordsData[index]
-        return word.translated ?? ""
+        return word.translated ?? "Undefined"
     }
     
     func viewModel(for index: Int) -> MainWordVM {

@@ -2,8 +2,8 @@
 //  Words+CoreDataProperties.swift
 //  iLearnWords
 //
-//  Created by Jose Catala on 30/09/2019.
-//  Copyright © 2019 Armentechnology. All rights reserved.
+//  Created by Jose Francisco Catalá Barba on 28/09/2019.
+//  Copyright © 2019 Jose Francisco Catalá Barba. All rights reserved.
 //
 //
 
@@ -19,9 +19,8 @@ extension Words {
 
     @NSManaged public var lastUpdate: Date?
     @NSManaged public var original: String?
+    @NSManaged public var translated: String?
     @NSManaged public var recordID: Data?
     @NSManaged public var recordName: String?
-    @NSManaged public var translated: String?
     @NSManaged public var history: History?
-
 }

@@ -31,7 +31,7 @@ extension MainHistoryVM  {
         let coreData: CoreDataStack = CoreDataStack()
         let originalArray = original.components(separatedBy: "\n")
         let translatedArray = translated.components(separatedBy: "\n")
-        var response: Array<Words> = []
+        let response: Array<Words> = []
         for (index, element) in originalArray.enumerated() {
             let word = Words(context: coreData.context()!)
             word.original = element
@@ -46,7 +46,6 @@ extension MainHistoryVM  {
             }
             word.recordName = UserDefaults.Entity.Words + UUID().uuidString
             word.lastUpdate = Date()
-            response.append(word)
         }
         let viewModel = MainWordsVM(wordsData: response)
         completion(viewModel)

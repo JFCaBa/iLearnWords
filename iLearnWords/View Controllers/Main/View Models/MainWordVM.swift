@@ -25,12 +25,10 @@ struct MainWordVM {
 
 extension MainWordVM: MainRepresentable {
     var textOriginal: String {
-        guard let original = word.original else { return "" }
-        return original
+        return originalWord
     }
     
     var textTranslated: String {
-        guard let translated = word.translated else { return "" }
-        return translated
+        return translatedWord
     }
 }

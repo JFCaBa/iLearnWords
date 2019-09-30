@@ -2,8 +2,8 @@
 //  History+CoreDataProperties.swift
 //  iLearnWords
 //
-//  Created by Jose Catala on 30/09/2019.
-//  Copyright © 2019 Armentechnology. All rights reserved.
+//  Created by Jose Francisco Catalá Barba on 28/09/2019.
+//  Copyright © 2019 Jose Francisco Catalá Barba. All rights reserved.
 //
 //
 
@@ -17,19 +17,20 @@ extension History {
         return NSFetchRequest<History>(entityName: "History")
     }
 
-    @NSManaged public var isSelected: Bool
     @NSManaged public var lastUpdate: Date?
+    @NSManaged public var isSelected: Bool
+    @NSManaged public var title: String?
     @NSManaged public var recordID: Data?
     @NSManaged public var recordName: String?
-    @NSManaged public var title: String?
+    @NSManaged public var hasWord: NSSet?
     @NSManaged public var language: Languages?
     @NSManaged public var words: NSSet?
 
 }
 
-// MARK: Generated accessors for words
+// MARK: Generated accessors for hasWord
 extension History {
-
+    
     @objc(addWordsObject:)
     @NSManaged public func addToWords(_ value: Words)
 

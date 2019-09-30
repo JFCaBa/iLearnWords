@@ -1,0 +1,830 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 51;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		0B8BDA27BECECB557B3C72ED /* Pods_iLearnWordsTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DC6EC260ADB1F483B3E722D6 /* Pods_iLearnWordsTests.framework */; };
+		6D8A8F1F2341E3A1003EF281 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D8A8F1E2341E3A1003EF281 /* AppDelegate.swift */; };
+		6D8A8F282341E3AA003EF281 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 6D8A8F272341E3AA003EF281 /* Assets.xcassets */; };
+		6D8A8F2B2341E3AA003EF281 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 6D8A8F2A2341E3AA003EF281 /* Preview Assets.xcassets */; };
+		6D8A8F392341E3AA003EF281 /* iLearnWordsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D8A8F382341E3AA003EF281 /* iLearnWordsTests.swift */; };
+		6D8A8F442341E461003EF281 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 6D8A8F432341E461003EF281 /* Main.storyboard */; };
+		6D8A8F462341E606003EF281 /* CoreDataStack.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D8A8F452341E5FC003EF281 /* CoreDataStack.swift */; };
+		6D8A8F482341E6A5003EF281 /* UserDefaults+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D8A8F472341E6A5003EF281 /* UserDefaults+Extension.swift */; };
+		6D8A8F4A2341E718003EF281 /* DataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D8A8F492341E718003EF281 /* DataManager.swift */; };
+		6D8A8F4C2341E7D2003EF281 /* TranslationData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D8A8F4B2341E7D2003EF281 /* TranslationData.swift */; };
+		6D8A8F512341EAF0003EF281 /* JSONDecodable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D8A8F502341EAF0003EF281 /* JSONDecodable.swift */; };
+		6D8A8F582341EC84003EF281 /* MainVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D8A8F572341EC84003EF281 /* MainVC.swift */; };
+		6D8A8F5B2341ECAF003EF281 /* Configuration.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D8A8F5A2341ECAF003EF281 /* Configuration.swift */; };
+		6D8A8F5F2341ED7B003EF281 /* CoreDataManaged.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D8A8F5E2341ED7B003EF281 /* CoreDataManaged.swift */; };
+		6D8A8F612341EE9C003EF281 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 6D8A8F602341EE9C003EF281 /* LaunchScreen.storyboard */; };
+		6D8A8F6B2341EF45003EF281 /* Words+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D8A8F632341EF44003EF281 /* Words+CoreDataProperties.swift */; };
+		6D8A8F6D2341EF45003EF281 /* History+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D8A8F662341EF44003EF281 /* History+CoreDataProperties.swift */; };
+		6D8A8F6E2341EF45003EF281 /* Words+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D8A8F672341EF44003EF281 /* Words+CoreDataClass.swift */; };
+		6D8A8F6F2341EF45003EF281 /* Languages+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D8A8F682341EF44003EF281 /* Languages+CoreDataClass.swift */; };
+		6D8A8F702341EF45003EF281 /* Languages+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D8A8F692341EF44003EF281 /* Languages+CoreDataProperties.swift */; };
+		6D8A8F712341EF45003EF281 /* History+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D8A8F6A2341EF45003EF281 /* History+CoreDataClass.swift */; };
+		6D8A8F732341EFBF003EF281 /* CoreDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D8A8F722341EFBF003EF281 /* CoreDataManager.swift */; };
+		6D8A8F752341F408003EF281 /* TalkManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D8A8F742341F408003EF281 /* TalkManager.swift */; };
+		6D8A8F772341F4C4003EF281 /* MainWordsVM.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D8A8F762341F4C4003EF281 /* MainWordsVM.swift */; };
+		6D8A8F7A234201B0003EF281 /* MainHistoryVM.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D8A8F79234201B0003EF281 /* MainHistoryVM.swift */; };
+		6D8A8F7C234201BD003EF281 /* MainLanguageVM.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D8A8F7B234201BD003EF281 /* MainLanguageVM.swift */; };
+		6D8A8F8123421134003EF281 /* MainTC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D8A8F8023421134003EF281 /* MainTC.swift */; };
+		6D8A8F84234211C1003EF281 /* MainRepresentable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D8A8F83234211C1003EF281 /* MainRepresentable.swift */; };
+		6D8A8F8723421624003EF281 /* MainWordVM.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D8A8F8623421624003EF281 /* MainWordVM.swift */; };
+		6D8A8FC323424F06003EF281 /* iLearnWords.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 6D8A8FC123424F06003EF281 /* iLearnWords.xcdatamodeld */; };
+		8046308AFEA92B21C9F13EE6 /* Pods_iLearnWords.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A5FE711386A024776E34D254 /* Pods_iLearnWords.framework */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		6D8A8F352341E3AA003EF281 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 6D8A8F132341E3A1003EF281 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 6D8A8F1A2341E3A1003EF281;
+			remoteInfo = iLearnWords;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXFileReference section */
+		3E0C0079B13102613299F94D /* Pods-iLearnWords.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-iLearnWords.release.xcconfig"; path = "Target Support Files/Pods-iLearnWords/Pods-iLearnWords.release.xcconfig"; sourceTree = "<group>"; };
+		59259B9D45E6D131B9CB6913 /* Pods-iLearnWordsTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-iLearnWordsTests.debug.xcconfig"; path = "Target Support Files/Pods-iLearnWordsTests/Pods-iLearnWordsTests.debug.xcconfig"; sourceTree = "<group>"; };
+		6D8A8F1B2341E3A1003EF281 /* iLearnWords.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = iLearnWords.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		6D8A8F1E2341E3A1003EF281 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
+		6D8A8F272341E3AA003EF281 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		6D8A8F2A2341E3AA003EF281 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
+		6D8A8F2F2341E3AA003EF281 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		6D8A8F342341E3AA003EF281 /* iLearnWordsTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = iLearnWordsTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		6D8A8F382341E3AA003EF281 /* iLearnWordsTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = iLearnWordsTests.swift; sourceTree = "<group>"; };
+		6D8A8F3A2341E3AA003EF281 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		6D8A8F432341E461003EF281 /* Main.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Main.storyboard; sourceTree = "<group>"; };
+		6D8A8F452341E5FC003EF281 /* CoreDataStack.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CoreDataStack.swift; sourceTree = "<group>"; };
+		6D8A8F472341E6A5003EF281 /* UserDefaults+Extension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UserDefaults+Extension.swift"; sourceTree = "<group>"; };
+		6D8A8F492341E718003EF281 /* DataManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DataManager.swift; sourceTree = "<group>"; };
+		6D8A8F4B2341E7D2003EF281 /* TranslationData.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TranslationData.swift; sourceTree = "<group>"; };
+		6D8A8F502341EAF0003EF281 /* JSONDecodable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JSONDecodable.swift; sourceTree = "<group>"; };
+		6D8A8F572341EC84003EF281 /* MainVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainVC.swift; sourceTree = "<group>"; };
+		6D8A8F5A2341ECAF003EF281 /* Configuration.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Configuration.swift; sourceTree = "<group>"; };
+		6D8A8F5E2341ED7B003EF281 /* CoreDataManaged.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CoreDataManaged.swift; sourceTree = "<group>"; };
+		6D8A8F602341EE9C003EF281 /* LaunchScreen.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = LaunchScreen.storyboard; sourceTree = "<group>"; };
+		6D8A8F632341EF44003EF281 /* Words+CoreDataProperties.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Words+CoreDataProperties.swift"; sourceTree = "<group>"; };
+		6D8A8F662341EF44003EF281 /* History+CoreDataProperties.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "History+CoreDataProperties.swift"; sourceTree = "<group>"; };
+		6D8A8F672341EF44003EF281 /* Words+CoreDataClass.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Words+CoreDataClass.swift"; sourceTree = "<group>"; };
+		6D8A8F682341EF44003EF281 /* Languages+CoreDataClass.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Languages+CoreDataClass.swift"; sourceTree = "<group>"; };
+		6D8A8F692341EF44003EF281 /* Languages+CoreDataProperties.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Languages+CoreDataProperties.swift"; sourceTree = "<group>"; };
+		6D8A8F6A2341EF45003EF281 /* History+CoreDataClass.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "History+CoreDataClass.swift"; sourceTree = "<group>"; };
+		6D8A8F722341EFBF003EF281 /* CoreDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataManager.swift; sourceTree = "<group>"; };
+		6D8A8F742341F408003EF281 /* TalkManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TalkManager.swift; sourceTree = "<group>"; };
+		6D8A8F762341F4C4003EF281 /* MainWordsVM.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainWordsVM.swift; sourceTree = "<group>"; };
+		6D8A8F79234201B0003EF281 /* MainHistoryVM.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainHistoryVM.swift; sourceTree = "<group>"; };
+		6D8A8F7B234201BD003EF281 /* MainLanguageVM.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainLanguageVM.swift; sourceTree = "<group>"; };
+		6D8A8F8023421134003EF281 /* MainTC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainTC.swift; sourceTree = "<group>"; };
+		6D8A8F83234211C1003EF281 /* MainRepresentable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainRepresentable.swift; sourceTree = "<group>"; };
+		6D8A8F8623421624003EF281 /* MainWordVM.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainWordVM.swift; sourceTree = "<group>"; };
+		6D8A8FC223424F06003EF281 /* Model.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Model.xcdatamodel; sourceTree = "<group>"; };
+		A5FE711386A024776E34D254 /* Pods_iLearnWords.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_iLearnWords.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		DC6EC260ADB1F483B3E722D6 /* Pods_iLearnWordsTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_iLearnWordsTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		EAD2E86D8685DF3B6233BFED /* Pods-iLearnWordsTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-iLearnWordsTests.release.xcconfig"; path = "Target Support Files/Pods-iLearnWordsTests/Pods-iLearnWordsTests.release.xcconfig"; sourceTree = "<group>"; };
+		FBEFBA94F2F5AC3584DA8824 /* Pods-iLearnWords.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-iLearnWords.debug.xcconfig"; path = "Target Support Files/Pods-iLearnWords/Pods-iLearnWords.debug.xcconfig"; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		6D8A8F182341E3A1003EF281 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				8046308AFEA92B21C9F13EE6 /* Pods_iLearnWords.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		6D8A8F312341E3AA003EF281 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				0B8BDA27BECECB557B3C72ED /* Pods_iLearnWordsTests.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		66A9AFE8F76D8DF67F6C6799 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				FBEFBA94F2F5AC3584DA8824 /* Pods-iLearnWords.debug.xcconfig */,
+				3E0C0079B13102613299F94D /* Pods-iLearnWords.release.xcconfig */,
+				59259B9D45E6D131B9CB6913 /* Pods-iLearnWordsTests.debug.xcconfig */,
+				EAD2E86D8685DF3B6233BFED /* Pods-iLearnWordsTests.release.xcconfig */,
+			);
+			path = Pods;
+			sourceTree = "<group>";
+		};
+		6D8A8F122341E3A1003EF281 = {
+			isa = PBXGroup;
+			children = (
+				6D8A8F1D2341E3A1003EF281 /* iLearnWords */,
+				6D8A8F372341E3AA003EF281 /* iLearnWordsTests */,
+				6D8A8F1C2341E3A1003EF281 /* Products */,
+				66A9AFE8F76D8DF67F6C6799 /* Pods */,
+				82AD4711D8892468FB4126C3 /* Frameworks */,
+			);
+			sourceTree = "<group>";
+		};
+		6D8A8F1C2341E3A1003EF281 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				6D8A8F1B2341E3A1003EF281 /* iLearnWords.app */,
+				6D8A8F342341E3AA003EF281 /* iLearnWordsTests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		6D8A8F1D2341E3A1003EF281 /* iLearnWords */ = {
+			isa = PBXGroup;
+			children = (
+				6D8A8F562341EC53003EF281 /* Application Delegate */,
+				6D8A8F592341EC89003EF281 /* View Controllers */,
+				6D8A8F5C2341ECB3003EF281 /* Configuration */,
+				6D8A8F532341EBD6003EF281 /* Extensions */,
+				6D8A8F522341EAF5003EF281 /* Protocols */,
+				6D8A8F4D2341E7D7003EF281 /* Managers */,
+				6D8A8F4E2341E7E1003EF281 /* Models */,
+				6D8A8F5D2341ED12003EF281 /* SupportingFiles */,
+				6D8A8F552341EC22003EF281 /* Resources */,
+				6D8A8F542341EC09003EF281 /* Storyboards */,
+			);
+			path = iLearnWords;
+			sourceTree = "<group>";
+		};
+		6D8A8F292341E3AA003EF281 /* Preview Content */ = {
+			isa = PBXGroup;
+			children = (
+				6D8A8F2A2341E3AA003EF281 /* Preview Assets.xcassets */,
+			);
+			path = "Preview Content";
+			sourceTree = "<group>";
+		};
+		6D8A8F372341E3AA003EF281 /* iLearnWordsTests */ = {
+			isa = PBXGroup;
+			children = (
+				6D8A8F382341E3AA003EF281 /* iLearnWordsTests.swift */,
+				6D8A8F3A2341E3AA003EF281 /* Info.plist */,
+			);
+			path = iLearnWordsTests;
+			sourceTree = "<group>";
+		};
+		6D8A8F4D2341E7D7003EF281 /* Managers */ = {
+			isa = PBXGroup;
+			children = (
+				6D8A8F492341E718003EF281 /* DataManager.swift */,
+				6D8A8F722341EFBF003EF281 /* CoreDataManager.swift */,
+				6D8A8F742341F408003EF281 /* TalkManager.swift */,
+			);
+			path = Managers;
+			sourceTree = "<group>";
+		};
+		6D8A8F4E2341E7E1003EF281 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				6D8A8F4B2341E7D2003EF281 /* TranslationData.swift */,
+				6D8A8F6A2341EF45003EF281 /* History+CoreDataClass.swift */,
+				6D8A8F662341EF44003EF281 /* History+CoreDataProperties.swift */,
+				6D8A8F682341EF44003EF281 /* Languages+CoreDataClass.swift */,
+				6D8A8F692341EF44003EF281 /* Languages+CoreDataProperties.swift */,
+				6D8A8F672341EF44003EF281 /* Words+CoreDataClass.swift */,
+				6D8A8F632341EF44003EF281 /* Words+CoreDataProperties.swift */,
+				6D8A8FC123424F06003EF281 /* iLearnWords.xcdatamodeld */,
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
+		6D8A8F522341EAF5003EF281 /* Protocols */ = {
+			isa = PBXGroup;
+			children = (
+				6D8A8F502341EAF0003EF281 /* JSONDecodable.swift */,
+			);
+			path = Protocols;
+			sourceTree = "<group>";
+		};
+		6D8A8F532341EBD6003EF281 /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				6D8A8F472341E6A5003EF281 /* UserDefaults+Extension.swift */,
+			);
+			path = Extensions;
+			sourceTree = "<group>";
+		};
+		6D8A8F542341EC09003EF281 /* Storyboards */ = {
+			isa = PBXGroup;
+			children = (
+				6D8A8F432341E461003EF281 /* Main.storyboard */,
+				6D8A8F602341EE9C003EF281 /* LaunchScreen.storyboard */,
+			);
+			path = Storyboards;
+			sourceTree = "<group>";
+		};
+		6D8A8F552341EC22003EF281 /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				6D8A8F292341E3AA003EF281 /* Preview Content */,
+				6D8A8F272341E3AA003EF281 /* Assets.xcassets */,
+			);
+			path = Resources;
+			sourceTree = "<group>";
+		};
+		6D8A8F562341EC53003EF281 /* Application Delegate */ = {
+			isa = PBXGroup;
+			children = (
+				6D8A8F1E2341E3A1003EF281 /* AppDelegate.swift */,
+			);
+			path = "Application Delegate";
+			sourceTree = "<group>";
+		};
+		6D8A8F592341EC89003EF281 /* View Controllers */ = {
+			isa = PBXGroup;
+			children = (
+				6D8A8F622341EEB7003EF281 /* Main */,
+			);
+			path = "View Controllers";
+			sourceTree = "<group>";
+		};
+		6D8A8F5C2341ECB3003EF281 /* Configuration */ = {
+			isa = PBXGroup;
+			children = (
+				6D8A8F7E2342053B003EF281 /* CoreData */,
+				6D8A8F7D23420533003EF281 /* General */,
+			);
+			path = Configuration;
+			sourceTree = "<group>";
+		};
+		6D8A8F5D2341ED12003EF281 /* SupportingFiles */ = {
+			isa = PBXGroup;
+			children = (
+				6D8A8F2F2341E3AA003EF281 /* Info.plist */,
+			);
+			path = SupportingFiles;
+			sourceTree = "<group>";
+		};
+		6D8A8F622341EEB7003EF281 /* Main */ = {
+			isa = PBXGroup;
+			children = (
+				6D8A8F572341EC84003EF281 /* MainVC.swift */,
+				6D8A8F8523421259003EF281 /* Protocols */,
+				6D8A8F782341F5DA003EF281 /* View Models */,
+				6D8A8F8223421140003EF281 /* TableViewCells */,
+			);
+			path = Main;
+			sourceTree = "<group>";
+		};
+		6D8A8F782341F5DA003EF281 /* View Models */ = {
+			isa = PBXGroup;
+			children = (
+				6D8A8F8623421624003EF281 /* MainWordVM.swift */,
+				6D8A8F762341F4C4003EF281 /* MainWordsVM.swift */,
+				6D8A8F79234201B0003EF281 /* MainHistoryVM.swift */,
+				6D8A8F7B234201BD003EF281 /* MainLanguageVM.swift */,
+			);
+			path = "View Models";
+			sourceTree = "<group>";
+		};
+		6D8A8F7D23420533003EF281 /* General */ = {
+			isa = PBXGroup;
+			children = (
+				6D8A8F5A2341ECAF003EF281 /* Configuration.swift */,
+			);
+			path = General;
+			sourceTree = "<group>";
+		};
+		6D8A8F7E2342053B003EF281 /* CoreData */ = {
+			isa = PBXGroup;
+			children = (
+				6D8A8F452341E5FC003EF281 /* CoreDataStack.swift */,
+				6D8A8F7F23420542003EF281 /* Protocols */,
+			);
+			path = CoreData;
+			sourceTree = "<group>";
+		};
+		6D8A8F7F23420542003EF281 /* Protocols */ = {
+			isa = PBXGroup;
+			children = (
+				6D8A8F5E2341ED7B003EF281 /* CoreDataManaged.swift */,
+			);
+			path = Protocols;
+			sourceTree = "<group>";
+		};
+		6D8A8F8223421140003EF281 /* TableViewCells */ = {
+			isa = PBXGroup;
+			children = (
+				6D8A8F8023421134003EF281 /* MainTC.swift */,
+			);
+			path = TableViewCells;
+			sourceTree = "<group>";
+		};
+		6D8A8F8523421259003EF281 /* Protocols */ = {
+			isa = PBXGroup;
+			children = (
+				6D8A8F83234211C1003EF281 /* MainRepresentable.swift */,
+			);
+			path = Protocols;
+			sourceTree = "<group>";
+		};
+		82AD4711D8892468FB4126C3 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				A5FE711386A024776E34D254 /* Pods_iLearnWords.framework */,
+				DC6EC260ADB1F483B3E722D6 /* Pods_iLearnWordsTests.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		6D8A8F1A2341E3A1003EF281 /* iLearnWords */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 6D8A8F3D2341E3AA003EF281 /* Build configuration list for PBXNativeTarget "iLearnWords" */;
+			buildPhases = (
+				DA8C53955A46C022977D656E /* [CP] Check Pods Manifest.lock */,
+				6D8A8F172341E3A1003EF281 /* Sources */,
+				6D8A8F182341E3A1003EF281 /* Frameworks */,
+				6D8A8F192341E3A1003EF281 /* Resources */,
+				1216E7B5A860DE475599D3E2 /* [CP] Embed Pods Frameworks */,
+				6D8A8F4F2341EAAF003EF281 /* ShellScript */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = iLearnWords;
+			productName = iLearnWords;
+			productReference = 6D8A8F1B2341E3A1003EF281 /* iLearnWords.app */;
+			productType = "com.apple.product-type.application";
+		};
+		6D8A8F332341E3AA003EF281 /* iLearnWordsTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 6D8A8F402341E3AA003EF281 /* Build configuration list for PBXNativeTarget "iLearnWordsTests" */;
+			buildPhases = (
+				A8A02CEA033A1A5BD438B1CA /* [CP] Check Pods Manifest.lock */,
+				6D8A8F302341E3AA003EF281 /* Sources */,
+				6D8A8F312341E3AA003EF281 /* Frameworks */,
+				6D8A8F322341E3AA003EF281 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				6D8A8F362341E3AA003EF281 /* PBXTargetDependency */,
+			);
+			name = iLearnWordsTests;
+			productName = iLearnWordsTests;
+			productReference = 6D8A8F342341E3AA003EF281 /* iLearnWordsTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		6D8A8F132341E3A1003EF281 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastSwiftUpdateCheck = 1100;
+				LastUpgradeCheck = 1100;
+				ORGANIZATIONNAME = Armentechnology;
+				TargetAttributes = {
+					6D8A8F1A2341E3A1003EF281 = {
+						CreatedOnToolsVersion = 11.0;
+					};
+					6D8A8F332341E3AA003EF281 = {
+						CreatedOnToolsVersion = 11.0;
+						TestTargetID = 6D8A8F1A2341E3A1003EF281;
+					};
+				};
+			};
+			buildConfigurationList = 6D8A8F162341E3A1003EF281 /* Build configuration list for PBXProject "iLearnWords" */;
+			compatibilityVersion = "Xcode 9.3";
+			developmentRegion = en;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = 6D8A8F122341E3A1003EF281;
+			productRefGroup = 6D8A8F1C2341E3A1003EF281 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				6D8A8F1A2341E3A1003EF281 /* iLearnWords */,
+				6D8A8F332341E3AA003EF281 /* iLearnWordsTests */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		6D8A8F192341E3A1003EF281 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				6D8A8F2B2341E3AA003EF281 /* Preview Assets.xcassets in Resources */,
+				6D8A8F612341EE9C003EF281 /* LaunchScreen.storyboard in Resources */,
+				6D8A8F282341E3AA003EF281 /* Assets.xcassets in Resources */,
+				6D8A8F442341E461003EF281 /* Main.storyboard in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		6D8A8F322341E3AA003EF281 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		1216E7B5A860DE475599D3E2 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-iLearnWords/Pods-iLearnWords-frameworks-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-iLearnWords/Pods-iLearnWords-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-iLearnWords/Pods-iLearnWords-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		6D8A8F4F2341EAAF003EF281 /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+			);
+			outputFileListPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "# Type a script or drag a script file from your workspace to insert its path.\n\"${PODS_ROOT}/Fabric/run\" cabecef2885ab6b13a45be76549690aa1209c79f 3c27f002783db310f3df9601cec11672284506827aaf60f6efe3b8f8dcbdcdb8\n";
+		};
+		A8A02CEA033A1A5BD438B1CA /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-iLearnWordsTests-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		DA8C53955A46C022977D656E /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-iLearnWords-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		6D8A8F172341E3A1003EF281 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				6D8A8F512341EAF0003EF281 /* JSONDecodable.swift in Sources */,
+				6D8A8F752341F408003EF281 /* TalkManager.swift in Sources */,
+				6D8A8FC323424F06003EF281 /* iLearnWords.xcdatamodeld in Sources */,
+				6D8A8F84234211C1003EF281 /* MainRepresentable.swift in Sources */,
+				6D8A8F1F2341E3A1003EF281 /* AppDelegate.swift in Sources */,
+				6D8A8F462341E606003EF281 /* CoreDataStack.swift in Sources */,
+				6D8A8F6F2341EF45003EF281 /* Languages+CoreDataClass.swift in Sources */,
+				6D8A8F732341EFBF003EF281 /* CoreDataManager.swift in Sources */,
+				6D8A8F7C234201BD003EF281 /* MainLanguageVM.swift in Sources */,
+				6D8A8F5B2341ECAF003EF281 /* Configuration.swift in Sources */,
+				6D8A8F702341EF45003EF281 /* Languages+CoreDataProperties.swift in Sources */,
+				6D8A8F7A234201B0003EF281 /* MainHistoryVM.swift in Sources */,
+				6D8A8F5F2341ED7B003EF281 /* CoreDataManaged.swift in Sources */,
+				6D8A8F4A2341E718003EF281 /* DataManager.swift in Sources */,
+				6D8A8F6E2341EF45003EF281 /* Words+CoreDataClass.swift in Sources */,
+				6D8A8F482341E6A5003EF281 /* UserDefaults+Extension.swift in Sources */,
+				6D8A8F8123421134003EF281 /* MainTC.swift in Sources */,
+				6D8A8F772341F4C4003EF281 /* MainWordsVM.swift in Sources */,
+				6D8A8F582341EC84003EF281 /* MainVC.swift in Sources */,
+				6D8A8F6D2341EF45003EF281 /* History+CoreDataProperties.swift in Sources */,
+				6D8A8F712341EF45003EF281 /* History+CoreDataClass.swift in Sources */,
+				6D8A8F4C2341E7D2003EF281 /* TranslationData.swift in Sources */,
+				6D8A8F6B2341EF45003EF281 /* Words+CoreDataProperties.swift in Sources */,
+				6D8A8F8723421624003EF281 /* MainWordVM.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		6D8A8F302341E3AA003EF281 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				6D8A8F392341E3AA003EF281 /* iLearnWordsTests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		6D8A8F362341E3AA003EF281 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 6D8A8F1A2341E3A1003EF281 /* iLearnWords */;
+			targetProxy = 6D8A8F352341E3AA003EF281 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin XCBuildConfiguration section */
+		6D8A8F3B2341E3AA003EF281 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+			};
+			name = Debug;
+		};
+		6D8A8F3C2341E3AA003EF281 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				MTL_FAST_MATH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_COMPILATION_MODE = wholemodule;
+				SWIFT_OPTIMIZATION_LEVEL = "-O";
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		6D8A8F3E2341E3AA003EF281 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = FBEFBA94F2F5AC3584DA8824 /* Pods-iLearnWords.debug.xcconfig */;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				DEVELOPMENT_ASSET_PATHS = "";
+				DEVELOPMENT_TEAM = 75SEZC5TGW;
+				ENABLE_PREVIEWS = YES;
+				INFOPLIST_FILE = iLearnWords/SupportingFiles/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.armentechnology.iLearnWords;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		6D8A8F3F2341E3AA003EF281 /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 3E0C0079B13102613299F94D /* Pods-iLearnWords.release.xcconfig */;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_ASSET_PATHS = "";
+				DEVELOPMENT_TEAM = 75SEZC5TGW;
+				ENABLE_PREVIEWS = YES;
+				INFOPLIST_FILE = iLearnWords/SupportingFiles/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.armentechnology.iLearnWords;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
+		6D8A8F412341E3AA003EF281 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 59259B9D45E6D131B9CB6913 /* Pods-iLearnWordsTests.debug.xcconfig */;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = 75SEZC5TGW;
+				INFOPLIST_FILE = iLearnWordsTests/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.Armentechnology.MVVM.iLearnWordsTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/iLearnWords.app/iLearnWords";
+			};
+			name = Debug;
+		};
+		6D8A8F422341E3AA003EF281 /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = EAD2E86D8685DF3B6233BFED /* Pods-iLearnWordsTests.release.xcconfig */;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = 75SEZC5TGW;
+				INFOPLIST_FILE = iLearnWordsTests/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.Armentechnology.MVVM.iLearnWordsTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/iLearnWords.app/iLearnWords";
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		6D8A8F162341E3A1003EF281 /* Build configuration list for PBXProject "iLearnWords" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				6D8A8F3B2341E3AA003EF281 /* Debug */,
+				6D8A8F3C2341E3AA003EF281 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		6D8A8F3D2341E3AA003EF281 /* Build configuration list for PBXNativeTarget "iLearnWords" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				6D8A8F3E2341E3AA003EF281 /* Debug */,
+				6D8A8F3F2341E3AA003EF281 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		6D8A8F402341E3AA003EF281 /* Build configuration list for PBXNativeTarget "iLearnWordsTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				6D8A8F412341E3AA003EF281 /* Debug */,
+				6D8A8F422341E3AA003EF281 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+
+/* Begin XCVersionGroup section */
+		6D8A8FC123424F06003EF281 /* iLearnWords.xcdatamodeld */ = {
+			isa = XCVersionGroup;
+			children = (
+				6D8A8FC223424F06003EF281 /* Model.xcdatamodel */,
+			);
+			currentVersion = 6D8A8FC223424F06003EF281 /* Model.xcdatamodel */;
+			path = iLearnWords.xcdatamodeld;
+			sourceTree = "<group>";
+			versionGroupType = wrapper.xcdatamodel;
+		};
+/* End XCVersionGroup section */
+	};
+	rootObject = 6D8A8F132341E3A1003EF281 /* Project object */;
+}

@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="14903" systemVersion="18G95" minimumToolsVersion="Automatic" sourceLanguage="Swift" userDefinedModelVersionIdentifier="">
+    <entity name="History" representedClassName=".History" syncable="YES">
+        <attribute name="isSelected" optional="YES" attributeType="Boolean" usesScalarValueType="YES"/>
+        <attribute name="lastUpdate" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
+        <attribute name="recordID" optional="YES" attributeType="Binary"/>
+        <attribute name="recordName" optional="YES" attributeType="String"/>
+        <attribute name="title" optional="YES" attributeType="String" maxValueString="40" defaultValueString="Untitled"/>
+        <relationship name="language" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Languages" inverseName="history" inverseEntity="Languages"/>
+        <relationship name="words" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Words" inverseName="history" inverseEntity="Words"/>
+    </entity>
+    <entity name="Languages" representedClassName=".Languages" syncable="YES">
+        <attribute name="isSelected" optional="YES" attributeType="Boolean" usesScalarValueType="YES"/>
+        <attribute name="lastUpdate" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
+        <attribute name="recordID" optional="YES" attributeType="Binary"/>
+        <attribute name="recordName" optional="YES" attributeType="String"/>
+        <attribute name="sayOriginal" optional="YES" attributeType="String" defaultValueString="en_GB"/>
+        <attribute name="sayTranslated" optional="YES" attributeType="String"/>
+        <attribute name="title" optional="YES" attributeType="String" defaultValueString="Russian to English"/>
+        <attribute name="way" optional="YES" attributeType="String" defaultValueString="ru-en"/>
+        <relationship name="history" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="History" inverseName="language" inverseEntity="History"/>
+    </entity>
+    <entity name="Words" representedClassName=".Words" syncable="YES">
+        <attribute name="lastUpdate" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
+        <attribute name="original" optional="YES" attributeType="String" customClassName="NSString"/>
+        <attribute name="recordID" optional="YES" attributeType="Binary"/>
+        <attribute name="recordName" optional="YES" attributeType="String"/>
+        <attribute name="translated" optional="YES" attributeType="String" customClassName="NSString"/>
+        <relationship name="history" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="History" inverseName="words" inverseEntity="History"/>
+    </entity>
+    <elements>
+        <element name="History" positionX="-63" positionY="27" width="128" height="148"/>
+        <element name="Languages" positionX="-63" positionY="9" width="128" height="178"/>
+        <element name="Words" positionX="216.02734375" positionY="86.7421875" width="128" height="133"/>
+    </elements>
+</model>

@@ -1,0 +1,29 @@
+PODS:
+  - Crashlytics (3.14.0):
+    - Fabric (~> 1.10.2)
+  - Fabric (1.10.2)
+  - IQKeyboardManagerSwift (6.4.2)
+  - MKProgress (1.1.0)
+
+DEPENDENCIES:
+  - Crashlytics
+  - Fabric
+  - IQKeyboardManagerSwift
+  - MKProgress (~> 1.1.0)
+
+SPEC REPOS:
+  https://github.com/cocoapods/specs.git:
+    - Crashlytics
+    - Fabric
+    - IQKeyboardManagerSwift
+    - MKProgress
+
+SPEC CHECKSUMS:
+  Crashlytics: 540b7e5f5da5a042647227a5e3ac51d85eed06df
+  Fabric: 706c8b8098fff96c33c0db69cbf81f9c551d0d74
+  IQKeyboardManagerSwift: 79a3ec200dfb41cb66a89b8575417b5378107c5d
+  MKProgress: 260d166200323f3d991190a73ab2dc3a04b0f52f
+
+PODFILE CHECKSUM: 97b349b5d179d8cfc7567cba22b067310a06393c
+
+COCOAPODS: 1.7.5

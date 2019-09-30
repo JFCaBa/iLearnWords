@@ -1,0 +1,17 @@
+//
+//  Configuration.swift
+//  iLearnWords
+//
+//  Created by Jose Catala on 30/09/2019.
+//  Copyright © 2019 Armentechnology. All rights reserved.
+//
+
+import Foundation
+
+struct API {
+    //Free key from Yandex.com
+    //https://translate.yandex.com/developers/keys
+    static let key     =  "trnsl.1.1.20190621T071428Z.f5242913863515ce.ad3d081c06e886ba5c5a34a836a10c817dd16b45"
+    static let baseURL = "https://translate.yandex.net/api/v1.5/tr.json/translate?key=%@&text=%@&lang=%@&format=plain"
+}
+

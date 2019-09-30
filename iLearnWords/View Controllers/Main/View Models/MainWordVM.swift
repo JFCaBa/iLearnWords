@@ -15,20 +15,30 @@ struct MainWordVM {
     
     // MARK: -
     var originalWord: String {
-        return word.original ?? ""
+        return word.original ?? "Undefined"
     }
     
     var translatedWord: String {
-        return word.translated ?? ""
+        return word.translated ?? "Undefined"
     }
 }
 
 extension MainWordVM: MainRepresentable {
     var textOriginal: String {
+<<<<<<< Updated upstream
         return originalWord
     }
     
     var textTranslated: String {
         return translatedWord
+=======
+        guard let original = word.original else { return "Undefined" }
+        return original
+    }
+    
+    var textTranslated: String {
+        guard let translated = word.translated else { return "Undefined" }
+        return translated
+>>>>>>> Stashed changes
     }
 }

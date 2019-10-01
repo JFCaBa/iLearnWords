@@ -10,10 +10,11 @@ import UIKit
 
 class SettingsTVC: UITableViewController {
 
+    // MARK: - Outlets
     @IBOutlet weak var voiceSpeedOutlet: UISlider!
     @IBOutlet weak var repeatOriginalOutlet: UISwitch!
     @IBOutlet weak var playInLoopOutlet: UISwitch!
-    
+    // MARK: - Objects
     private let coreDataManager: CoreDataManager = CoreDataManager()
     
     //MARK: Lifecycle
@@ -81,13 +82,6 @@ class SettingsTVC: UITableViewController {
             }
             else {
                 print("Error flushing History")
-            }
-            
-            if self.coreDataManager.cleanData(UserDefaults.Entity.Languages) {
-                print("History flushed")
-            }
-            else {
-                print("Error flushing Languages")
             }
             
             self.navigationController?.popViewController(animated: true)

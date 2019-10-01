@@ -10,20 +10,20 @@ import UIKit
 
 class CardsGameVC: UIViewController {
 
-    //Outlets
+    // MARK: - Outlets
     @IBOutlet weak var lblOriginal: UILabel!
     @IBOutlet weak var lblTranslated: UILabel!
     @IBOutlet weak var btnPlayOutlet: UIButton!
-    //Ivars
+    // MARK: - Objects
     private let coreDataManager: CoreDataManager = CoreDataManager()
     private var talkManager = TalkManager.shared
-    /// Dependency injection ivars
+    // MARK: -  Dependency injection objects
     public var viewModelWords: MainWordsVM?
     public var viewModelLanguage: MainLanguageVM?
-    
-    var reverse: Bool = false
-        
+    // MARK: - ViewModels
     var viewModelWord: MainWordVM?
+    // MARK: - Ivars
+    var reverse: Bool = false
     
     //MARK: Lifecycle
     override func viewDidLoad() {
@@ -72,12 +72,7 @@ class CardsGameVC: UIViewController {
     
     @IBAction func btnPlayDidTap(_ sender: Any) {
         guard let langOriginal = viewModelLanguage?.sayOriginal, let langTranslated = viewModelLanguage?.sayTranslated else { return }
-        
-        let btn = sender as? UIButton
-        btn?.isEnabled = false
-        guard  let txt = reverse ? lblTranslated.text : lblOriginal.text else {
-            return
-        }
+        guard  let txt = reverse ? lblTranslated.text : lblOriginal.text else { return }
         talkManager.sayText(text: txt, language: reverse ? langTranslated : langOriginal)
     }
     
@@ -91,6 +86,7 @@ class CardsGameVC: UIViewController {
     }
 }
 
+// MARK: - TalkManager Delegate
 extension CardsGameVC: TalkerDelegate {
 
     //MARK: TalkController delegate
@@ -99,6 +95,7 @@ extension CardsGameVC: TalkerDelegate {
     }
 }
 
+// MARK: - Load data extension
 extension CardsGameVC {
     func loadAllWords() {
 

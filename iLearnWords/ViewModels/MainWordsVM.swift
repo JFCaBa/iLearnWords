@@ -10,7 +10,6 @@ import Foundation
 
 struct MainWordsVM {
     
-    
     // MARK: - Properties
 
     let wordsData: [Words]

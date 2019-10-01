@@ -6,7 +6,7 @@
 //  Copyright © 2019 Armentechnology. All rights reserved.
 //
 
-import Foundation
+import UIKit
 
 struct MainHistoryVM {
     
@@ -21,12 +21,27 @@ struct MainHistoryVM {
     var title : String {
         return history?.title ?? ""
     }
+    
+    var isSelected: Bool {
+        return history?.isSelected ?? false
+    }
+    
+    var languageTitle: String {
+        return history?.language?.title ?? "Untitled"
+    }
+    
+    var accessoryType: UITableViewCell.AccessoryType {
+        if history?.isSelected ?? false {
+            return .checkmark
+        } else {
+            return .none
+        }
+    }
 }
 
 extension MainHistoryVM  {
     
     // MARK: -
-    
     func wordsViewModel(original: String, translated: String, title: String, completion: translateDataCompletion) {
         let coreData = CoreDataStack.shared
         let coreDataManager: CoreDataManager = CoreDataManager()
@@ -58,7 +73,22 @@ extension MainHistoryVM  {
             print(error)
         }
         
+        _ = coreDataManager.updateSelectedHistory(history)
         let viewModel = MainWordsVM(wordsData: response)
         completion(viewModel)
+    }
+}
+
+extension MainHistoryVM: HistoryRepresentable {
+    var textTitle: String {
+        return title
+    }
+    
+    var textLanguage: String {
+        return languageTitle
+    }
+    
+    var accessory: UITableViewCell.AccessoryType {
+        return accessoryType
     }
 }

@@ -8,10 +8,15 @@
 
 import UIKit
 
-
 protocol MainRepresentable {
 
     var textOriginal: String { get }
     var textTranslated: String { get }
 
+}
+
+protocol HistoryRepresentable {
+    var textTitle: String { get }
+    var textLanguage: String { get }
+    var accessoryType: UITableViewCell.AccessoryType { get }
 }

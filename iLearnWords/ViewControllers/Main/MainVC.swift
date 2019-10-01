@@ -14,14 +14,12 @@ class MainVC: UIViewController {
     // MARK: - Constants
     private let segueSettings = "gotoSettings"
     private let segueCardsGame = "gotoCardsGame"
-    
     // MARK: - Outlets
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var btnPlayOutlet: UIButton!
-    
     // MARK: - Ivars
     var talkIndex = 0
-    
+    // MARK: - ViewModels
     var viewModelWords: MainWordsVM? {
         didSet {
             updateView()
@@ -140,6 +138,7 @@ class MainVC: UIViewController {
     }
 }
 
+// MARK: - UITableView stuff
 extension MainVC: UITableViewDataSource, UITableViewDelegate {
     
     func numberOfSections(in tableView: UITableView) -> Int {
@@ -174,6 +173,7 @@ extension MainVC: UITableViewDataSource, UITableViewDelegate {
     }
 }
 
+// MARK: - Data related extension
 extension MainVC {
     func loadData() {
         guard let selectedLang = coreDataManager.fetchSelectedByEntity(UserDefaults.Entity.Languages) else {
@@ -235,6 +235,7 @@ extension MainVC {
     }
 }
 
+// MARK: - TalkManager Delegate
 extension MainVC: TalkerDelegate {
     // MARK: TalkController delegate
     func didFinishTalk() {

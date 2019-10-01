@@ -99,6 +99,91 @@ public class CoreDataManager: NSObject {
             return
         }
     }
+    
+    /// To delete the NSManagedObject
+    ///
+    /// - Parameters:
+    ///  - entity: The NSManagedObject: History / Word / Language
+    /// - Returns:
+    ///  - True if the operation was succes, false otherwise
+    public func deleteObject(_ entity: NSManagedObject) -> Bool {
+        managedContext!.delete(entity)
+        do {
+            try managedContext!.save()
+            return true
+            
+        } catch let error as NSError {
+            print("Could not delete Object.\n \(error), \(error.userInfo)")
+            return false
+        }
+    }
+    
+    /// To update the NSManagedObject
+    ///
+    /// - Parameters:
+    ///  - entity: The NSManagedObject: History / Word / Language
+    /// - Returns:
+    ///  - True if the operation was succes, false otherwise
+    public func updateObject(_ entity: NSManagedObject) -> Bool {
+        managedContext!.insert(entity)
+        do {
+            try managedContext!.save()
+            return true
+            
+        } catch let error as NSError {
+            print("Could not Update Object.\n \(error), \(error.userInfo)")
+            return false
+        }
+    }
+    
+    /// To update the selected History
+    ///
+    /// - Parameters:
+    ///  - Language entity selected by the user in the list
+    /// - Returns:
+    ///  - True if the operation was complete, false if not
+    func updateSelectedHistory(_ hist: History) -> Bool {
+        let fetchRequest = NSFetchRequest<NSManagedObject>(entityName: UserDefaults.Entity.History)
+        do {
+            let result = try managedContext?.fetch(fetchRequest)
+            if result!.count > 0 {
+                for history in result!.compactMap({ $0 as? History}) {
+                    history.isSelected =  false
+                }
+                hist.isSelected = true
+                try managedContext?.save()
+            }
+            return true
+            
+        } catch let error as NSError {
+            print("Could not Update selected Language. \(error), \(error.userInfo)")
+            return false
+        }
+    }
+    
+    /// To update the selected language
+    ///
+    /// - Parameters:
+    ///  - Language entity selected by the user in the list
+    /// - Returns:
+    ///  - True if the operation was complete, false if not
+    func updateSelectedLanguage(_ lang: Languages) -> Bool {
+        let fetchRequest = NSFetchRequest<NSManagedObject>(entityName: UserDefaults.Entity.Languages)
+        do {
+            let result = try managedContext?.fetch(fetchRequest)
+            if result!.count > 0 {
+                for language in result!.compactMap({ $0 as? Languages }) {
+                    language.isSelected = language.recordID == lang.recordID ? true : false
+                    try managedContext!.save()
+                }
+            }
+            return true
+            
+        } catch let error as NSError {
+            print("Could not Update selected Language. \(error), \(error.userInfo)")
+            return false
+        }
+    }
 }
 
 extension CoreDataManager {

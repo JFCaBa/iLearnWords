@@ -509,29 +509,40 @@
                                 <rect key="frame" x="0.0" y="88" width="414" height="774"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <prototypes>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" accessoryType="disclosureIndicator" indentationWidth="10" reuseIdentifier="Cell" textLabel="46v-Md-b4H" detailTextLabel="FAt-vM-VhD" rowHeight="75" style="IBUITableViewCellStyleSubtitle" id="3T5-Py-2Or">
-                                        <rect key="frame" x="0.0" y="28" width="414" height="75"/>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="CellHistory" rowHeight="76" id="tOY-jG-hKv" customClass="HistoryTC" customModule="iLearnWords" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="28" width="414" height="76"/>
                                         <autoresizingMask key="autoresizingMask"/>
-                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="3T5-Py-2Or" id="pWr-4E-ahV">
-                                            <rect key="frame" x="0.0" y="0.0" width="382.5" height="75"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="tOY-jG-hKv" id="49m-7p-fqL">
+                                            <rect key="frame" x="0.0" y="0.0" width="414" height="76"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" insetsLayoutMarginsFromSafeArea="NO" text="Title" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="46v-Md-b4H">
-                                                    <rect key="frame" x="20" y="17" width="33.5" height="20.5"/>
-                                                    <autoresizingMask key="autoresizingMask"/>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" text="Title" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="L7M-Ma-weP">
+                                                    <rect key="frame" x="20" y="11" width="374" height="31"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
-                                                <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" insetsLayoutMarginsFromSafeArea="NO" text="Subtitle" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="FAt-vM-VhD">
-                                                    <rect key="frame" x="20" y="40.5" width="44" height="14.5"/>
-                                                    <autoresizingMask key="autoresizingMask"/>
-                                                    <fontDescription key="fontDescription" type="system" pointSize="12"/>
-                                                    <nil key="textColor"/>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Language" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="pcB-u5-Rzk">
+                                                    <rect key="frame" x="20" y="50" width="374" height="18"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                                                    <color key="textColor" white="0.66666666669999997" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                             </subviews>
+                                            <constraints>
+                                                <constraint firstItem="L7M-Ma-weP" firstAttribute="leading" secondItem="49m-7p-fqL" secondAttribute="leading" constant="20" id="7lk-mU-cZV"/>
+                                                <constraint firstItem="pcB-u5-Rzk" firstAttribute="trailing" secondItem="L7M-Ma-weP" secondAttribute="trailing" id="Cqw-kB-Zto"/>
+                                                <constraint firstItem="L7M-Ma-weP" firstAttribute="top" secondItem="49m-7p-fqL" secondAttribute="top" constant="11" id="Ncw-S4-pYy"/>
+                                                <constraint firstItem="pcB-u5-Rzk" firstAttribute="leading" secondItem="L7M-Ma-weP" secondAttribute="leading" id="cvM-aj-JoH"/>
+                                                <constraint firstItem="pcB-u5-Rzk" firstAttribute="top" secondItem="L7M-Ma-weP" secondAttribute="bottom" constant="8" id="g3v-K5-G7o"/>
+                                                <constraint firstAttribute="bottom" secondItem="pcB-u5-Rzk" secondAttribute="bottom" constant="8" id="kBK-qJ-KQs"/>
+                                                <constraint firstAttribute="trailing" secondItem="L7M-Ma-weP" secondAttribute="trailing" constant="20" id="p4Z-We-VDs"/>
+                                            </constraints>
                                         </tableViewCellContentView>
+                                        <connections>
+                                            <outlet property="lblLanguage" destination="pcB-u5-Rzk" id="jaf-Zt-k56"/>
+                                            <outlet property="lblTitle" destination="L7M-Ma-weP" id="jEN-az-ceE"/>
+                                        </connections>
                                     </tableViewCell>
                                 </prototypes>
                             </tableView>

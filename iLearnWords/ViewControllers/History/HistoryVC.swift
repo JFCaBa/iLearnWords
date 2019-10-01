@@ -66,7 +66,6 @@ extension HistoryVC: UITableViewDelegate, UITableViewDataSource {
         return cell
     }
     
-    //MARK: - Table view delegate
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         index = indexPath.row
         self.performSegue(withIdentifier: "gotoHistoryDetails", sender: self)

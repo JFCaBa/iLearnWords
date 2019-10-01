@@ -86,9 +86,9 @@ class MainVC: UIViewController {
     }
     
     @IBAction func btnCopyDidTap(_ sender: Any) {
-        var copyStr = ""
-       
-        UIPasteboard.general.string = copyStr
+//        var copyStr = ""
+//
+//        UIPasteboard.general.string = copyStr
     }
     
     @IBAction func btnPlayDidTap(_ sender: Any) {

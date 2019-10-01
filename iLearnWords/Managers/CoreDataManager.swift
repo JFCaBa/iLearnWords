@@ -20,6 +20,8 @@ public class CoreDataManager: NSObject {
         managedContext = coreData.context()
     }
     
+    // MARK: - Fetch
+    
     /// To get all the objects associated to the entity passed as parameter
     ///
     /// - Parameters:
@@ -60,24 +62,7 @@ public class CoreDataManager: NSObject {
         }
     }
     
-    /// To clean the content of the data base
-    ///
-    /// - Parameters:
-    ///  - entity: String with the name of the entity
-    /// - Returns:
-    ///  - True if the operation was succes, false otherwise
-    public func cleanData(_ entity: String) -> Bool {
-        let fetchRequest = NSFetchRequest<NSManagedObject>(entityName: entity)
-        let deleteRequest = NSBatchDeleteRequest(fetchRequest: fetchRequest as! NSFetchRequest<NSFetchRequestResult>)
-        do {
-            try managedContext!.execute(deleteRequest)
-            try managedContext!.save()
-            return true
-        } catch let error as NSError {
-            print("Could not delete. \(error), \(error.userInfo)")
-            return false
-        }
-    }
+    // MARK: - Save
     
     /// To save the NSManagedObject with the common properties
     ///
@@ -100,6 +85,8 @@ public class CoreDataManager: NSObject {
         }
     }
     
+    // MARK: - Delete
+    
     /// To delete the NSManagedObject
     ///
     /// - Parameters:
@@ -117,6 +104,27 @@ public class CoreDataManager: NSObject {
             return false
         }
     }
+    
+    /// To clean the content of the data base
+    ///
+    /// - Parameters:
+    ///  - entity: String with the name of the entity
+    /// - Returns:
+    ///  - True if the operation was succes, false otherwise
+    public func cleanData(_ entity: String) -> Bool {
+        let fetchRequest = NSFetchRequest<NSManagedObject>(entityName: entity)
+        let deleteRequest = NSBatchDeleteRequest(fetchRequest: fetchRequest as! NSFetchRequest<NSFetchRequestResult>)
+        do {
+            try managedContext!.execute(deleteRequest)
+            try managedContext!.save()
+            return true
+        } catch let error as NSError {
+            print("Could not delete. \(error), \(error.userInfo)")
+            return false
+        }
+    }
+    
+    // MARK: - Update
     
     /// To update the NSManagedObject
     ///
@@ -186,6 +194,7 @@ public class CoreDataManager: NSObject {
     }
 }
 
+// MARK: - Languages table iniatilaser
 extension CoreDataManager {
     /// Will save the Languages defined in Configuration.swift
     /// into the Core Data data base

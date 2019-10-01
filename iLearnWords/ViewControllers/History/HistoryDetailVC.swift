@@ -91,8 +91,13 @@ class HistoryDetailVC: UIViewController {
     }
 }
 
+//MARK: - UITableView datasource/delegate
 extension HistoryDetailVC: UITableViewDataSource, UITableViewDelegate {
-    //MARK: - Table view datasource
+    
+    func numberOfSections(in tableView: UITableView) -> Int {
+        return  1
+    }
+    
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return dataObj.count
     }
@@ -111,7 +116,6 @@ extension HistoryDetailVC: UITableViewDataSource, UITableViewDelegate {
         return cell
     }
     
-    //MARK: - Table view delegate
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         index = indexPath.row
         self.performSegue(withIdentifier: "gotoEditWord", sender: self)

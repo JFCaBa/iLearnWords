@@ -45,8 +45,6 @@ struct JSONDecoder {
         }
     }
 
-    // MARK: -
-
     private init(JSONData: JSON) {
         self.JSONData = JSONData
     }
@@ -130,5 +128,4 @@ struct JSONDecoder {
         
         throw JSONDecoderError.keyPathNotFound(keyPath)
     }
-    
 }

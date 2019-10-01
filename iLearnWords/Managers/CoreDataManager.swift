@@ -20,6 +20,24 @@ public class CoreDataManager: NSObject {
         managedContext = coreData.context()
     }
     
+    /// To get all the objects associated to the entity passed as parameter
+    ///
+    /// - Parameters:
+    ///  - entity: String with the name of the entity
+    /// - Returns:
+    ///  - Array containig all the objects in the table
+    func fetchAllByEntity(_ entity: String) -> Array<NSManagedObject>? {
+        let fetchRequest = NSFetchRequest<NSManagedObject>(entityName: entity)
+        do {
+            let result = try managedContext?.fetch(fetchRequest)
+            return result
+            
+        } catch let error as NSError {
+            print("Could not fetch. \(error), \(error.userInfo)")
+            return nil
+        }
+    }
+    
     /// To get the selected object in the passed entity. For the tables Language and History
     /// there is a property call isSelected
     ///
@@ -27,9 +45,12 @@ public class CoreDataManager: NSObject {
     ///  - entity: String with the name of the entity
     /// - Returns:
     ///  - The first NSManagedObject with the property isSelected to true (should be just one)
-    func fetchSelectedByEntity(_ entity: String) -> NSManagedObject? {
+    public func fetchSelectedByEntity(_ entity: String) -> NSManagedObject? {
         let fetchRequest = NSFetchRequest<NSManagedObject>(entityName: entity)
         fetchRequest.predicate = NSPredicate(format: "isSelected == %@", NSNumber(value: true))
+        let sectionSortDescriptor = NSSortDescriptor(key: "lastUpdate", ascending: true)
+        let sortDescriptors = [sectionSortDescriptor]
+        fetchRequest.sortDescriptors = sortDescriptors
         do {
             let result = try managedContext?.fetch(fetchRequest)
             return result?.first
@@ -38,54 +59,61 @@ public class CoreDataManager: NSObject {
             return nil
         }
     }
+    
+    /// To clean the content of the data base
+    ///
+    /// - Parameters:
+    ///  - entity: String with the name of the entity
+    /// - Returns:
+    ///  - True if the operation was succes, false otherwise
+    public func cleanData(_ entity: String) -> Bool {
+        let fetchRequest = NSFetchRequest<NSManagedObject>(entityName: entity)
+        let deleteRequest = NSBatchDeleteRequest(fetchRequest: fetchRequest as! NSFetchRequest<NSFetchRequestResult>)
+        do {
+            try managedContext!.execute(deleteRequest)
+            try managedContext!.save()
+            return true
+        } catch let error as NSError {
+            print("Could not delete. \(error), \(error.userInfo)")
+            return false
+        }
+    }
+    
+    /// To save the NSManagedObject with the common properties
+    ///
+    /// - Parameters:
+    ///  - entity: The NSManagedObject: History / Word / Language
+    /// - Returns:
+    ///  - True if the operation was succes, false otherwise
+    public func saveEntity(entity: NSManagedObject) {
+        let name = UserDefaults.Entity.Words + UUID().uuidString
+        entity.setValue(name, forKey: "recordName")
+        entity.setValue(Date(), forKey: "lastUpdate")
+        let uuid = UUID().uuidString
+        do {
+            let key = try NSKeyedArchiver.archivedData(withRootObject: uuid, requiringSecureCoding: false)
+            entity.setValue(key, forKey:"recordID")
+        }
+         catch let error as NSError {
+            print(error)
+            return
+        }
+    }
 }
 
 extension CoreDataManager {
-    
-    func suportedLanguages() -> [[String: String]] {
-        let langDic = [["title":"Russian to English",
-                        "sayOriginal":"ru_RU",
-                        "sayTranslated":"en_GB",
-                        "way":"ru-en",
-                        "isSelected":"1"],
-                       ["title":"English to Russian",
-                        "sayOriginal":"en_GB",
-                        "sayTranslated":"ru_RU",
-                        "way":"en-ru",
-                        "isSelected":"0"]
-        ]
-        return langDic
-    }
-    
+    /// Will save the Languages defined in Configuration.swift
+    /// into the Core Data data base
     func saveLanguagesInCoreDataWith() {
-        let array = suportedLanguages()
-        _ = array.map{self.createLanguageEntityFrom(dictionary: $0)}
-        do {
-            try managedContext?.save()
-        } catch let error {
-            print(error)
-        }
-    }
-    
-    func createLanguageEntityFrom(dictionary: [String: String]) -> NSManagedObject? {
-        if let languageEntity = NSEntityDescription.insertNewObject(forEntityName: UserDefaults.Entity.Languages, into: managedContext!) as? Languages {
-            languageEntity.title = dictionary[UserDefaults.Languages.Title]
-            languageEntity.sayOriginal = dictionary[UserDefaults.Languages.SayOriginal]
-            languageEntity.sayTranslated = dictionary[UserDefaults.Languages.SayTranslated]
-            languageEntity.way = dictionary[UserDefaults.Languages.Way]
-            languageEntity.isSelected = dictionary[UserDefaults.Languages.IsSelected] == "1" ? true : false
-            let uuid = UUID().uuidString
+        let landDefaults = Languages_Defaults()
+        let array = TranslationLanguages.languagesArray
+        if let managedContext = managedContext {
+            _ = array.map{landDefaults.createLanguageEntityFrom(dictionary: $0, managedContext: managedContext)}
             do {
-                languageEntity.recordID = try NSKeyedArchiver.archivedData(withRootObject: uuid, requiringSecureCoding: false)
+                try managedContext.save()
+            } catch let error as NSError {
+                print(error)
             }
-            catch {
-                print("Error")
-                return nil
-            }
-            languageEntity.recordName = UserDefaults.Entity.Languages + UUID().uuidString
-            languageEntity.lastUpdate = Date()
-            return languageEntity
         }
-        return nil
     }
 }

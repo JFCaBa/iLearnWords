@@ -15,3 +15,16 @@ struct API {
     static let baseURL = "https://translate.yandex.net/api/v1.5/tr.json/translate?key=%@&text=%@&lang=%@&format=plain"
 }
 
+struct TranslationLanguages {
+    static let languagesArray = [["title":"Russian to English",
+                    "sayOriginal":"ru_RU",
+                    "sayTranslated":"en_GB",
+                    "way":"ru-en",
+                    "isSelected":"1"],
+                   ["title":"English to Russian",
+                    "sayOriginal":"en_GB",
+                    "sayTranslated":"ru_RU",
+                    "way":"en-ru",
+                    "isSelected":"0"]
+    ]
+}

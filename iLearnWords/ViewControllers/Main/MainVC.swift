@@ -15,16 +15,12 @@ class MainVC: UIViewController {
     private let segueSettings = "gotoSettings"
     private let segueCardsGame = "gotoCardsGame"
     
-    //MARK: - Outlets
+    // MARK: - Outlets
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var btnPlayOutlet: UIButton!
     
-    // MARK: -
-    var viewModelRepresentable: MainWordVM? {
-        didSet {
-            
-        }
-    }
+    // MARK: - Ivars
+    var talkIndex = 0
     
     var viewModelWords: MainWordsVM? {
         didSet {
@@ -44,23 +40,35 @@ class MainVC: UIViewController {
         }
     }
     
+    // MARK: - Objects
     private let coreDataManager: CoreDataManager = CoreDataManager()
+    private let talkManager = TalkManager.shared
     
     private lazy var dataManager = {
         return DataManager(APIKey: API.key)
     }()
     
-    //MARK: - Lifecycle
+    // MARK: - Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
-        tableView.delegate = self
-        tableView.dataSource = self
+        tableView.delegate        = self
+        tableView.dataSource      = self
         tableView.tableFooterView = UIView.init(frame: CGRect.zero)
-        
+        talkManager.delegate      = self
         loadData()
     }
     
-    //MARK: - Actions
+    // MARK: - Navigation
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == "gotoCardsGame" {
+            let cards = segue.destination as! CardsGameVC
+            cards.viewModelWords = viewModelWords
+            cards.viewModelLanguage = viewModelLanguage
+        }
+    }
+    
+    // MARK: - Actions
     @IBAction func btnSettingsDidTap(_ sender: Any) {
         self.performSegue(withIdentifier: segueSettings, sender: self)
     }
@@ -89,13 +97,18 @@ class MainVC: UIViewController {
         let btn = sender as! UIButton
         if btn.titleLabel?.text == NSLocalizedString("PLAY", comment: "") {
             btn.setTitle(NSLocalizedString("STOP", comment:""), for: .normal)
+            guard let viewModel = viewModelHistory else { return }
+            talkManager.sayText(viewModel: viewModel)
         }
         else {
-
+            let success = talkManager.stopTalk()
+            if success {
+                btn.setTitle(NSLocalizedString("PLAY", comment:""), for: .normal)
+            }
         }
     }
     
-    //MARK: - Private functions
+    // MARK: - Private functions
     private func
         updateView() {
         MKProgress.hide()
@@ -153,8 +166,8 @@ extension MainVC: UITableViewDataSource, UITableViewDelegate {
         return viewModelHistory?.title
     }
     
-    //MARK: - Table view delegate
-    // Will play the Word in the tapped row
+    // MARK: - Table view delegate
+    /// Will play the Word in the tapped row
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         //Unselect the tapped row
         tableView.deselectRow(at: indexPath, animated: false)
@@ -217,6 +230,24 @@ extension MainVC {
                     self.viewModelWords = viewModel
                     MKProgress.hide()
                 })
+            }
+        }
+    }
+}
+
+extension MainVC: TalkerDelegate {
+    // MARK: TalkController delegate
+    func didFinishTalk() {
+        // If tap on the table cell the btn is disable to avoid tap again on it until the play finish is notified here
+        btnPlayOutlet.isEnabled = true
+        if btnPlayOutlet.titleLabel?.text == NSLocalizedString("PLAY", comment:"") {
+            return
+        }
+        
+        let playInLoop = UserDefaults.standard.bool(forKey: UserDefaults.keys.PlayInLoop)
+        if playInLoop {
+            if let viewModel = viewModelHistory {
+                talkManager.sayText(viewModel: viewModel)
             }
         }
     }

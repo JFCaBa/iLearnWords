@@ -76,7 +76,8 @@ extension UserDefaults {
                 let color = try NSKeyedUnarchiver.unarchivedObject(ofClass: UIColor.self, from: colorData)
                 return color
             }
-            catch {
+            catch let error {
+                print(error)
                 return nil
             }
         }
@@ -91,8 +92,8 @@ extension UserDefaults {
                 let  colorData = try NSKeyedArchiver.archivedData(withRootObject: color, requiringSecureCoding: false)
                 set(colorData, forKey: key)
             }
-            catch {
-                print("Error setting color")
+            catch let error as NSError {
+                print(error)
             }
         }
     }

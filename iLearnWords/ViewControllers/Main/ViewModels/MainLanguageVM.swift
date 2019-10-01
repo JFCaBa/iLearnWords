@@ -19,5 +19,12 @@ struct MainLanguageVM {
     var title : String {
         return language?.way ?? "Untitled"
     }
-
+    
+    var sayOriginal: String {
+        return language?.sayOriginal ?? "ru_RU"
+    }
+    
+    var sayTranslated: String {
+        return language?.sayTranslated ?? "en_GB"
+    }
 }

@@ -20,8 +20,12 @@ class TalkManager: NSObject {
     public weak var delegate:TalkerDelegate?
     
     var utteranceRate: Float = 0.3
+    var talkIndex = 0
+    var isOriginal: Bool = true
+    var shouldStop: Bool = false
+    private var proxyViewModel: MainHistoryVM?
     
-    //MARK: Initializers
+    // MARK: Initializers
     private override init() {
         super.init()
         synthesizer.delegate = (self as AVSpeechSynthesizerDelegate)
@@ -31,14 +35,32 @@ class TalkManager: NSObject {
         do {
             try AVAudioSession.sharedInstance().setCategory(.playback, mode: .default, options: AVAudioSession.CategoryOptions.mixWithOthers)
             try AVAudioSession.sharedInstance().setActive(true)
-        } catch {
+        } catch let error as NSError {
             print(error)
         }
     }
 
-    //MARK: Public functions
-    /** On charge of create the AudioSession object, Synthesiser stuff and start the Utterance with the passed word. The language settings for the voice is passed as a parameter*/
-    public func sayText(_ text: String, language: String) {
+    // MARK: Public functions
+    
+    /// To use the sunthesizer to hear the word
+    ///
+    /// - Parameters:
+    ///  - viewModel: The MainHistoryViewModel
+    public func sayText(viewModel: MainHistoryVM) {
+        if let word = viewModel.history?.words?.allObjects[talkIndex], let lang = viewModel.history?.language {
+            guard let  wordToSay  =  isOriginal ? (word as! Words).original :  (word as! Words).translated else {
+                return
+            }
+            guard let langToSay = isOriginal ? lang.sayOriginal : lang.sayTranslated else {
+                return
+            }
+            proxyViewModel = viewModel
+            sayText(text: wordToSay, language: langToSay)
+            shouldStop = false
+        }
+    }
+    
+    public func sayText(text: String, language: String) {
         let utterance = AVSpeechUtterance(string: text)
         utterance.voice = AVSpeechSynthesisVoice(language: language)
         utterance.rate = utteranceRate
@@ -54,6 +76,7 @@ class TalkManager: NSObject {
     }
     
     public func stopTalk() -> Bool {
+        shouldStop = true
         return synthesizer.stopSpeaking(at: .immediate)
     }
     
@@ -64,15 +87,28 @@ class TalkManager: NSObject {
     public func isPaused() -> Bool {
         return synthesizer.isPaused
     }
+    
 }
 
 extension TalkManager: AVSpeechSynthesizerDelegate {
     func speechSynthesizer(_ synthesizer: AVSpeechSynthesizer, didFinish utterance: AVSpeechUtterance) {
-        if let del = delegate {
-                del.didFinishTalk()
+        if shouldStop { return }
+        if !isOriginal { talkIndex += 1 }
+        isOriginal = !isOriginal
+        if proxyViewModel?.history?.words?.count == talkIndex {
+            if let delegate = delegate {
+                talkIndex = 0
+                delegate.didFinishTalk()
+            }
+        }
+        else {
+            if let proxyViewModel = proxyViewModel {
+                sayText(viewModel: proxyViewModel)
+            }
         }
     }
     
+    /// Notification when the user change values in Settings
     @objc private func didChangeSettings(){
         let value = UserDefaults.standard.float(forKey: "VOICE_SPEED")
         if value != utteranceRate{

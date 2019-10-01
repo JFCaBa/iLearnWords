@@ -41,39 +41,23 @@ extension MainHistoryVM  {
             let word = Words(context: context)
             word.original = element
             word.translated = translatedArray[index]
-            let uuid = UUID().uuidString
-            do {
-                word.recordID = try NSKeyedArchiver.archivedData(withRootObject: uuid, requiringSecureCoding: false)
-            }
-            catch {
-                print("Error")
-                return
-            }
-            word.recordName = UserDefaults.Entity.Words + UUID().uuidString
-            word.lastUpdate = Date()
+            coreDataManager.saveEntity(entity: word)
             response.append(word)
         }
         
         let history = History(context: context)
         history.isSelected = true
         history.title = title
-        let uuid = UUID().uuidString
-        do {
-            history.recordID = try NSKeyedArchiver.archivedData(withRootObject: uuid, requiringSecureCoding: false)
-        }
-        catch {
-            print("Error")
-            return
-        }
-        history.recordName = UserDefaults.Entity.History + UUID().uuidString
-        history.lastUpdate = Date()
-        history.addToWords(NSSet.init(array: response))
         history.language = (coreDataManager.fetchSelectedByEntity(UserDefaults.Entity.Languages) as! Languages)
+        history.addToWords(NSSet.init(array: response))
+        coreDataManager.saveEntity(entity: history)
+        
         do {
             try coreDataManager.managedContext?.save()
-        } catch let error {
+        } catch let error as NSError {
             print(error)
         }
+        
         let viewModel = MainWordsVM(wordsData: response)
         completion(viewModel)
     }

@@ -26,5 +26,5 @@ extension Languages {
     @NSManaged public var recordName: String?
     @NSManaged public var lastUpdate: Date?
     @NSManaged public var history: History?
-
+    @NSManaged public var created: Double
 }

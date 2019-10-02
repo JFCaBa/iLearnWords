@@ -25,6 +25,7 @@ extension History {
     @NSManaged public var hasWord: NSSet?
     @NSManaged public var language: Languages?
     @NSManaged public var words: NSSet?
+    @NSManaged public var created: Double
 
 }
 

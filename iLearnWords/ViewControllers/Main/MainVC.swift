@@ -63,7 +63,7 @@ class MainVC: UIViewController {
     // MARK: - Navigation
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if segue.identifier == "gotoCardsGame" {
+        if segue.identifier == segueCardsGame {
             let cards = segue.destination as! CardsGameVC
             cards.viewModelWords = viewModelWords
             cards.viewModelLanguage = viewModelLanguage
@@ -191,7 +191,9 @@ extension MainVC {
         viewModelLanguage = MainLanguageVM(language: selectedLang as? Languages)
         let history = hist as! History
         viewModelHistory = MainHistoryVM(history: history)
-        viewModelWords = MainWordsVM(wordsData: history.words?.allObjects as! [Words])
+        var words = history.words?.allObjects as! [Words]
+        words = words.sorted(by:{ $0.created < $1.created })
+        viewModelWords = MainWordsVM(wordsData: words)
         guard let lang = history.language else { return }
         viewModelLanguage = MainLanguageVM(language: lang)
     }

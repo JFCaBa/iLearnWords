@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="14903" systemVersion="18G95" minimumToolsVersion="Automatic" sourceLanguage="Swift" userDefinedModelVersionIdentifier="">
+<model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="14903" systemVersion="18G103" minimumToolsVersion="Automatic" sourceLanguage="Swift" userDefinedModelVersionIdentifier="">
     <entity name="History" representedClassName=".History" syncable="YES">
+        <attribute name="created" optional="YES" attributeType="Double" defaultValueString="0.0" usesScalarValueType="YES"/>
         <attribute name="isSelected" optional="YES" attributeType="Boolean" usesScalarValueType="YES"/>
         <attribute name="lastUpdate" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
         <attribute name="recordID" optional="YES" attributeType="Binary"/>
@@ -10,6 +11,7 @@
         <relationship name="words" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Words" inverseName="history" inverseEntity="Words"/>
     </entity>
     <entity name="Languages" representedClassName=".Languages" syncable="YES">
+        <attribute name="created" optional="YES" attributeType="Double" defaultValueString="0.0" usesScalarValueType="YES"/>
         <attribute name="isSelected" optional="YES" attributeType="Boolean" usesScalarValueType="YES"/>
         <attribute name="lastUpdate" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
         <attribute name="recordID" optional="YES" attributeType="Binary"/>
@@ -21,6 +23,7 @@
         <relationship name="history" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="History" inverseName="language" inverseEntity="History"/>
     </entity>
     <entity name="Words" representedClassName=".Words" syncable="YES">
+        <attribute name="created" optional="YES" attributeType="Double" defaultValueString="0.0" usesScalarValueType="YES"/>
         <attribute name="lastUpdate" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
         <attribute name="original" optional="YES" attributeType="String" customClassName="NSString"/>
         <attribute name="recordID" optional="YES" attributeType="Binary"/>
@@ -29,8 +32,8 @@
         <relationship name="history" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="History" inverseName="words" inverseEntity="History"/>
     </entity>
     <elements>
-        <element name="History" positionX="-63" positionY="27" width="128" height="148"/>
-        <element name="Languages" positionX="-63" positionY="9" width="128" height="178"/>
-        <element name="Words" positionX="216.02734375" positionY="86.7421875" width="128" height="133"/>
+        <element name="History" positionX="-63" positionY="27" width="128" height="163"/>
+        <element name="Languages" positionX="-63" positionY="9" width="128" height="193"/>
+        <element name="Words" positionX="216.02734375" positionY="86.7421875" width="128" height="148"/>
     </elements>
 </model>

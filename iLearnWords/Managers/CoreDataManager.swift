@@ -30,7 +30,7 @@ public class CoreDataManager: NSObject {
     ///  - Array containig all the objects in the table
     public func fetchAllByEntity(_ entity: String) -> Array<NSManagedObject>? {
         let fetchRequest = NSFetchRequest<NSManagedObject>(entityName: entity)
-        let sectionSortDescriptor = NSSortDescriptor(key: "lastUpdate", ascending: false)
+        let sectionSortDescriptor = NSSortDescriptor(key: "created", ascending: true)
         let sortDescriptors = [sectionSortDescriptor]
         fetchRequest.sortDescriptors = sortDescriptors
         do {
@@ -53,7 +53,7 @@ public class CoreDataManager: NSObject {
     public func fetchSelectedByEntity(_ entity: String) -> NSManagedObject? {
         let fetchRequest = NSFetchRequest<NSManagedObject>(entityName: entity)
         fetchRequest.predicate = NSPredicate(format: "isSelected == %@", NSNumber(value: true))
-        let sectionSortDescriptor = NSSortDescriptor(key: "lastUpdate", ascending: false)
+        let sectionSortDescriptor = NSSortDescriptor(key: "created", ascending: true)
         let sortDescriptors = [sectionSortDescriptor]
         fetchRequest.sortDescriptors = sortDescriptors
         do {
@@ -66,15 +66,14 @@ public class CoreDataManager: NSObject {
     }
     
     public func fetchWordsForHistory(_ entity: NSManagedObject) -> Array<Words>? {
-        let fetchRequest = NSFetchRequest<NSManagedObject>(entityName: UserDefaults.Entity.History)
-        fetchRequest.predicate = NSPredicate(format: "recordName == %@", entity.value(forKey: "recordName") as! String)
-        let sectionSortDescriptor = NSSortDescriptor(key: "lastUpdate", ascending: false)
+        let fetchRequest = NSFetchRequest<NSManagedObject>(entityName: UserDefaults.Entity.Words)
+        fetchRequest.predicate = NSPredicate(format: "history == %@", entity as! History)
+        let sectionSortDescriptor = NSSortDescriptor(key: "created", ascending: true)
         let sortDescriptors = [sectionSortDescriptor]
         fetchRequest.sortDescriptors = sortDescriptors
         do {
             let result = try managedContext?.fetch(fetchRequest)
-            let history = result?.first as! History
-            return history.words?.allObjects as? Array<Words>
+            return result as? Array<Words>
         }catch let error as NSError {
             print("Could not fetch. \(error), \(error.userInfo)")
             return nil
@@ -93,6 +92,7 @@ public class CoreDataManager: NSObject {
         let name = UserDefaults.Entity.Words + UUID().uuidString
         entity.setValue(name, forKey: "recordName")
         entity.setValue(Date(), forKey: "lastUpdate")
+        entity.setValue(Date().timeIntervalSince1970, forKey: "created")
         let uuid = UUID().uuidString
         do {
             let key = try NSKeyedArchiver.archivedData(withRootObject: uuid, requiringSecureCoding: false)

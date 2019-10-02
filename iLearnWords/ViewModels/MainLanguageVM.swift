@@ -17,7 +17,7 @@ struct MainLanguageVM {
     // MARK: -
     
     var title : String {
-        return language?.way ?? "Untitled"
+        return language?.title ?? "Untitled"
     }
     
     var sayOriginal: String {

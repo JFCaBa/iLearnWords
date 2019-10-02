@@ -142,7 +142,7 @@ class MainVC: UIViewController {
     }
 }
 
-// MARK: - UITableView stuff
+// MARK: - UITableView datasource/delegate
 extension MainVC: UITableViewDataSource, UITableViewDelegate {
     
     func numberOfSections(in tableView: UITableView) -> Int {
@@ -169,27 +169,26 @@ extension MainVC: UITableViewDataSource, UITableViewDelegate {
         return viewModelHistory?.title
     }
     
-    // MARK: - Table view delegate
     /// Will play the Word in the tapped row
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         //Unselect the tapped row
         tableView.deselectRow(at: indexPath, animated: false)
+        guard let langOriginal = viewModelLanguage?.sayOriginal else { return }
+        guard  let word = viewModelWords?.wordsData[indexPath.row] else { return }
+        let viewModel = MainWordVM(word: word)
+        talkManager.sayText(text: viewModel.originalWord, language: langOriginal)
     }
 }
 
 // MARK: - Data related extension
 extension MainVC {
     func loadData() {
-        guard let selectedLang = coreDataManager.fetchSelectedByEntity(UserDefaults.Entity.Languages) else {
+        guard let selectedLang = coreDataManager.fetchSelectedByEntity(UserDefaults.Entity.Languages), let hist = coreDataManager.fetchSelectedByEntity(UserDefaults.Entity.History)  else {
             viewModelLanguage = MainLanguageVM(language: nil)
-            return
-        }
-        viewModelLanguage = MainLanguageVM(language: selectedLang as? Languages)
-        
-        guard let hist = coreDataManager.fetchSelectedByEntity(UserDefaults.Entity.History) else {
             viewModelHistory = MainHistoryVM(history: nil)
             return
         }
+        viewModelLanguage = MainLanguageVM(language: selectedLang as? Languages)
         let history = hist as! History
         viewModelHistory = MainHistoryVM(history: history)
         viewModelWords = MainWordsVM(wordsData: history.words?.allObjects as! [Words])

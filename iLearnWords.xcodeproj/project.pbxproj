@@ -230,9 +230,9 @@
 			isa = PBXGroup;
 			children = (
 				6D8A8F4B2341E7D2003EF281 /* TranslationData.swift */,
-				6DE1601F23434C6B002E8DC7 /* Languages+Defaults.swift */,
 				6D8A8F6A2341EF45003EF281 /* History+CoreDataClass.swift */,
 				6D8A8F662341EF44003EF281 /* History+CoreDataProperties.swift */,
+				6DE1601F23434C6B002E8DC7 /* Languages+Defaults.swift */,
 				6D8A8F682341EF44003EF281 /* Languages+CoreDataClass.swift */,
 				6D8A8F692341EF44003EF281 /* Languages+CoreDataProperties.swift */,
 				6D8A8F672341EF44003EF281 /* Words+CoreDataClass.swift */,

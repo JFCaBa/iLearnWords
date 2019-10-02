@@ -15,11 +15,11 @@ struct MainWordVM {
     
     // MARK: -
     var originalWord: String {
-        return word.original ?? "Undefined"
+        return word.original ?? ""
     }
     
     var translatedWord: String {
-        return word.translated ?? "Undefined"
+        return word.translated ?? ""
     }
 }
 

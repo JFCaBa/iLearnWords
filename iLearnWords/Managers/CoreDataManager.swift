@@ -28,7 +28,7 @@ public class CoreDataManager: NSObject {
     ///  - entity: String with the name of the entity
     /// - Returns:
     ///  - Array containig all the objects in the table
-    func fetchAllByEntity(_ entity: String) -> Array<NSManagedObject>? {
+    public func fetchAllByEntity(_ entity: String) -> Array<NSManagedObject>? {
         let fetchRequest = NSFetchRequest<NSManagedObject>(entityName: entity)
         do {
             let result = try managedContext?.fetch(fetchRequest)
@@ -56,6 +56,19 @@ public class CoreDataManager: NSObject {
         do {
             let result = try managedContext?.fetch(fetchRequest)
             return result?.first
+        }catch let error as NSError {
+            print("Could not fetch. \(error), \(error.userInfo)")
+            return nil
+        }
+    }
+    
+    public func fetchWordsForHistory(_ entity: NSManagedObject) -> Array<Words>? {
+        let fetchRequest = NSFetchRequest<NSManagedObject>(entityName: UserDefaults.Entity.History)
+        fetchRequest.predicate = NSPredicate(format: "recordName == %@", entity.value(forKey: "recordName") as! String)
+        do {
+            let result = try managedContext?.fetch(fetchRequest)
+            let history = result?.first as! History
+            return history.words?.allObjects as? Array<Words>
         }catch let error as NSError {
             print("Could not fetch. \(error), \(error.userInfo)")
             return nil
@@ -150,7 +163,7 @@ public class CoreDataManager: NSObject {
     ///  - Language entity selected by the user in the list
     /// - Returns:
     ///  - True if the operation was complete, false if not
-    func updateSelectedHistory(_ hist: History) -> Bool {
+    public func updateSelectedHistory(_ hist: History) -> Bool {
         let fetchRequest = NSFetchRequest<NSManagedObject>(entityName: UserDefaults.Entity.History)
         do {
             let result = try managedContext?.fetch(fetchRequest)
@@ -175,7 +188,7 @@ public class CoreDataManager: NSObject {
     ///  - Language entity selected by the user in the list
     /// - Returns:
     ///  - True if the operation was complete, false if not
-    func updateSelectedLanguage(_ lang: Languages) -> Bool {
+    public func updateSelectedLanguage(_ lang: Languages) -> Bool {
         let fetchRequest = NSFetchRequest<NSManagedObject>(entityName: UserDefaults.Entity.Languages)
         do {
             let result = try managedContext?.fetch(fetchRequest)
@@ -189,6 +202,34 @@ public class CoreDataManager: NSObject {
             
         } catch let error as NSError {
             print("Could not Update selected Language. \(error), \(error.userInfo)")
+            return false
+        }
+    }
+    
+    /// To update the edited Word. Only the translation can be edited
+    ///
+    /// - Parameters:
+    ///  - original  the original word
+    ///  - translated the translated wrd
+    /// - Returns:
+    ///  - True if the operation was complete, false if not
+    public func updateWord(original: String, translated: String) -> Bool {
+        let fetchRequest = NSFetchRequest<NSManagedObject>(entityName: UserDefaults.Entity.Words)
+        fetchRequest.predicate = NSPredicate(format: "original == %@", original,translated)
+        do {
+            let result = try managedContext?.fetch(fetchRequest)
+            if result!.count > 0 {
+                let word = result?.first as! Words
+                word.translated = translated
+                try managedContext!.save()
+                return true
+            }
+            else {
+                return false
+            }
+            
+        } catch let error as NSError {
+            print("Could not fetch. \(error), \(error.userInfo)")
             return false
         }
     }

@@ -11,11 +11,17 @@ import UIKit
 class HistoryDetailVC: UIViewController {
 
     @IBOutlet weak var tableView: UITableView!
-    
-    var dataObj: Array<Words> = []
-    public var history: History?
+    // MARK: - Ivars
     var index: Int = 0
+    // MARK: - Object instances
     private let coreDataManager: CoreDataManager = CoreDataManager()
+    // MARK: - ViewModels
+    var viewModelHistory: MainHistoryVM? {
+        didSet {
+            updateView()
+        }
+    }
+    var viewModelWords: MainWordsVM?
     
     //MARK: - Lifecycle
     override func viewDidLoad() {
@@ -23,9 +29,6 @@ class HistoryDetailVC: UIViewController {
         tableView.delegate = self
         tableView.dataSource = self
         tableView.tableFooterView = UIView.init(frame: CGRect.zero)
-        dataObj = (history!.words?.allObjects as! Array<Words>)
-        //Sort the array by the date the words were added to the database
-        dataObj = dataObj.sorted(by:{ $0.lastUpdate?.timeIntervalSince1970 ?? Date().timeIntervalSince1970 < $1.lastUpdate?.timeIntervalSince1970 ?? Date().timeIntervalSince1970 })
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -35,8 +38,10 @@ class HistoryDetailVC: UIViewController {
     
     //MARK: - Navigation
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-//        let edit = segue.destination as! WordsEditVC
-//        edit.dataObj = dataObj[index]
+        let edit = segue.destination as! WordsEditVC
+        if let word = viewModelWords?.wordsData[index] {
+            edit.viewModelWord = MainWordVM(word: word)
+        }
     }
     
     //MARK: - Actions
@@ -44,14 +49,7 @@ class HistoryDetailVC: UIViewController {
         let alertController = UIAlertController(title: NSLocalizedString("Switch to this History", comment:""), message: "", preferredStyle: .alert)
         let yesAction = UIAlertAction(title: NSLocalizedString("Yes", comment:""), style: .default, handler: { alert -> Void in
             //Set the isSelected property to yes
-            self.history?.isSelected = true
-            if self.coreDataManager.updateSelectedHistory(self.history!) {
-                //Back to the main screen
-                self.navigationController?.popToRootViewController(animated: true)
-            }
-            else {
-                print("Error: The History couldn't be selected")
-            }
+           
         })
         
         let cancelAction = UIAlertAction(title: NSLocalizedString("Cancel", comment:""), style: .default, handler: {
@@ -65,29 +63,10 @@ class HistoryDetailVC: UIViewController {
         self.present(alertController, animated: true, completion: nil)
     }
     
-    @IBAction func deleteDidTap(_ sender: Any) {
-        
-        let alertController = UIAlertController(title: NSLocalizedString("Delete From History", comment:""), message: "", preferredStyle: .alert)
-        
-        let saveAction = UIAlertAction(title: NSLocalizedString("Yes", comment:""), style: .default, handler: { alert -> Void in
-//            if self.coreDataManager.deleteObject(self.dataObj!) {
-//                print("History deleted")
-//                self.navigationController?.popViewController(animated: true)
-//            }
-//            else {
-//                print("Error deleting History")
-//            }
-        })
-        
-        let cancelAction = UIAlertAction(title: NSLocalizedString("Cancel", comment:""), style: .default, handler: {
-            (action : UIAlertAction!) -> Void in })
-        
-        alertController.addAction(cancelAction)
-        alertController.addAction(saveAction)
-        
-        alertController.preferredAction = saveAction
-        
-        self.present(alertController, animated: true, completion: nil)
+    // MARK: Private functions
+    private func updateView() {
+        let words = viewModelHistory?.history?.words?.allObjects as! Array<Words>
+        viewModelWords = MainWordsVM(wordsData: words)
     }
 }
 
@@ -99,25 +78,43 @@ extension HistoryDetailVC: UITableViewDataSource, UITableViewDelegate {
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return dataObj.count
+        guard let rows = viewModelWords?.wordsData.count else { return 0 }
+        return  rows
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell: UITableViewCell = {
-            guard let cell = tableView.dequeueReusableCell(withIdentifier: "CellMain") else {
-                // Never fails:
-                return UITableViewCell(style: UITableViewCell.CellStyle.subtitle, reuseIdentifier: "CellMain")
-            }
-            return cell
-        }()
-        let word: Words = dataObj[indexPath.row]
-        cell.textLabel?.text = word.original
-        cell.detailTextLabel?.text = word.translated
+        guard let cell = tableView.dequeueReusableCell(withIdentifier: HistoryDetailTC.reuseIdentifier, for: indexPath) as? HistoryDetailTC else { fatalError("Unexpected Table View Cell") }
+        
+        if let word = viewModelWords?.wordsData[indexPath.row] {
+            let viewModel = MainWordVM(word: word)
+            cell.configure(withViewModel: viewModel)
+        }
         return cell
+    }
+    
+    func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
+        if (editingStyle == .delete) {
+            // handle delete (by removing the data from your array and updating the tableview)
+            if let obj = viewModelHistory?.history?.words?.allObjects[indexPath.row] {
+                if coreDataManager.deleteObject(obj as! Words) {
+                    loadData()
+                }
+            }
+        }
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         index = indexPath.row
         self.performSegue(withIdentifier: "gotoEditWord", sender: self)
+    }
+}
+
+extension HistoryDetailVC {
+    func loadData() {
+        guard  let history = viewModelHistory?.history else { return }
+        if let words = coreDataManager.fetchWordsForHistory(history) {
+            viewModelWords = MainWordsVM(wordsData: words)
+            tableView.reloadData()
+        }
     }
 }

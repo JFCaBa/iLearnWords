@@ -12,7 +12,7 @@ class HistoryVC: UIViewController  {
     
     // MARK: - Outlets
     @IBOutlet weak var tableView: UITableView!
-    //MARK: - Object instances
+    // MARK: - Object instances
     private let coreDataManager: CoreDataManager = CoreDataManager()
     // MARK: - Ivars
     var index: Int = 0
@@ -38,8 +38,9 @@ class HistoryVC: UIViewController  {
     
      // MARK: - Navigation
      override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-//        let details = segue.destination as! HistoryDetailVC
-//        details.history = dataArray[index]
+        let details = segue.destination as! HistoryDetailVC
+        let viewModelHistory = MainHistoryVM(history: viewModelHistories?.historiesData[index])
+        details.viewModelHistory = viewModelHistory
      }
 }
 

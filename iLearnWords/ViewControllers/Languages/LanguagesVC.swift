@@ -22,6 +22,7 @@ class LanguagesVC: UIViewController {
         }
     }
     
+    // MARK: - Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
         tableView.register(UITableViewCell.self, forCellReuseIdentifier: "Cell")
@@ -32,7 +33,7 @@ class LanguagesVC: UIViewController {
     }
 }
 
-//MARK: - UITableView datasource/delegate
+// MARK: - UITableView datasource/delegate
 extension LanguagesVC: UITableViewDataSource, UITableViewDelegate {
     
     func numberOfSections(in tableView: UITableView) -> Int {

@@ -53,6 +53,10 @@ class MainVC: UIViewController {
         tableView.dataSource      = self
         tableView.tableFooterView = UIView.init(frame: CGRect.zero)
         talkManager.delegate      = self
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(true)
         loadData()
     }
     

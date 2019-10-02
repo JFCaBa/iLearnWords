@@ -566,10 +566,10 @@
             </objects>
             <point key="canvasLocation" x="1837.68115942029" y="782.8125"/>
         </scene>
-        <!--History-->
+        <!--History Detail-->
         <scene sceneID="yvC-RT-j0W">
             <objects>
-                <viewController storyboardIdentifier="HistoryDetailVC" title="History" id="eIS-Hl-dZN" customClass="HistoryDetailVC" customModule="iLearnWords" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="HistoryDetailVC" title="History Detail" id="eIS-Hl-dZN" customClass="HistoryDetailVC" customModule="iLearnWords" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="RlY-Bw-fLZ">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -578,29 +578,40 @@
                                 <rect key="frame" x="0.0" y="88" width="414" height="774"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <prototypes>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="CellWords" textLabel="Kex-PV-Pu7" detailTextLabel="Tjz-BS-vXj" rowHeight="75" style="IBUITableViewCellStyleSubtitle" id="TRv-ea-idK">
-                                        <rect key="frame" x="0.0" y="28" width="414" height="75"/>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="CellHistoryDetail" rowHeight="76" id="OAy-Yw-Zp8" customClass="HistoryDetailTC" customModule="iLearnWords" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="28" width="414" height="76"/>
                                         <autoresizingMask key="autoresizingMask"/>
-                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="TRv-ea-idK" id="gll-WE-qLb">
-                                            <rect key="frame" x="0.0" y="0.0" width="414" height="75"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="OAy-Yw-Zp8" id="c9T-fu-6b8">
+                                            <rect key="frame" x="0.0" y="0.0" width="414" height="76"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" insetsLayoutMarginsFromSafeArea="NO" text="Title" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="Kex-PV-Pu7">
-                                                    <rect key="frame" x="20" y="17" width="33.5" height="20.5"/>
-                                                    <autoresizingMask key="autoresizingMask"/>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" text="Original" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="eRf-o6-Xbk">
+                                                    <rect key="frame" x="20" y="11" width="374" height="31"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
-                                                <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" insetsLayoutMarginsFromSafeArea="NO" text="Subtitle" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="Tjz-BS-vXj">
-                                                    <rect key="frame" x="20" y="40.5" width="44" height="14.5"/>
-                                                    <autoresizingMask key="autoresizingMask"/>
-                                                    <fontDescription key="fontDescription" type="system" pointSize="12"/>
-                                                    <nil key="textColor"/>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Translated" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="wUE-DZ-9cW">
+                                                    <rect key="frame" x="20" y="50" width="374" height="18"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                                                    <color key="textColor" white="0.66666666669999997" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                             </subviews>
+                                            <constraints>
+                                                <constraint firstAttribute="bottom" secondItem="wUE-DZ-9cW" secondAttribute="bottom" constant="8" id="IYL-kc-VAc"/>
+                                                <constraint firstItem="wUE-DZ-9cW" firstAttribute="leading" secondItem="eRf-o6-Xbk" secondAttribute="leading" id="S40-PO-a86"/>
+                                                <constraint firstAttribute="trailing" secondItem="eRf-o6-Xbk" secondAttribute="trailing" constant="20" id="ZkB-pc-xA8"/>
+                                                <constraint firstItem="wUE-DZ-9cW" firstAttribute="top" secondItem="eRf-o6-Xbk" secondAttribute="bottom" constant="8" id="brk-WI-IpP"/>
+                                                <constraint firstItem="eRf-o6-Xbk" firstAttribute="leading" secondItem="c9T-fu-6b8" secondAttribute="leading" constant="20" id="cWG-NJ-jvZ"/>
+                                                <constraint firstItem="wUE-DZ-9cW" firstAttribute="trailing" secondItem="eRf-o6-Xbk" secondAttribute="trailing" id="dAh-mP-W5J"/>
+                                                <constraint firstItem="eRf-o6-Xbk" firstAttribute="top" secondItem="c9T-fu-6b8" secondAttribute="top" constant="11" id="mRM-Rv-qKo"/>
+                                            </constraints>
                                         </tableViewCellContentView>
+                                        <connections>
+                                            <outlet property="lblOriginal" destination="eRf-o6-Xbk" id="5e9-ur-NSP"/>
+                                            <outlet property="lblTranslated" destination="wUE-DZ-9cW" id="Q2L-Uy-0AZ"/>
+                                        </connections>
                                     </tableViewCell>
                                 </prototypes>
                             </tableView>
@@ -614,19 +625,12 @@
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="rBD-4u-Nu3"/>
                     </view>
-                    <navigationItem key="navigationItem" title="Words" id="cR5-B9-xxT">
-                        <rightBarButtonItems>
-                            <barButtonItem title="Select" id="HHD-ki-xlB">
-                                <connections>
-                                    <action selector="switchDidTap:" destination="eIS-Hl-dZN" id="h7a-Fl-gFP"/>
-                                </connections>
-                            </barButtonItem>
-                            <barButtonItem title="Delete" id="Bcd-jZ-Z76">
-                                <connections>
-                                    <action selector="deleteDidTap:" destination="eIS-Hl-dZN" id="USc-Ko-1ui"/>
-                                </connections>
-                            </barButtonItem>
-                        </rightBarButtonItems>
+                    <navigationItem key="navigationItem" title="History Detail" id="cR5-B9-xxT">
+                        <barButtonItem key="rightBarButtonItem" title="Select" id="HHD-ki-xlB">
+                            <connections>
+                                <action selector="switchDidTap:" destination="eIS-Hl-dZN" id="h7a-Fl-gFP"/>
+                            </connections>
+                        </barButtonItem>
                     </navigationItem>
                     <connections>
                         <outlet property="tableView" destination="cIt-MC-j6d" id="ep8-hf-BJ2"/>

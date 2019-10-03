@@ -25,7 +25,6 @@ class LanguagesVC: UIViewController {
     // MARK: - Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
-        tableView.register(UITableViewCell.self, forCellReuseIdentifier: "Cell")
         tableView.delegate = self
         tableView.dataSource = self
         tableView.tableFooterView = UIView.init(frame: CGRect.zero)
@@ -46,29 +45,11 @@ extension LanguagesVC: UITableViewDataSource, UITableViewDelegate {
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell: UITableViewCell = {
-            guard let cell = tableView.dequeueReusableCell(withIdentifier: "Cell") else {
-                // Never fails:
-                return UITableViewCell(style: UITableViewCell.CellStyle.subtitle, reuseIdentifier: "Cell")
-            }
-            return cell
-        }()
-        if let viewModel = viewModelLanguages?.languagesData[indexPath.row] {
-            if let title = viewModel.title {
-                cell.textLabel?.text = title
-            }
-            else {
-                cell.textLabel?.text = "Untitled"
-            }
-            
-            if viewModel.isSelected {
-                cell.accessoryType = .checkmark
-            }
-            else {
-                cell.accessoryType = .none
-            }
-            
-            cell.detailTextLabel?.text = viewModel.title
+        guard let cell = tableView.dequeueReusableCell(withIdentifier: LanguagesTC.reuseIdentifier, for: indexPath) as? LanguagesTC else { fatalError("Unexpected Table View Cell") }
+        
+        if let obj = viewModelLanguages?.languagesData[indexPath.row] {
+            let viewModel = MainLanguageVM(language: obj)
+            cell.configure(withViewModel: viewModel)
         }
         return cell
     }

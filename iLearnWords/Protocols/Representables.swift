@@ -20,3 +20,11 @@ protocol HistoryRepresentable {
     var textLanguage: String { get }
     var accessoryType: UITableViewCell.AccessoryType { get }
 }
+
+protocol LanguageRepresentable {
+    var textTitle: String { get }
+    var textSayOriginal: String { get }
+    var textSayTranslated: String { get }
+    var textWay: String { get }
+    var accessoryType: UITableViewCell.AccessoryType { get }
+}

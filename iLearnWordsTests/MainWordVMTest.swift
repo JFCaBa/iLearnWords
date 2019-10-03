@@ -12,29 +12,39 @@ import XCTest
 class MainWordVMTest: XCTestCase {
     
     let coreDataManager: CoreDataManager = CoreDataManager()
+    var words: [Words]?
     
     override func setUp() {
-
+        words = coreDataManager.fetchAllByEntity(UserDefaults.Entity.Words) as? [Words]
     }
 
     override func tearDown() {
 
     }
 
+    func testNumberOfWords() {
+        let viewModel = MainWordsVM(wordsData: words!)
+        XCTAssertGreaterThan(viewModel.numberOfWords, 0)
+    }
+    
+    func testViewModel() {
+        let viewModel = MainWordsVM(wordsData: words!)
+        for(index, _) in words!.enumerated() {
+            XCTAssertNotNil(viewModel.viewModel(for: index))
+        }
+    }
+    
     func testOriginalWord_Undefined() {
-        let words = coreDataManager.fetchAllByEntity(UserDefaults.Entity.Words) as! [Words]
-        for(index, _) in words.enumerated() {
-            let viewModel = MainWordVM(word: words[index])
+        for(index, _) in words!.enumerated() {
+            let viewModel = MainWordVM(word: words![index])
             XCTAssertNotEqual(viewModel.originalWord, "Undefined")
         }
     }
     
     func testTranslatedWord_Undefined() {
-        let words = coreDataManager.fetchAllByEntity(UserDefaults.Entity.Words) as! [Words]
-        for(index, _) in words.enumerated() {
-            let viewModel = MainWordVM(word: words[index])
+        for(index, _) in words!.enumerated() {
+            let viewModel = MainWordVM(word: words![index])
             XCTAssertNotEqual(viewModel.translatedWord, "Undefined")
         }
     }
-
 }

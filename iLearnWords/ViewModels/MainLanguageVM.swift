@@ -6,7 +6,7 @@
 //  Copyright © 2019 Armentechnology. All rights reserved.
 //
 
-import Foundation
+import UIKit
 
 struct MainLanguageVM {
     
@@ -17,14 +17,49 @@ struct MainLanguageVM {
     // MARK: -
     
     var title : String {
-        return language?.title ?? "Untitled"
+        return language?.title ?? "Undefined"
     }
     
     var sayOriginal: String {
-        return language?.sayOriginal ?? "ru_RU"
+        return language?.sayOriginal ?? "Undefined"
     }
     
     var sayTranslated: String {
-        return language?.sayTranslated ?? "en_GB"
+        return language?.sayTranslated ?? "Undefined"
+    }
+    
+    var way: String {
+        return language?.way ?? "Undefined"
+    }
+    
+    var accessoryType: UITableViewCell.AccessoryType {
+        if language?.isSelected ?? false {
+            return .checkmark
+        } else {
+            return .none
+        }
+    }
+}
+
+extension MainLanguageVM: LanguageRepresentable {
+    
+    var textTitle: String {
+        return title
+    }
+    
+    var textSayOriginal: String {
+        return sayOriginal
+    }
+    
+    var textSayTranslated: String {
+        return sayTranslated
+    }
+    
+    var textWay: String {
+        return way
+    }
+    
+    var accessory: UITableViewCell.AccessoryType {
+        return accessoryType
     }
 }

@@ -24,3 +24,4 @@ struct MainLanguagesVM {
         return languagesData.count
     }
 }
+

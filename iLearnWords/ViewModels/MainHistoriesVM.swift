@@ -11,11 +11,9 @@ import Foundation
 struct MainHistoriesVM {
     
     // MARK: - Properties
-
     let historiesData: [History]
     
     // MARK: -
-
     var numberOfSections: Int {
         return 1
     }

@@ -18,9 +18,6 @@ class MainLanguageVMTest: XCTestCase {
         languages = coreDataManager.fetchAllByEntity(UserDefaults.Entity.Languages) as? [Languages]
     }
 
-    override func tearDown() {
-    }
-
     func testTitle() {
         for(_, element) in (languages?.enumerated())! {
             let viewModel = MainLanguageVM(language: element)

@@ -13,11 +13,9 @@ struct MainHistoryVM {
     typealias translateDataCompletion = (MainWordsVM?) -> ()
     
     // MARK: - Properties
-
     let history: History?
     
     // MARK: -
-
     var title : String {
         return history?.title ?? "Undefined"
     }

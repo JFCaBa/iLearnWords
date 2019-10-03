@@ -18,10 +18,6 @@ class MainWordVMTest: XCTestCase {
         words = coreDataManager.fetchAllByEntity(UserDefaults.Entity.Words) as? [Words]
     }
 
-    override func tearDown() {
-
-    }
-
     func testNumberOfWords() {
         let viewModel = MainWordsVM(wordsData: words!)
         XCTAssertGreaterThan(viewModel.numberOfWords, 0)

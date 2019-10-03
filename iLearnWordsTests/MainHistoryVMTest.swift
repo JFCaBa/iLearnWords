@@ -18,9 +18,6 @@ class MainHistoryVMTest: XCTestCase {
         histories = coreDataManager.fetchAllByEntity(UserDefaults.Entity.History) as? [History]
     }
 
-    override func tearDown() {
-    }
-
     func testNumberOfHistories() {
         let viewModel = MainHistoriesVM(historiesData: histories!)
         XCTAssertGreaterThan(viewModel.numberOfHistories, 0)

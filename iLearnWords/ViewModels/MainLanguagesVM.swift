@@ -11,11 +11,9 @@ import Foundation
 struct MainLanguagesVM {
     
     // MARK: - Properties
-
     let languagesData: [Languages]
     
     // MARK: -
-
     var numberOfSections: Int {
         return 1
     }

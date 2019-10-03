@@ -11,11 +11,9 @@ import Foundation
 struct MainWordsVM {
     
     // MARK: - Properties
-
     let wordsData: [Words]
     
     // MARK: -
-
     var numberOfSections: Int {
         return 1
     }

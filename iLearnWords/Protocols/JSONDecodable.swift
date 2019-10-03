@@ -9,9 +9,7 @@
 import Foundation
 
 protocol JSONDecodable {
-
     init(decoder: JSONDecoder) throws
-
 }
 
 enum JSONDecoderError: Error {
@@ -25,18 +23,15 @@ struct JSONDecoder {
     typealias JSON = [String: AnyObject]
 
     // MARK: - Properties
-
     private let JSONData: JSON
 
     // MARK: - Static Methods
-
     static func decode<T: JSONDecodable>(data: Data) throws -> T {
         let decoder = try JSONDecoder(data: data)
         return try T(decoder: decoder)
     }
 
     // MARK: - Initialization
-
     init(data: Data) throws {
         if let JSONData = try JSONSerialization.jsonObject(with: data, options: []) as? JSON {
             self.JSONData = JSONData
@@ -50,7 +45,6 @@ struct JSONDecoder {
     }
 
     // MARK: - Public Interface
-
     func decode<T>(key: String) throws -> T {
         if key.contains(".") {
             return try value(forKeyPath: key)
@@ -70,7 +64,6 @@ struct JSONDecoder {
     }
 
     // MARK: - Private Interface
-
     private func value<T>(forKey key: String) throws -> T {
         guard let value = JSONData[key] as? T else { throw JSONDecoderError.keyNotFound(key) }
         return value
@@ -88,7 +81,6 @@ struct JSONDecoder {
     }
 
     // MARK: -
-
     private func value<T>(forKeyPath keyPath: String) throws -> T {
         var partial = JSONData
         let keys = keyPath.components(separatedBy: ".")

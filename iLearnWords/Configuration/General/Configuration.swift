@@ -11,6 +11,7 @@ import Foundation
 struct API {
     //Free key from Yandex.com
     //https://translate.yandex.com/developers/keys
+    //Test with: https://translate.yandex.net/api/v1.5/tr.json/translate?key=trnsl.1.1.20190621T071428Z.f5242913863515ce.ad3d081c06e886ba5c5a34a836a10c817dd16b45&text=да&lang=ru-en&format=plain
     static let key     =  "trnsl.1.1.20190621T071428Z.f5242913863515ce.ad3d081c06e886ba5c5a34a836a10c817dd16b45"
     static let baseURL = "https://translate.yandex.net/api/v1.5/tr.json/translate?key=%@&text=%@&lang=%@&format=plain"
 }

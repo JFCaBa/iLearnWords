@@ -18,7 +18,6 @@ class HistoryDetailTC: UITableViewCell {
     @IBOutlet weak var lblTranslated: UILabel!
     
     // MARK: - Initialization
-
     override func awakeFromNib() {
         super.awakeFromNib()
 
@@ -27,7 +26,6 @@ class HistoryDetailTC: UITableViewCell {
     }
 
     // MARK: - Configuration
-
     func configure(withViewModel viewModel: MainRepresentable) {
         lblOriginal.text   = viewModel.textOriginal
         lblTranslated.text = viewModel.textTranslated

@@ -14,12 +14,6 @@ class DataManagerTest: XCTestCase {
     private lazy var dataManager = {
         return DataManager(APIKey: API.key)
     }()
-    
-    override func setUp() {
-    }
-
-    override func tearDown() {
-    }
 
     func testTranslation() {
         let translateWord = XCTestExpectation(description: "Translate word")

@@ -18,7 +18,11 @@ class CardsGameVC: UIViewController {
     private let coreDataManager: CoreDataManager = CoreDataManager()
     private var talkManager = TalkManager.shared
     // MARK: -  Dependency injection objects
-    public var viewModelWords: MainWordsVM?
+    public var viewModelWords: MainWordsVM? {
+        didSet {
+            btnNextDidTap(nil)
+        }
+    }
     public var viewModelLanguage: MainLanguageVM?
     // MARK: - ViewModels
     var viewModelWord: MainWordVM?
@@ -42,11 +46,9 @@ class CardsGameVC: UIViewController {
     
     //MARK: - Actions
     @IBAction func btnNextDidTap(_ sender: Any?) {
+        guard let _ = lblTranslated?.text else { return }
         lblTranslated.isHidden = true
-        guard let original = lblOriginal.text else { return }
-        guard let translated = lblTranslated.text else { return }
-        
-        if let count = viewModelWords?.wordsData.count {
+        if let count = viewModelWords?.numberOfWords {
             if count > 0 {
                 if let randomElement = viewModelWords?.wordsData.randomElement()
                 {
@@ -55,14 +57,6 @@ class CardsGameVC: UIViewController {
                     lblTranslated.text = reverse ? viewModelWord!.textOriginal :  viewModelWord!.textTranslated
                 }
             }
-        }
-        else if reverse {
-            lblOriginal.text = translated
-            lblTranslated.text = original
-        }
-        else {
-            lblTranslated.text = original
-            lblOriginal.text = translated
         }
     }
     
@@ -98,6 +92,8 @@ extension CardsGameVC: TalkerDelegate {
 // MARK: - Load data extension
 extension CardsGameVC {
     func loadAllWords() {
-
+        if let words = coreDataManager.fetchAllByEntity(UserDefaults.Entity.Words) as? [Words] {
+            viewModelWords = MainWordsVM(wordsData: words)
+        }
     }
 }

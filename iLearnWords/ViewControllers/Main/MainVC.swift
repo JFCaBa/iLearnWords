@@ -59,7 +59,6 @@ class MainVC: UIViewController {
     }
     
     // MARK: - Navigation
-    
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == segueCardsGame {
             let cards = segue.destination as! CardsGameVC

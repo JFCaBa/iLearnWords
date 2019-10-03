@@ -11,11 +11,9 @@ import UIKit
 struct MainLanguageVM {
     
     // MARK: - Properties
-
     let language: Languages?
     
     // MARK: -
-    
     var title : String {
         return language?.title ?? "Undefined"
     }

@@ -49,7 +49,10 @@ class HistoryDetailVC: UIViewController {
         let alertController = UIAlertController(title: NSLocalizedString("Switch to this History", comment:""), message: "", preferredStyle: .alert)
         let yesAction = UIAlertAction(title: NSLocalizedString("Yes", comment:""), style: .default, handler: { alert -> Void in
             //Set the isSelected property to yes
-           
+            let ok = self.coreDataManager.updateSelectedHistory((self.viewModelHistory?.history)!)
+            if ok {
+                self.navigationController?.popToRootViewController(animated: true)
+            }
         })
         
         let cancelAction = UIAlertAction(title: NSLocalizedString("Cancel", comment:""), style: .default, handler: {

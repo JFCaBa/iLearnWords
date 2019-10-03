@@ -24,27 +24,8 @@ struct MainWordsVM {
         return wordsData.count
     }
     
-    func originalWord(index: Int) -> String {
-        if index >= wordsData.count {
-            return ""
-        }
-        let word = wordsData[index]
-        return word.original ?? "Undefined"
-    }
-    
-    func translatedWord(index: Int) -> String {
-        if index >= wordsData.count {
-            return "Undefined"
-        }
-        let word = wordsData[index]
-        return word.translated ?? "Undefined"
-    }
-    
     func viewModel(for index: Int) -> MainWordVM {
         return MainWordVM(word: wordsData[index])
     }
 }
 
-//extension MainWordsVM: MainRepresentable {
-//
-//}

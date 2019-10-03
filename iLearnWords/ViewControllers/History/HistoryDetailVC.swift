@@ -68,7 +68,8 @@ class HistoryDetailVC: UIViewController {
     
     // MARK: Private functions
     private func updateView() {
-        let words = viewModelHistory?.history?.words?.allObjects as! Array<Words>
+        var words = viewModelHistory?.history?.words?.allObjects as! Array<Words>
+        words = words.sorted(by:{ $0.created < $1.created })
         viewModelWords = MainWordsVM(wordsData: words)
     }
 }

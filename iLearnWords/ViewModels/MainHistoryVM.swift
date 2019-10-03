@@ -35,6 +35,12 @@ struct MainHistoryVM {
             return .none
         }
     }
+    
+    func viewModelWords() -> MainWordsVM {
+        var words = history?.words?.allObjects as? [Words]
+        words = words?.sorted(by:{ $0.created < $1.created })
+        return MainWordsVM(wordsData: words ?? [])
+    }
 }
 
 extension MainHistoryVM  {

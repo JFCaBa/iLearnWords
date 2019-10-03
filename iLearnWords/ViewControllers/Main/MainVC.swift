@@ -181,17 +181,15 @@ extension MainVC: UITableViewDataSource, UITableViewDelegate {
 extension MainVC {
     func loadData() {
         guard let selectedLang = coreDataManager.fetchSelectedByEntity(UserDefaults.Entity.Languages), let hist = coreDataManager.fetchSelectedByEntity(UserDefaults.Entity.History)  else {
-            viewModelLanguage = MainLanguageVM(language: nil)
-            viewModelHistory = MainHistoryVM(history: nil)
+            viewModelLanguage  = MainLanguageVM(language: nil)
+            viewModelHistory   = MainHistoryVM(history: nil)
             return
         }
         viewModelLanguage = MainLanguageVM(language: selectedLang as? Languages)
-        let history = hist as! History
-        viewModelHistory = MainHistoryVM(history: history)
-        var words = history.words?.allObjects as! [Words]
-        words = words.sorted(by:{ $0.created < $1.created })
-        viewModelWords = MainWordsVM(wordsData: words)
-        guard let lang = history.language else { return }
+        let history       = hist as! History
+        viewModelHistory  = MainHistoryVM(history: history)
+        viewModelWords    = viewModelHistory?.viewModelWords()
+        guard let lang    = history.language else { return }
         viewModelLanguage = MainLanguageVM(language: lang)
     }
     

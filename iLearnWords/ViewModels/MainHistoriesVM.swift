@@ -20,7 +20,7 @@ struct MainHistoriesVM {
         return 1
     }
 
-    var numberOfWords: Int {
+    var numberOfHistories: Int {
         return historiesData.count
     }
     

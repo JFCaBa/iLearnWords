@@ -19,6 +19,12 @@ class MainVC: UIViewController {
     @IBOutlet weak var btnPlayOutlet: UIButton!
     // MARK: - Ivars
     var talkIndex = 0
+    // MARK: - Objects
+    private let coreDataManager: CoreDataManager = CoreDataManager()
+    private let talkManager = TalkManager.shared
+    private lazy var dataManager = {
+        return DataManager(APIKey: API.key)
+    }()
     // MARK: - ViewModels
     var viewModelWords: MainWordsVM? {
         didSet {
@@ -37,14 +43,6 @@ class MainVC: UIViewController {
             updateTitle()
         }
     }
-    
-    // MARK: - Objects
-    private let coreDataManager: CoreDataManager = CoreDataManager()
-    private let talkManager = TalkManager.shared
-    
-    private lazy var dataManager = {
-        return DataManager(APIKey: API.key)
-    }()
     
     // MARK: - Lifecycle
     override func viewDidLoad() {

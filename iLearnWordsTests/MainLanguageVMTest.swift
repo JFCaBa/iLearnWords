@@ -1,5 +1,5 @@
 //
-//  MainLanguagesVMTest.swift
+//  MainLanguageVMTest.swift
 //  iLearnWordsTests
 //
 //  Created by Jose Catala on 03/10/2019.
@@ -9,7 +9,7 @@
 import XCTest
 @testable import iLearnWords
 
-class MainLanguagesVMTest: XCTestCase {
+class MainLanguageVMTest: XCTestCase {
 
     let coreDataManager: CoreDataManager = CoreDataManager()
     var languages: [Languages]?
@@ -21,24 +21,29 @@ class MainLanguagesVMTest: XCTestCase {
     override func tearDown() {
     }
 
-    func titleTest() {
+    func testTitle() {
         for(_, element) in (languages?.enumerated())! {
             let viewModel = MainLanguageVM(language: element)
             XCTAssertNotEqual(viewModel.title, "Undefined")
         }
     }
     
-    func sayOriginalTest() {
+    func testSayOriginal() {
         for(_, element) in (languages?.enumerated())! {
             let viewModel = MainLanguageVM(language: element)
             XCTAssertNotEqual(viewModel.sayOriginal, "Undefined")
         }
     }
     
-    func sayTranslatedTest() {
+    func testSayTranslated() {
         for(_, element) in (languages?.enumerated())! {
             let viewModel = MainLanguageVM(language: element)
             XCTAssertNotEqual(viewModel.sayTranslated, "Undefined")
         }
+    }
+    
+    func testNumberOfLanguages() {
+        let viewModel = MainLanguagesVM(languagesData: languages!)
+        XCTAssertGreaterThan(viewModel.numberOfWords, 0)
     }
 }

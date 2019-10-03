@@ -19,7 +19,7 @@ struct MainHistoryVM {
     // MARK: -
 
     var title : String {
-        return history?.title ?? ""
+        return history?.title ?? "Undefined"
     }
     
     var isSelected: Bool {
@@ -27,7 +27,7 @@ struct MainHistoryVM {
     }
     
     var languageTitle: String {
-        return history?.language?.title ?? "Untitled"
+        return history?.language?.title ?? "Undefined"
     }
     
     var accessoryType: UITableViewCell.AccessoryType {

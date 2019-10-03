@@ -52,8 +52,7 @@ extension HistoryVC: UITableViewDelegate, UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        guard let rows = viewModelHistories?.historiesData.count else { return 0 }
-        return  rows
+        viewModelHistories?.numberOfHistories ?? 0
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {

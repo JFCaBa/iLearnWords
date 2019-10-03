@@ -81,8 +81,7 @@ extension HistoryDetailVC: UITableViewDataSource, UITableViewDelegate {
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        guard let rows = viewModelWords?.wordsData.count else { return 0 }
-        return  rows
+        viewModelWords?.numberOfWords ?? 0
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -112,6 +111,7 @@ extension HistoryDetailVC: UITableViewDataSource, UITableViewDelegate {
     }
 }
 
+// MARK: - Load data extension
 extension HistoryDetailVC {
     func loadData() {
         guard  let history = viewModelHistory?.history else { return }

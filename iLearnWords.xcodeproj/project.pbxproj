@@ -48,8 +48,10 @@
 		6DE1603223438F52002E8DC7 /* LanguagesVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6DE1603123438F51002E8DC7 /* LanguagesVC.swift */; };
 		6DE1603523438FD0002E8DC7 /* MainLanguagesVM.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6DE1603423438FD0002E8DC7 /* MainLanguagesVM.swift */; };
 		6DECA59C2345FDC100F7A6C6 /* MainWordVMTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6DECA59B2345FDC100F7A6C6 /* MainWordVMTest.swift */; };
-		6DECA59E2346051200F7A6C6 /* MainLanguagesVMTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6DECA59D2346051200F7A6C6 /* MainLanguagesVMTest.swift */; };
+		6DECA59E2346051200F7A6C6 /* MainLanguageVMTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6DECA59D2346051200F7A6C6 /* MainLanguageVMTest.swift */; };
 		6DECA5A02346186C00F7A6C6 /* LanguagesTC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6DECA59F2346186C00F7A6C6 /* LanguagesTC.swift */; };
+		6DECA5A323461E7300F7A6C6 /* MainHistoryVMTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6DECA5A223461E7300F7A6C6 /* MainHistoryVMTest.swift */; };
+		6DECA5A52346239500F7A6C6 /* DataManagerTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6DECA5A42346239500F7A6C6 /* DataManagerTest.swift */; };
 		8046308AFEA92B21C9F13EE6 /* Pods_iLearnWords.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A5FE711386A024776E34D254 /* Pods_iLearnWords.framework */; };
 /* End PBXBuildFile section */
 
@@ -110,8 +112,10 @@
 		6DE1603123438F51002E8DC7 /* LanguagesVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LanguagesVC.swift; sourceTree = "<group>"; };
 		6DE1603423438FD0002E8DC7 /* MainLanguagesVM.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainLanguagesVM.swift; sourceTree = "<group>"; };
 		6DECA59B2345FDC100F7A6C6 /* MainWordVMTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainWordVMTest.swift; sourceTree = "<group>"; };
-		6DECA59D2346051200F7A6C6 /* MainLanguagesVMTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainLanguagesVMTest.swift; sourceTree = "<group>"; };
+		6DECA59D2346051200F7A6C6 /* MainLanguageVMTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainLanguageVMTest.swift; sourceTree = "<group>"; };
 		6DECA59F2346186C00F7A6C6 /* LanguagesTC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LanguagesTC.swift; sourceTree = "<group>"; };
+		6DECA5A223461E7300F7A6C6 /* MainHistoryVMTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainHistoryVMTest.swift; sourceTree = "<group>"; };
+		6DECA5A42346239500F7A6C6 /* DataManagerTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataManagerTest.swift; sourceTree = "<group>"; };
 		A5FE711386A024776E34D254 /* Pods_iLearnWords.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_iLearnWords.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		DC6EC260ADB1F483B3E722D6 /* Pods_iLearnWordsTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_iLearnWordsTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		EAD2E86D8685DF3B6233BFED /* Pods-iLearnWordsTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-iLearnWordsTests.release.xcconfig"; path = "Target Support Files/Pods-iLearnWordsTests/Pods-iLearnWordsTests.release.xcconfig"; sourceTree = "<group>"; };
@@ -216,7 +220,9 @@
 			children = (
 				6D8A8F3A2341E3AA003EF281 /* Info.plist */,
 				6DECA59B2345FDC100F7A6C6 /* MainWordVMTest.swift */,
-				6DECA59D2346051200F7A6C6 /* MainLanguagesVMTest.swift */,
+				6DECA59D2346051200F7A6C6 /* MainLanguageVMTest.swift */,
+				6DECA5A223461E7300F7A6C6 /* MainHistoryVMTest.swift */,
+				6DECA5A42346239500F7A6C6 /* DataManagerTest.swift */,
 			);
 			path = iLearnWordsTests;
 			sourceTree = "<group>";
@@ -658,8 +664,10 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				6DECA5A323461E7300F7A6C6 /* MainHistoryVMTest.swift in Sources */,
+				6DECA5A52346239500F7A6C6 /* DataManagerTest.swift in Sources */,
 				6DECA59C2345FDC100F7A6C6 /* MainWordVMTest.swift in Sources */,
-				6DECA59E2346051200F7A6C6 /* MainLanguagesVMTest.swift in Sources */,
+				6DECA59E2346051200F7A6C6 /* MainLanguageVMTest.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

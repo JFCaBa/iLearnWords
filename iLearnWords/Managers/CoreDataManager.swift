@@ -201,6 +201,9 @@ public class CoreDataManager: NSObject {
             if result!.count > 0 {
                 for language in result!.compactMap({ $0 as? Languages }) {
                     language.isSelected = language.recordID == lang.recordID ? true : false
+                    if language.isSelected {
+                        UserDefaults.standard.setValue(language.way, forKey: UserDefaults.keys.TranslateWay)
+                    }
                     try managedContext!.save()
                 }
             }
@@ -221,13 +224,11 @@ public class CoreDataManager: NSObject {
     ///  - True if the operation was complete, false if not
     public func updateWord(original: String, translated: String) -> Bool {
         let fetchRequest = NSFetchRequest<NSManagedObject>(entityName: UserDefaults.Entity.Words)
-        fetchRequest.predicate = NSPredicate(format: "original == %@", original,translated)
+        fetchRequest.predicate = NSPredicate(format: "original == %@", original)
         do {
             let result = try managedContext?.fetch(fetchRequest)
-            if result!.count > 0 {
-                let word = result?.first as! Words
-                word.translated = translated
-                try managedContext!.save()
+            if let word = result?.first {
+                word.setValue(translated, forKey: UserDefaults.Words.Translated)
                 return true
             }
             else {
@@ -235,7 +236,7 @@ public class CoreDataManager: NSObject {
             }
             
         } catch let error as NSError {
-            print("Could not fetch. \(error), \(error.userInfo)")
+            print("Could not update Word. \(error), \(error.userInfo)")
             return false
         }
     }

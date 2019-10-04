@@ -41,6 +41,6 @@ class MainLanguageVMTest: XCTestCase {
     
     func testNumberOfLanguages() {
         let viewModel = MainLanguagesVM(languagesData: languages!)
-        XCTAssertGreaterThan(viewModel.numberOfWords, 0)
+        XCTAssertGreaterThan(viewModel.numberOfLanguages, 0)
     }
 }

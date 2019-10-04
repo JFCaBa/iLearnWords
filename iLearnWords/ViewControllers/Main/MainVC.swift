@@ -31,13 +31,11 @@ class MainVC: UIViewController {
             updateView()
         }
     }
-    
     var viewModelHistory: MainHistoryVM? {
         didSet {
             updateHeader()
         }
     }
-    
     var viewModelLanguage: MainLanguageVM? {
         didSet {
             updateTitle()

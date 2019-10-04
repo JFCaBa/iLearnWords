@@ -18,14 +18,24 @@ struct API {
 
 struct TranslationLanguages {
     static let languagesArray = [["title":"Russian to English",
-                    "sayOriginal":"ru_RU",
-                    "sayTranslated":"en_GB",
-                    "way":"ru-en",
-                    "isSelected":"1"],
-                   ["title":"English to Russian",
-                    "sayOriginal":"en_GB",
-                    "sayTranslated":"ru_RU",
-                    "way":"en-ru",
-                    "isSelected":"0"]
+                                  "sayOriginal":"ru_RU",
+                                  "sayTranslated":"en_GB",
+                                  "way":"ru-en",
+                                  "isSelected":"1"],
+                                 ["title":"Español a Ruso",
+                                  "sayOriginal":"es_ES",
+                                  "sayTranslated":"ru_RU",
+                                  "way":"es-ru",
+                                  "isSelected":"0"],
+                                 ["title":"Ruso to Español",
+                                 "sayOriginal":"ru_RU",
+                                 "sayTranslated":"es_ES",
+                                 "way":"ru-es",
+                                 "isSelected":"0"],
+                                 ["title":"English to Russian",
+                                  "sayOriginal":"en_GB",
+                                  "sayTranslated":"ru_RU",
+                                  "way":"en-ru",
+                                  "isSelected":"0"]
     ]
 }

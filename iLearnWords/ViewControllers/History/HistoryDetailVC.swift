@@ -67,9 +67,7 @@ class HistoryDetailVC: UIViewController {
     
     // MARK: Private functions
     private func updateView() {
-        var words = viewModelHistory?.history?.words?.allObjects as! Array<Words>
-        words = words.sorted(by:{ $0.created < $1.created })
-        viewModelWords = MainWordsVM(wordsData: words)
+        viewModelWords = viewModelHistory?.viewModelWords()
     }
 }
 
@@ -114,10 +112,7 @@ extension HistoryDetailVC: UITableViewDataSource, UITableViewDelegate {
 // MARK: - Load data extension
 extension HistoryDetailVC {
     func loadData() {
-        guard  let history = viewModelHistory?.history else { return }
-        if let words = coreDataManager.fetchWordsForHistory(history) {
-            viewModelWords = MainWordsVM(wordsData: words)
-            tableView.reloadData()
-        }
+        viewModelWords = viewModelHistory?.viewModelWords()
+        tableView.reloadData()
     }
 }

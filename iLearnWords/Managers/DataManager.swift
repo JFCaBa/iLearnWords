@@ -12,6 +12,9 @@ enum DataManagerError: Error {
     case unknown
     case failedRequest
     case invalidResponse
+    case invalidLanguateWay
+    case failedEscapingString
+    case failedURL
 }
 
 final class DataManager {
@@ -32,7 +35,9 @@ final class DataManager {
     // MARK: - Requesting Data
 
     func tranlationFor(word: String, completion: @escaping TranslationDataCompletion) {
-        let translateWay = UserDefaults.standard.object(forKey: UserDefaults.keys.TranslateWay) as? String ?? "ru-en"
+        guard let translateWay = UserDefaults.standard.object(forKey: UserDefaults.keys.TranslateWay) as? String else {
+            fatalError("TranslateWay not Set")
+             }
         guard let escapedString = word.addingPercentEncoding(withAllowedCharacters: .urlHostAllowed) else { return }
         let str = String(format: API.baseURL, APIKey, escapedString ,translateWay)
         guard let url = URL(string: str) else { return }

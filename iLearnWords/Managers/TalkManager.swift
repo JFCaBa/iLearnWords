@@ -47,8 +47,9 @@ class TalkManager: NSObject {
     /// - Parameters:
     ///  - viewModel: The MainHistoryViewModel
     public func sayText(viewModel: MainHistoryVM) {
-        if let word = viewModel.history?.words?.allObjects[talkIndex], let lang = viewModel.history?.language {
-            guard let  wordToSay  =  isOriginal ? (word as! Words).original :  (word as! Words).translated else {
+        if let lang = viewModel.history?.language {
+            let word = viewModel.viewModelWords().wordsData[talkIndex]
+            guard let  wordToSay  =  isOriginal ? word.original : word.translated else {
                 return
             }
             guard let langToSay = isOriginal ? lang.sayOriginal : lang.sayTranslated else {

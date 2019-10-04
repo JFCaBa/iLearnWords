@@ -18,7 +18,7 @@ struct MainLanguagesVM {
         return 1
     }
 
-    var numberOfWords: Int {
+    var numberOfLanguages: Int {
         return languagesData.count
     }
 }

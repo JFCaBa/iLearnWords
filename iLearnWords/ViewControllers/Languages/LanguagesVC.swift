@@ -40,7 +40,7 @@ extension LanguagesVC: UITableViewDataSource, UITableViewDelegate {
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        guard let rows = viewModelLanguages?.languagesData.count else { return 0 }
+        guard let rows = viewModelLanguages?.numberOfLanguages else { return 0 }
         return  rows
     }
     

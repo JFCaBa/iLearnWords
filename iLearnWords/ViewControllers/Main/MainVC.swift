@@ -147,7 +147,7 @@ extension MainVC: UITableViewDataSource, UITableViewDelegate {
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        guard let rows = viewModelWords?.wordsData.count else { return 0 }
+        guard let rows = viewModelWords?.numberOfWords else { return 0 }
         return  rows
     }
     

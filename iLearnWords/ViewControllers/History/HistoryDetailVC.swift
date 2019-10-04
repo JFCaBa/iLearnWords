@@ -47,6 +47,7 @@ class HistoryDetailVC: UIViewController {
     //MARK: - Actions
     @IBAction func switchDidTap(_ sender: Any) {
         let alertController = UIAlertController(title: NSLocalizedString("Switch to this History", comment:""), message: "", preferredStyle: .alert)
+        
         let yesAction = UIAlertAction(title: NSLocalizedString("Yes", comment:""), style: .default, handler: { alert -> Void in
             //Set the isSelected property to yes
             let ok = self.coreDataManager.updateSelectedHistory((self.viewModelHistory?.history)!)
@@ -60,9 +61,7 @@ class HistoryDetailVC: UIViewController {
         
         alertController.addAction(cancelAction)
         alertController.addAction(yesAction)
-        
         alertController.preferredAction = yesAction
-        
         self.present(alertController, animated: true, completion: nil)
     }
     

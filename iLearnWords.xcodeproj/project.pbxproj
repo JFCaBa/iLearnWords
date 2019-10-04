@@ -246,9 +246,9 @@
 		6D8A8F4E2341E7E1003EF281 /* Models */ = {
 			isa = PBXGroup;
 			children = (
+				6D8A8F4B2341E7D2003EF281 /* TranslationData.swift */,
 				6D216A9A2344E796006ECC8F /* Words+CoreDataClass.swift */,
 				6D216A9B2344E796006ECC8F /* Words+CoreDataProperties.swift */,
-				6D8A8F4B2341E7D2003EF281 /* TranslationData.swift */,
 				6D8A8F6A2341EF45003EF281 /* History+CoreDataClass.swift */,
 				6D8A8F662341EF44003EF281 /* History+CoreDataProperties.swift */,
 				6DE1601F23434C6B002E8DC7 /* Languages+Defaults.swift */,
@@ -505,6 +505,7 @@
 					};
 					6D8A8F332341E3AA003EF281 = {
 						CreatedOnToolsVersion = 11.0;
+						LastSwiftMigration = 1100;
 						TestTargetID = 6D8A8F1A2341E3A1003EF281;
 					};
 				};
@@ -865,6 +866,7 @@
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				BUNDLE_LOADER = "$(TEST_HOST)";
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 75SEZC5TGW;
 				INFOPLIST_FILE = iLearnWordsTests/Info.plist;
@@ -876,6 +878,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.Armentechnology.MVVM.iLearnWordsTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/iLearnWords.app/iLearnWords";
@@ -888,6 +891,7 @@
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				BUNDLE_LOADER = "$(TEST_HOST)";
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 75SEZC5TGW;
 				INFOPLIST_FILE = iLearnWordsTests/Info.plist;

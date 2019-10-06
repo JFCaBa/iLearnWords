@@ -660,11 +660,18 @@
                         <viewLayoutGuide key="safeArea" id="rBD-4u-Nu3"/>
                     </view>
                     <navigationItem key="navigationItem" title="History Detail" id="cR5-B9-xxT">
-                        <barButtonItem key="rightBarButtonItem" title="Select" id="HHD-ki-xlB">
-                            <connections>
-                                <action selector="switchDidTap:" destination="eIS-Hl-dZN" id="h7a-Fl-gFP"/>
-                            </connections>
-                        </barButtonItem>
+                        <rightBarButtonItems>
+                            <barButtonItem title="Select" id="HHD-ki-xlB">
+                                <connections>
+                                    <action selector="switchDidTap:" destination="eIS-Hl-dZN" id="h7a-Fl-gFP"/>
+                                </connections>
+                            </barButtonItem>
+                            <barButtonItem systemItem="add" id="UEz-p7-k2F">
+                                <connections>
+                                    <action selector="btnAddWordDidTap:" destination="eIS-Hl-dZN" id="awU-Th-uOo"/>
+                                </connections>
+                            </barButtonItem>
+                        </rightBarButtonItems>
                     </navigationItem>
                     <connections>
                         <outlet property="tableView" destination="cIt-MC-j6d" id="ep8-hf-BJ2"/>

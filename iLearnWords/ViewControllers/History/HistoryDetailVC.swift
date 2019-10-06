@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import MKProgress
 
 class HistoryDetailVC: UIViewController {
 
@@ -15,6 +16,9 @@ class HistoryDetailVC: UIViewController {
     var index: Int = 0
     // MARK: - Object instances
     private let coreDataManager: CoreDataManager = CoreDataManager()
+    private lazy var dataManager = {
+        return DataManager(APIKey: API.key)
+    }()
     // MARK: - ViewModels
     var viewModelHistory: MainHistoryVM? {
         didSet {
@@ -46,23 +50,11 @@ class HistoryDetailVC: UIViewController {
     
     //MARK: - Actions
     @IBAction func switchDidTap(_ sender: Any) {
-        let alertController = UIAlertController(title: NSLocalizedString("Switch to this History", comment:""), message: "", preferredStyle: .alert)
-        
-        let yesAction = UIAlertAction(title: NSLocalizedString("Yes", comment:""), style: .default, handler: { alert -> Void in
-            //Set the isSelected property to yes
-            let ok = self.coreDataManager.updateSelectedHistory((self.viewModelHistory?.history)!)
-            if ok {
-                self.navigationController?.popToRootViewController(animated: true)
-            }
-        })
-        
-        let cancelAction = UIAlertAction(title: NSLocalizedString("Cancel", comment:""), style: .default, handler: {
-            (action : UIAlertAction!) -> Void in })
-        
-        alertController.addAction(cancelAction)
-        alertController.addAction(yesAction)
-        alertController.preferredAction = yesAction
-        self.present(alertController, animated: true, completion: nil)
+        swithHistory()
+    }
+    
+    @IBAction func btnAddWordDidTap(_ sender: Any) {
+        addWord()
     }
     
     // MARK: Private functions
@@ -95,8 +87,8 @@ extension HistoryDetailVC: UITableViewDataSource, UITableViewDelegate {
     func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
         if (editingStyle == .delete) {
             // handle delete (by removing the data from your array and updating the tableview)
-            if let obj = viewModelHistory?.history?.words?.allObjects[indexPath.row] {
-                if coreDataManager.deleteObject(obj as! Words) {
+            if let obj = viewModelWords?.wordsData[indexPath.row] {
+                if coreDataManager.deleteObject(obj) {
                     loadData()
                 }
             }
@@ -114,5 +106,71 @@ extension HistoryDetailVC {
     func loadData() {
         viewModelWords = viewModelHistory?.viewModelWords()
         tableView.reloadData()
+    }
+    
+    private func translateWord(withWord word: String) {
+        MKProgress.show()
+        dataManager.tranlationFor(word: word) { (response, error) in
+            if let error = error {
+                print(error)
+            } else if let response = response {
+                // Configure the viewModel
+                self.viewModelHistory?.wordViewModel(withOriginal:word, translated:response, completion: { (viewModel) in
+                    self.viewModelWords = viewModel
+                    MKProgress.hide()
+                    self.tableView.reloadData()
+                })
+            }
+        }
+    }
+}
+
+// MARK: - Alert confirmations
+extension HistoryDetailVC {
+    
+    func swithHistory() {
+        let alertController = UIAlertController(title: NSLocalizedString("Switch to this History", comment:""), message: "", preferredStyle: .alert)
+        
+        let yesAction = UIAlertAction(title: NSLocalizedString("Yes", comment:""), style: .default, handler: { alert -> Void in
+            //Set the isSelected property to yes
+            let ok = self.coreDataManager.updateSelectedHistory((self.viewModelHistory?.history)!)
+            if ok {
+                self.navigationController?.popToRootViewController(animated: true)
+            }
+        })
+        
+        let cancelAction = UIAlertAction(title: NSLocalizedString("Cancel", comment:""), style: .default, handler: {
+            (action : UIAlertAction!) -> Void in })
+        
+        alertController.addAction(cancelAction)
+        alertController.addAction(yesAction)
+        alertController.preferredAction = yesAction
+        self.present(alertController, animated: true, completion: nil)
+    }
+    
+    func addWord() {
+        let alertController = UIAlertController(title: NSLocalizedString("Add Word to History", comment: ""), message: "", preferredStyle: .alert)
+        alertController.addTextField { (textField : UITextField!) -> Void in
+            textField.placeholder = NSLocalizedString("Enter the Word", comment:"")
+        }
+        
+        let saveAction = UIAlertAction(title: NSLocalizedString("Add", comment:""), style: .default, handler: { alert -> Void in
+            if let textField = alertController.textFields?[0] {
+                if textField.text!.count > 0 {
+                    guard let word = textField.text else { return }
+                    self.translateWord(withWord: word)
+                }
+            }
+        })
+        
+        let cancelAction = UIAlertAction(title: NSLocalizedString("Cancel", comment:""), style: .default, handler: {
+            (action : UIAlertAction!) -> Void in })
+        
+        alertController.addAction(cancelAction)
+        alertController.addAction(saveAction)
+        
+        alertController.preferredAction = saveAction
+        
+        self.present(alertController, animated: true, completion: nil)
     }
 }

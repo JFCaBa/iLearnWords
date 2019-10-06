@@ -36,15 +36,12 @@ class MainVC: UIViewController {
             updateHeader()
         }
     }
-    var viewModelLanguage: MainLanguageVM? {
-        didSet {
-            updateTitle()
-        }
-    }
+    var viewModelLanguage: MainLanguageVM?
     
     // MARK: - Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
+        title                     = "History Words"
         tableView.delegate        = self
         tableView.dataSource      = self
         tableView.tableFooterView = UIView.init(frame: CGRect.zero)
@@ -118,15 +115,6 @@ class MainVC: UIViewController {
         }
     }
     
-    private func updateTitle() {
-        if nil != viewModelLanguage {
-            title = viewModelLanguage?.title
-        }
-        else {
-            //Error
-        }
-    }
-    
     private func updateHeader() {
         if nil != viewModelHistory {
             tableView.reloadData()
@@ -194,7 +182,7 @@ extension MainVC {
     private func saveHistory(data: String) {
         let alertController = UIAlertController(title: NSLocalizedString("Save List", comment: ""), message: "", preferredStyle: .alert)
         alertController.addTextField { (textField : UITextField!) -> Void in
-            textField.placeholder = NSLocalizedString("Enter a List Name", comment:"")
+            textField.placeholder = NSLocalizedString("Enter a Name", comment:"")
         }
         
         let saveAction = UIAlertAction(title: NSLocalizedString("Save", comment:""), style: .default, handler: { alert -> Void in

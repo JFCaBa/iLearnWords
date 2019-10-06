@@ -54,11 +54,19 @@
 		6DECA5A52346239500F7A6C6 /* DataManagerTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6DECA5A42346239500F7A6C6 /* DataManagerTest.swift */; };
 		6DECA5A72346272C00F7A6C6 /* JSONDecodableTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6DECA5A62346272C00F7A6C6 /* JSONDecodableTest.swift */; };
 		6DECA5A923462EBC00F7A6C6 /* response.json in Resources */ = {isa = PBXBuildFile; fileRef = 6DECA5A823462EBC00F7A6C6 /* response.json */; };
+		6DFF0A1F234A2C79004B400D /* iLearnWordsUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6DFF0A1E234A2C79004B400D /* iLearnWordsUITests.swift */; };
 		8046308AFEA92B21C9F13EE6 /* Pods_iLearnWords.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A5FE711386A024776E34D254 /* Pods_iLearnWords.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
 		6D8A8F352341E3AA003EF281 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 6D8A8F132341E3A1003EF281 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 6D8A8F1A2341E3A1003EF281;
+			remoteInfo = iLearnWords;
+		};
+		6DFF0A21234A2C79004B400D /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 6D8A8F132341E3A1003EF281 /* Project object */;
 			proxyType = 1;
@@ -120,6 +128,9 @@
 		6DECA5A42346239500F7A6C6 /* DataManagerTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataManagerTest.swift; sourceTree = "<group>"; };
 		6DECA5A62346272C00F7A6C6 /* JSONDecodableTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JSONDecodableTest.swift; sourceTree = "<group>"; };
 		6DECA5A823462EBC00F7A6C6 /* response.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = response.json; sourceTree = "<group>"; };
+		6DFF0A1C234A2C79004B400D /* iLearnWordsUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = iLearnWordsUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		6DFF0A1E234A2C79004B400D /* iLearnWordsUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = iLearnWordsUITests.swift; sourceTree = "<group>"; };
+		6DFF0A20234A2C79004B400D /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		A5FE711386A024776E34D254 /* Pods_iLearnWords.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_iLearnWords.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		DC6EC260ADB1F483B3E722D6 /* Pods_iLearnWordsTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_iLearnWordsTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		EAD2E86D8685DF3B6233BFED /* Pods-iLearnWordsTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-iLearnWordsTests.release.xcconfig"; path = "Target Support Files/Pods-iLearnWordsTests/Pods-iLearnWordsTests.release.xcconfig"; sourceTree = "<group>"; };
@@ -140,6 +151,13 @@
 			buildActionMask = 2147483647;
 			files = (
 				0B8BDA27BECECB557B3C72ED /* Pods_iLearnWordsTests.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		6DFF0A19234A2C79004B400D /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -178,6 +196,7 @@
 			children = (
 				6D8A8F1D2341E3A1003EF281 /* iLearnWords */,
 				6D8A8F372341E3AA003EF281 /* iLearnWordsTests */,
+				6DFF0A1D234A2C79004B400D /* iLearnWordsUITests */,
 				6D8A8F1C2341E3A1003EF281 /* Products */,
 				66A9AFE8F76D8DF67F6C6799 /* Pods */,
 				82AD4711D8892468FB4126C3 /* Frameworks */,
@@ -189,6 +208,7 @@
 			children = (
 				6D8A8F1B2341E3A1003EF281 /* iLearnWords.app */,
 				6D8A8F342341E3AA003EF281 /* iLearnWordsTests.xctest */,
+				6DFF0A1C234A2C79004B400D /* iLearnWordsUITests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -439,6 +459,15 @@
 			name = stubs;
 			sourceTree = "<group>";
 		};
+		6DFF0A1D234A2C79004B400D /* iLearnWordsUITests */ = {
+			isa = PBXGroup;
+			children = (
+				6DFF0A1E234A2C79004B400D /* iLearnWordsUITests.swift */,
+				6DFF0A20234A2C79004B400D /* Info.plist */,
+			);
+			path = iLearnWordsUITests;
+			sourceTree = "<group>";
+		};
 		82AD4711D8892468FB4126C3 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
@@ -490,6 +519,24 @@
 			productReference = 6D8A8F342341E3AA003EF281 /* iLearnWordsTests.xctest */;
 			productType = "com.apple.product-type.bundle.unit-test";
 		};
+		6DFF0A1B234A2C79004B400D /* iLearnWordsUITests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 6DFF0A23234A2C79004B400D /* Build configuration list for PBXNativeTarget "iLearnWordsUITests" */;
+			buildPhases = (
+				6DFF0A18234A2C79004B400D /* Sources */,
+				6DFF0A19234A2C79004B400D /* Frameworks */,
+				6DFF0A1A234A2C79004B400D /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				6DFF0A22234A2C79004B400D /* PBXTargetDependency */,
+			);
+			name = iLearnWordsUITests;
+			productName = iLearnWordsUITests;
+			productReference = 6DFF0A1C234A2C79004B400D /* iLearnWordsUITests.xctest */;
+			productType = "com.apple.product-type.bundle.ui-testing";
+		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
@@ -506,6 +553,10 @@
 					6D8A8F332341E3AA003EF281 = {
 						CreatedOnToolsVersion = 11.0;
 						LastSwiftMigration = 1100;
+						TestTargetID = 6D8A8F1A2341E3A1003EF281;
+					};
+					6DFF0A1B234A2C79004B400D = {
+						CreatedOnToolsVersion = 11.0;
 						TestTargetID = 6D8A8F1A2341E3A1003EF281;
 					};
 				};
@@ -525,6 +576,7 @@
 			targets = (
 				6D8A8F1A2341E3A1003EF281 /* iLearnWords */,
 				6D8A8F332341E3AA003EF281 /* iLearnWordsTests */,
+				6DFF0A1B234A2C79004B400D /* iLearnWordsUITests */,
 			);
 		};
 /* End PBXProject section */
@@ -546,6 +598,13 @@
 			buildActionMask = 2147483647;
 			files = (
 				6DECA5A923462EBC00F7A6C6 /* response.json in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		6DFF0A1A234A2C79004B400D /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -688,6 +747,14 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		6DFF0A18234A2C79004B400D /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				6DFF0A1F234A2C79004B400D /* iLearnWordsUITests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
@@ -695,6 +762,11 @@
 			isa = PBXTargetDependency;
 			target = 6D8A8F1A2341E3A1003EF281 /* iLearnWords */;
 			targetProxy = 6D8A8F352341E3AA003EF281 /* PBXContainerItemProxy */;
+		};
+		6DFF0A22234A2C79004B400D /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 6D8A8F1A2341E3A1003EF281 /* iLearnWords */;
+			targetProxy = 6DFF0A21234A2C79004B400D /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
 
@@ -819,7 +891,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1;
+				CURRENT_PROJECT_VERSION = 3;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				DEVELOPMENT_ASSET_PATHS = "";
 				DEVELOPMENT_TEAM = 75SEZC5TGW;
@@ -843,7 +915,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1;
+				CURRENT_PROJECT_VERSION = 3;
 				DEVELOPMENT_ASSET_PATHS = "";
 				DEVELOPMENT_TEAM = 75SEZC5TGW;
 				ENABLE_PREVIEWS = YES;
@@ -909,6 +981,44 @@
 			};
 			name = Release;
 		};
+		6DFF0A24234A2C79004B400D /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = 75SEZC5TGW;
+				INFOPLIST_FILE = iLearnWordsUITests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.armentechnology.WalkAndLearn.iLearnWordsUITests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_TARGET_NAME = iLearnWords;
+			};
+			name = Debug;
+		};
+		6DFF0A25234A2C79004B400D /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = 75SEZC5TGW;
+				INFOPLIST_FILE = iLearnWordsUITests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.armentechnology.WalkAndLearn.iLearnWordsUITests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_TARGET_NAME = iLearnWords;
+			};
+			name = Release;
+		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
@@ -935,6 +1045,15 @@
 			buildConfigurations = (
 				6D8A8F412341E3AA003EF281 /* Debug */,
 				6D8A8F422341E3AA003EF281 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		6DFF0A23234A2C79004B400D /* Build configuration list for PBXNativeTarget "iLearnWordsUITests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				6DFF0A24234A2C79004B400D /* Debug */,
+				6DFF0A25234A2C79004B400D /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;

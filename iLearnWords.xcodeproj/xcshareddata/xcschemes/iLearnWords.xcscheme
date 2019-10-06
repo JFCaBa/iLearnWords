@@ -38,6 +38,16 @@
                ReferencedContainer = "container:iLearnWords.xcodeproj">
             </BuildableReference>
          </TestableReference>
+         <TestableReference
+            skipped = "NO">
+            <BuildableReference
+               BuildableIdentifier = "primary"
+               BlueprintIdentifier = "6DFF0A1B234A2C79004B400D"
+               BuildableName = "iLearnWordsUITests.xctest"
+               BlueprintName = "iLearnWordsUITests"
+               ReferencedContainer = "container:iLearnWords.xcodeproj">
+            </BuildableReference>
+         </TestableReference>
       </Testables>
    </TestAction>
    <LaunchAction

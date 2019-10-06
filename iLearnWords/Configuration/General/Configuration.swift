@@ -22,12 +22,12 @@ struct TranslationLanguages {
                                   "sayTranslated":"en_GB",
                                   "way":"ru-en",
                                   "isSelected":"1"],
-                                 ["title":"Español a Ruso",
+                                 ["title":"Spanish a Russian",
                                   "sayOriginal":"es_ES",
                                   "sayTranslated":"ru_RU",
                                   "way":"es-ru",
                                   "isSelected":"0"],
-                                 ["title":"Ruso to Español",
+                                 ["title":"Russian to Spanish",
                                  "sayOriginal":"ru_RU",
                                  "sayTranslated":"es_ES",
                                  "way":"ru-es",
@@ -36,6 +36,16 @@ struct TranslationLanguages {
                                   "sayOriginal":"en_GB",
                                   "sayTranslated":"ru_RU",
                                   "way":"en-ru",
-                                  "isSelected":"0"]
+                                  "isSelected":"0"],
+                                  ["title":"English to Spanish",
+                                   "sayOriginal":"en_GB",
+                                   "sayTranslated":"es_ES",
+                                   "way":"en-es",
+                                   "isSelected":"0"],
+                                   ["title":"Spanish to English",
+                                    "sayOriginal":"es_ES",
+                                    "sayTranslated":"en_GB",
+                                    "way":"es-en",
+                                    "isSelected":"0"]
     ]
 }

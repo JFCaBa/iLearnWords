@@ -35,8 +35,8 @@ class TalkManager: NSObject {
     private override init() {
         super.init()
         synthesizer.delegate = (self as AVSpeechSynthesizerDelegate)
-        NotificationCenter.default.addObserver(self, selector: #selector(didChangeSettings), name: NSNotification.Name(rawValue: "DID_CHANGE_SETTINGS"), object: nil)
-        let rate = UserDefaults.standard.float(forKey: "VOICE_SPEED")
+        NotificationCenter.default.addObserver(self, selector: #selector(didChangeSettings), name: NSNotification.Name(rawValue: UserDefaults.keys.DidChangeDefaultValues), object: nil)
+        let rate = UserDefaults.standard.float(forKey: UserDefaults.keys.VoiceSpeed)
         utteranceRate = rate
         do {
             try AVAudioSession.sharedInstance().setCategory(.playback, mode: .default, options: AVAudioSession.CategoryOptions.mixWithOthers)
@@ -130,7 +130,7 @@ extension TalkManager: AVSpeechSynthesizerDelegate {
     
     /// Notification when the user change values in Settings
     @objc private func didChangeSettings(){
-        let value = UserDefaults.standard.float(forKey: "VOICE_SPEED")
+        let value = UserDefaults.standard.float(forKey: UserDefaults.keys.VoiceSpeed)
         if value != utteranceRate{
             utteranceRate = value
         }

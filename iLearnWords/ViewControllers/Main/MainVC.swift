@@ -92,7 +92,7 @@ class MainVC: UIViewController {
         if btn.titleLabel?.text == NSLocalizedString("PLAY", comment: "") {
             btn.setTitle(NSLocalizedString("STOP", comment:""), for: .normal)
             guard let viewModel = viewModelHistory else { return }
-            talkManager.sayText(viewModel: viewModel)
+            try? talkManager.sayText(viewModel: viewModel)
         }
         else {
             let success = talkManager.stopTalk()
@@ -234,7 +234,7 @@ extension MainVC: TalkerDelegate {
         let playInLoop = UserDefaults.standard.bool(forKey: UserDefaults.keys.PlayInLoop)
         if playInLoop {
             if let viewModel = viewModelHistory {
-                talkManager.sayText(viewModel: viewModel)
+                try? talkManager.sayText(viewModel: viewModel)
             }
         }
     }

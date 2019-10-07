@@ -16,6 +16,7 @@ class CoreDataStack: NSObject {
     
     private override init() {
         super.init()
+        NotificationCenter.default.addObserver(self, selector: #selector(appWillTerminate), name: UIApplication.willTerminateNotification, object: nil)
     }
     
     lazy var persistentContainer: NSPersistentContainer = {
@@ -58,6 +59,10 @@ class CoreDataStack: NSObject {
                 fatalError("Unresolved error \(nserror), \(nserror.userInfo)")
             }
         }
+    }
+    
+    @objc func appWillTerminate() {
+        saveContext()
     }
 }
 

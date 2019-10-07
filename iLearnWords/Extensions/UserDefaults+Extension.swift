@@ -19,16 +19,27 @@ extension UserDefaults {
         static let RunOnce = "RUN_ONCE"
         
         /** Related to the Synthezyser */
-        static let VoiceSpeed = "VOICE_SPEED" //The speed for the utterance object
-        static let RepeatOriginal = "REPEAT_ORIGINAL" //If the user wants to repeat 3 times the original word before to hear the translation
-        static let PlayInLoop = "PLAY_IN_LOOP" //Start to play again when the last word is played
-        static let TranslateWay = "TRANSLATE_WAY" //From what language to what languate
-        static let TalkOriginal = "TALK_ORIGINAL" //Language defenition of the original word for the Synthethiser
-        static let TalkTranslate = "TALK_TRANSLATED" //Language definition of the translated word for the Synthethiser
+        //The speed for the utterance object
+        static let VoiceSpeed = "VOICE_SPEED"
+        //If the user wants to repeat 3 times the original word before to hear the translation
+        static let RepeatOriginal = "REPEAT_ORIGINAL"
+        //Start to play again when the last word is played
+        static let PlayInLoop = "PLAY_IN_LOOP"
+        //From what language to what languate
+        static let TranslateWay = "TRANSLATE_WAY"
+        //Language defenition of the original word for the Synthethiser
+        static let TalkOriginal = "TALK_ORIGINAL"
+        //Language definition of the translated word for the Synthethiser
+        static let TalkTranslate = "TALK_TRANSLATED"
         
         /** Related to Colors */
-        static let CellSelectedBackgroundColor = "CELL_SELECTED_BACKGROUND_COLOR" //The speed for the utterance object
-        static let CellBackgroundColor = "CELL_BACKGROUND_COLOR" //The speed for the utterance object
+        //The speed for the utterance object
+        static let CellSelectedBackgroundColor = "CELL_SELECTED_BACKGROUND_COLOR"
+        //The speed for the utterance object
+        static let CellBackgroundColor = "CELL_BACKGROUND_COLOR"
+        
+        /** Related to Notifications */
+        static let DidChangeDefaultValues = "DID_CHANGE_SETTINGS"
     }
     
     /** CoreData stuff */

@@ -102,7 +102,7 @@ class SettingsTVC: UITableViewController {
 extension SettingsTVC{
     private func notifyChanges(){
         UserDefaults.standard.synchronize()
-        NotificationCenter.default.post(name: NSNotification.Name(rawValue: "DID_CHANGE_SETTINGS"), object: nil)
+        NotificationCenter.default.post(name: NSNotification.Name(rawValue: UserDefaults.keys.DidChangeDefaultValues), object: nil)
     }
     
     private func tweakUI(){

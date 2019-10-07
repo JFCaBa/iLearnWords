@@ -10,6 +10,9 @@ import UIKit
 
 class SettingsTVC: UITableViewController {
 
+    // MARK: - Constants
+    private let segueLanguages = "gotoLanguages"
+    private let segueHistory = "gotoHistory"
     // MARK: - Outlets
     @IBOutlet weak var voiceSpeedOutlet: UISlider!
     @IBOutlet weak var repeatOriginalOutlet: UISwitch!
@@ -40,10 +43,10 @@ class SettingsTVC: UITableViewController {
     //MARK: - Table view delegate
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         if indexPath.row == 3 {
-            self.performSegue(withIdentifier: "gotoLanguages", sender: self)
+            self.performSegue(withIdentifier: segueLanguages, sender: self)
         }
         else if indexPath.row == 4 {
-            self.performSegue(withIdentifier: "gotoHistory", sender: self)
+            self.performSegue(withIdentifier: segueHistory, sender: self)
         }
     }
 

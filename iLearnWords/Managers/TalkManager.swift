@@ -9,6 +9,12 @@
 import UIKit
 import AVFoundation
 
+enum TalkManagerError: Error {
+    case sayTextUnexpectedWord
+    case sayTextUnexpectedLanguage
+    case unexpectedViewModel
+}
+
 public protocol TalkerDelegate: class {
     func didFinishTalk()
 }
@@ -36,7 +42,8 @@ class TalkManager: NSObject {
             try AVAudioSession.sharedInstance().setCategory(.playback, mode: .default, options: AVAudioSession.CategoryOptions.mixWithOthers)
             try AVAudioSession.sharedInstance().setActive(true)
         } catch let error as NSError {
-            print(error)
+            print("Generic error")
+            print(error.localizedDescription)
         }
     }
 
@@ -46,18 +53,21 @@ class TalkManager: NSObject {
     ///
     /// - Parameters:
     ///  - viewModel: The MainHistoryViewModel
-    public func sayText(viewModel: MainHistoryVM) {
+    public func sayText(viewModel: MainHistoryVM) throws {
         if let lang = viewModel.history?.language {
             let word = viewModel.viewModelWords().wordsData[talkIndex]
             guard let  wordToSay  =  isOriginal ? word.original : word.translated else {
-                return
+                throw TalkManagerError.sayTextUnexpectedWord
             }
             guard let langToSay = isOriginal ? lang.sayOriginal : lang.sayTranslated else {
-                return
+                throw TalkManagerError.sayTextUnexpectedLanguage
             }
             proxyViewModel = viewModel
             sayText(text: wordToSay, language: langToSay)
             shouldStop = false
+        }
+        else {
+            
         }
     }
     
@@ -104,7 +114,16 @@ extension TalkManager: AVSpeechSynthesizerDelegate {
         }
         else {
             if let proxyViewModel = proxyViewModel {
-                sayText(viewModel: proxyViewModel)
+                do {
+                    try sayText(viewModel: proxyViewModel)
+                }
+                catch let error as TalkManagerError {
+                    print(error.localizedDescription)
+                }
+                catch {
+                    print("Generic error")
+                    print(error.localizedDescription)
+                }
             }
         }
     }
@@ -114,6 +133,19 @@ extension TalkManager: AVSpeechSynthesizerDelegate {
         let value = UserDefaults.standard.float(forKey: "VOICE_SPEED")
         if value != utteranceRate{
             utteranceRate = value
+        }
+    }
+}
+
+extension TalkManagerError: LocalizedError {
+    public var errorDescription: String? {
+        switch self {
+        case .sayTextUnexpectedWord:
+            return "Cannot get the word from the viewModel"
+        case .sayTextUnexpectedLanguage:
+            return "Cannot get the Language from the viewModel"
+        case .unexpectedViewModel:
+            return "The viewModel passed is probably null/nil"
         }
     }
 }

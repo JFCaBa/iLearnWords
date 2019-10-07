@@ -34,14 +34,14 @@ class iLearnWordsUITests: XCTestCase {
         app.buttons["Settings"].tap()
         
         // Tap on Language Option
-        let languageCell = app.tables.cells.element(boundBy: 3)
-        XCTAssertTrue(languageCell.exists)
-        languageCell.tap()
+        var cell = app.tables.cells.element(boundBy: 3)
+        XCTAssertTrue(cell.exists)
+        cell.tap()
         
         // Select ru-en language
-        let ruEnCell = app.tables.cells.element(boundBy: 5)
-        XCTAssertTrue(ruEnCell.exists)
-        ruEnCell.tap()
+        cell = app.tables.cells.element(boundBy: 5)
+        XCTAssertTrue(cell.exists)
+        cell.tap()
         
         // Back to the main screen
         app.buttons["Settings"].tap()
@@ -62,14 +62,12 @@ class iLearnWordsUITests: XCTestCase {
         app.buttons["Save"].tap()
         
         // Check the table was updated
-        let mainCell = app.tables.cells.element(boundBy: 0)
-        let mainCellTwo = app.tables.cells.element(boundBy: 1)
-        let mainCellExists = mainCell.waitForExistence(timeout: 5)
-        XCTAssertTrue(mainCellExists)
-        XCTAssertFalse(mainCellTwo.exists)
+        let cell = app.tables.cells.element(boundBy: 0)
+        let cellExists = cell.waitForExistence(timeout: 5)
+        XCTAssertTrue(cellExists)
         
         // Tap on cell to play sound
-        mainCell.tap()
+        cell.tap()
         sleep(5)
     }
 
@@ -79,14 +77,14 @@ class iLearnWordsUITests: XCTestCase {
         app.buttons["Settings"].tap()
         
         // Tap on histories row
-        let historySettingsCell = app.tables.cells.element(boundBy: 4)
-        XCTAssertTrue(historySettingsCell.exists)
-        historySettingsCell.tap()
+        var cell = app.tables.cells.element(boundBy: 4)
+        XCTAssertTrue(cell.exists)
+        cell.tap()
         
         // Delete the last history (the one we added to test)
-        let historyCell = app.tables.cells.element(boundBy: 0)
-        XCTAssertTrue(historyCell.exists)
-        historyCell.swipeLeft()
+        cell = app.tables.cells.element(boundBy: 0)
+        XCTAssertTrue(cell.exists)
+        cell.swipeLeft()
         app.buttons["Delete"].tap()
     }
 }

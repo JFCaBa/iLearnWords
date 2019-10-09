@@ -15,6 +15,7 @@
 			dependencies = (
 			);
 			name = Fabric;
+			productName = Fabric;
 		};
 		C0E41540D6862472ED7F2FA11669BE1F /* Crashlytics */ = {
 			isa = PBXAggregateTarget;
@@ -25,6 +26,7 @@
 				C9CEFEFAAAEDB8CD947737FA56C849D4 /* PBXTargetDependency */,
 			);
 			name = Crashlytics;
+			productName = Crashlytics;
 		};
 /* End PBXAggregateTarget section */
 
@@ -122,7 +124,7 @@
 		014FE8D5C96AD12CDB9173DBB4FC8882 /* Fabric.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Fabric.framework; path = iOS/Fabric.framework; sourceTree = "<group>"; };
 		0199DF5F80E858F0ADE2855CE1ABF373 /* Pods-iLearnWordsTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-iLearnWordsTests.debug.xcconfig"; sourceTree = "<group>"; };
 		0603BA097674A403749F098B80FEE1FA /* MKProgress.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.module; path = MKProgress.modulemap; sourceTree = "<group>"; };
-		0D061672DF325F88239A8D9F89D9B40C /* MKProgress.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; name = MKProgress.framework; path = MKProgress.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		0D061672DF325F88239A8D9F89D9B40C /* MKProgress.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = MKProgress.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		156B16E5C77C05244D1AB1D5318DF822 /* Pods-iLearnWordsTests-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "Pods-iLearnWordsTests-umbrella.h"; sourceTree = "<group>"; };
 		18FEFA658ECC092E15D182DFF869B5F8 /* CLSAttributes.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = CLSAttributes.h; path = iOS/Crashlytics.framework/Headers/CLSAttributes.h; sourceTree = "<group>"; };
 		1C05FBB9F4252E418373C6B2A5D760D1 /* Pods-iLearnWordsTests-Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "Pods-iLearnWordsTests-Info.plist"; sourceTree = "<group>"; };
@@ -161,10 +163,10 @@
 		778EB59AAB8D46D92CDC5BF8055F6E40 /* Pods-iLearnWords-frameworks.sh */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.script.sh; path = "Pods-iLearnWords-frameworks.sh"; sourceTree = "<group>"; };
 		785B465EDCEB63F2BF9D81186CE272F6 /* MKProgress-prefix.pch */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "MKProgress-prefix.pch"; sourceTree = "<group>"; };
 		89426DCADA72C4B03312A86DE3A476FA /* Pods-iLearnWords-acknowledgements.markdown */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; path = "Pods-iLearnWords-acknowledgements.markdown"; sourceTree = "<group>"; };
-		9D940727FF8FB9C785EB98E56350EF41 /* Podfile */ = {isa = PBXFileReference; explicitFileType = text.script.ruby; includeInIndex = 1; indentWidth = 2; lastKnownFileType = text; name = Podfile; path = ../Podfile; sourceTree = SOURCE_ROOT; tabWidth = 2; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
+		9D940727FF8FB9C785EB98E56350EF41 /* Podfile */ = {isa = PBXFileReference; explicitFileType = text.script.ruby; includeInIndex = 1; indentWidth = 2; name = Podfile; path = ../Podfile; sourceTree = SOURCE_ROOT; tabWidth = 2; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
 		A72940CBD6A45586A6AD04C7065669CC /* MKProgress.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = MKProgress.swift; path = MKProgress/MKProgress.swift; sourceTree = "<group>"; };
 		A780449CDCE99B6791761B267BE3EAD8 /* MKProgressBaseView.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = MKProgressBaseView.swift; path = MKProgress/MKProgressBaseView.swift; sourceTree = "<group>"; };
-		A8E950A16D00F649C54FFB30F81D7842 /* IQKeyboardManagerSwift.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; name = IQKeyboardManagerSwift.framework; path = IQKeyboardManagerSwift.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		A8E950A16D00F649C54FFB30F81D7842 /* IQKeyboardManagerSwift.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = IQKeyboardManagerSwift.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		AB64479674C384E4E0CFA930DB87C93C /* IQKeyboardManager.bundle */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = "wrapper.plug-in"; name = IQKeyboardManager.bundle; path = IQKeyboardManagerSwift/Resources/IQKeyboardManager.bundle; sourceTree = "<group>"; };
 		B0811098104C1685D4FF27F409F1CBF3 /* Crashlytics.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = Crashlytics.h; path = iOS/Crashlytics.framework/Headers/Crashlytics.h; sourceTree = "<group>"; };
 		B1145BB8CAB20C20CBF44B5490AC3A46 /* Pods-iLearnWords-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "Pods-iLearnWords-umbrella.h"; sourceTree = "<group>"; };
@@ -174,7 +176,7 @@
 		B8ADB7EA035298B33D5555C38CD45C8D /* IQKeyboardManagerConstantsInternal.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = IQKeyboardManagerConstantsInternal.swift; path = IQKeyboardManagerSwift/Constants/IQKeyboardManagerConstantsInternal.swift; sourceTree = "<group>"; };
 		B9B86528815F4C81E70D4F6522BB7687 /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS12.2.sdk/System/Library/Frameworks/QuartzCore.framework; sourceTree = DEVELOPER_DIR; };
 		BB67A5DB3379363F6E8492C1DFC3F892 /* Answers.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = Answers.h; path = iOS/Crashlytics.framework/Headers/Answers.h; sourceTree = "<group>"; };
-		C0B1C30B5123E9ED236B67F14F59FB2B /* Pods_iLearnWords.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; name = Pods_iLearnWords.framework; path = "Pods-iLearnWords.framework"; sourceTree = BUILT_PRODUCTS_DIR; };
+		C0B1C30B5123E9ED236B67F14F59FB2B /* Pods_iLearnWords.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_iLearnWords.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		C0FCD00C87B04DC44DE221A938A526BE /* CALayer+Extension.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = "CALayer+Extension.swift"; path = "MKProgress/CALayer+Extension.swift"; sourceTree = "<group>"; };
 		C9C3ACF767C6D4A58D4590C0E1C899A7 /* ANSCompatibility.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = ANSCompatibility.h; path = iOS/Crashlytics.framework/Headers/ANSCompatibility.h; sourceTree = "<group>"; };
 		CD9A46F95B1E2D3DAF1D98CB6328963F /* IQPreviousNextView.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = IQPreviousNextView.swift; path = IQKeyboardManagerSwift/IQToolbar/IQPreviousNextView.swift; sourceTree = "<group>"; };
@@ -182,7 +184,7 @@
 		D46B946B1A21FDC27FD0FAAE28EE4F7D /* Pods-iLearnWordsTests-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "Pods-iLearnWordsTests-dummy.m"; sourceTree = "<group>"; };
 		D5D11DCA6D4835843C41F7571C51414E /* Pods-iLearnWords.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-iLearnWords.debug.xcconfig"; sourceTree = "<group>"; };
 		D6828DCD78E4385CC65FB10918AA78F4 /* IQKeyboardManagerSwift.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = IQKeyboardManagerSwift.xcconfig; sourceTree = "<group>"; };
-		D7ECDC75802D2B5C40E057624949A310 /* Pods_iLearnWordsTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; name = Pods_iLearnWordsTests.framework; path = "Pods-iLearnWordsTests.framework"; sourceTree = BUILT_PRODUCTS_DIR; };
+		D7ECDC75802D2B5C40E057624949A310 /* Pods_iLearnWordsTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_iLearnWordsTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		D9CBAB8D8FE56FAE060AB00C6C77A141 /* IQUITextFieldView+Additions.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = "IQUITextFieldView+Additions.swift"; path = "IQKeyboardManagerSwift/Categories/IQUITextFieldView+Additions.swift"; sourceTree = "<group>"; };
 		DC44AD5926188F8BAEE3BA4F55BFF8D6 /* IQTitleBarButtonItem.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = IQTitleBarButtonItem.swift; path = IQKeyboardManagerSwift/IQToolbar/IQTitleBarButtonItem.swift; sourceTree = "<group>"; };
 		E0059777B95FD152EC668A52DCA24093 /* Crashlytics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Crashlytics.framework; path = iOS/Crashlytics.framework; sourceTree = "<group>"; };
@@ -283,7 +285,6 @@
 				098C616CD10E4CF9823C03DAB2D15ABA /* Frameworks */,
 				179177AD1E1AD9B65E53C92430FFFDCF /* Support Files */,
 			);
-			name = Fabric;
 			path = Fabric;
 			sourceTree = "<group>";
 		};
@@ -331,7 +332,6 @@
 				420FFABEE84366B87FA2F473DA77F253 /* MKRotationView.swift */,
 				DC109087CB1A6765C9BF8FBEE8A2FE9E /* Support Files */,
 			);
-			name = MKProgress;
 			path = MKProgress;
 			sourceTree = "<group>";
 		};
@@ -368,7 +368,6 @@
 				8C480FC99170D410F9EBDF9FD85A089D /* Resources */,
 				320FB0AD57A59231614024B25E7BE8DD /* Support Files */,
 			);
-			name = IQKeyboardManagerSwift;
 			path = IQKeyboardManagerSwift;
 			sourceTree = "<group>";
 		};
@@ -385,7 +384,6 @@
 				9B3B22FB2DBCB21D641440BA0C3F6867 /* Frameworks */,
 				BB09DB571A68A855791126587864BB62 /* Support Files */,
 			);
-			name = Crashlytics;
 			path = Crashlytics;
 			sourceTree = "<group>";
 		};
@@ -603,6 +601,7 @@
 			hasScannedForEncodings = 0;
 			knownRegions = (
 				en,
+				Base,
 			);
 			mainGroup = CF1408CF629C7361332E53B88F7BD30C;
 			productRefGroup = 4B86C90E166DAA4A0DE25AE9FCB0336D /* Products */;

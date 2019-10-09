@@ -205,6 +205,11 @@ extension MainVC {
         self.present(alertController, animated: true, completion: nil)
     }
     
+
+}
+
+// MARK: - Translation stuff
+extension MainVC {
     private func translateData(data: String, title: String) {
         MKProgress.show()
         dataManager.tranlationFor(word: data) { (response, error) in
@@ -223,7 +228,6 @@ extension MainVC {
 
 // MARK: - TalkManager Delegate
 extension MainVC: TalkerDelegate {
-    // MARK: TalkController delegate
     func didFinishTalk() {
         // If tap on the table cell the btn is disable to avoid tap again on it until the play finish is notified here
         btnPlayOutlet.isEnabled = true
@@ -234,7 +238,13 @@ extension MainVC: TalkerDelegate {
         let playInLoop = UserDefaults.standard.bool(forKey: UserDefaults.keys.PlayInLoop)
         if playInLoop {
             if let viewModel = viewModelHistory {
-                try? talkManager.sayText(viewModel: viewModel)
+                do {
+                    try talkManager.sayText(viewModel: viewModel)
+                } catch let error as TalkManagerError {
+                    self.showAlertController(withTitle: "Error!", text: error.localizedDescription)
+                } catch {
+                    self.showAlertController(withTitle: "Error!", text: "Unknown error")
+                }
             }
         }
     }

@@ -14,6 +14,7 @@ enum DataManagerError: Error {
     case invalidResponse
     case invalidLanguateWay
     case failedEscapingString
+    case failedNoInternetConnection
     case failedURL
 }
 
@@ -54,7 +55,15 @@ final class DataManager {
 
     private func didFetchTranslationData(data: Data?, response: URLResponse?, error: Error?, completion: TranslationDataCompletion) {
         if let _ = error {
-            completion(nil, .failedRequest)
+            do {
+                let reachability = try Reachability.init(hostname: "www.google.com")
+                if reachability.connection != .unavailable {
+                    completion(nil, .failedNoInternetConnection)
+                }
+            }
+            catch {
+                completion(nil, .failedRequest)
+            }
 
         } else if let data = data, let response = response as? HTTPURLResponse {
             if response.statusCode == 200 {
@@ -76,6 +85,27 @@ final class DataManager {
 
         } else {
             completion(nil, .unknown)
+        }
+    }
+}
+
+extension DataManagerError: LocalizedError {
+    public var errorDescription: String? {
+        switch self {
+        case .unknown:
+            return "Unknown error"
+        case .failedRequest:
+            return "The request did Fail"
+        case .invalidResponse:
+            return "Invalid server response"
+        case .invalidLanguateWay:
+            return "Invalid passed Language"
+        case .failedEscapingString:
+            return "Error escaping the string"
+        case .failedNoInternetConnection:
+            return "Check your internet connection"
+        case .failedURL:
+            return "Failed creating URL"
         }
     }
 }

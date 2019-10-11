@@ -23,72 +23,74 @@ final class DataManager {
     typealias TranslationDataCompletion = (String?, DataManagerError?) -> ()
 
     // MARK: - Properties
-
     private let APIKey: String
-
     // MARK: - Initialization
-
     init(APIKey: String) {
-        
         self.APIKey = APIKey
     }
 
     // MARK: - Requesting Data
-
     func tranlationFor(word: String, completion: @escaping TranslationDataCompletion) {
         guard let translateWay = UserDefaults.standard.object(forKey: UserDefaults.keys.TranslateWay) as? String else {
-            fatalError("TranslateWay not Set")
+            completion(nil, .invalidLanguateWay)
+            return
              }
         guard let escapedString = word.addingPercentEncoding(withAllowedCharacters: .urlHostAllowed) else { return }
         let str = String(format: API.baseURL, APIKey, escapedString ,translateWay)
         guard let url = URL(string: str) else { return }
         
         // Create Data Task
-        URLSession.shared.dataTask(with: url) { (data, response, error) in
+        URLSession.shared.dataTask(with: url) { (result) in
             DispatchQueue.main.async {
-                self.didFetchTranslationData(data: data, response: response, error: error, completion: completion)
+                switch result {
+                case .success( _, let data):
+                    do {
+                        // Decode JSON
+                        let translationData: TranslationData = try JSONDecoder.decode(data: data)
+                        // Invoke Completion Handler
+                        completion(translationData.text.first, nil)
+                    }
+                    catch {
+                        // Invoke Completion Handler
+                        completion(nil, .invalidResponse)
+                    }
+                    break
+                case .failure(_):
+                    do {
+                        let reachability = try Reachability.init(hostname: "www.google.com")
+                        if reachability.connection != .unavailable {
+                            completion(nil, .failedNoInternetConnection)
+                        }
+                    }
+                    catch {
+                        completion(nil, .failedRequest)
+                    }
+                    break
+                }
             }
         }.resume()
     }
+}
 
-    // MARK: - Helper Methods
-
-    private func didFetchTranslationData(data: Data?, response: URLResponse?, error: Error?, completion: TranslationDataCompletion) {
-        if let _ = error {
-            do {
-                let reachability = try Reachability.init(hostname: "www.google.com")
-                if reachability.connection != .unavailable {
-                    completion(nil, .failedNoInternetConnection)
-                }
+// MARK: - URLSession extension
+extension URLSession {
+    func dataTask(with url: URL, result: @escaping (Result<(URLResponse, Data), Error>) -> Void) -> URLSessionDataTask {
+        return dataTask(with: url) { (data, response, error) in
+            if let error = error {
+                result(.failure(error))
+                return
             }
-            catch {
-                completion(nil, .failedRequest)
+            guard let response = response, let data = data else {
+                let error = NSError(domain: "error", code: 0, userInfo: nil)
+                result(.failure(error))
+                return
             }
-
-        } else if let data = data, let response = response as? HTTPURLResponse {
-            if response.statusCode == 200 {
-                do {
-                    // Decode JSON
-                    let translationData: TranslationData = try JSONDecoder.decode(data: data)
-
-                    // Invoke Completion Handler
-                    completion(translationData.text.first, nil)
-
-                } catch {
-                    // Invoke Completion Handler
-                    completion(nil, .invalidResponse)
-                }
-
-            } else {
-                completion(nil, .failedRequest)
-            }
-
-        } else {
-            completion(nil, .unknown)
+            result(.success((response, data)))
         }
     }
 }
 
+// MARK: - Error Handler Localized descriptions
 extension DataManagerError: LocalizedError {
     public var errorDescription: String? {
         switch self {

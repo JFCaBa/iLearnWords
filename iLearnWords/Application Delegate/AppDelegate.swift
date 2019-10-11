@@ -5,6 +5,11 @@
 //  Created by Jose Catala on 30/09/2019.
 //  Copyright © 2019 Armentechnology. All rights reserved.
 //
+// *********************************************************************************
+// *                                                                               *
+// * CORE DATA STACK HAS BEEN MOVED TO /Configuration/CoreData/CoreDataStack.swift *
+// *                                                                               *
+// *********************************************************************************
 
 import UIKit
 //PODs

@@ -31,6 +31,8 @@ extension UserDefaults {
         static let TalkOriginal = "TALK_ORIGINAL"
         //Language definition of the translated word for the Synthethiser
         static let TalkTranslate = "TALK_TRANSLATED"
+        //Default translate way in the first app instalation
+        static let DefaultTranslateWay = "ru-en"
         
         /** Related to Colors */
         //The speed for the utterance object

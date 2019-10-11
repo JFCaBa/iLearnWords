@@ -248,11 +248,12 @@ extension CoreDataManager {
     /// into the Core Data data base
     func saveLanguagesInCoreDataWith() {
         let landDefaults = Languages_Defaults()
-        let array = TranslationLanguages.languagesArray
+        let array = Languages_Defaults.languagesArray
         if let managedContext = managedContext {
             _ = array.map{landDefaults.createLanguageEntityFrom(dictionary: $0, managedContext: managedContext)}
             do {
                 try managedContext.save()
+                UserDefaults.standard.setValue(UserDefaults.keys.DefaultTranslateWay, forKey: UserDefaults.keys.TranslateWay)
             } catch let error as NSError {
                 print(error)
             }

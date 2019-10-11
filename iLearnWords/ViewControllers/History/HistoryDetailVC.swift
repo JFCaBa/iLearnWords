@@ -112,7 +112,7 @@ extension HistoryDetailVC {
         MKProgress.show()
         dataManager.tranlationFor(word: word) { (response, error) in
             if let error = error {
-                print(error)
+                self.showAlertController(withTitle: NSLocalizedString("Error!", comment: "") , text: error.localizedDescription)
             } else if let response = response {
                 // Configure the viewModel
                 self.viewModelHistory?.wordViewModel(withOriginal:word, translated:response, completion: { (viewModel) in

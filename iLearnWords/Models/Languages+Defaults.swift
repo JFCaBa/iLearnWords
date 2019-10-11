@@ -11,6 +11,38 @@ import CoreData
 
 struct Languages_Defaults {
     
+    static let languagesArray = [["title":"Russian to English",
+                                  "sayOriginal":"ru_RU",
+                                  "sayTranslated":"en_GB",
+                                  "way":"ru-en",
+                                  "isSelected":"1"],
+                                 ["title":"Spanish a Russian",
+                                  "sayOriginal":"es_ES",
+                                  "sayTranslated":"ru_RU",
+                                  "way":"es-ru",
+                                  "isSelected":"0"],
+                                 ["title":"Russian to Spanish",
+                                 "sayOriginal":"ru_RU",
+                                 "sayTranslated":"es_ES",
+                                 "way":"ru-es",
+                                 "isSelected":"0"],
+                                 ["title":"English to Russian",
+                                  "sayOriginal":"en_GB",
+                                  "sayTranslated":"ru_RU",
+                                  "way":"en-ru",
+                                  "isSelected":"0"],
+                                  ["title":"English to Spanish",
+                                   "sayOriginal":"en_GB",
+                                   "sayTranslated":"es_ES",
+                                   "way":"en-es",
+                                   "isSelected":"0"],
+                                   ["title":"Spanish to English",
+                                    "sayOriginal":"es_ES",
+                                    "sayTranslated":"en_GB",
+                                    "way":"es-en",
+                                    "isSelected":"0"]
+    ]
+    
     func createLanguageEntityFrom(dictionary: [String: String], managedContext: NSManagedObjectContext) -> NSManagedObject? {
         if let languageEntity = NSEntityDescription.insertNewObject(forEntityName: UserDefaults.Entity.Languages, into: managedContext) as? Languages {
             languageEntity.title = dictionary[UserDefaults.Languages.Title]

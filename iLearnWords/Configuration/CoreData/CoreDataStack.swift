@@ -61,6 +61,7 @@ class CoreDataStack: NSObject {
         }
     }
     
+    // MARK: - To save the context before app will terminate
     @objc func appWillTerminate() {
         saveContext()
     }

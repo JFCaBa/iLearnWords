@@ -213,13 +213,13 @@ extension MainVC {
     private func translateData(data: String, title: String) {
         MKProgress.show()
         dataManager.tranlationFor(word: data) { (response, error) in
+            MKProgress.hide()
             if let error = error {
-                print(error)
+                self.showAlertController(withTitle: NSLocalizedString("Error!", comment: "") , text: error.localizedDescription)
             } else if let response = response {
                 // Configure the viewModel
                 self.viewModelHistory?.wordsViewModel(original: data, translated: response, title: title, completion: { (viewModel) in
                     self.viewModelWords = viewModel
-                    MKProgress.hide()
                 })
             }
         }
@@ -241,9 +241,9 @@ extension MainVC: TalkerDelegate {
                 do {
                     try talkManager.sayText(viewModel: viewModel)
                 } catch let error as TalkManagerError {
-                    self.showAlertController(withTitle: "Error!", text: error.localizedDescription)
+                    self.showAlertController(withTitle: NSLocalizedString("Error!", comment: ""), text: error.localizedDescription)
                 } catch {
-                    self.showAlertController(withTitle: "Error!", text: "Unknown error")
+                    self.showAlertController(withTitle: NSLocalizedString("Error!", comment: ""), text: NSLocalizedString("Unknown error", comment: ""))
                 }
             }
         }

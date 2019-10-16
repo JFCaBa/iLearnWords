@@ -58,8 +58,11 @@ final class DataManager {
                 case .failure(_):
                     do {
                         let reachability = try Reachability.init(hostname: "www.google.com")
-                        if reachability.connection != .unavailable {
+                        if reachability.connection == .unavailable {
                             completion(nil, .failedNoInternetConnection)
+                        }
+                        else {
+                            completion(nil, .failedRequest)
                         }
                     }
                     catch {

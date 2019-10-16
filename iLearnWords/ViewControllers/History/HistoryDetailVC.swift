@@ -110,15 +110,15 @@ extension HistoryDetailVC {
     
     private func translateWord(withWord word: String) {
         MKProgress.show()
-        dataManager.tranlationFor(word: word) { (response, error) in
+        dataManager.tranlationFor(word: word) { [weak self] (response, error) in
+            MKProgress.hide()
             if let error = error {
-                self.showAlertController(withTitle: NSLocalizedString("Error!", comment: "") , text: error.localizedDescription)
+                self?.showAlertController(withTitle: NSLocalizedString("Error!", comment: "") , text: error.localizedDescription)
             } else if let response = response {
                 // Configure the viewModel
-                self.viewModelHistory?.wordViewModel(withOriginal:word, translated:response, completion: { (viewModel) in
-                    self.viewModelWords = viewModel
-                    MKProgress.hide()
-                    self.tableView.reloadData()
+                self?.viewModelHistory?.wordViewModel(withOriginal:word, translated:response, completion: { (viewModel) in
+                    self?.viewModelWords = viewModel
+                    self?.tableView.reloadData()
                 })
             }
         }

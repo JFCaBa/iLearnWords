@@ -212,14 +212,14 @@ extension MainVC {
 extension MainVC {
     private func translateData(data: String, title: String) {
         MKProgress.show()
-        dataManager.tranlationFor(word: data) { (response, error) in
+        dataManager.tranlationFor(word: data) { [weak self] (response, error) in
             MKProgress.hide()
             if let error = error {
-                self.showAlertController(withTitle: NSLocalizedString("Error!", comment: "") , text: error.localizedDescription)
+                self?.showAlertController(withTitle: NSLocalizedString("Error!", comment: "") , text: error.localizedDescription)
             } else if let response = response {
                 // Configure the viewModel
-                self.viewModelHistory?.wordsViewModel(original: data, translated: response, title: title, completion: { (viewModel) in
-                    self.viewModelWords = viewModel
+                self?.viewModelHistory?.wordsViewModel(original: data, translated: response, title: title, completion: { (viewModel) in
+                    self?.viewModelWords = viewModel
                 })
             }
         }
